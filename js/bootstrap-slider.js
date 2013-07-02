@@ -236,6 +236,7 @@
 					type: 'slide',
 					value: val
 				});
+			this.setValue(val);
 			return false;
 		},
 
