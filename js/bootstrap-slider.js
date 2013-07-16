@@ -122,6 +122,7 @@
 		this.size = this.picker[0][this.sizePos];
 
 		this.formater = options.formater;
+		this.reversed = this.element.data('slider-reversed')||options.reversed;
 
 		this.layout();
 
@@ -167,29 +168,38 @@
 		},
 
 		layout: function(){
-			this.handle1Stype[this.stylePos] = this.percentage[0]+'%';
-			this.handle2Stype[this.stylePos] = this.percentage[1]+'%';
-			if (this.orientation == 'vertical') {
-				this.selectionElStyle.top = Math.min(this.percentage[0], this.percentage[1]) +'%';
-				this.selectionElStyle.height = Math.abs(this.percentage[0] - this.percentage[1]) +'%';
-			} else {
-				this.selectionElStyle.left = Math.min(this.percentage[0], this.percentage[1]) +'%';
-				this.selectionElStyle.width = Math.abs(this.percentage[0] - this.percentage[1]) +'%';
-			}
-			if (this.range) {
-				this.tooltipInner.text(
-					this.formater(this.value[0]) + 
-					' : ' + 
-					this.formater(this.value[1])
-				);
-				this.tooltip[0].style[this.stylePos] = this.size * (this.percentage[0] + (this.percentage[1] - this.percentage[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
-			} else {
-				this.tooltipInner.text(
-					this.formater(this.value[0])
-				);
-				this.tooltip[0].style[this.stylePos] = this.size * this.percentage[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
-			}
-		},
+      var positionPercentages;
+      
+      if(this.reversed) {
+        positionPercentages = [ this.percentage[1] - this.percentage[0], this.percentage[1] ];
+      } else {
+        positionPercentages = [ this.percentage[0], this.percentage[1] ];
+      }
+
+      this.handle1Stype[this.stylePos] = positionPercentages[0]+'%';
+      this.handle2Stype[this.stylePos] = positionPercentages[1]+'%';
+      if (this.orientation == 'vertical') {
+        this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+        this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+      } else {
+        this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+        this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+      }
+
+      if (this.range) {
+        this.tooltipInner.text(
+          this.formater(this.value[0]) + 
+          ' : ' + 
+          this.formater(this.value[1])
+        );
+        this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+      } else {
+        this.tooltipInner.text(
+          this.formater(this.value[0])
+        );
+        this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+      }
+    },
 
 		mousedown: function(ev) {
 
@@ -211,7 +221,7 @@
 				this.dragged = 0;
 			}
 
-			this.percentage[this.dragged] = percentage;
+			this.percentage[this.dragged] = this.reversed ? this.percentage[1] - percentage : percentage;
 			this.layout();
 
 			if (this.touchCapable) {
@@ -257,7 +267,7 @@
 					this.dragged = 0;
 				}
 			}
-			this.percentage[this.dragged] = percentage;
+			this.percentage[this.dragged] = this.reversed ? this.percentage[1] - percentage : percentage;
 			this.layout();
 			var val = this.calculateValue();
 			this.setValue(val);
@@ -381,6 +391,7 @@
 		selection: 'before',
 		tooltip: 'show',
 		handle: 'round',
+		reversed : false,
 		formater: function(value) {
 			return value;
 		}
