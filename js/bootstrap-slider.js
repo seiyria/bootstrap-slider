@@ -20,7 +20,7 @@
 !function( $ ) {
 
 	var Slider = function(element, options) {
-		this.element = $(element);
+		this.element = $(element).hide();
 		this.picker = $('<div class="slider">'+
 							'<div class="slider-track">'+
 								'<div class="slider-selection"></div>'+
@@ -365,7 +365,11 @@
 				this.step*100/this.diff
 			];
 			this.layout();
-		}
+		},
+		destroy: function(){
+			this.element.show().insertBefore(this.picker);
+			this.picker.remove();
+		},
 	};
 
 	$.fn.slider = function ( option, val ) {
