@@ -66,10 +66,10 @@
 				break;
 		}
 
-		this.min = this.element.data('slider-min')||options.min;
-		this.max = this.element.data('slider-max')||options.max;
-		this.step = this.element.data('slider-step')||options.step;
-		this.value = this.element.data('slider-value')||options.value;
+		this.min = this.element.data('slider-min') || options.min || this.element.attr('min');
+		this.max = this.element.data('slider-max') || options.max || this.element.attr('max');
+		this.step = this.element.data('slider-step') || options.step || this.element.attr('step');
+		this.value = this.element.data('slider-value') || options.value || this.element.val();
 		if (this.value[1]) {
 			this.range = true;
 		}
