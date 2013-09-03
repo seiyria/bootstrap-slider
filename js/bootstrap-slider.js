@@ -66,10 +66,10 @@
 				break;
 		}
 
-		this.min = this.element.data('slider-min') || options.min || this.element.attr('min');
-		this.max = this.element.data('slider-max') || options.max || this.element.attr('max');
-		this.step = this.element.data('slider-step') || options.step || this.element.attr('step');
-		this.value = this.element.data('slider-value') || options.value || this.element.val();
+		this.min = Number(this.element.data('slider-min') || this.element.attr('min') || options.min);
+		this.max = Number(this.element.data('slider-max') || this.element.attr('max') || options.max);
+		this.step = Number(this.element.data('slider-step') || this.element.attr('step') || options.step);
+		this.value = Number(this.element.data('slider-value') || this.element.val() || options.value);
 		if (this.value[1]) {
 			this.range = true;
 		}
@@ -92,7 +92,7 @@
 			case 'round':
 				this.handle1.addClass('round');
 				this.handle2.addClass('round');
-				break
+				break;
 			case 'triangle':
 				this.handle1.addClass('triangle');
 				this.handle2.addClass('triangle');
