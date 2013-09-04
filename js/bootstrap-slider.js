@@ -21,16 +21,26 @@
 
 	var Slider = function(element, options) {
 		this.element = $(element).hide();
-		this.picker = $('<div class="slider">'+
-							'<div class="slider-track">'+
-								'<div class="slider-selection"></div>'+
-								'<div class="slider-handle"></div>'+
-								'<div class="slider-handle"></div>'+
-							'</div>'+
-							'<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'+
-						'</div>')
-							.insertBefore(this.element)
-							.append(this.element);
+
+		var updateSlider = false;
+		var parent = this.element.parent();
+
+		if (parent.hasClass('slider') == true) {
+			updateSlider = true;
+			this.picker = parent;
+		} else {
+			this.picker = $('<div class="slider">'+
+								'<div class="slider-track">'+
+									'<div class="slider-selection"></div>'+
+									'<div class="slider-handle"></div>'+
+									'<div class="slider-handle"></div>'+
+								'</div>'+
+								'<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'+
+							'</div>')
+								.insertBefore(this.element)
+								.append(this.element);
+		}
+
 		this.id = this.element.data('slider-id')||options.id;
 		if (this.id) {
 			this.picker[0].id = this.id;
@@ -144,6 +154,17 @@
 			});
 		} else {
 			this.tooltip.addClass('hide');
+		}
+
+		if (updateSlider == true) {
+			var val = this.calculateValue();
+			this.element
+				.trigger({
+					type: 'slide',
+					value: val
+				})
+				.data('value', val)
+				.prop('value', val);
 		}
 	};
 
@@ -377,9 +398,9 @@
 			var $this = $(this),
 				data = $this.data('slider'),
 				options = typeof option === 'object' && option;
-			if (!data)  {
-				$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
-			}
+
+			$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
+
 			if (typeof option == 'string') {
 				data[option](val);
 			}
