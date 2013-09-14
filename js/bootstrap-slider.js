@@ -157,6 +157,7 @@
 		}
 
 		if (updateSlider == true) {
+			var old = this.getValue();
 			var val = this.calculateValue();
 			this.element
 				.trigger({
@@ -165,6 +166,17 @@
 				})
 				.data('value', val)
 				.prop('value', val);
+
+			if (old != val) {
+				this.element
+                    .trigger({
+                        type: 'slideChange',
+                        new: val,
+                        old: old
+                    })
+                    .data('value', val)
+                    .prop('value', val);
+			}
 		}
 	};
 
