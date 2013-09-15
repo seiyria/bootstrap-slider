@@ -17,7 +17,7 @@
  * limitations under the License.
  * ========================================================= */
  
-!function( $ ) {
+(function( $ ) {
 
 	var Slider = function(element, options) {
 		var el = this.element = $(element).hide();
@@ -25,7 +25,7 @@
 		var updateSlider = false;
 		var parent = this.element.parent();
 
-		if (parent.hasClass('slider') == true) {
+		if (parent.hasClass('slider') === true) {
 			updateSlider = true;
 			this.picker = parent;
 		} else {
@@ -78,14 +78,16 @@
 
         ['min', 'max', 'step', 'value'].forEach(function(attr) {
             var val = el.data('slider-' + attr);
-            if (val == null || val == '')
-                val = el.attr(attr);
-            if (val == null || val == '')
-                val = options[attr];
-
-            this[attr] = Number(val);
+            if (val === null || val === '') {
+				val = options[attr];
+            }
+            if (val === null || val === '') {
+                val = el.prop(attr);
+            }
+            this[attr] = val;
         }, this);
-		if (this.value[1]) {
+
+        if (this.value[1]) {
 			this.range = true;
 		}
 
@@ -111,7 +113,7 @@
 			case 'triangle':
 				this.handle1.addClass('triangle');
 				this.handle2.addClass('triangle');
-				break
+				break;
 		}
 
 		if (this.range) {
@@ -120,7 +122,7 @@
 		} else {
 			this.value = [ Math.max(this.min, Math.min(this.max, this.value))];
 			this.handle2.addClass('hide');
-			if (this.selection == 'after') {
+			if (this.selection === 'after') {
 				this.value[1] = this.max;
 			} else {
 				this.value[1] = this.min;
@@ -137,6 +139,7 @@
 		this.size = this.picker[0][this.sizePos];
 
 		this.formater = options.formater;
+
 		this.reversed = this.element.data('slider-reversed')||options.reversed;
 
 		this.layout();
@@ -161,7 +164,7 @@
 			this.tooltip.addClass('hide');
 		}
 
-		if (updateSlider == true) {
+		if (updateSlider === true) {
 			var old = this.getValue();
 			var val = this.calculateValue();
 			this.element
@@ -172,7 +175,7 @@
 				.data('value', val)
 				.prop('value', val);
 
-			if (old != val) {
+			if (old !== val) {
 				this.element
                     .trigger({
                         type: 'slideChange',
@@ -209,14 +212,15 @@
       var positionPercentages;
       
       if(this.reversed) {
-        positionPercentages = [ this.percentage[1] - this.percentage[0], this.percentage[1] ];
+        positionPercentages = [ 100 - this.percentage[0], this.percentage[1] ];
       } else {
         positionPercentages = [ this.percentage[0], this.percentage[1] ];
       }
 
       this.handle1Stype[this.stylePos] = positionPercentages[0]+'%';
       this.handle2Stype[this.stylePos] = positionPercentages[1]+'%';
-      if (this.orientation == 'vertical') {
+
+      if (this.orientation === 'vertical') {
         this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
         this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
       } else {
@@ -226,9 +230,7 @@
 
       if (this.range) {
         this.tooltipInner.text(
-          this.formater(this.value[0]) + 
-          ' : ' + 
-          this.formater(this.value[1])
+          this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
         );
         this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
       } else {
@@ -259,7 +261,7 @@
 				this.dragged = 0;
 			}
 
-			this.percentage[this.dragged] = this.reversed ? this.percentage[1] - percentage : percentage;
+			this.percentage[this.dragged] = this.reversed ? 100 - percentage : percentage;
 			this.layout();
 
 			if (this.touchCapable) {
@@ -305,7 +307,7 @@
 					this.dragged = 0;
 				}
 			}
-			this.percentage[this.dragged] = this.reversed ? this.percentage[1] - percentage : percentage;
+			this.percentage[this.dragged] = this.reversed ? 100 - percentage : percentage;
 			this.layout();
 			var val = this.calculateValue();
 			this.setValue(val);
@@ -319,7 +321,7 @@
 			return false;
 		},
 
-		mouseup: function(ev) {
+		mouseup: function() {
 			if (this.touchCapable) {
 				// Touch: Bind touch events:
 				$(document).off({
@@ -334,10 +336,9 @@
 			}
 
 			this.inDrag = false;
-			if (this.over == false) {
+			if (this.over === false) {
 				this.hideTooltip();
 			}
-			this.element;
 			var val = this.calculateValue();
 			this.layout();
 			this.element
@@ -390,7 +391,7 @@
 			} else {
 				this.value = [ Math.max(this.min, Math.min(this.max, this.value))];
 				this.handle2.addClass('hide');
-				if (this.selection == 'after') {
+				if (this.selection === 'after') {
 					this.value[1] = this.max;
 				} else {
 					this.value[1] = this.min;
@@ -418,10 +419,10 @@
 
 			$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
 
-			if (typeof option == 'string') {
+			if (typeof option === 'string') {
 				data[option](val);
 			}
-		})
+		});
 	};
 
 	$.fn.slider.defaults = {
@@ -441,4 +442,4 @@
 
 	$.fn.slider.Constructor = Slider;
 
-}( window.jQuery );
+})( window.jQuery );
