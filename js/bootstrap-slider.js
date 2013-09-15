@@ -20,7 +20,7 @@
 !function( $ ) {
 
 	var Slider = function(element, options) {
-		this.element = $(element).hide();
+		var el = this.element = $(element).hide();
 
 		var updateSlider = false;
 		var parent = this.element.parent();
@@ -76,10 +76,15 @@
 				break;
 		}
 
-		this.min = this.element.data('slider-min') || options.min || this.element.attr('min');
-		this.max = this.element.data('slider-max') || options.max || this.element.attr('max');
-		this.step = this.element.data('slider-step') || options.step || this.element.attr('step');
-		this.value = this.element.data('slider-value') || options.value || this.element.val();
+        ['min', 'max', 'step', 'value'].forEach(function(attr) {
+            var val = el.data('slider-' + attr);
+            if (val == null || val == '')
+                val = el.attr(attr);
+            if (val == null || val == '')
+                val = options[attr];
+
+            this[attr] = Number(val);
+        }, this);
 		if (this.value[1]) {
 			this.range = true;
 		}
@@ -102,7 +107,7 @@
 			case 'round':
 				this.handle1.addClass('round');
 				this.handle2.addClass('round');
-				break
+				break;
 			case 'triangle':
 				this.handle1.addClass('triangle');
 				this.handle2.addClass('triangle');
