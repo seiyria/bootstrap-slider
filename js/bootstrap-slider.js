@@ -20,7 +20,7 @@
 !function( $ ) {
 
 	var Slider = function(element, options) {
-		this.element = $(element).hide();
+		var el = this.element = $(element).hide();
 
 		var updateSlider = false;
 		var parent = this.element.parent();
@@ -76,10 +76,15 @@
 				break;
 		}
 
-		this.min = Number(this.element.data('slider-min') || this.element.attr('min') || options.min);
-		this.max = Number(this.element.data('slider-max') || this.element.attr('max') || options.max);
-		this.step = Number(this.element.data('slider-step') || this.element.attr('step') || options.step);
-		this.value = Number(this.element.data('slider-value') || this.element.val() || options.value);
+        ['min', 'max', 'step', 'value'].forEach(function(attr) {
+            var val = el.data('slider-' + attr);
+            if (val == null || val == '')
+                val = el.attr(attr);
+            if (val == null || val == '')
+                val = options[attr];
+
+            this[attr] = Number(val);
+        }, this);
 		if (this.value[1]) {
 			this.range = true;
 		}
