@@ -77,14 +77,7 @@
 		}
 
         ['min', 'max', 'step', 'value'].forEach(function(attr) {
-            var val = el.data('slider-' + attr);
-            if (val === null || val === '') {
-				val = options[attr];
-            }
-            if (val === null || val === '') {
-                val = el.prop(attr);
-            }
-            this[attr] = val;
+            this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr);
         }, this);
 
         if (this.value[1]) {
