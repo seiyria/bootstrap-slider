@@ -36,6 +36,7 @@ Functions
 | .slider(options) | Initializes the slider |
 | .slider('getValue') | Get the current value from the slider |
 | .slider('setValue', newValue) | Set a new value for the slider |
+| .slider('destroy') | Properly clean up and remove the slider instance |
 
 Events
 ======
