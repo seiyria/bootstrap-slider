@@ -23,7 +23,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | step | float |	1 |	increment step |
 | orientation |	string | 'horizontal' |	set the orientation. Accepts 'vertical' or 'horizontal' |
 | value |	float,array |	5	| initial value. Use array to have a range slider. |
-| selection |	string |	'before' |	selection plament. Accepts: 'before', 'after' or 'none'. In case of a range slider, the selection will be placed between the handles |
+| selection |	string |	'before' |	selection placement. Accepts: 'before', 'after' or 'none'. In case of a range slider, the selection will be placed between the handles |
 | tooltip |	string |	'show' |	whatever to show or hide the tooltip. Accepts: 'show' or 'hide' |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square' or 'triangle' |
 | reversed | bool | false | whether or not the slider should be reversed |
