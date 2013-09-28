@@ -411,17 +411,20 @@
 	};
 
 	$.fn.slider = function ( option, val ) {
-		return this.each(function () {
-			var $this = $(this),
-				data = $this.data('slider'),
-				options = typeof option === 'object' && option;
-
-			$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
-
-			if (typeof option === 'string') {
-				data[option](val);
-			}
-		});
+        if (option) {
+            if (typeof option == 'string') {
+                return $(this).data('slider')[option](val);
+            }
+        } else {
+            return this.each(function () {
+                var $this = $(this),
+                    data = $this.data('slider'),
+                    options = typeof option === 'object' && option;
+                if (!data)  {
+                    $this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
+                }
+            });
+        }
 	};
 
 	$.fn.slider.defaults = {
