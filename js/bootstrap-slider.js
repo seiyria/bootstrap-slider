@@ -348,8 +348,8 @@
 			var val;
 			if (this.range) {
 				val = [
-					(this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step),
-					(this.min + Math.round((this.diff * this.percentage[1]/100)/this.step)*this.step)
+					(Math.max(this.min, this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step)),
+					(Math.min(this.max, this.min + Math.round((this.diff * this.percentage[1]/100)/this.step)*this.step))
 				];
 				this.value = val;
 			} else {
