@@ -348,12 +348,17 @@
 			var val;
 			if (this.range) {
 				val = [
-					(this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step),
-					(this.min + Math.round((this.diff * this.percentage[1]/100)/this.step)*this.step)
+					(Math.max(this.min, this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step)),
+					(Math.min(this.max, this.min + Math.round((this.diff * this.percentage[1]/100)/this.step)*this.step))
 				];
 				this.value = val;
 			} else {
 				val = (this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step);
+                if (val < this.min) {
+                    val = this.min;
+                else if (val > this.max) {
+                    val = this.max;
+                }
 				this.value = [val, this.value[1]];
 			}
 			return val;
