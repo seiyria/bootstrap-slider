@@ -354,6 +354,11 @@
 				this.value = val;
 			} else {
 				val = (this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step);
+                if (val < this.min) {
+                    val = this.min;
+                else if (val > this.max) {
+                    val = this.max;
+                }
 				this.value = [val, this.value[1]];
 			}
 			return val;
