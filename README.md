@@ -18,6 +18,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 
 | Name | Type |	Default |	Description |
 | ---- |:----:|:-------:|:----------- |
+| id | string | '' | set the id of the slider element when it's created |
 | min |	float	| 0 |	minimum possible value |
 | max |	float |	10 |	maximum possible value | 
 | step | float |	1 |	increment step |
