@@ -2,6 +2,8 @@ bootstrap-slider
 ================
 A "fork" of bootstrap-slider found on http://www.eyecon.ro/ originally by Stefan Petre.
 
+[![Build Status](https://travis-ci.org/seiyria/bootstrap-slider.png?branch=master)](https://travis-ci.org/seiyria/bootstrap-slider)
+
 Using bootstrap-slider
 ======================
 
