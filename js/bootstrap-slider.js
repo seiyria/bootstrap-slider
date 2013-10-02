@@ -19,12 +19,19 @@
  
 (function( $ ) {
 
+	var ErrorMsgs = {
+		formatInvalidInputErrorMsg : function(input) {
+			return "Invalid input value '" + input + "' passed in";
+		}
+	};
+
 	var Slider = function(element, options) {
 		var el = this.element = $(element).hide();
         var origWidth = el.outerWidth();
 
 		var updateSlider = false;
 		var parent = this.element.parent();
+
 
 		if (parent.hasClass('slider') === true) {
 			updateSlider = true;
@@ -81,7 +88,7 @@
             this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr);
         }, this);
 
-        if (this.value[1]) {
+        if (this.value instanceof Array) {
 			this.range = true;
 		}
 
@@ -203,40 +210,39 @@
 		},
 
 		layout: function(){
-      var positionPercentages;
-      
-      if(this.reversed) {
-        positionPercentages = [ 100 - this.percentage[0], this.percentage[1] ];
-      } else {
-        positionPercentages = [ this.percentage[0], this.percentage[1] ];
-      }
+			var positionPercentages;
 
-      this.handle1Stype[this.stylePos] = positionPercentages[0]+'%';
-      this.handle2Stype[this.stylePos] = positionPercentages[1]+'%';
+			if(this.reversed) {
+			positionPercentages = [ 100 - this.percentage[0], this.percentage[1] ];
+			} else {
+			positionPercentages = [ this.percentage[0], this.percentage[1] ];
+			}
 
-      if (this.orientation === 'vertical') {
-        this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-        this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
-      } else {
-        this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-        this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
-      }
+			this.handle1Stype[this.stylePos] = positionPercentages[0]+'%';
+			this.handle2Stype[this.stylePos] = positionPercentages[1]+'%';
 
-      if (this.range) {
-        this.tooltipInner.text(
-          this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
-        );
-        this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
-      } else {
-        this.tooltipInner.text(
-          this.formater(this.value[0])
-        );
-        this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
-      }
-    },
+			if (this.orientation === 'vertical') {
+			this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+			this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+			} else {
+			this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+			this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+			}
+
+			if (this.range) {
+			this.tooltipInner.text(
+				this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
+			);
+			this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+			} else {
+			this.tooltipInner.text(
+				this.formater(this.value[0])
+			);
+			this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+			}
+		},
 
 		mousedown: function(ev) {
-
 			// Touch: Get the original event:
 			if (this.touchCapable && ev.type === 'touchstart') {
 				ev = ev.originalEvent;
@@ -361,6 +367,7 @@
                 else if (val > this.max) {
                     val = this.max;
                 }
+                val = parseFloat(val);
 				this.value = [val, this.value[1]];
 			}
 			return val;
@@ -383,7 +390,7 @@
 		},
 
 		setValue: function(val) {
-			this.value = val;
+			this.value = this.validateInputValue(val);
 
 			if (this.range) {
 				this.value[0] = Math.max(this.min, Math.min(this.max, this.value[0]));
@@ -405,28 +412,59 @@
 			];
 			this.layout();
 		},
+
+		validateInputValue : function(val) {
+			if(typeof val === 'number') {
+				return val;
+			} else if(val instanceof Array) {
+				val.forEach(function(input) { if (typeof input !== 'number') { throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(input) ); }});
+				return val;
+			} else {
+				throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(val) );
+			}
+		},
+
 		destroy: function(){
 			this.element.show().insertBefore(this.picker);
 			this.picker.remove();
+			$(this.element).removeData('slider');
+			$(this.element).off();
 		},
 	};
 
-	$.fn.slider = function ( option, val ) {
-        if (option) {
-            if (typeof option == 'string') {
-                return $(this).data('slider')[option](val);
-            }
+	var publicMethods = {
+		getValue : Slider.prototype.getValue,
+		setValue : Slider.prototype.setValue,
+		destroy : Slider.prototype.destroy
+	};
+
+	$.fn.slider = function (option) {
+        if (typeof option === 'string') {
+			var args = Array.prototype.slice.call(arguments, 1);
+			return invokePublicMethod.call(this, option, args);
         } else {
-            return this.each(function () {
-                var $this = $(this),
-                    data = $this.data('slider'),
-                    options = typeof option === 'object' && option;
-                if (!data)  {
-                    $this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
-                }
-            });
+            return createNewSliderInstance.call(this, option);
         }
 	};
+
+	function invokePublicMethod(methodName, args) {
+		if(publicMethods[methodName]) {
+			var sliderObject = $(this).data('slider');
+			return publicMethods[methodName].apply(sliderObject, args);
+		} else {
+			throw new Error("method '" + methodName + "()' does not exist for slider.");
+		}
+	}
+
+	function createNewSliderInstance(opts) {
+		var $this = $(this),
+             data = $this.data('slider'),
+             options = typeof opts === 'object' && opts;
+        if (!data)  {
+			$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
+        }
+        return $this;
+	}
 
 	$.fn.slider.defaults = {
 		min: 0,

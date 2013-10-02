@@ -9,8 +9,8 @@
     <title>Slider for Bootstrap Examples Page</title>
 
     <!-- core CSS -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/slider.css" rel="stylesheet">
+    <link href="<%= css.bootstrap %>" rel="stylesheet">
+    <link href="<%= css.slider %>" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <style type='text/css'>
@@ -134,7 +134,7 @@
 			width: 300px;
 		}
     </style>
-	<script type='text/javascript' src="bower_components/modernizr/modernizr.js"></script>
+	<script type='text/javascript' src="<%= js.modernizr %>"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../../assets/js/html5shiv.js"></script>
@@ -213,8 +213,8 @@
 
     <!-- core JavaScript
     ================================================== -->
-    <script type='text/javascript' src="bower_components/jquery/jquery.min.js"></script>
-    <script type='text/javascript' src="js/bootstrap-slider.js"></script>
+    <script type='text/javascript' src="<%= js.jquery %>"></script>
+    <script type='text/javascript' src="<%= js.slider %>"></script>
     <script type='text/javascript'>
     	$(document).ready(function() {
     		/* Example 1 */
