@@ -116,7 +116,7 @@
   border: 0px solid transparent;
 }
 .slider-handle.round {
-  border-radius: 4px;
+  border-radius: 50%;
 }
 .slider-handle.triangle {
   background: transparent none;
