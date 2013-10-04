@@ -243,6 +243,9 @@
 		},
 
 		mousedown: function(ev) {
+			if(this.picker.hasClass('slider-disabled')) {
+				return false;
+			}
 			// Touch: Get the original event:
 			if (this.touchCapable && ev.type === 'touchstart') {
 				ev = ev.originalEvent;
@@ -291,7 +294,9 @@
 		},
 
 		mousemove: function(ev) {
-			
+			if(this.picker.hasClass('slider-disabled')) {
+				return false;
+			}
 			// Touch: Get the original event:
 			if (this.touchCapable && ev.type === 'touchmove') {
 				ev = ev.originalEvent;
