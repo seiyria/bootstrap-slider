@@ -187,6 +187,13 @@
                     .prop('value', val);
 			}
 		}
+
+		this.enabled = options.enabled && 
+						(this.element.data('enabled') === undefined || this.element.data('enabled') === true);
+		if(!this.enabled)
+		{
+			this.disable();
+		}
 	};
 
 	Slider.prototype = {
@@ -435,12 +442,33 @@
 			$(this.element).removeData('slider');
 			$(this.element).off();
 		},
+
+		disable: function() {
+			this.enabled = false;
+			this.picker.addClass('slider-disabled');
+			this.element.data('enabled', false);
+		},
+
+		enable: function() {
+			this.enabled = true;
+			this.picker.removeClass('slider-disabled');
+			this.element.data('enabled', true);	
+		},
+
+		toggle: function() {
+			this.enabled = !this.enabled;
+			this.picker.toggleClass('slider-disabled');
+			this.element.data('enabled', this.enabled);
+		}
 	};
 
 	var publicMethods = {
 		getValue : Slider.prototype.getValue,
 		setValue : Slider.prototype.setValue,
-		destroy : Slider.prototype.destroy
+		destroy : Slider.prototype.destroy,
+		disable : Slider.prototype.disable,
+		enable : Slider.prototype.enable,
+		toggle : Slider.prototype.toggle
 	};
 
 	$.fn.slider = function (option) {
@@ -481,6 +509,7 @@
 		tooltip: 'show',
 		handle: 'round',
 		reversed : false,
+		enabled: true,
 		formater: function(value) {
 			return value;
 		}
