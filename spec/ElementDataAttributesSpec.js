@@ -66,6 +66,12 @@ describe("Element Data Attributes Tests", function() {
     expect(sliderSelectionHeightAtMaxValue).toBe(0);
   });
 
+  it("reads the 'data-slider-enabled' property and sets it on slider", function() {
+    slider = $("#disabledSlider").slider();
+    var isEnabled = slider.slider('isEnabled');
+    expect(isEnabled).not.toBeTruthy();
+  });
+
   afterEach(function() {
     if(slider) { slider.slider('destroy'); }
   });

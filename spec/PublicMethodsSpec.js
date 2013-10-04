@@ -126,6 +126,14 @@ describe("Public Method Tests", function() {
       var tooltipMessage = $("#testSlider1").siblings("div.tooltip").children("div.tooltip-inner").text();
       expect(tooltipMessage).toBe("Current value: 9");
     });
+
+    it("reads and sets the 'enabled' option properly", function() {
+      testSlider = $("#testSlider1").slider({
+        enabled: false
+      });
+      var isEnabled = testSlider.slider('isEnabled');
+      expect(isEnabled).not.toBeTruthy();
+    });
   });
 
 
@@ -341,6 +349,64 @@ describe("Public Method Tests", function() {
 
     afterEach(function() {
       testSlider = null;
+    });
+  });
+
+  describe("'enable()' tests", function() {
+    it("correctly enables a slider", function() {
+      testSlider = $("#testSlider1").slider({
+        enabled: false
+      });
+      testSlider.slider("enable");
+      var isEnabled = testSlider.slider("isEnabled");
+      expect(isEnabled).toBeTruthy();
+    });
+  });
+
+  describe("'disable()' tests", function() {
+    it("correctly disable a slider", function() {
+      testSlider = $("#testSlider1").slider();
+      testSlider.slider("disable");
+      var isEnabled = testSlider.slider("isEnabled");
+      expect(isEnabled).not.toBeTruthy();
+    });
+  });
+
+  describe("'toggle()' tests", function() {
+    it("correctly enables a disabled slider", function() {
+      testSlider = $("#testSlider1").slider({
+        enabled: false
+      });
+      testSlider.slider("toggle");
+      var isEnabled = testSlider.slider("isEnabled");
+      expect(isEnabled).toBeTruthy();
+    });
+
+    it("correctly disables an enabled slider", function() {
+      testSlider = $("#testSlider1").slider();
+      testSlider.slider("toggle");
+      var isEnabled = testSlider.slider("isEnabled");
+      expect(isEnabled).not.toBeTruthy();
+    });
+  });
+
+  describe("'isEnabled()' tests", function() {
+    it("returns true for an enabled slider", function() {
+      testSlider = $("#testSlider1").slider();
+      var isEnabled = testSlider.slider("isEnabled");
+      var hasDisabledClass = testSlider.parent().hasClass("slider") && testSlider.parent().hasClass("slider-disabled");
+      expect(isEnabled).toBeTruthy();
+      expect(hasDisabledClass).not.toBeTruthy();
+    });
+
+    it("returns false for a disabled slider", function() {
+      testSlider = $("#testSlider1").slider({
+        enabled: false
+      });
+      var isEnabled = testSlider.slider("isEnabled");
+      var hasDisabledClass = testSlider.parent().hasClass("slider") && testSlider.parent().hasClass("slider-disabled");
+      expect(isEnabled).not.toBeTruthy();
+      expect(hasDisabledClass).toBeTruthy();
     });
   });
 
