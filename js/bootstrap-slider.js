@@ -446,19 +446,24 @@
 		disable: function() {
 			this.enabled = false;
 			this.picker.addClass('slider-disabled');
-			this.element.data('enabled', false);
 		},
 
 		enable: function() {
 			this.enabled = true;
 			this.picker.removeClass('slider-disabled');
-			this.element.data('enabled', true);	
 		},
 
 		toggle: function() {
-			this.enabled = !this.enabled;
-			this.picker.toggleClass('slider-disabled');
-			this.element.data('enabled', this.enabled);
+			if(this.enabled) {
+				this.disable();
+			}
+			else {
+				this.enable();
+			}
+		},
+
+		isEnabled: function() {
+			return this.enabled;
 		}
 	};
 
@@ -468,7 +473,8 @@
 		destroy : Slider.prototype.destroy,
 		disable : Slider.prototype.disable,
 		enable : Slider.prototype.enable,
-		toggle : Slider.prototype.toggle
+		toggle : Slider.prototype.toggle,
+		isEnabled: Slider.prototype.isEnabled
 	};
 
 	$.fn.slider = function (option) {
