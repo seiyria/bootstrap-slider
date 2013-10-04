@@ -189,7 +189,7 @@
 		}
 
 		this.enabled = options.enabled && 
-						(this.element.data('enabled') === undefined || this.element.data('enabled') === true);
+						(this.element.data('slider-enabled') === undefined || this.element.data('slider-enabled') === true);
 		if(!this.enabled)
 		{
 			this.disable();
