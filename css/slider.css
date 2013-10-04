@@ -66,6 +66,22 @@
   border-left-color: #0480be;
   margin-left: 0;
 }
+.slider.slider-disabled .slider-handle {
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#dfdfdf), to(#bebebe));
+  background-image: -webkit-linear-gradient(top, #dfdfdf, 0%, #bebebe, 100%);
+  background-image: -moz-linear-gradient(top, #dfdfdf 0%, #bebebe 100%);
+  background-image: linear-gradient(to bottom, #dfdfdf 0%, #bebebe 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdfdfdf', endColorstr='#ffbebebe', GradientType=0);
+}
+.slider.slider-disabled .slider-track {
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#e5e5e5), to(#e9e9e9));
+  background-image: -webkit-linear-gradient(top, #e5e5e5, 0%, #e9e9e9, 100%);
+  background-image: -moz-linear-gradient(top, #e5e5e5 0%, #e9e9e9 100%);
+  background-image: linear-gradient(to bottom, #e5e5e5 0%, #e9e9e9 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe5e5e5', endColorstr='#ffe9e9e9', GradientType=0);
+}
 .slider input {
   display: none;
 }
