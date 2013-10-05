@@ -92,7 +92,7 @@
 			padding: 10px 0;
 		}
 
-		#destroyEx5Slider, #ex6CurrentSliderValLabel {
+		#destroyEx5Slider, #ex6CurrentSliderValLabel, #ex7-enabled {
 			margin-left: 45px;
 		}
 
@@ -206,6 +206,14 @@
       			<span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>
       		</div>
       	</div>
+      	<div class='slider-example'>
+      		<h4>Example 7:</h4>
+      		<p>Sliders can be enabled and disabled.</p>
+      		<div class="well">
+      			<input id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
+      			<input id="ex7-enabled" type="checkbox"/> Enabled
+      		</div>
+      	</div>
       </div>
 
     </div> <!-- /container -->
@@ -257,6 +265,16 @@
 			$("#ex6").slider();
 			$("#ex6").on('slide', function(slideEvt) {
 				$("#ex6SliderVal").text(slideEvt.value);
+			});
+
+			$("#ex7").slider();
+			$("#ex7-enabled").click(function() {
+				if(this.checked) {
+					$("#ex7").slider("enable");
+				}
+				else {
+					$("#ex7").slider("disable");
+				}
 			});
     	});
     </script>
