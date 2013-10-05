@@ -27,5 +27,6 @@
 	<input id="tooltipSlider" type="text" data-slider-tooltip="hide"/>
 	<input id="handleSlider" type="text" data-slider-handle="triangle"/>
 	<input id="reversedSlider" type="text" data-slider-reversed="true"/>
+	<input id="disabledSlider" type="text" data-slider-enabled="false"/>
 </body>
 </html>

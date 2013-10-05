@@ -187,6 +187,13 @@
                     .prop('value', val);
 			}
 		}
+
+		this.enabled = options.enabled && 
+						(this.element.data('slider-enabled') === undefined || this.element.data('slider-enabled') === true);
+		if(!this.enabled)
+		{
+			this.disable();
+		}
 	};
 
 	Slider.prototype = {
@@ -243,6 +250,9 @@
 		},
 
 		mousedown: function(ev) {
+			if(this.picker.hasClass('slider-disabled')) {
+				return false;
+			}
 			// Touch: Get the original event:
 			if (this.touchCapable && ev.type === 'touchstart') {
 				ev = ev.originalEvent;
@@ -291,7 +301,9 @@
 		},
 
 		mousemove: function(ev) {
-			
+			if(this.picker.hasClass('slider-disabled')) {
+				return false;
+			}
 			// Touch: Get the original event:
 			if (this.touchCapable && ev.type === 'touchmove') {
 				ev = ev.originalEvent;
@@ -322,6 +334,9 @@
 		},
 
 		mouseup: function() {
+			if(this.picker.hasClass('slider-disabled')) {
+				return false;
+			}
 			if (this.touchCapable) {
 				// Touch: Bind touch events:
 				$(document).off({
@@ -430,12 +445,41 @@
 			$(this.element).removeData('slider');
 			$(this.element).off();
 		},
+
+		disable: function() {
+			this.enabled = false;
+			this.picker.addClass('slider-disabled');
+			this.element.trigger('slideDisabled');
+		},
+
+		enable: function() {
+			this.enabled = true;
+			this.picker.removeClass('slider-disabled');
+			this.element.trigger('slideEnabled');
+		},
+
+		toggle: function() {
+			if(this.enabled) {
+				this.disable();
+			}
+			else {
+				this.enable();
+			}
+		},
+
+		isEnabled: function() {
+			return this.enabled;
+		}
 	};
 
 	var publicMethods = {
 		getValue : Slider.prototype.getValue,
 		setValue : Slider.prototype.setValue,
-		destroy : Slider.prototype.destroy
+		destroy : Slider.prototype.destroy,
+		disable : Slider.prototype.disable,
+		enable : Slider.prototype.enable,
+		toggle : Slider.prototype.toggle,
+		isEnabled: Slider.prototype.isEnabled
 	};
 
 	$.fn.slider = function (option) {
@@ -476,6 +520,7 @@
 		tooltip: 'show',
 		handle: 'round',
 		reversed : false,
+		enabled: true,
 		formater: function(value) {
 			return value;
 		}

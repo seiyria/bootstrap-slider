@@ -30,6 +30,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | tooltip |	string |	'show' |	whether to show or hide the tooltip. Accepts: 'show' or 'hide' |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square' or 'triangle' |
 | reversed | bool | false | whether or not the slider should be reversed |
+| enabled | bool | true | whether or not the slider is initially enabled |
 | formater |	function |	returns the plain value |	formatter callback. Return the value wanted to be displayed in the tooltip |
 
 Functions
@@ -40,6 +41,10 @@ Functions
 | .slider('getValue') | Get the current value from the slider |
 | .slider('setValue', newValue) | Set a new value for the slider |
 | .slider('destroy') | Properly clean up and remove the slider instance |
+| .slider('disable') | Disables the slider and prevents the user from changing the value |
+| .slider('enable') | Enables the slider |
+| .slider('toggle') | Toggles the slider between enabled and disabled |
+| .slider('isEnabled') | Returns true if enabled, false if disabled |
 
 Events
 ======
@@ -49,3 +54,5 @@ Events
 | slide | This event fires when the slider is dragged |
 | slideStop | This event fires when the dragging stops |
 | slideChange | This event fires when the slider value changes as a result of dragging |
+| slideEnabled | This event fires when the slider is enabled |
+| slideDisabled | This event fires when the slider is disabled |
