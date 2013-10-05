@@ -449,11 +449,13 @@
 		disable: function() {
 			this.enabled = false;
 			this.picker.addClass('slider-disabled');
+			this.element.trigger('slideDisabled');
 		},
 
 		enable: function() {
 			this.enabled = true;
 			this.picker.removeClass('slider-disabled');
+			this.element.trigger('slideEnabled');
 		},
 
 		toggle: function() {

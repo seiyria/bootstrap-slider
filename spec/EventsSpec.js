@@ -41,7 +41,7 @@ describe("Event Tests", function() {
       testSlider.slider('disable');
     });
 
-    it(" should not trigger 'slideStart' event when disabled", function() {
+    it("should not trigger 'slideStart' event when disabled", function() {
       testSlider.on('slideStart', function() {
         flag = true;
       });
@@ -70,6 +70,23 @@ describe("Event Tests", function() {
       expect(false).not.toBeTruthy();
     });
 
+  });
+
+  it("'slideDisabled' event is triggered properly and can be binded to", function() {
+    testSlider.on('slideDisabled', function() {
+      flag = true;
+    });
+    testSlider.slider('disable');
+    expect(flag).toBeTruthy();
+  });
+
+  it("'slideDisabled' event is triggered properly and can be binded to", function() {
+    testSlider.on('slideEnabled', function() {
+      flag = true;
+    });
+    testSlider.slider('disable');
+    testSlider.slider('enable');
+    expect(flag).toBeTruthy();
   });
 
   afterEach(function() {
