@@ -24,25 +24,31 @@
     "grunt-contrib-jasmine": "~0.5.2",
     "grunt-template": "~0.2.0",
     "grunt-open": "~0.2.2",
-    "bower": "*"
+    "bower": "*",
+    "grunt-contrib-less": "~0.7.0"
   },
-  "gruntConfig" : {
-    "devPort" : 9000,
-    "js" : {
-      "modernizr" : "bower_components/modernizr/modernizr.js",
-      "jquery" : "bower_components/jquery/jquery.min.js"
+  "gruntConfig": {
+    "devPort": 9000,
+    "js": {
+      "modernizr": "bower_components/modernizr/modernizr.js",
+      "jquery": "bower_components/jquery/jquery.min.js"
     },
-    "css" : {
-      "bootstrap" : "bower_components/bootstrap/dist/css/bootstrap.min.css",
-      "slider" : "css/slider.css"
+    "less": {
+      "slider": "less/slider.less"
     },
-    "tpl" : {
-      "SpecRunner" : "tpl/SpecRunner.tpl",
-      "index" : "tpl/index.tpl"
+    "css": {
+      "bootstrap": "bower_components/bootstrap/dist/css/bootstrap.min.css",
+      "slider": "css/slider.css"
     },
-    "dist" : {
-      "js" : "dist/bootstrap-slider.min.js"
+    "tpl": {
+      "SpecRunner": "tpl/SpecRunner.tpl",
+      "index": "tpl/index.tpl"
     },
-    "spec" : "spec/**/*.js"
+    "dist": {
+      "js": "dist/bootstrap-slider.min.js",
+      "css": "dist/css/slider.css",
+      "cssMin": "dist/css/slider.min.css"
+    },
+    "spec": "spec/**/*.js"
   }
 }

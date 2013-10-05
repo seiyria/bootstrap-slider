@@ -6,6 +6,10 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  */
+//@import '../bower_components/bootstrap/less/variables.less';
+@line-height-base: 20px;
+@border-radius-base: 4px;
+@import 'mixins.less';
 
 .slider {
 	display: inline-block;
@@ -96,7 +100,7 @@
 	opacity: 0.8;
 	border: 0px solid transparent;
 	&.round {
-		border-radius: @border-radius-base;
+		border-radius: 50%;
 	}
 	&.triangle {
 		background: transparent none;

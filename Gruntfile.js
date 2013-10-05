@@ -106,6 +106,10 @@ module.exports = function(grunt) {
       spec : {
         files: '<%= jshint.spec %>',
         tasks: ['jshint:spec']
+      },
+      css : {
+        files: '<%= pkg.gruntConfig.less.slider %>',
+        tasks: ['less:development']
       }
     },
     connect: {
@@ -119,8 +123,32 @@ module.exports = function(grunt) {
       development : {
         path: 'http://localhost:<%= connect.server.options.port %>'
       }
+    },
+    less: {
+      options: {
+        paths: ["bower_components/bootstrap/less"]
+      },
+      development: {
+        files: {
+          '<%= pkg.gruntConfig.css.slider %>': '<%= pkg.gruntConfig.less.slider %>'
+        }
+      },
+      production: {
+        files: {
+         '<%= pkg.gruntConfig.dist.css %>': '<%= pkg.gruntConfig.less.slider %>',
+        }
+      },
+      "production-min": {
+        options: {
+          yuicompress: true
+        },
+        files: {
+         '<%= pkg.gruntConfig.dist.cssMin %>': '<%= pkg.gruntConfig.less.slider %>'
+        }
+      }
     }
   });
+
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -130,10 +158,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-template');
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   // Default task.
   grunt.registerTask('test', ['jshint', 'jasmine']);
-  grunt.registerTask('development', ['test', 'template', 'connect', 'open:development', 'watch']);
-  grunt.registerTask('production', ['test', 'uglify']);
+  grunt.registerTask('development', ['less:development', 'test', 'template', 'connect', 'open:development', 'watch']);
+  grunt.registerTask('production', ['less:production', 'less:production-min', 'test', 'uglify']);
 
 };
