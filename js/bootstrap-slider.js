@@ -334,6 +334,9 @@
 		},
 
 		mouseup: function() {
+			if(this.picker.hasClass('slider-disabled')) {
+				return false;
+			}
 			if (this.touchCapable) {
 				// Touch: Bind touch events:
 				$(document).off({

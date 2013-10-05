@@ -36,6 +36,42 @@ describe("Event Tests", function() {
     expect(true).toBeTruthy();
   });
 
+  describe("Disabled Slider Event Tests", function() {
+    beforeEach(function() {
+      testSlider.slider('disable');
+    });
+
+    it(" should not trigger 'slideStart' event when disabled", function() {
+      testSlider.on('slideStart', function() {
+        flag = true;
+      });
+      testSlider.data('slider').mousedown(mouse);
+      expect(flag).not.toBeTruthy();
+    });
+
+    it("should not trigger 'slide' event when disabled", function() {
+      testSlider.on('slide', function() {
+        flag = true;
+      });
+      testSlider.data('slider').mousedown(mouse);
+      expect(flag).not.toBeTruthy();
+    });
+
+    it("should not trigger 'slideStop' event when disabled", function() {
+      testSlider.on('slideStop', function() {
+        flag = true;
+      });
+      testSlider.data('slider').mouseup();
+      expect(flag).not.toBeTruthy();
+    });
+
+    it("should not trigger 'slideChange' event when disabled", function() {
+      //TODO: Cannot find any way to trigger this through sliding actions.
+      expect(false).not.toBeTruthy();
+    });
+
+  });
+
   afterEach(function() {
     if(testSlider) {
       testSlider.slider('destroy');
