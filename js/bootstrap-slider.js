@@ -414,8 +414,9 @@
 			var tempValue = this.validateInputValue(val);
 
 			if(this.range && this.minRangeDifference) {
-				if(Math.abs(val[0]-val[1]) < this.minRangeDifference)
+				if(Math.abs(val[0]-val[1]) < this.minRangeDifference) {
 					tempValue = this.value;
+				}
 			}
 
 			this.value = tempValue;
