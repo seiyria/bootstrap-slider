@@ -19,6 +19,10 @@
  
 (function( $ ) {
 
+	var clamp = function(min, max, val) {
+		return Math.max(min, Math.min(max, val));
+	};
+
 	var ErrorMsgs = {
 		formatInvalidInputErrorMsg : function(input) {
 			return "Invalid input value '" + input + "' passed in";
@@ -118,10 +122,10 @@
 		}
 
 		if (this.range) {
-			this.value[0] = Math.max(this.min, Math.min(this.max, this.value[0]));
-			this.value[1] = Math.max(this.min, Math.min(this.max, this.value[1]));
+			this.value[0] = clamp(this.min, this.max, this.value[0]);
+			this.value[1] = clamp(this.min, this.max, this.value[1]);
 		} else {
-			this.value = [ Math.max(this.min, Math.min(this.max, this.value))];
+			this.value = [ clamp(this.min, this.max, this.value)];
 			this.handle2.addClass('hide');
 			if (this.selection === 'after') {
 				this.value[1] = this.max;
@@ -142,6 +146,8 @@
 		this.formater = options.formater;
 
 		this.reversed = this.element.data('slider-reversed')||options.reversed;
+
+		this.minRangeDifference = this.element.data('min-range-difference')||options.minRangeDifference;
 
 		this.layout();
 
@@ -220,32 +226,32 @@
 			var positionPercentages;
 
 			if(this.reversed) {
-			positionPercentages = [ 100 - this.percentage[0], this.percentage[1] ];
+				positionPercentages = [ 100 - this.percentage[0], this.percentage[1] ];
 			} else {
-			positionPercentages = [ this.percentage[0], this.percentage[1] ];
+				positionPercentages = [ this.percentage[0], this.percentage[1] ];
 			}
 
 			this.handle1Stype[this.stylePos] = positionPercentages[0]+'%';
 			this.handle2Stype[this.stylePos] = positionPercentages[1]+'%';
 
 			if (this.orientation === 'vertical') {
-			this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-			this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+				this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+				this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
 			} else {
-			this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-			this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+				this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+				this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
 			}
 
 			if (this.range) {
-			this.tooltipInner.text(
-				this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
+				this.tooltipInner.text(
+					this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
 			);
-			this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+				this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
 			} else {
-			this.tooltipInner.text(
-				this.formater(this.value[0])
+				this.tooltipInner.text(
+					this.formater(this.value[0])
 			);
-			this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+				this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
 			}
 		},
 
@@ -394,7 +400,7 @@
 			}
 			var percentage = (ev[this.mousePos] - this.offset[this.stylePos])*100/this.size;
 			percentage = Math.round(percentage/this.percentage[2])*this.percentage[2];
-			return Math.max(0, Math.min(100, percentage));
+			return clamp(0, 100, percentage);
 		},
 
 		getValue: function() {
@@ -408,10 +414,10 @@
 			this.value = this.validateInputValue(val);
 
 			if (this.range) {
-				this.value[0] = Math.max(this.min, Math.min(this.max, this.value[0]));
-				this.value[1] = Math.max(this.min, Math.min(this.max, this.value[1]));
+				this.value[0] = clamp(this.min, this.max, this.value[0]);
+				this.value[1] = clamp(this.min, this.max, this.value[1]);
 			} else {
-				this.value = [ Math.max(this.min, Math.min(this.max, this.value))];
+				this.value = [ clamp(this.min, this.max, this.value)];
 				this.handle2.addClass('hide');
 				if (this.selection === 'after') {
 					this.value[1] = this.max;
@@ -521,6 +527,7 @@
 		handle: 'round',
 		reversed : false,
 		enabled: true,
+		minRangeDifference: 0,
 		formater: function(value) {
 			return value;
 		}
