@@ -411,7 +411,14 @@
 		},
 
 		setValue: function(val) {
-			this.value = this.validateInputValue(val);
+			var tempValue = this.validateInputValue(val);
+
+			if(this.range && this.minRangeDifference) {
+				if(Math.abs(val[0]-val[1]) < this.minRangeDifference)
+					tempValue = this.value;
+			}
+
+			this.value = tempValue;
 
 			if (this.range) {
 				this.value[0] = clamp(this.min, this.max, this.value[0]);
