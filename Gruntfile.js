@@ -162,7 +162,9 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('test', ['jshint', 'jasmine']);
-  grunt.registerTask('development', ['less:development', 'test', 'template', 'connect', 'open:development', 'watch']);
+  grunt.registerTask('build', ['less:development', 'test', 'template']);
+  grunt.registerTask('development', ['build', 'connect', 'open:development', 'watch']);
   grunt.registerTask('production', ['less:production', 'less:production-min', 'test', 'uglify']);
-
+  grunt.registerTask('dev', 'development');
+  grunt.registerTask('dist', 'production');
 };
