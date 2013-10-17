@@ -2,6 +2,10 @@ bootstrap-slider
 ================
 A "fork" of bootstrap-slider found on http://www.eyecon.ro/ originally by Stefan Petre.
 
+Examples
+========
+You can see all of our API examples [here](http://seiyria.github.io/bootstrap-slider/).
+
 [![Build Status](https://travis-ci.org/seiyria/bootstrap-slider.png?branch=master)](https://travis-ci.org/seiyria/bootstrap-slider)
 
 Using bootstrap-slider
