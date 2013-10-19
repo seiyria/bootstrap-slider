@@ -248,7 +248,7 @@
 		},
 
 		mousedown: function(ev) {
-			if(this.picker.hasClass('slider-disabled')) {
+			if(!this.isEnabled()) {
 				return false;
 			}
 			// Touch: Get the original event:
@@ -299,7 +299,7 @@
 		},
 
 		mousemove: function(ev) {
-			if(this.picker.hasClass('slider-disabled')) {
+			if(!this.isEnabled()) {
 				return false;
 			}
 			// Touch: Get the original event:
@@ -332,7 +332,7 @@
 		},
 
 		mouseup: function() {
-			if(this.picker.hasClass('slider-disabled')) {
+			if(!this.isEnabled()) {
 				return false;
 			}
 			if (this.touchCapable) {
