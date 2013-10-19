@@ -27,7 +27,7 @@
 
 	var Slider = function(element, options) {
 		var el = this.element = $(element).hide();
-        var origWidth = el.outerWidth();
+		var origWidth = el.outerWidth();
 
 		var updateSlider = false;
 		var parent = this.element.parent();
@@ -84,11 +84,11 @@
 				break;
 		}
 
-        ['min', 'max', 'step', 'value'].forEach(function(attr) {
-            this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr);
-        }, this);
+		['min', 'max', 'step', 'value'].forEach(function(attr) {
+			this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr);
+		}, this);
 
-        if (this.value instanceof Array) {
+		if (this.value instanceof Array) {
 			this.range = true;
 		}
 
@@ -178,13 +178,13 @@
 
 			if (old !== val) {
 				this.element
-                    .trigger({
-                        type: 'slideChange',
-                        new: val,
-                        old: old
-                    })
-                    .data('value', val)
-                    .prop('value', val);
+					.trigger({
+						type: 'slideChange',
+						new: val,
+						old: old
+					})
+					.data('value', val)
+					.prop('value', val);
 			}
 		}
 
@@ -374,13 +374,13 @@
 				this.value = val;
 			} else {
 				val = (this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step);
-                if (val < this.min) {
-                    val = this.min;
-                }
-                else if (val > this.max) {
-                    val = this.max;
-                }
-                val = parseFloat(val);
+				if (val < this.min) {
+					val = this.min;
+				}
+				else if (val > this.max) {
+					val = this.max;
+				}
+				val = parseFloat(val);
 				this.value = [val, this.value[1]];
 			}
 			return val;
@@ -480,12 +480,12 @@
 	};
 
 	$.fn.slider = function (option) {
-        if (typeof option === 'string') {
+		if (typeof option === 'string') {
 			var args = Array.prototype.slice.call(arguments, 1);
 			return invokePublicMethod.call(this, option, args);
-        } else {
-            return createNewSliderInstance.call(this, option);
-        }
+		} else {
+			return createNewSliderInstance.call(this, option);
+		}
 	};
 
 	function invokePublicMethod(methodName, args) {
@@ -499,12 +499,12 @@
 
 	function createNewSliderInstance(opts) {
 		var $this = $(this),
-             data = $this.data('slider'),
-             options = typeof opts === 'object' && opts;
-        if (!data)  {
+			data = $this.data('slider'),
+			options = typeof opts === 'object' && opts;
+		if (!data)  {
 			$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
-        }
-        return $this;
+		}
+		return $this;
 	}
 
 	$.fn.slider.defaults = {
