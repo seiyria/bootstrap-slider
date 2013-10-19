@@ -97,8 +97,8 @@
 		if (this.selection === 'none') {
 			this.selectionEl.addClass('hide');
 		}
-		this.selectionElStyle = this.selectionEl[0].style;
 
+		this.selectionElStyle = this.selectionEl[0].style;
 
 		this.handle1 = this.picker.find('.slider-handle:first');
 		this.handle1Stype = this.handle1[0].style;
@@ -204,8 +204,6 @@
 		
 		showTooltip: function(){
 			this.tooltip.addClass('in');
-			//var left = Math.round(this.percent*this.width);
-			//this.tooltip.css('left', left - this.tooltip.outerWidth()/2);
 			this.over = true;
 		},
 		
@@ -220,32 +218,32 @@
 			var positionPercentages;
 
 			if(this.reversed) {
-			positionPercentages = [ 100 - this.percentage[0], this.percentage[1] ];
+				positionPercentages = [ 100 - this.percentage[0], this.percentage[1] ];
 			} else {
-			positionPercentages = [ this.percentage[0], this.percentage[1] ];
+				positionPercentages = [ this.percentage[0], this.percentage[1] ];
 			}
 
 			this.handle1Stype[this.stylePos] = positionPercentages[0]+'%';
 			this.handle2Stype[this.stylePos] = positionPercentages[1]+'%';
 
 			if (this.orientation === 'vertical') {
-			this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-			this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+				this.selectionElStyle.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+				this.selectionElStyle.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
 			} else {
-			this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-			this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+				this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+				this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
 			}
 
 			if (this.range) {
-			this.tooltipInner.text(
-				this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
-			);
-			this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+				this.tooltipInner.text(
+					this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
+				);
+				this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
 			} else {
-			this.tooltipInner.text(
-				this.formater(this.value[0])
-			);
-			this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+				this.tooltipInner.text(
+					this.formater(this.value[0])
+				);
+				this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
 			}
 		},
 
@@ -461,8 +459,7 @@
 		toggle: function() {
 			if(this.enabled) {
 				this.disable();
-			}
-			else {
+			} else {
 				this.enable();
 			}
 		},
