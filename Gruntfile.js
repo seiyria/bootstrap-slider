@@ -110,6 +110,10 @@ module.exports = function(grunt) {
       css : {
         files: '<%= pkg.gruntConfig.less.slider %>',
         tasks: ['less:development']
+      },
+      index : {
+        files: '<%= pkg.gruntConfig.tpl.index %>',
+        tasks: ['template:generate-index-page']
       }
     },
     connect: {
