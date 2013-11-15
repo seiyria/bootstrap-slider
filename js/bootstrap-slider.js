@@ -22,7 +22,8 @@
 	var ErrorMsgs = {
 		formatInvalidInputErrorMsg : function(input) {
 			return "Invalid input value '" + input + "' passed in";
-		}
+		},
+		callingContextNotSliderInstance : "Calling context element does not have instance of Slider bound to it. Check your code to make sure the JQuery object returned from the call to the slider() initializer is calling the method"
 	};
 
 	var Slider = function(element, options) {
@@ -490,10 +491,19 @@
 
 	function invokePublicMethod(methodName, args) {
 		if(publicMethods[methodName]) {
-			var sliderObject = $(this).data('slider');
+			var sliderObject = retrieveSliderObjectFromElement(this);
 			return publicMethods[methodName].apply(sliderObject, args);
 		} else {
 			throw new Error("method '" + methodName + "()' does not exist for slider.");
+		}
+	}
+
+	function retrieveSliderObjectFromElement(element) {
+		var sliderObject = $(element).data('slider');
+		if(sliderObject && sliderObject instanceof Slider) {
+			return sliderObject;
+		} else {
+			throw new Error(ErrorMsgs.callingContextNotSliderInstance);
 		}
 	}
 
