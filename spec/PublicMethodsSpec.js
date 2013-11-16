@@ -1,5 +1,6 @@
 describe("Public Method Tests", function() {
-  var testSlider;
+  var testSlider,
+      callingContextNotSliderInstanceErrorMsg = "Calling context element does not have instance of Slider bound to it. Check your code to make sure the JQuery object returned from the call to the slider() initializer is calling the method";
 
   describe("slider constructor", function() {
     it("reads and sets the 'id' attribute of the slider instance that is created", function() {
@@ -266,89 +267,110 @@ describe("Public Method Tests", function() {
         });
       });
     });
+    
+    it("throws an error if an element without a 'slider' data property tries to call setValue()", function() {
+      var settingValue = function() {
+        $("#testSlider1").slider('setValue', 3);
+      };
+      expect(settingValue).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
+    });
   });
 
 
   describe("'getValue()' tests", function() {
-    beforeEach(function() {
-      testSlider = $("#testSlider1").slider();
-    });
-
     it("returns the current value of the slider", function() {
+      testSlider = $("#testSlider1").slider();
+
       var valueToSet = 5;
       testSlider.slider('setValue', valueToSet);
 
       var sliderValue = testSlider.slider('getValue');
       expect(sliderValue).toBe(valueToSet);
     });
+
+    it("throws an error if an element without a 'slider' data property tries to call getValue()", function() {
+      var gettingValue = function() {
+        $("#testSlider1").slider('getValue');
+      };
+      expect(gettingValue).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
+    });
   });
 
 
   describe("'destroy()' tests", function() {
-    beforeEach(function() {
-      testSlider = $("#testSlider1").slider();
-    });
-
-    it("removes the extra DOM elements associated with a slider", function() {
-      testSlider.slider('destroy');
-
-      var sliderParentElement = $("#testSlider1").parent('div.slider').length,
-          sliderChildrenElements = $("#testSlider1").siblings('div.slider-track, div.tooltip').length;
-      
-      expect(sliderParentElement).toBe(0);
-      expect(sliderChildrenElements).toBe(0);
-    });
-
-    describe("unbinds all slider events", function() {
-      var flag, evtName;
-
+    describe("slider instance tests", function() {
       beforeEach(function() {
-        flag = false;
+        testSlider = $("#testSlider1").slider();
       });
 
-      it("unbinds from 'slideStart' event", function() {
-        evtName = 'slideStart';
-        testSlider.on(evtName, function() {
-          flag = true;
-        });
+      it("removes the extra DOM elements associated with a slider", function() {
         testSlider.slider('destroy');
-        testSlider.trigger(evtName);
-        expect(flag).toBeFalsy();
+
+        var sliderParentElement = $("#testSlider1").parent('div.slider').length,
+            sliderChildrenElements = $("#testSlider1").siblings('div.slider-track, div.tooltip').length;
+        
+        expect(sliderParentElement).toBe(0);
+        expect(sliderChildrenElements).toBe(0);
       });
 
-      it("unbinds from 'slide' event", function() {
-        evtName = 'slide';
-        testSlider.on(evtName, function() {
-          flag = true;
+      describe("unbinds all slider events", function() {
+        var flag, evtName;
+
+        beforeEach(function() {
+          flag = false;
         });
-        testSlider.slider('destroy');
-        testSlider.trigger(evtName);
-        expect(flag).toBeFalsy();
+
+        it("unbinds from 'slideStart' event", function() {
+          evtName = 'slideStart';
+          testSlider.on(evtName, function() {
+            flag = true;
+          });
+          testSlider.slider('destroy');
+          testSlider.trigger(evtName);
+          expect(flag).toBeFalsy();
+        });
+
+        it("unbinds from 'slide' event", function() {
+          evtName = 'slide';
+          testSlider.on(evtName, function() {
+            flag = true;
+          });
+          testSlider.slider('destroy');
+          testSlider.trigger(evtName);
+          expect(flag).toBeFalsy();
+        });
+
+        it("unbinds from 'slideStop' event", function() {
+          evtName = 'slideStop';
+          testSlider.on(evtName, function() {
+            flag = true;
+          });
+          testSlider.slider('destroy');
+          testSlider.trigger(evtName);
+          expect(flag).toBeFalsy();
+        });
+
+        it("unbinds from 'slideChange' event", function() {
+          evtName = 'slideChange';
+          testSlider.on(evtName, function() {
+            flag = true;
+          });
+          testSlider.slider('destroy');
+          testSlider.trigger(evtName);
+          expect(flag).toBeFalsy();
+        });
       });
 
-      it("unbinds from 'slideStop' event", function() {
-        evtName = 'slideStop';
-        testSlider.on(evtName, function() {
-          flag = true;
-        });
-        testSlider.slider('destroy');
-        testSlider.trigger(evtName);
-        expect(flag).toBeFalsy();
-      });
-
-      it("unbinds from 'slideChange' event", function() {
-        evtName = 'slideChange';
-        testSlider.on(evtName, function() {
-          flag = true;
-        });
-        testSlider.slider('destroy');
-        testSlider.trigger(evtName);
-        expect(flag).toBeFalsy();
+      afterEach(function() {
+        testSlider = null;
       });
     });
 
-    afterEach(function() {
-      testSlider = null;
+    it("throws an error if an element without a 'slider' data property tries to call destroy()", function() {
+      var destroySlider = function() {
+        $("#testSlider1").slider('destroy');
+      };
+      expect(destroySlider).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
     });
   });
 
@@ -361,6 +383,13 @@ describe("Public Method Tests", function() {
       var isEnabled = testSlider.slider("isEnabled");
       expect(isEnabled).toBeTruthy();
     });
+
+    it("throws an error if an element without a 'slider' data property tries to call enable()", function() {
+      var enableSlider = function() {
+        $("#testSlider1").slider('enable');
+      };
+      expect(enableSlider).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
+    });
   });
 
   describe("'disable()' tests", function() {
@@ -369,6 +398,13 @@ describe("Public Method Tests", function() {
       testSlider.slider("disable");
       var isEnabled = testSlider.slider("isEnabled");
       expect(isEnabled).not.toBeTruthy();
+    });
+
+    it("throws an error if an element without a 'slider' data property tries to call disable()", function() {
+      var disableSlider = function() {
+        $("#testSlider1").slider('disable');
+      };
+      expect(disableSlider).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
     });
   });
 
@@ -387,6 +423,13 @@ describe("Public Method Tests", function() {
       testSlider.slider("toggle");
       var isEnabled = testSlider.slider("isEnabled");
       expect(isEnabled).not.toBeTruthy();
+    });
+
+    it("throws an error if an element without a 'slider' data property tries to call toggle()", function() {
+      var toggleSlider = function() {
+        $("#testSlider1").slider("toggle");
+      };
+      expect(toggleSlider).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
     });
   });
 
@@ -407,6 +450,13 @@ describe("Public Method Tests", function() {
       var hasDisabledClass = testSlider.parent().hasClass("slider") && testSlider.parent().hasClass("slider-disabled");
       expect(isEnabled).not.toBeTruthy();
       expect(hasDisabledClass).toBeTruthy();
+    });
+
+    it("throws an error if an element without a 'slider' data property tries to call isEnabled()", function() {
+      var sliderIsEnabled = function() {
+        $("#testSlider1").slider("isEnabled");
+      };
+      expect(sliderIsEnabled).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
     });
   });
 
