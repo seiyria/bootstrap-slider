@@ -34,11 +34,11 @@
       "jquery": "bower_components/jquery/jquery.min.js"
     },
     "less": {
-      "slider": "less/slider.less"
+      "slider": "less/bootstrap-slider.less"
     },
     "css": {
       "bootstrap": "bower_components/bootstrap/dist/css/bootstrap.min.css",
-      "slider": "css/slider.css"
+      "slider": "css/bootstrap-slider.css"
     },
     "tpl": {
       "SpecRunner": "tpl/SpecRunner.tpl",
