@@ -20,6 +20,10 @@
 		  padding-bottom: 20px;
 		}
 
+		h1 small {
+			font-size: 51%;
+		}
+
 		/* Everything but the jumbotron gets side spacing for mobile first views */
 		.header,
 		.marketing,
@@ -90,6 +94,7 @@
 
 		.slider-example {
 			padding: 10px 0;
+			margin: 35px 0;
 		}
 
 		#destroyEx5Slider, #ex6CurrentSliderValLabel, #ex7-enabled {
@@ -144,26 +149,72 @@
       <div class="jumbotron">
         <h1>Slider for Bootstrap <small>bootstrap-slider.js</small></h1>
         <p class="lead">Examples for the bootstrap-slider component.<p>
-        <p class="lead">To see the JavaScript and CSS code, view the page source.</p>
       </div>
 
       <div class="examples">
       	<div class='slider-example'>
-      		<h4>Example 1:</h4>
+      		<h3>Example 1:</h3>
       		<p>Basic example with custom formater and colored selected region via CSS.</p>
       		<div class="well">
 				<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
 			</div>
+			<pre><code>
+###################
+       HTML	
+###################
+
+&ltinput id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/&gt
+
+
+
+###################
+    JavaScript	
+###################
+
+$('#ex1').slider({
+	formater: function(value) {
+		return 'Current value: ' + value;
+	}
+});
+
+
+
+###################
+       CSS	
+###################
+
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
+            </code></pre>
       	</div>
+
       	<div class='slider-example'>
-      		<h4>Example 2:</h4>
+      		<h3>Example 2:</h3>
       		<p>Range selector, options specified via data attribute.</p>
       		<div class="well">
       			Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
       		</div>
+      		<pre><code>
+###################
+       HTML	
+###################
+
+Filter by price interval: &ltb&gt€ 10&lt/b&gt &ltinput id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/&gt &ltb&gt€ 1000&lt/b&gt
+
+
+###################
+    JavaScript	
+###################
+
+$("#ex2").slider({});
+
+            </code></pre>
       	</div>
+
       	<div class='slider-example'>
-      		<h4>Example 3:</h4>
+      		<h3>Example 3:</h3>
       		<p>Using events to work with the values and style the selection and handles via CSS. The tooltip is disabled and diferent shapes for the handles.</p>
       		<div class="well">
       			<p>
@@ -177,37 +228,187 @@
 	            </p>
 	            <div id="RGB"></div>
       		</div>
+      		<pre><code>
+###################
+       HTML	
+###################
+
+&ltp&gt
+&ltb&gtR&lt/b&gt &ltinput type="text" class="span2" value="" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="128" data-slider-id="RC" id="R" data-slider-tooltip="hide" data-slider-handle="square" /&gt
+&lt/p&gt
+&ltp&gt
+&ltb&gtG&lt/b&gt &ltinput type="text" class="span2" value="" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="128" data-slider-id="GC" id="G" data-slider-tooltip="hide" data-slider-handle="round" /&gt
+&lt/p&gt
+&ltp&gt
+&ltb&gtB&lt/b&gt &ltinput type="text" class="span2" value="" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="128" data-slider-id="BC" id="B" data-slider-tooltip="hide" data-slider-handle="triangle" /&gt
+&lt/p&gt
+&ltdiv id="RGB"&gt&lt/div&gt
+
+
+###################
+    JavaScript	
+###################
+
+var RGBChange = function() {
+	$('#RGB').css('background', 'rgb('+r.getValue()+','+g.getValue()+','+b.getValue()+')')
+};
+
+var r = $('#R').slider()
+		.on('slide', RGBChange)
+		.data('slider');
+var g = $('#G').slider()
+		.on('slide', RGBChange)
+		.data('slider');
+var b = $('#B').slider()
+		.on('slide', RGBChange)
+		.data('slider');
+
+
+###################
+       CSS	
+###################
+
+#RGB {
+	height: 20px;
+	background: rgb(128, 128, 128);
+}
+#RC .slider-selection {
+	background: #FF8282;
+}
+#RC .slider-handle {
+	background: red;
+}
+#GC .slider-selection {
+	background: #428041;
+}
+#GC .slider-handle {
+	background: green;
+}
+#BC .slider-selection {
+	background: #8283FF;
+}
+#BC .slider-handle {
+	border-bottom-color: blue;
+}
+#R, #G, #B {
+	width: 300px;
+}
+
+            </code></pre>
       	</div>
+
       	<div class='slider-example'>
-      		<h4>Example 4:</h4>
+      		<h3>Example 4:</h3>
       		<p>Vertical Slider with reversed values (largest to smallest).</p>
       		<div class="well">
       			<input id="ex4" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="-3" data-slider-orientation="vertical"/>
       		</div>
+      		<pre><code>
+###################
+       HTML	
+###################
+
+&ltinput id="ex4" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="-3" data-slider-orientation="vertical"/&gt
+
+
+###################
+    JavaScript	
+###################
+
+$("#ex4").slider({
+	reversed : true
+});
+
+            </code></pre>
       	</div>
+
       	<div class='slider-example'>
-      		<h4>Example 5:</h4>
+      		<h3>Example 5:</h3>
       		<p>Destroy instance of slider by calling destroy() method on slider instance via JavaScript.
       		<div class="well">
       			<input id="ex5" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="0"/>
       			<button id="destroyEx5Slider" class='btn btn-danger'>Click to Destroy</button>
       		</div>
+      		<pre><code>
+###################
+       HTML	
+###################
+
+&ltinput id="ex5" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="0"/&gt
+&ltbutton id="destroyEx5Slider" class='btn btn-danger'>Click to Destroy&lt/button&gt
+
+
+###################
+    JavaScript	
+###################
+
+$("#ex5").slider();
+$("#destroyEx5Slider").click(function() {
+	$("#ex5").slider('destroy');
+});
+
+            </code></pre>
       	</div>
+
       	<div class='slider-example'>
-      		<h4>Example 6:</h4>
+      		<h3>Example 6:</h3>
       		<p>Able to bind to 'slide' JQuery event on slider, which is triggered whenever the slider is used.</p>
       		<div class="well">
       			<input id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
       			<span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>
       		</div>
+      		<pre><code>
+###################
+       HTML	
+###################
+
+&ltinput id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/&t
+&ltspan id="ex6CurrentSliderValLabel">Current Slider Value: &ltspan id="ex6SliderVal"&gt3&lt/span&gt&lt/span&gt
+
+
+###################
+    JavaScript	
+###################
+
+$("#ex6").slider();
+$("#ex6").on('slide', function(slideEvt) {
+	$("#ex6SliderVal").text(slideEvt.value);
+});
+
+            </code></pre>
       	</div>
+
       	<div class='slider-example'>
-      		<h4>Example 7:</h4>
+      		<h3>Example 7:</h3>
       		<p>Sliders can be enabled and disabled.</p>
       		<div class="well">
       			<input id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
       			<input id="ex7-enabled" type="checkbox"/> Enabled
       		</div>
+      		<pre><code>
+###################
+       HTML	
+###################
+
+&ltinput id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/&gt
+&ltinput id="ex7-enabled" type="checkbox"/&gt Enabled
+
+
+###################
+    JavaScript	
+###################
+
+$("#ex7").slider();
+$("#ex7-enabled").click(function() {
+	if(this.checked) {
+		$("#ex7").slider("enable");
+	}
+	else {
+		$("#ex7").slider("disable");
+	}
+});
+
+            </code></pre>
       	</div>
       </div>
 
