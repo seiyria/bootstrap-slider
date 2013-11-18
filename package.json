@@ -46,8 +46,8 @@
     },
     "dist": {
       "js": "dist/bootstrap-slider.min.js",
-      "css": "dist/css/slider.css",
-      "cssMin": "dist/css/slider.min.css"
+      "css": "dist/css/bootstrap-slider.css",
+      "cssMin": "dist/css/bootstrap-slider.min.css"
     },
     "spec": "spec/**/*.js"
   }
