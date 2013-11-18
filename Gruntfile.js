@@ -70,7 +70,7 @@ module.exports = function(grunt) {
       options : {
         specs : '<%= pkg.gruntConfig.spec %>',
         vendor : ['<%= pkg.gruntConfig.js.jquery %>'],
-        styles : ['<%= pkg.gruntConfig.css.boostrap %>', '<%= pkg.gruntConfig.css.slider %>'],
+        styles : ['<%= pkg.gruntConfig.css.bootstrap %>', '<%= pkg.gruntConfig.css.slider %>'],
         template : '<%= pkg.gruntConfig.tpl.SpecRunner %>'
       }
     },
