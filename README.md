@@ -2,6 +2,8 @@ bootstrap-slider
 ================
 A "fork" of bootstrap-slider found on http://www.eyecon.ro/ originally by Stefan Petre.
 
+Want to use this with Rails? [Check it out!](https://github.com/stationkeeping/bootstrap-slider-rails)
+
 Examples
 ========
 You can see all of our API examples [here](http://seiyria.github.io/bootstrap-slider/).
