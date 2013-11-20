@@ -86,7 +86,8 @@
 		}
 
 		['min', 'max', 'step', 'value'].forEach(function(attr) {
-			this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr);
+            // the "|| 0" is used when the expression before it evaluates to an empty string (causes bad calculations in IE later on)
+			this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr) || 0;
 		}, this);
 
 		if (this.value instanceof Array) {
@@ -171,8 +172,8 @@
 			var val = this.calculateValue();
 			this.element
 				.trigger({
-					type: 'slide',
-					value: val
+					'type': 'slide',
+					'value': val
 				})
 				.data('value', val)
 				.prop('value', val);
@@ -180,9 +181,9 @@
 			if (old !== val) {
 				this.element
 					.trigger({
-						type: 'slideChange',
-						new: val,
-						old: old
+						'type': 'slideChange',
+						'new': val, // without a string literal, IE8 will interpret as the JS "new" keyword
+						'old': old
 					})
 					.data('value', val)
 					.prop('value', val);
