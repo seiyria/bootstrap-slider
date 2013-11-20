@@ -356,12 +356,12 @@
 			var val = this.calculateValue();
 			this.layout();
 			this.element
+				.data('value', val)
+				.prop('value', val)
 				.trigger({
 					type: 'slideStop',
 					value: val
-				})
-				.data('value', val)
-				.prop('value', val);
+				});
 			return false;
 		},
 
