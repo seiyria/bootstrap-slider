@@ -1,9 +1,28 @@
 {
-	"name": "bootstrap-slider",
-	"version": "0.0.1",
-	"dependencies": {
-		"jquery": "",
-		"bootstrap": "",
-		"modernizr": ""
-	}
+  "name": "seiyria-bootstrap-slider",
+  "version": "1.9.0",
+  "dependencies": {
+    "jquery": "",
+    "bootstrap": "",
+    "modernizr": ""
+  },
+  "homepage": "https://github.com/seiyria/bootstrap-slider",
+  "authors": [
+    "Kyle Kemp <kyle@seiyria.com>",
+    "Rohit Kalkur <rohit.kalkur@gmail.com>"
+  ],
+  "description": "a slider element for bootstrap 2/3",
+  "main": "js/bootstrap-slider.js",
+  "keywords": [
+    "slider",
+    "bootstrap2",
+    "bootstrap3",
+    "bootstrap"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
 }
