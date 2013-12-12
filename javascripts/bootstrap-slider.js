@@ -19,19 +19,16 @@
  
 (function( $ ) {
 
-	var clamp = function(min, max, val) {
-		return Math.max(min, Math.min(max, val));
-	};
-
 	var ErrorMsgs = {
 		formatInvalidInputErrorMsg : function(input) {
 			return "Invalid input value '" + input + "' passed in";
-		}
+		},
+		callingContextNotSliderInstance : "Calling context element does not have instance of Slider bound to it. Check your code to make sure the JQuery object returned from the call to the slider() initializer is calling the method"
 	};
 
 	var Slider = function(element, options) {
 		var el = this.element = $(element).hide();
-        var origWidth = el.outerWidth();
+		var origWidth = el.outerWidth();
 
 		var updateSlider = false;
 		var parent = this.element.parent();
@@ -88,11 +85,12 @@
 				break;
 		}
 
-        ['min', 'max', 'step', 'value'].forEach(function(attr) {
-            this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr);
-        }, this);
+		['min', 'max', 'step', 'value'].forEach(function(attr) {
+            // the "|| 0" is used when the expression before it evaluates to an empty string (causes bad calculations in IE later on)
+			this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr) || 0;
+		}, this);
 
-        if (this.value instanceof Array) {
+		if (this.value instanceof Array) {
 			this.range = true;
 		}
 
@@ -101,8 +99,8 @@
 		if (this.selection === 'none') {
 			this.selectionEl.addClass('hide');
 		}
-		this.selectionElStyle = this.selectionEl[0].style;
 
+		this.selectionElStyle = this.selectionEl[0].style;
 
 		this.handle1 = this.picker.find('.slider-handle:first');
 		this.handle1Stype = this.handle1[0].style;
@@ -122,10 +120,10 @@
 		}
 
 		if (this.range) {
-			this.value[0] = clamp(this.min, this.max, this.value[0]);
-			this.value[1] = clamp(this.min, this.max, this.value[1]);
+			this.value[0] = Math.max(this.min, Math.min(this.max, this.value[0]));
+			this.value[1] = Math.max(this.min, Math.min(this.max, this.value[1]));
 		} else {
-			this.value = [ clamp(this.min, this.max, this.value)];
+			this.value = [ Math.max(this.min, Math.min(this.max, this.value))];
 			this.handle2.addClass('hide');
 			if (this.selection === 'after') {
 				this.value[1] = this.max;
@@ -147,8 +145,6 @@
 
 		this.reversed = this.element.data('slider-reversed')||options.reversed;
 
-		this.minRangeDifference = this.element.data('min-range-difference')||options.minRangeDifference;
-
 		this.layout();
 
 		if (this.touchCapable) {
@@ -162,13 +158,16 @@
 			});
 		}
 
-		if (tooltip === 'show') {
+		if(tooltip === 'hide') {
+			this.tooltip.addClass('hide');
+		} else if(tooltip === 'always') {
+			this.showTooltip();
+			this.alwaysShowTooltip = true;
+		} else {
 			this.picker.on({
 				mouseenter: $.proxy(this.showTooltip, this),
 				mouseleave: $.proxy(this.hideTooltip, this)
 			});
-		} else {
-			this.tooltip.addClass('hide');
 		}
 
 		if (updateSlider === true) {
@@ -176,21 +175,21 @@
 			var val = this.calculateValue();
 			this.element
 				.trigger({
-					type: 'slide',
-					value: val
+					'type': 'slide',
+					'value': val
 				})
 				.data('value', val)
 				.prop('value', val);
 
 			if (old !== val) {
 				this.element
-                    .trigger({
-                        type: 'slideChange',
-                        new: val,
-                        old: old
-                    })
-                    .data('value', val)
-                    .prop('value', val);
+					.trigger({
+						'type': 'slideChange',
+						'new': val, // without a string literal, IE8 will interpret as the JS "new" keyword
+						'old': old
+					})
+					.data('value', val)
+					.prop('value', val);
 			}
 		}
 
@@ -210,13 +209,11 @@
 		
 		showTooltip: function(){
 			this.tooltip.addClass('in');
-			//var left = Math.round(this.percent*this.width);
-			//this.tooltip.css('left', left - this.tooltip.outerWidth()/2);
 			this.over = true;
 		},
 		
 		hideTooltip: function(){
-			if (this.inDrag === false) {
+			if (this.inDrag === false && this.alwaysShowTooltip !== true) {
 				this.tooltip.removeClass('in');
 			}
 			this.over = false;
@@ -245,18 +242,18 @@
 			if (this.range) {
 				this.tooltipInner.text(
 					this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
-			);
+				);
 				this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
 			} else {
 				this.tooltipInner.text(
 					this.formater(this.value[0])
-			);
+				);
 				this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
 			}
 		},
 
 		mousedown: function(ev) {
-			if(this.picker.hasClass('slider-disabled')) {
+			if(!this.isEnabled()) {
 				return false;
 			}
 			// Touch: Get the original event:
@@ -307,7 +304,7 @@
 		},
 
 		mousemove: function(ev) {
-			if(this.picker.hasClass('slider-disabled')) {
+			if(!this.isEnabled()) {
 				return false;
 			}
 			// Touch: Get the original event:
@@ -340,7 +337,7 @@
 		},
 
 		mouseup: function() {
-			if(this.picker.hasClass('slider-disabled')) {
+			if(!this.isEnabled()) {
 				return false;
 			}
 			if (this.touchCapable) {
@@ -363,12 +360,12 @@
 			var val = this.calculateValue();
 			this.layout();
 			this.element
+				.data('value', val)
+				.prop('value', val)
 				.trigger({
 					type: 'slideStop',
 					value: val
-				})
-				.data('value', val)
-				.prop('value', val);
+				});
 			return false;
 		},
 
@@ -382,13 +379,13 @@
 				this.value = val;
 			} else {
 				val = (this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step);
-                if (val < this.min) {
-                    val = this.min;
-                }
-                else if (val > this.max) {
-                    val = this.max;
-                }
-                val = parseFloat(val);
+				if (val < this.min) {
+					val = this.min;
+				}
+				else if (val > this.max) {
+					val = this.max;
+				}
+				val = parseFloat(val);
 				this.value = [val, this.value[1]];
 			}
 			return val;
@@ -400,7 +397,7 @@
 			}
 			var percentage = (ev[this.mousePos] - this.offset[this.stylePos])*100/this.size;
 			percentage = Math.round(percentage/this.percentage[2])*this.percentage[2];
-			return clamp(0, 100, percentage);
+			return Math.max(0, Math.min(100, percentage));
 		},
 
 		getValue: function() {
@@ -411,21 +408,13 @@
 		},
 
 		setValue: function(val) {
-			var tempValue = this.validateInputValue(val);
-
-			if(this.range && this.minRangeDifference) {
-				if(Math.abs(val[0]-val[1]) < this.minRangeDifference) {
-					tempValue = this.value;
-				}
-			}
-
-			this.value = tempValue;
+			this.value = this.validateInputValue(val);
 
 			if (this.range) {
-				this.value[0] = clamp(this.min, this.max, this.value[0]);
-				this.value[1] = clamp(this.min, this.max, this.value[1]);
+				this.value[0] = Math.max(this.min, Math.min(this.max, this.value[0]));
+				this.value[1] = Math.max(this.min, Math.min(this.max, this.value[1]));
 			} else {
-				this.value = [ clamp(this.min, this.max, this.value)];
+				this.value = [ Math.max(this.min, Math.min(this.max, this.value))];
 				this.handle2.addClass('hide');
 				if (this.selection === 'after') {
 					this.value[1] = this.max;
@@ -475,8 +464,7 @@
 		toggle: function() {
 			if(this.enabled) {
 				this.disable();
-			}
-			else {
+			} else {
 				this.enable();
 			}
 		},
@@ -497,31 +485,40 @@
 	};
 
 	$.fn.slider = function (option) {
-        if (typeof option === 'string') {
+		if (typeof option === 'string') {
 			var args = Array.prototype.slice.call(arguments, 1);
 			return invokePublicMethod.call(this, option, args);
-        } else {
-            return createNewSliderInstance.call(this, option);
-        }
+		} else {
+			return createNewSliderInstance.call(this, option);
+		}
 	};
 
 	function invokePublicMethod(methodName, args) {
 		if(publicMethods[methodName]) {
-			var sliderObject = $(this).data('slider');
+			var sliderObject = retrieveSliderObjectFromElement(this);
 			return publicMethods[methodName].apply(sliderObject, args);
 		} else {
 			throw new Error("method '" + methodName + "()' does not exist for slider.");
 		}
 	}
 
+	function retrieveSliderObjectFromElement(element) {
+		var sliderObject = $(element).data('slider');
+		if(sliderObject && sliderObject instanceof Slider) {
+			return sliderObject;
+		} else {
+			throw new Error(ErrorMsgs.callingContextNotSliderInstance);
+		}
+	}
+
 	function createNewSliderInstance(opts) {
 		var $this = $(this),
-             data = $this.data('slider'),
-             options = typeof opts === 'object' && opts;
-        if (!data)  {
+			data = $this.data('slider'),
+			options = typeof opts === 'object' && opts;
+		if (!data)  {
 			$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
-        }
-        return $this;
+		}
+		return $this;
 	}
 
 	$.fn.slider.defaults = {
@@ -535,7 +532,6 @@
 		handle: 'round',
 		reversed : false,
 		enabled: true,
-		minRangeDifference: 0,
 		formater: function(value) {
 			return value;
 		}
