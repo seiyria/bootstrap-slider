@@ -417,6 +417,32 @@ $("#ex7-enabled").click(function() {
       	</div>
       </div>
 
+      <div class='slider-example'>
+      		<h3>Example 8:</h3>
+      		<p>Tooltip can always be displayed.</p>
+      		<div class="well">
+  				<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+      		</div>
+      		<pre><code>
+###################
+       HTML	
+###################
+
+&ltinput id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/&gt
+
+
+###################
+    JavaScript	
+###################
+
+$("#ex8").slider({
+	tooltip: 'always'
+});
+
+            </code></pre>
+      	</div>
+      </div>
+
     </div> <!-- /container -->
 
 
@@ -477,6 +503,11 @@ $("#ex7-enabled").click(function() {
 				else {
 					$("#ex7").slider("disable");
 				}
+			});
+
+			/* Example 8 */
+			$("#ex8").slider({
+				tooltip: 'always'
 			});
     	});
     </script>

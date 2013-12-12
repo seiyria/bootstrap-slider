@@ -158,13 +158,16 @@
 			});
 		}
 
-		if (tooltip === 'show') {
+		if(tooltip === 'hide') {
+			this.tooltip.addClass('hide');
+		} else if(tooltip === 'always') {
+			this.showTooltip();
+			this.alwaysShowTooltip = true;
+		} else {
 			this.picker.on({
 				mouseenter: $.proxy(this.showTooltip, this),
 				mouseleave: $.proxy(this.hideTooltip, this)
 			});
-		} else {
-			this.tooltip.addClass('hide');
 		}
 
 		if (updateSlider === true) {
@@ -210,7 +213,7 @@
 		},
 		
 		hideTooltip: function(){
-			if (this.inDrag === false) {
+			if (this.inDrag === false && this.alwaysShowTooltip !== true) {
 				this.tooltip.removeClass('in');
 			}
 			this.over = false;
