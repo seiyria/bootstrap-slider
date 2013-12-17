@@ -86,8 +86,15 @@
 		}
 
 		['min', 'max', 'step', 'value'].forEach(function(attr) {
-            // the "|| 0" is used when the expression before it evaluates to an empty string (causes bad calculations in IE later on)
-			this[attr] = el.data('slider-' + attr) || options[attr] || el.prop(attr) || 0;
+			if (typeof el.data('slider-' + attr) !== 'undefined') {
+				this[attr] = el.data('slider-' + attr);
+			} else if (typeof options[attr] !== 'undefined') {
+				this[attr] = options[attr];
+			} else if (typeof el.prop(attr) !== 'undefined') {
+				this[attr] = el.prop(attr);
+			} else {
+				this[attr] = 0; // to prevent empty string issues in calculations in IE
+			}
 		}, this);
 
 		if (this.value instanceof Array) {
