@@ -86,11 +86,11 @@
 		}
 
 		['min', 'max', 'step', 'value'].forEach(function(attr) {
-			if (el.data('slider-' + attr) != 'undefined') {
+			if (typeof el.data('slider-' + attr) !== 'undefined') {
 				this[attr] = el.data('slider-' + attr);
-			} else if (options[attr] != 'undefined') {
+			} else if (typeof options[attr] !== 'undefined') {
 				this[attr] = options[attr];
-			} else if (el.prop(attr) != 'undefined') {
+			} else if (typeof el.prop(attr) !== 'undefined') {
 				this[attr] = el.prop(attr);
 			} else {
 				this[attr] = 0; // to prevent empty string issues in calculations in IE
