@@ -454,7 +454,7 @@
 		setMax: function(val) {
 			this.max = val;
 			this.setValue(this.getValue());
-		}
+		},
 
 		validateInputValue : function(val) {
 			if(typeof val === 'number') {
