@@ -437,6 +437,24 @@
 			];
 			this.layout();
 		},
+		
+		getMin: function() {
+			return this.min;
+		},
+		
+		setMin: function(val) {
+			this.min = val;
+			this.setValue(this.getValue());
+		},
+		
+		getMax: function() {
+			return this.max;
+		},
+		
+		setMax: function(val) {
+			this.max = val;
+			this.setValue(this.getValue());
+		},
 
 		validateInputValue : function(val) {
 			if(typeof val === 'number') {
