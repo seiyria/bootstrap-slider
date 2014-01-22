@@ -379,10 +379,13 @@
 		calculateValue: function() {
 			var val;
 			if (this.range) {
-				val = [
-					(Math.max(this.min, this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step)),
-					(Math.min(this.max, this.min + Math.round((this.diff * this.percentage[1]/100)/this.step)*this.step))
-				];
+				val = [this.min,this.max];
+                if (this.percentage[0] !== 0){
+                    val[0] = (Math.max(this.min, this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step))
+                }
+                if (this.percentage[1] !== 100){
+                    val[1] = (Math.min(this.max, this.min + Math.round((this.diff * this.percentage[1]/100)/this.step)*this.step));
+                }
 				this.value = val;
 			} else {
 				val = (this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step);
