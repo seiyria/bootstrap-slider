@@ -111,8 +111,11 @@
 
 		this.handle1 = this.picker.find('.slider-handle:first');
 		this.handle1Stype = this.handle1[0].style;
+		this.handle1.attr("tabindex", 0);
+
 		this.handle2 = this.picker.find('.slider-handle:last');
 		this.handle2Stype = this.handle2[0].style;
+		this.handle2.attr("tabindex", 0);
 
 		var handle = this.element.data('slider-handle')||options.handle;
 		switch(handle) {
