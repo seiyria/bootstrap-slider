@@ -28,7 +28,7 @@
 
 	var Slider = function(element, options) {
 		var el = this.element = $(element).hide();
-		var origWidth = el.outerWidth();
+		var origWidth =  $(element)[0].style.width;
 
 		var updateSlider = false;
 		var parent = this.element.parent();
