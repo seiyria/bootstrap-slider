@@ -75,8 +75,7 @@
 				break;
 			default:
 				this.picker
-					.addClass('slider-horizontal')
-					.css('width', origWidth);
+					.addClass('slider-horizontal');
 				this.orientation = 'horizontal';
 				this.stylePos = 'left';
 				this.mousePos = 'pageX';
