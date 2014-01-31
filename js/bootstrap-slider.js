@@ -166,6 +166,14 @@
 			});
 		}
 
+		this.handle1.on({
+			keydown: $.proxy(this.keydown, this, 0)
+		});
+
+		this.handle2.on({
+			keydown: $.proxy(this.keydown, this, 1)
+		});
+
 		if(tooltip === 'hide') {
 			this.tooltip.addClass('hide');
 		} else if(tooltip === 'always') {
@@ -309,6 +317,65 @@
 					value: val
 				});
 			return false;
+		},
+
+		keydown: function(handleIdx, ev) {
+			if(!this.isEnabled()) {
+				return false;
+			}
+
+			var dir;
+			switch (ev.which) {
+				case 37: // left
+				case 40: // down
+					dir = -1;
+					break;
+				case 39: // right
+				case 38: // up
+					dir = 1;
+					break;
+			}
+			if (!dir) {
+				return;
+			}
+
+			ev.preventDefault();
+
+			var percentage = this.percentage[handleIdx] + dir * (this.step/this.diff*100);
+			if (percentage > 100) {
+				percentage = 100;
+			} else if (percentage < 0) {
+				percentage = 0;
+			}
+
+			this.dragged = handleIdx;
+			if (this.range) {
+				if (this.dragged === 0 && this.percentage[1] < percentage) {
+					this.percentage[0] = this.percentage[1];
+					this.dragged = 1;
+					this.handle2.focus();
+				} else if (this.dragged === 1 && this.percentage[0] > percentage) {
+					this.percentage[1] = this.percentage[0];
+					this.dragged = 0;
+					this.handle1.focus();
+				}
+			}
+			this.percentage[this.dragged] = this.reversed ? 100 - percentage : percentage;
+			this.layout();
+			var val = this.calculateValue();
+			this.setValue(val);
+			this.element
+				.trigger({
+					type: 'slide',
+					value: val
+				})
+				.trigger({
+					type: 'slideStop',
+					value: val
+				})
+				.data('value', val)
+				.prop('value', val);
+			return;
 		},
 
 		mousemove: function(ev) {
