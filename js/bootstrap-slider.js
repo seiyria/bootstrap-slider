@@ -28,6 +28,7 @@
 
 	var Slider = function(element, options) {
 		var el = this.element = $(element).hide();
+		var origWidth =  $(element)[0].style.width;
 
 		var updateSlider = false;
 		var parent = this.element.parent();
@@ -74,7 +75,8 @@
 				break;
 			default:
 				this.picker
-					.addClass('slider-horizontal');
+					.addClass('slider-horizontal')
+					.css('width', origWidth);
 				this.orientation = 'horizontal';
 				this.stylePos = 'left';
 				this.mousePos = 'pageX';
