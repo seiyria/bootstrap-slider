@@ -112,11 +112,9 @@
 
 		this.handle1 = this.picker.find('.slider-handle:first');
 		this.handle1Stype = this.handle1[0].style;
-		this.handle1.attr("tabindex", 0);
 
 		this.handle2 = this.picker.find('.slider-handle:last');
 		this.handle2Stype = this.handle2[0].style;
-		this.handle2.attr("tabindex", 0);
 
 		var handle = this.element.data('slider-handle')||options.handle;
 		switch(handle) {
@@ -187,6 +185,14 @@
 				mouseenter: $.proxy(this.showTooltip, this),
 				mouseleave: $.proxy(this.hideTooltip, this)
 			});
+			this.handle1.on({
+				focus: $.proxy(this.showTooltip, this),
+				blur: $.proxy(this.hideTooltip, this)
+			});
+			this.handle2.on({
+				focus: $.proxy(this.showTooltip, this),
+				blur: $.proxy(this.hideTooltip, this)
+			});
 		}
 
 		if (updateSlider === true) {
@@ -214,8 +220,9 @@
 
 		this.enabled = options.enabled && 
 						(this.element.data('slider-enabled') === undefined || this.element.data('slider-enabled') === true);
-		if(!this.enabled)
-		{
+		if(this.enabled) {
+			this.enable();
+		} else {
 			this.disable();
 		}
 	};
@@ -342,9 +349,9 @@
 				return;
 			}
 
-			ev.preventDefault();
+			var oneStepValuePercentageChange = dir * this.percentage[2];
+			var percentage = this.percentage[handleIdx] + oneStepValuePercentageChange;
 
-			var percentage = this.percentage[handleIdx] + dir * (this.step/this.diff*100);
 			if (percentage > 100) {
 				percentage = 100;
 			} else if (percentage < 0) {
@@ -352,19 +359,10 @@
 			}
 
 			this.dragged = handleIdx;
-			if (this.range) {
-				if (this.dragged === 0 && this.percentage[1] < percentage) {
-					this.percentage[0] = this.percentage[1];
-					this.dragged = 1;
-					this.handle2.focus();
-				} else if (this.dragged === 1 && this.percentage[0] > percentage) {
-					this.percentage[1] = this.percentage[0];
-					this.dragged = 0;
-					this.handle1.focus();
-				}
-			}
-			this.percentage[this.dragged] = this.reversed ? 100 - percentage : percentage;
+			this.adjustPercentageForRangeSliders(percentage);
+			this.percentage[this.dragged] = percentage;
 			this.layout();
+
 			var val = this.calculateValue();
 			this.setValue(val);
 			this.element
@@ -378,7 +376,7 @@
 				})
 				.data('value', val)
 				.prop('value', val);
-			return;
+			return false;
 		},
 
 		mousemove: function(ev) {
@@ -389,19 +387,12 @@
 			if (this.touchCapable && ev.type === 'touchmove') {
 				ev = ev.originalEvent;
 			}
-
+			
 			var percentage = this.getPercentage(ev);
-			if (this.range) {
-				if (this.dragged === 0 && this.percentage[1] < percentage) {
-					this.percentage[0] = this.percentage[1];
-					this.dragged = 1;
-				} else if (this.dragged === 1 && this.percentage[0] > percentage) {
-					this.percentage[1] = this.percentage[0];
-					this.dragged = 0;
-				}
-			}
+			this.adjustPercentageForRangeSliders(percentage);
 			this.percentage[this.dragged] = this.reversed ? 100 - percentage : percentage;
 			this.layout();
+
 			var val = this.calculateValue();
 			this.setValue(val);
 			this.element
@@ -412,6 +403,18 @@
 				.data('value', val)
 				.prop('value', val);
 			return false;
+		},
+
+		adjustPercentageForRangeSliders: function(percentage) {
+			if (this.range) {
+				if (this.dragged === 0 && this.percentage[1] < percentage) {
+					this.percentage[0] = this.percentage[1];
+					this.dragged = 1;
+				} else if (this.dragged === 1 && this.percentage[0] > percentage) {
+					this.percentage[1] = this.percentage[0];
+					this.dragged = 0;
+				}
+			}
 		},
 
 		mouseup: function() {
@@ -524,20 +527,25 @@
 		},
 
 		destroy: function(){
-			this.element.show().insertBefore(this.picker);
-			this.picker.remove();
+			this.handle1.off();
+			this.handle2.off();
+			this.element.off().show().insertBefore(this.picker);
+			this.picker.off().remove();
 			$(this.element).removeData('slider');
-			$(this.element).off();
 		},
 
 		disable: function() {
 			this.enabled = false;
+			this.handle1.removeAttr("tabindex");
+			this.handle2.removeAttr("tabindex");
 			this.picker.addClass('slider-disabled');
 			this.element.trigger('slideDisabled');
 		},
 
 		enable: function() {
 			this.enabled = true;
+			this.handle1.attr("tabindex", 0);
+			this.handle2.attr("tabindex", 0);
 			this.picker.removeClass('slider-disabled');
 			this.element.trigger('slideEnabled');
 		},

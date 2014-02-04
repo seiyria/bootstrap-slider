@@ -104,8 +104,8 @@ module.exports = function(grunt) {
         tasks: ['jshint:gruntfile']
       },
       spec : {
-        files: '<%= jshint.spec %>',
-        tasks: ['jshint:spec']
+        files: '<%= pkg.gruntConfig.spec %>',
+        tasks: ['jshint:spec', 'jasmine:src']
       },
       css : {
         files: '<%= pkg.gruntConfig.less.slider %>',

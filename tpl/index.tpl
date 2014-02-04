@@ -161,7 +161,7 @@
       		<h3>Example 1:</h3>
       		<p>Basic example with custom formater and colored selected region via CSS.</p>
       		<div class="well">
-				<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+				<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
 			</div>
 			<pre><code>
 ###################
