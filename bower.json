@@ -12,7 +12,8 @@
     "Rohit Kalkur <rohit.kalkur@gmail.com>"
   ],
   "description": "a slider element for bootstrap 2/3",
-  "main": "js/bootstrap-slider.js",
+  "main": ["js/bootstrap-slider.js"
+          ,"dist/css/bootstrap-slider.css"],
   "keywords": [
     "slider",
     "bootstrap2",
