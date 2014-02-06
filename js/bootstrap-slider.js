@@ -85,17 +85,18 @@
 				break;
 		}
 
-		['min', 'max', 'step', 'value'].forEach(function(attr) {
+    var self = this;
+		$.each(['min', 'max', 'step', 'value'], function(i, attr) {
 			if (typeof el.data('slider-' + attr) !== 'undefined') {
-				this[attr] = el.data('slider-' + attr);
+				self[attr] = el.data('slider-' + attr);
 			} else if (typeof options[attr] !== 'undefined') {
-				this[attr] = options[attr];
+				self[attr] = options[attr];
 			} else if (typeof el.prop(attr) !== 'undefined') {
-				this[attr] = el.prop(attr);
+				self[attr] = el.prop(attr);
 			} else {
-				this[attr] = 0; // to prevent empty string issues in calculations in IE
+				self[attr] = 0; // to prevent empty string issues in calculations in IE
 			}
-		}, this);
+		});
 
 		if (this.value instanceof Array) {
 			this.range = true;
@@ -515,7 +516,7 @@
 			if(typeof val === 'number') {
 				return val;
 			} else if(val instanceof Array) {
-				val.forEach(function(input) { if (typeof input !== 'number') { throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(input) ); }});
+				$.each(val, function(i, input) { if (typeof input !== 'number') { throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(input) ); }});
 				return val;
 			} else {
 				throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(val) );
