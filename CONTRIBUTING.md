@@ -1,7 +1,7 @@
 Issues
 ======
 
-We take all manner of questions, suggestions, and bug reports. Feel free to open an issue regarding anything and it'll get looked at!
+We take all manner of questions, suggestions, and bug reports. Feel free to open an issue regarding anything and it'll get looked at! If you have a bug report, please include a jsfiddle!
 
 Pull Requests
 =============
