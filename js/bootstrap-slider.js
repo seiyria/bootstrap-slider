@@ -579,7 +579,7 @@
 			return invokePublicMethod.call(this, option, args);
 		} else {
 			var $this = $(this);
-			var createdInstances = new Array();
+			var createdInstances = [];
 			$this.each(function() {
 				return createNewSliderInstance.call(this, option);
 			});
