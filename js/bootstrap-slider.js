@@ -578,7 +578,7 @@
 			var args = Array.prototype.slice.call(arguments, 1);
 			return invokePublicMethod.call(this, option, args);
 		} else {
-			if (this.length == 1) {
+			if (this.length === 1) {
 				return createNewSliderInstance.call(this, option);
 			} else {
 				var $this = $(this);
