@@ -8,6 +8,8 @@ Installation
 ============
 Clone the repository, then run `npm install`
 
+Want to use bower? `bower install seiyria-bootstrap-slider`
+
 Examples
 ========
 You can see all of our API examples [here](http://seiyria.github.io/bootstrap-slider/).
