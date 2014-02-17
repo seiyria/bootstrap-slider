@@ -31,7 +31,7 @@
     "devPort": 9000,
     "js": {
       "modernizr": "bower_components/modernizr/modernizr.js",
-      "jquery": "bower_components/jquery/jquery.min.js"
+      "jquery": "bower_components/jquery/dist/jquery.min.js"
     },
     "less": {
       "slider": "less/bootstrap-slider.less"
