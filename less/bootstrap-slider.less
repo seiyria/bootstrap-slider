@@ -7,9 +7,10 @@
  *
  */
 //@import '../bower_components/bootstrap/less/variables.less';
-@line-height-base: 20px;
-@border-radius-base: 4px;
-@import 'mixins.less'; // BootStrap mixins
+@import 'variables.less'; // Bootstrap variables
+@import 'mixins.less';    // Bootstrap mixins
+
+@slider-line-height: @line-height-computed;
 
 .slider {
 	display: inline-block;
@@ -17,11 +18,11 @@
 	position: relative;
 	&.slider-horizontal {
 		width: 210px;
-		height: @line-height-base;
+		height: @slider-line-height;
 		.slider-track {
-			height: @line-height-base/2;
+			height: @slider-line-height/2;
 			width: 100%;
-			margin-top: -@line-height-base/4;
+			margin-top: -@slider-line-height/4;
 			top: 50%;
 			left: 0;
 		}
@@ -31,10 +32,10 @@
 			bottom: 0;
 		}
 		.slider-handle {
-			margin-left: -@line-height-base/2;
-			margin-top: -@line-height-base/4;
+			margin-left: -@slider-line-height/2;
+			margin-top: -@slider-line-height/4;
 			&.triangle {
-    			border-width: 0 @line-height-base/2 @line-height-base/2 @line-height-base/2;
+    			border-width: 0 @slider-line-height/2 @slider-line-height/2 @slider-line-height/2;
 				width: 0;
 				height: 0;
 				border-bottom-color: #0480be;
@@ -44,11 +45,11 @@
 	}
 	&.slider-vertical {
 		height: 210px;
-		width: @line-height-base;
+		width: @slider-line-height;
 		.slider-track {
-			width: @line-height-base/2;
+			width: @slider-line-height/2;
 			height: 100%;
-			margin-left: -@line-height-base/4;
+			margin-left: -@slider-line-height/4;
 			left: 50%;
 			top: 0;
 		}
@@ -59,10 +60,10 @@
 			bottom: 0;
 		}
 		.slider-handle {
-			margin-left: -@line-height-base/4;
-			margin-top: -@line-height-base/2;
+			margin-left: -@slider-line-height/4;
+			margin-top: -@slider-line-height/2;
 			&.triangle {
-				border-width: @line-height-base/2 0 @line-height-base/2 @line-height-base/2;
+				border-width: @slider-line-height/2 0 @slider-line-height/2 @slider-line-height/2;
 				width: 1px;
 				height: 1px;
 				border-left-color: #0480be;
@@ -102,8 +103,8 @@
 }
 .slider-handle {
 	position: absolute;
-	width: @line-height-base;
-	height: @line-height-base;
+	width: @slider-line-height;
+	height: @slider-line-height;
 	#gradient > .vertical(#149bdf, #0480be);
 	.box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
 	opacity: 0.8;
