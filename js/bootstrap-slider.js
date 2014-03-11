@@ -85,7 +85,7 @@
 				break;
 		}
 
-    var self = this;
+		var self = this;
 		$.each(['min', 'max', 'step', 'value'], function(i, attr) {
 			if (typeof el.data('slider-' + attr) !== 'undefined') {
 				self[attr] = el.data('slider-' + attr);
@@ -193,29 +193,6 @@
 				focus: $.proxy(this.showTooltip, this),
 				blur: $.proxy(this.hideTooltip, this)
 			});
-		}
-
-		if (updateSlider === true) {
-			var old = this.getValue();
-			var val = this.calculateValue();
-			this.element
-				.trigger({
-					'type': 'slide',
-					'value': val
-				})
-				.data('value', val)
-				.prop('value', val);
-
-			if (old !== val) {
-				this.element
-					.trigger({
-						'type': 'slideChange',
-						'new': val, // without a string literal, IE8 will interpret as the JS "new" keyword
-						'old': old
-					})
-					.data('value', val)
-					.prop('value', val);
-			}
 		}
 
 		this.enabled = options.enabled && 
@@ -513,6 +490,14 @@
 				this.step*100/this.diff
 			];
 			this.layout();
+
+			this.element
+				.trigger({
+					'type': 'slide',
+					'value': this.value
+				})
+				.data('value', this.value)
+				.prop('value', this.value);
 		},
 
 		validateInputValue : function(val) {
