@@ -14,6 +14,17 @@ describe("Public Method Tests", function() {
       expect(sliderInstanceHasExpectedId).toBeTruthy();
     });
 
+    it("generates multiple slider instances from selector", function() {
+
+      $(".makeSlider").slider();
+
+      var sliderInstancesExists = $(".makeSlider").parent().is(".slider");
+      expect(sliderInstancesExists).toBeTruthy();
+
+      var sliderInstancesCount = $(".makeSlider").parent(".slider").length;
+      expect(sliderInstancesCount).toEqual(2);
+    });
+
     it("reads and sets the 'min' option properly", function() {
       var minVal = -5;
 
