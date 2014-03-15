@@ -16,6 +16,8 @@
 	<!-- Slider used for PublicMethodsSpec and EventsSpec -->
 	<input id="testSlider1" type="text"/>
 	<input id="testSlider2" type="text"/>
+    <input class="makeSlider" type="text"/>
+    <input class="makeSlider" type="text"/>
 
 	<!-- Sliders used for ElementDataSttributesSpec -->
 	<input id="minSlider" type="text" data-slider-min="5"/>

@@ -586,12 +586,15 @@
 	}
 
 	function createNewSliderInstance(opts) {
-		var $this = $(this),
-			data = $this.data('slider'),
-			options = typeof opts === 'object' && opts;
-		if (!data)  {
-			$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
-		}
+		var $this = $(this);
+		$this.each(function() {
+			var $this = $(this),
+				data = $this.data('slider'),
+				options = typeof opts === 'object' && opts;
+			if (!data)  {
+				$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
+			}
+		});
 		return $this;
 	}
 
