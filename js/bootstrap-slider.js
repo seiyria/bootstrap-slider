@@ -563,7 +563,16 @@
 			var args = Array.prototype.slice.call(arguments, 1);
 			return invokePublicMethod.call(this, option, args);
 		} else {
-			return createNewSliderInstance.call(this, option);
+			if (this.length === 1) {
+				return createNewSliderInstance.call(this, option);
+			} else {
+				var $this = $(this);
+				var createdInstances = [];
+				$this.each(function() {
+					return createNewSliderInstance.call(this, option);
+				});
+				return createdInstances;
+			}
 		}
 	};
 
