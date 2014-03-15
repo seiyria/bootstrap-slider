@@ -156,6 +156,16 @@
 
 		this.layout();
 
+		this.handle1.on({
+			keydown: $.proxy(this.keydown, this, 0),
+			mousedown: $.proxy(this.triggerFocusOnHandle, this, 0)
+		});
+
+		this.handle2.on({
+			keydown: $.proxy(this.keydown, this, 1),
+			mousedown: $.proxy(this.triggerFocusOnHandle, this, 1)
+		});
+
 		if (this.touchCapable) {
 			// Touch: Bind touch events:
 			this.picker.on({
@@ -166,14 +176,6 @@
 				mousedown: $.proxy(this.mousedown, this)
 			});
 		}
-
-		this.handle1.on({
-			keydown: $.proxy(this.keydown, this, 0)
-		});
-
-		this.handle2.on({
-			keydown: $.proxy(this.keydown, this, 1)
-		});
 
 		if(tooltip === 'hide') {
 			this.tooltip.addClass('hide');
@@ -264,6 +266,8 @@
 				ev = ev.originalEvent;
 			}
 
+			this.triggerFocusOnHandle();
+
 			this.offset = this.picker.offset();
 			this.size = this.picker[0][this.sizePos];
 
@@ -303,6 +307,16 @@
 					type: 'slide',
 					value: val
 				});
+			return false;
+		},
+
+		triggerFocusOnHandle: function(handleIdx) {
+			if(handleIdx === 0) {
+				this.handle1.focus();
+			} 
+			if(handleIdx === 1) {
+				this.handle2.focus();
+			}
 			return false;
 		},
 

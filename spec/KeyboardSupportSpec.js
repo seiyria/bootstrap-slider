@@ -8,6 +8,25 @@ describe("Keyboard Support Tests", function() {
       initialSliderVal = 5;
 
 
+  describe("Clicking on slider handle automatically gives it focus", function() {
+    
+    beforeEach(function() {
+      testSlider = $("#testSlider1").slider({
+        id: 'testSlider'
+      });
+      handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+    });
+
+    it("clicking on handle1 gives focus to handle1", function() {
+      var focusWasTriggered = false;
+      handle1.focus(function() {
+        focusWasTriggered = true;
+        expect(focusWasTriggered).toBeTruthy();
+      });
+      handle1.mousedown();
+    });
+  });
+
   describe("When slider handle has TAB focus", function() {
 
     it("should display it's tooltip if 'tooltip' option is set to 'show'", function() {
