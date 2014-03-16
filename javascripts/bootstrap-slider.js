@@ -85,7 +85,7 @@
 				break;
 		}
 
-    var self = this;
+		var self = this;
 		$.each(['min', 'max', 'step', 'value'], function(i, attr) {
 			if (typeof el.data('slider-' + attr) !== 'undefined') {
 				self[attr] = el.data('slider-' + attr);
@@ -156,6 +156,16 @@
 
 		this.layout();
 
+		this.handle1.on({
+			keydown: $.proxy(this.keydown, this, 0),
+			mousedown: $.proxy(this.triggerFocusOnHandle, this, 0)
+		});
+
+		this.handle2.on({
+			keydown: $.proxy(this.keydown, this, 1),
+			mousedown: $.proxy(this.triggerFocusOnHandle, this, 1)
+		});
+
 		if (this.touchCapable) {
 			// Touch: Bind touch events:
 			this.picker.on({
@@ -166,14 +176,6 @@
 				mousedown: $.proxy(this.mousedown, this)
 			});
 		}
-
-		this.handle1.on({
-			keydown: $.proxy(this.keydown, this, 0)
-		});
-
-		this.handle2.on({
-			keydown: $.proxy(this.keydown, this, 1)
-		});
 
 		if(tooltip === 'hide') {
 			this.tooltip.addClass('hide');
@@ -193,29 +195,6 @@
 				focus: $.proxy(this.showTooltip, this),
 				blur: $.proxy(this.hideTooltip, this)
 			});
-		}
-
-		if (updateSlider === true) {
-			var old = this.getValue();
-			var val = this.calculateValue();
-			this.element
-				.trigger({
-					'type': 'slide',
-					'value': val
-				})
-				.data('value', val)
-				.prop('value', val);
-
-			if (old !== val) {
-				this.element
-					.trigger({
-						'type': 'slideChange',
-						'new': val, // without a string literal, IE8 will interpret as the JS "new" keyword
-						'old': old
-					})
-					.data('value', val)
-					.prop('value', val);
-			}
 		}
 
 		this.enabled = options.enabled && 
@@ -287,6 +266,8 @@
 				ev = ev.originalEvent;
 			}
 
+			this.triggerFocusOnHandle();
+
 			this.offset = this.picker.offset();
 			this.size = this.picker[0][this.sizePos];
 
@@ -326,6 +307,16 @@
 					type: 'slide',
 					value: val
 				});
+			return false;
+		},
+
+		triggerFocusOnHandle: function(handleIdx) {
+			if(handleIdx === 0) {
+				this.handle1.focus();
+			} 
+			if(handleIdx === 1) {
+				this.handle2.focus();
+			}
 			return false;
 		},
 
@@ -513,6 +504,14 @@
 				this.step*100/this.diff
 			];
 			this.layout();
+
+			this.element
+				.trigger({
+					'type': 'slide',
+					'value': this.value
+				})
+				.data('value', this.value)
+				.prop('value', this.value);
 		},
 
 		validateInputValue : function(val) {
@@ -601,12 +600,15 @@
 	}
 
 	function createNewSliderInstance(opts) {
-		var $this = $(this),
-			data = $this.data('slider'),
-			options = typeof opts === 'object' && opts;
-		if (!data)  {
-			$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
-		}
+		var $this = $(this);
+		$this.each(function() {
+			var $this = $(this),
+				data = $this.data('slider'),
+				options = typeof opts === 'object' && opts;
+			if (!data)  {
+				$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
+			}
+		});
 		return $this;
 	}
 
