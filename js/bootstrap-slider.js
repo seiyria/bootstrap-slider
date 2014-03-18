@@ -584,7 +584,13 @@
 	function invokePublicMethod(methodName, args) {
 		if(publicMethods[methodName]) {
 			var sliderObject = retrieveSliderObjectFromElement(this);
-			return publicMethods[methodName].apply(sliderObject, args);
+			var result = publicMethods[methodName].apply(sliderObject, args);
+
+			if (typeof result === "undefined") {
+				return $(this);
+			} else {
+				return result;
+			}
 		} else {
 			throw new Error("method '" + methodName + "()' does not exist for slider.");
 		}
