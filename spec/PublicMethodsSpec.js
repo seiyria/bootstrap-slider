@@ -224,6 +224,14 @@ describe("Public Method Tests", function() {
         expect(sliderValue).toBe(minValue);
       });
 
+      it("return value is jquery object", function() {
+        var valueToSet = 8,
+            result = testSlider.slider('setValue', valueToSet);
+
+        expect(result.attr).toBeDefined();
+        expect(result.attr('id')).toBe('testSlider1');
+      });
+
       describe("when an invalid value type is passed in", function() {
         var invalidValue;
         
@@ -363,6 +371,13 @@ describe("Public Method Tests", function() {
         expect(sliderChildrenElements).toBe(0);
       });
 
+      it("return value is jquery object", function() {
+        var result = testSlider.slider('destroy');
+
+        expect(result.attr).toBeDefined();
+        expect(result.attr('id')).toBe('testSlider1');
+      });
+
       describe("unbinds all slider events", function() {
         var flag, evtName;
 
@@ -440,6 +455,16 @@ describe("Public Method Tests", function() {
       };
       expect(enableSlider).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
     });
+
+    it("return value is jquery object", function() {
+      testSlider = $("#testSlider1").slider({
+        enabled: false
+      });
+      var result = testSlider.slider("enable");
+
+      expect(result.attr).toBeDefined();
+      expect(result.attr('id')).toBe('testSlider1');
+    });
   });
 
   describe("'disable()' tests", function() {
@@ -455,6 +480,14 @@ describe("Public Method Tests", function() {
         $("#testSlider1").slider('disable');
       };
       expect(disableSlider).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
+    });
+
+    it("return value is jquery object", function() {
+      testSlider = $("#testSlider1").slider();
+      var result = testSlider.slider("disable");
+
+      expect(result.attr).toBeDefined();
+      expect(result.attr('id')).toBe('testSlider1');
     });
   });
 
@@ -480,6 +513,14 @@ describe("Public Method Tests", function() {
         $("#testSlider1").slider("toggle");
       };
       expect(toggleSlider).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
+    });
+
+    it("return value is jquery object", function() {
+      testSlider = $("#testSlider1").slider();
+      var result = testSlider.slider("toggle");
+
+      expect(result.attr).toBeDefined();
+      expect(result.attr('id')).toBe('testSlider1');
     });
   });
 
