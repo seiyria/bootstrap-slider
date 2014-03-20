@@ -1,5 +1,5 @@
 /* =========================================================
- * bootstrap-slider.js v2.0.0
+ * bootstrap-slider.js v3.0.0
  * http://www.eyecon.ro/bootstrap-slider
  * =========================================================
  * Copyright 2012 Stefan Petre
