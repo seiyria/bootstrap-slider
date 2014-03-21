@@ -157,13 +157,11 @@
 		this.layout();
 
 		this.handle1.on({
-			keydown: $.proxy(this.keydown, this, 0),
-			mousedown: $.proxy(this.triggerFocusOnHandle, this, 0)
+			keydown: $.proxy(this.keydown, this, 0)
 		});
 
 		this.handle2.on({
-			keydown: $.proxy(this.keydown, this, 1),
-			mousedown: $.proxy(this.triggerFocusOnHandle, this, 1)
+			keydown: $.proxy(this.keydown, this, 1)
 		});
 
 		if (this.touchCapable) {
@@ -307,7 +305,7 @@
 					type: 'slide',
 					value: val
 				});
-			return false;
+			return true;
 		},
 
 		triggerFocusOnHandle: function(handleIdx) {
@@ -317,7 +315,6 @@
 			if(handleIdx === 1) {
 				this.handle2.focus();
 			}
-			return false;
 		},
 
 		keydown: function(handleIdx, ev) {
