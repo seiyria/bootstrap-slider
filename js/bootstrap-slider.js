@@ -106,7 +106,14 @@
 		});
 
 		if (this.value instanceof Array) {
-			this.range = true;
+			if (updateSlider && !this.range) {
+				this.value = this.value[0];
+			} else {
+				this.range = true;
+			}
+		} else if (this.range) {
+			// User wants a range, but value is not an array
+			this.value = [this.value, this.max];
 		}
 
 		this.selection = this.element.data('slider-selection')||options.selection;
@@ -648,6 +655,7 @@
 		step: 1,
 		orientation: 'horizontal',
 		value: 5,
+		range: false,
 		selection: 'before',
 		tooltip: 'show',
 		handle: 'round',

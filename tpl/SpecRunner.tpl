@@ -23,7 +23,6 @@
 	<input id="minSlider" type="text" data-slider-min="5"/>
 	<input id="maxSlider" type="text" data-slider-max="5"/>
 	<input id="orientationSlider" type="text" data-slider-orientation="vertical"/>
-	<input id="changeOrientationSlider" type="text"/>
 	<input id="stepSlider" type="text" data-slider-step="5"/>
 	<input id="valueSlider" type="text" data-slider-value="5"/>
 	<input id="selectionSlider" type="text" data-slider-selection="after"/>
@@ -31,5 +30,7 @@
 	<input id="handleSlider" type="text" data-slider-handle="triangle"/>
 	<input id="reversedSlider" type="text" data-slider-reversed="true"/>
 	<input id="disabledSlider" type="text" data-slider-enabled="false"/>
+	<input id="changeOrientationSlider" type="text"/>
+	<input id="makeRangeSlider" type="text"/>
 </body>
 </html>
