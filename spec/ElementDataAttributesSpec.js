@@ -72,6 +72,25 @@ describe("Element Data Attributes Tests", function() {
     expect(isEnabled).not.toBeTruthy();
   });
 
+  it("changes the 'data-slider-orientation' property from horizontal to vertical", function() {
+    slider = $("#changeOrientationSlider").slider();
+    slider.slider('setAttribute', 'orientation', 'vertical').slider('refresh');
+
+    var $slider = $("#changeOrientationSlider").parent("div.slider");
+    var orientationClassApplied = $slider.hasClass("slider-vertical");
+    var secondSliderHidden = $slider.find('.slider-handle').last().hasClass('hide');
+    expect(orientationClassApplied).toBeTruthy();
+    expect(secondSliderHidden).toBeTruthy();
+  });
+
+  it("changes slider from basic to range", function() {
+    slider = $("#makeRangeSlider").slider();
+    slider.slider('setAttribute', 'range', true).slider('refresh');
+
+    var isRangeSlider = $("#changeOrientationSlider").parent("div.slider").find('.slider-handle').last().hasClass('hide');
+    expect(isRangeSlider).toBeFalsy();
+  });
+
   afterEach(function() {
     if(slider) { slider.slider('destroy'); }
   });

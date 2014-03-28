@@ -30,5 +30,7 @@
 	<input id="handleSlider" type="text" data-slider-handle="triangle"/>
 	<input id="reversedSlider" type="text" data-slider-reversed="true"/>
 	<input id="disabledSlider" type="text" data-slider-enabled="false"/>
+	<input id="changeOrientationSlider" type="text"/>
+	<input id="makeRangeSlider" type="text"/>
 </body>
 </html>

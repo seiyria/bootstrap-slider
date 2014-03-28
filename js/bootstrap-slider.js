@@ -64,6 +64,13 @@
 		this.tooltip = this.picker.find('.tooltip');
 		this.tooltipInner = this.tooltip.find('div.tooltip-inner');
 
+		if (updateSlider === true) {
+			// Reset classes
+			this.picker.removeClass('slider-horizontal');
+			this.picker.removeClass('slider-vertical');
+			this.tooltip.removeClass('hide');
+		}
+
 		this.orientation = this.element.data('slider-orientation')||options.orientation;
 		switch(this.orientation) {
 			case 'vertical':
@@ -99,7 +106,14 @@
 		});
 
 		if (this.value instanceof Array) {
-			this.range = true;
+			if (updateSlider && !this.range) {
+				this.value = this.value[0];
+			} else {
+				this.range = true;
+			}
+		} else if (this.range) {
+			// User wants a range, but value is not an array
+			this.value = [this.value, this.max];
 		}
 
 		this.selection = this.element.data('slider-selection')||options.selection;
@@ -115,6 +129,12 @@
 
 		this.handle2 = this.picker.find('.slider-handle:last');
 		this.handle2Stype = this.handle2[0].style;
+
+		if (updateSlider === true) {
+			// Reset classes
+			this.handle1.removeClass('round triangle');
+			this.handle2.removeClass('round triangle hide');
+		}
 
 		var handle = this.element.data('slider-handle')||options.handle;
 		switch(handle) {
@@ -556,12 +576,17 @@
 
 		isEnabled: function() {
 			return this.enabled;
+		},
+
+		setAttribute: function(attribute, value) {
+			this[attribute] = value;
 		}
 	};
 
 	var publicMethods = {
 		getValue : Slider.prototype.getValue,
 		setValue : Slider.prototype.setValue,
+		setAttribute : Slider.prototype.setAttribute,
 		destroy : Slider.prototype.destroy,
 		disable : Slider.prototype.disable,
 		enable : Slider.prototype.enable,
@@ -570,7 +595,7 @@
 	};
 
 	$.fn.slider = function (option) {
-		if (typeof option === 'string') {
+		if (typeof option === 'string' && option !== 'refresh') {
 			var args = Array.prototype.slice.call(arguments, 1);
 			return invokePublicMethod.call(this, option, args);
 		} else {
@@ -606,11 +631,20 @@
 		var $this = $(this);
 		$this.each(function() {
 			var $this = $(this),
-				data = $this.data('slider'),
+				slider = $this.data('slider'),
 				options = typeof opts === 'object' && opts;
-			if (!data)  {
-				$this.data('slider', (data = new Slider(this, $.extend({}, $.fn.slider.defaults,options))));
+
+			// If slider already exists, use its attributes
+			// as options so slider refreshes properly
+			if (slider && !options) {
+				options = {};
+
+				$.each($.fn.slider.defaults, function(key) {
+					options[key] = slider[key];
+				});
 			}
+
+			$this.data('slider', (new Slider(this, $.extend({}, $.fn.slider.defaults, options))));
 		});
 		return $this;
 	}
@@ -621,6 +655,7 @@
 		step: 1,
 		orientation: 'horizontal',
 		value: 5,
+		range: false,
 		selection: 'before',
 		tooltip: 'show',
 		handle: 'round',

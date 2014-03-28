@@ -36,6 +36,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | step | float |	1 |	increment step |
 | orientation |	string | 'horizontal' |	set the orientation. Accepts 'vertical' or 'horizontal' |
 | value |	float,array |	5	| initial value. Use array to have a range slider. |
+| range |	bool |	false	| make range slider. Optional if initial value is an array. If initial value is scalar, max will be used for second value. |
 | selection |	string |	'before' |	selection placement. Accepts: 'before', 'after' or 'none'. In case of a range slider, the selection will be placed between the handles |
 | tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', or 'always' |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square' or 'triangle' |
@@ -55,6 +56,8 @@ Functions
 | .slider('enable') | Enables the slider |
 | .slider('toggle') | Toggles the slider between enabled and disabled |
 | .slider('isEnabled') | Returns true if enabled, false if disabled |
+| .slider('setAttribute', [attribute], [value]) | Updates the slider's [attributes](#options) |
+| .slider('refresh') | Refreshes the current slider |
 
 Events
 ======
