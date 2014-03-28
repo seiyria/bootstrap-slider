@@ -56,6 +56,8 @@ Functions
 | .slider('enable') | Enables the slider |
 | .slider('toggle') | Toggles the slider between enabled and disabled |
 | .slider('isEnabled') | Returns true if enabled, false if disabled |
+| .slider('setAttribute', [attribute], [value]) | Updates the slider's [attributes](#options) |
+| .slider('refresh') | Refreshes the current slider |
 
 Events
 ======
