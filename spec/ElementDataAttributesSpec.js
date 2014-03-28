@@ -72,6 +72,14 @@ describe("Element Data Attributes Tests", function() {
     expect(isEnabled).not.toBeTruthy();
   });
 
+  it("changes the 'data-slider-orientation' property from horizontal to vertical", function() {
+    slider = $("#changeOrientationSlider").slider();
+    slider.slider('setAttribute', 'orientation', 'vertical').slider('refresh');
+
+    var orientationClassApplied = $("#changeOrientationSlider").parent("div.slider").hasClass("slider-vertical");
+    expect(orientationClassApplied).toBeTruthy();
+  });
+
   afterEach(function() {
     if(slider) { slider.slider('destroy'); }
   });
