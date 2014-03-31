@@ -171,6 +171,7 @@
 		this.size = this.picker[0][this.sizePos];
 
 		this.formater = options.formater;
+		this.tooltip_separator = options.tooltip_separator;
 
 		this.reversed = this.element.data('slider-reversed')||options.reversed;
 
@@ -264,7 +265,7 @@
 
 			if (this.range) {
 				this.tooltipInner.text(
-					this.formater(this.value[0]) + ' : ' + this.formater(this.value[1])
+					this.formater(this.value[0]) + this.tooltip_separator + this.formater(this.value[1])
 				);
 				this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
 			} else {
@@ -658,6 +659,7 @@
 		range: false,
 		selection: 'before',
 		tooltip: 'show',
+        tooltip_separator: ':',
 		handle: 'round',
 		reversed : false,
 		enabled: true,
