@@ -468,6 +468,34 @@ $("#ex9").slider({
             </code></pre>
       	</div>
 
+          <div class='slider-example'>
+      		<h3>Example 10:</h3>
+      		<p>One Tooltip for each handler.</p>
+      		<div class="well">
+  				<input id="ex10" data-slider-id='ex10Slider' type="text" data-slider-min="0" data-slider-max="3000" data-slider-step="1" data-slider-value="[14,1000]"/>
+      		</div>
+      		<pre><code>
+###################
+       HTML
+###################
+
+&ltinput id="ex10" data-slider-id='ex10Slider' type="text" data-slider-min="0" data-slider-max="3000" data-slider-step="1" data-slider-value="[14,1000]"/&gt
+
+
+###################
+    JavaScript
+###################
+
+$("#ex10").slider({
+	tooltip: 'always',
+	tooltip_split: true
+});
+
+            </code></pre>
+      	</div>
+
+
+
       </div>
 
     </div> <!-- /container -->
@@ -541,6 +569,12 @@ $("#ex9").slider({
             $("#ex9").slider({
                 tooltip: 'always',
                 tooltip_separator: ' to '
+            });
+
+            /* Example 10 */
+            $("#ex10").slider({
+                tooltip: 'always',
+                tooltip_split: true
             });
 
     	});
