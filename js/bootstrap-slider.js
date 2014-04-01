@@ -251,7 +251,7 @@
 		inDrag: false,
 		
 		showTooltip: function(){
-            if (this.tooltip_split == false ){
+            if (this.tooltip_split === false ){
                 this.tooltip.addClass('in');
             } else {
                 this.tooltip_min.addClass('in');
@@ -289,15 +289,15 @@
 				this.selectionElStyle.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
 				this.selectionElStyle.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
 
-                var offset_min = this.tooltip_min[0].getBoundingClientRect()
-                var offset_max = this.tooltip_max[0].getBoundingClientRect()
+                var offset_min = this.tooltip_min[0].getBoundingClientRect();
+                var offset_max = this.tooltip_max[0].getBoundingClientRect();
 
                 if (offset_min.right > offset_max.left) {
-                    this.tooltip_max.removeClass('top')
-    				this.tooltip_max.addClass('bottom')[0].style.top = 18 + 'px';
+                    this.tooltip_max.removeClass('top');
+                    this.tooltip_max.addClass('bottom')[0].style.top = 18 + 'px';
                 } else {
-                    this.tooltip_max.removeClass('bottom')
-    				this.tooltip_max.addClass('top')[0].style.top = -30 + 'px';
+                    this.tooltip_max.removeClass('bottom');
+                    this.tooltip_max.addClass('top')[0].style.top = -30 + 'px';
                 }
 			}
 
