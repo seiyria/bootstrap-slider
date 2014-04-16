@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================= */
- 
+
 (function( $ ) {
 
 	var ErrorMsgs = {
@@ -235,7 +235,7 @@
 			});
 		}
 
-		this.enabled = options.enabled && 
+		this.enabled = options.enabled &&
 						(this.element.data('slider-enabled') === undefined || this.element.data('slider-enabled') === true);
 		if(this.enabled) {
 			this.enable();
@@ -249,7 +249,7 @@
 
 		over: false,
 		inDrag: false,
-		
+
 		showTooltip: function(){
             if (this.tooltip_split === false ){
                 this.tooltip.addClass('in');
@@ -260,7 +260,7 @@
 
 			this.over = true;
 		},
-		
+
 		hideTooltip: function(){
 			if (this.inDrag === false && this.alwaysShowTooltip !== true) {
 				this.tooltip.removeClass('in');
@@ -381,7 +381,7 @@
 		triggerFocusOnHandle: function(handleIdx) {
 			if(handleIdx === 0) {
 				this.handle1.focus();
-			} 
+			}
 			if(handleIdx === 1) {
 				this.handle2.focus();
 			}
@@ -445,7 +445,7 @@
 			if (this.touchCapable && ev.type === 'touchmove') {
 				ev = ev.originalEvent;
 			}
-			
+
 			var percentage = this.getPercentage(ev);
 			this.adjustPercentageForRangeSliders(percentage);
 			this.percentage[this.dragged] = this.reversed ? 100 - percentage : percentage;
@@ -574,7 +574,7 @@
 
 			this.element
 				.trigger({
-					'type': 'slide',
+					'type': 'slideChange',
 					'value': this.value
 				})
 				.data('value', this.value)
