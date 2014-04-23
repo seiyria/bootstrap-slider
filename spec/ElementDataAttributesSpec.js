@@ -91,6 +91,13 @@ describe("Element Data Attributes Tests", function() {
     expect(isRangeSlider).toBeFalsy();
   });
 
+  it("get attribute", function() {
+    slider = $("#maxSlider").slider();
+
+    var sliderMaxValue = slider.slider('getAttribute', 'max');
+    expect(sliderMaxValue).toBe(5);
+  });
+
   afterEach(function() {
     if(slider) { slider.slider('destroy'); }
   });
