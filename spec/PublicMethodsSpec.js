@@ -558,6 +558,12 @@ describe("Public Method Tests", function() {
     expect(invokingNonPublicMethod).toThrow(new Error("method '" + nonPublicMethodName + "()' does not exist for slider."));
   });
 
+  it("get attribute", function() {
+    testSlider = $("#testSlider1").slider();
+
+    var sliderMaxValue = testSlider.slider('getAttribute', 'max');
+    expect(sliderMaxValue).toBe(10);
+  });
 
   afterEach(function() {
     if(testSlider) {

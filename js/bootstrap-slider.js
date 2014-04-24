@@ -630,13 +630,19 @@
 
 		setAttribute: function(attribute, value) {
 			this[attribute] = value;
+		},
+
+		getAttribute: function(attribute) {
+			return this[attribute];
 		}
+
 	};
 
 	var publicMethods = {
 		getValue : Slider.prototype.getValue,
 		setValue : Slider.prototype.setValue,
 		setAttribute : Slider.prototype.setAttribute,
+		getAttribute : Slider.prototype.getAttribute,
 		destroy : Slider.prototype.destroy,
 		disable : Slider.prototype.disable,
 		enable : Slider.prototype.enable,
