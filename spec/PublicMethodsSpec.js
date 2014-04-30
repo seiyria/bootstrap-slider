@@ -565,6 +565,14 @@ describe("Public Method Tests", function() {
     expect(sliderMaxValue).toBe(10);
   });
 
+  it("changes slider from basic to range", function() {
+    testSlider = $("#makeRangeSlider").slider();
+    testSlider.slider('setAttribute', 'range', true).slider('refresh');
+
+    var isRangeSlider = $("#changeOrientationSlider").parent("div.slider").find('.slider-handle').last().hasClass('hide');
+    expect(isRangeSlider).toBeFalsy();
+  });
+
   afterEach(function() {
     if(testSlider) {
       testSlider.slider('destroy');

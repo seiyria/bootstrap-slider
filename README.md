@@ -71,6 +71,5 @@ Events
 | slideStart | This event fires when dragging starts |
 | slide | This event fires when the slider is dragged |
 | slideStop | This event fires when the dragging stops |
-| slideChange | This event fires when the slider value changes via slider.setValue() |
 | slideEnabled | This event fires when the slider is enabled |
 | slideDisabled | This event fires when the slider is disabled |

@@ -83,14 +83,6 @@ describe("Element Data Attributes Tests", function() {
     expect(secondSliderHidden).toBeTruthy();
   });
 
-  it("changes slider from basic to range", function() {
-    slider = $("#makeRangeSlider").slider();
-    slider.slider('setAttribute', 'range', true).slider('refresh');
-
-    var isRangeSlider = $("#changeOrientationSlider").parent("div.slider").find('.slider-handle').last().hasClass('hide');
-    expect(isRangeSlider).toBeFalsy();
-  });
-
   afterEach(function() {
     if(slider) { slider.slider('destroy'); }
   });
