@@ -22,7 +22,6 @@ Create an input element and call .slider() on it:
 ```js
 $("input.slider").slider();
 ```
-
 Options
 =======
 Options can be passed either as a data (data-slider-foo) attribute, or as part of an object in the slider call. The only exception here is the formater argument - that can not be passed as a data- attribute.
@@ -45,8 +44,6 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | reversed | bool | false | whether or not the slider should be reversed |
 | enabled | bool | true | whether or not the slider is initially enabled |
 | formater |	function |	returns the plain value |	formatter callback. Return the value wanted to be displayed in the tooltip |
-
-
 
 Functions
 =========
@@ -73,3 +70,12 @@ Events
 | slideStop | This event fires when the dragging stops |
 | slideEnabled | This event fires when the slider is enabled |
 | slideDisabled | This event fires when the slider is disabled |
+
+Maintainers
+============
+- Kyle Kemp
+	* Twitter: [@seiyra](https://twitter.com/seiyria)
+	* Github: [seiyra](https://github.com/seiyria)
+- Rohit Kalkur
+	* Twitter: [@Rovolutionary](https://twitter.com/Rovolutionary)
+	* Github: [rovolution](https://github.com/rovolution)
