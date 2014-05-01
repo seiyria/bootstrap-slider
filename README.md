@@ -74,8 +74,8 @@ Events
 Maintainers
 ============
 - Kyle Kemp
-	* Twitter: [@seiyra](https://twitter.com/seiyria)
-	* Github: [seiyra](https://github.com/seiyria)
+	* Twitter: [@seiyria](https://twitter.com/seiyria)
+	* Github: [seiyria](https://github.com/seiyria)
 - Rohit Kalkur
 	* Twitter: [@Rovolutionary](https://twitter.com/Rovolutionary)
 	* Github: [rovolution](https://github.com/rovolution)
