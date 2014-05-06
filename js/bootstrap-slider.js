@@ -57,7 +57,7 @@
 			this.picker[0].id = this.id;
 		}
 
-		if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+		if (('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch) {
 			this.touchCapable = true;
 		}
 
