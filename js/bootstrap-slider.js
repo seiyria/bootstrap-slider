@@ -555,6 +555,11 @@
 		},
 
 		setValue: function(val) {
+
+      if (!val) {
+        val = 0;
+      }
+
 			this.value = this.validateInputValue(val);
 
 			if (this.range) {
