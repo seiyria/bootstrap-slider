@@ -184,8 +184,8 @@
 				this.step * 100 / this.diff
 			];
 		} else {
-      this.percentage = [0, 0, 0];
-    }
+			this.percentage = [0, 0, 100];
+		}
 
 		this.offset = this.picker.offset();
 		this.size = this.picker[0][this.sizePos];
@@ -584,8 +584,8 @@
 					this.step * 100 / this.diff
 				];
 			} else {
-			  this.percentage = [0, 0, 0];
-      }
+				this.percentage = [0, 0, 100];
+			}
 
 			this.layout();
 
@@ -744,3 +744,5 @@
 	$.fn.slider.Constructor = Slider;
 
 })( window.jQuery );
+
+/* vim: set noexpandtab tabstop=4 shiftwidth=4 autoindent: */
