@@ -577,10 +577,11 @@
 
 			this.layout();
 
+			var slideEventValue = this.range ? this.value : this.value[0];
 			this.element
 				.trigger({
 					'type': 'slide',
-					'value': this.value
+					'value': slideEventValue
 				})
 				.data('value', this.value)
 				.prop('value', this.value);
