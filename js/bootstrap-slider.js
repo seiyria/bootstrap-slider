@@ -376,10 +376,9 @@
 			this.element.trigger({
 					type: 'slideStart',
 					value: val
-				}).trigger({
-					type: 'slide',
-					value: val
-				});
+				})
+				.data('value', val)
+				.prop('value', val);
 			return true;
 		},
 
@@ -430,10 +429,6 @@
 			this.setValue(val);
 			this.element
 				.trigger({
-					type: 'slide',
-					value: val
-				})
-				.trigger({
 					type: 'slideStop',
 					value: val
 				})
@@ -458,13 +453,6 @@
 
 			var val = this.calculateValue();
 			this.setValue(val);
-			this.element
-				.trigger({
-					type: 'slide',
-					value: val
-				})
-				.data('value', val)
-				.prop('value', val);
 			return false;
 		},
 
@@ -556,9 +544,9 @@
 
 		setValue: function(val) {
 
-      if (!val) {
-        val = 0;
-      }
+			if (!val) {
+				val = 0;
+			}
 
 			this.value = this.validateInputValue(val);
 
