@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================= */
- 
+
 (function( $ ) {
 
 	var ErrorMsgs = {
@@ -176,11 +176,16 @@
 			}
 		}
 		this.diff = this.max - this.min;
-		this.percentage = [
-			(this.value[0]-this.min)*100/this.diff,
-			(this.value[1]-this.min)*100/this.diff,
-			this.step*100/this.diff
-		];
+
+		if (this.diff > 0) {
+			this.percentage = [
+				(this.value[0] - this.min) * 100 / this.diff,
+				(this.value[1] - this.min) * 100 / this.diff,
+				this.step * 100 / this.diff
+			];
+		} else {
+			this.percentage = [0, 0, 100];
+		}
 
 		this.offset = this.picker.offset();
 		this.size = this.picker[0][this.sizePos];
@@ -235,7 +240,7 @@
 			});
 		}
 
-		this.enabled = options.enabled && 
+		this.enabled = options.enabled &&
 						(this.element.data('slider-enabled') === undefined || this.element.data('slider-enabled') === true);
 		if(this.enabled) {
 			this.enable();
@@ -249,7 +254,7 @@
 
 		over: false,
 		inDrag: false,
-		
+
 		showTooltip: function(){
             if (this.tooltip_split === false ){
                 this.tooltip.addClass('in');
@@ -260,7 +265,7 @@
 
 			this.over = true;
 		},
-		
+
 		hideTooltip: function(){
 			if (this.inDrag === false && this.alwaysShowTooltip !== true) {
 				this.tooltip.removeClass('in');
@@ -381,7 +386,7 @@
 		triggerFocusOnHandle: function(handleIdx) {
 			if(handleIdx === 0) {
 				this.handle1.focus();
-			} 
+			}
 			if(handleIdx === 1) {
 				this.handle2.focus();
 			}
@@ -445,7 +450,7 @@
 			if (this.touchCapable && ev.type === 'touchmove') {
 				ev = ev.originalEvent;
 			}
-			
+
 			var percentage = this.getPercentage(ev);
 			this.adjustPercentageForRangeSliders(percentage);
 			this.percentage[this.dragged] = this.reversed ? 100 - percentage : percentage;
@@ -550,6 +555,11 @@
 		},
 
 		setValue: function(val) {
+
+      if (!val) {
+        val = 0;
+      }
+
 			this.value = this.validateInputValue(val);
 
 			if (this.range) {
@@ -565,11 +575,18 @@
 				}
 			}
 			this.diff = this.max - this.min;
-			this.percentage = [
-				(this.value[0]-this.min)*100/this.diff,
-				(this.value[1]-this.min)*100/this.diff,
-				this.step*100/this.diff
-			];
+
+
+			if (this.diff > 0) {
+				this.percentage = [
+					(this.value[0] - this.min) * 100 / this.diff,
+					(this.value[1] - this.min) * 100 / this.diff,
+					this.step * 100 / this.diff
+				];
+			} else {
+				this.percentage = [0, 0, 100];
+			}
+
 			this.layout();
 
 			this.element
@@ -727,3 +744,5 @@
 	$.fn.slider.Constructor = Slider;
 
 })( window.jQuery );
+
+/* vim: set noexpandtab tabstop=4 shiftwidth=4 autoindent: */
