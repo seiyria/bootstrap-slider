@@ -1,8 +1,6 @@
 /* =========================================================
  * bootstrap-slider.js v3.0.0
- * http://www.eyecon.ro/bootstrap-slider
  * =========================================================
- * Copyright 2012 Stefan Petre
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
