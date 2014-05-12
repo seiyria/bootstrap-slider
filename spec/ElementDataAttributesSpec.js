@@ -24,6 +24,14 @@ describe("Element Data Attributes Tests", function() {
     expect(true).toBeTruthy();
   });
 
+  it("reads the 'data-slider-precision' property (which is set to 2) and sets it on slider", function() {
+    slider = $("#precisionSlider").slider();
+    slider.slider('setValue', 8.115);
+    
+    var sliderValue = slider.slider('getValue');
+    expect(sliderValue).toBe(8.12);
+  });
+
   it("reads the 'data-slider-orientation' property and sets it on slider", function() {
     slider = $("#orientationSlider").slider();
       

@@ -19,7 +19,7 @@ describe("Event Tests", function() {
     testSlider.on('slide', function() {
       flag = true;
     });
-    testSlider.data('slider').mousedown(mouse);
+    testSlider.data('slider').mousemove(mouse);
     expect(flag).toBeTruthy();
   });
 
@@ -53,7 +53,7 @@ describe("Event Tests", function() {
       testSlider.on('slide', function() {
         flag = true;
       });
-      testSlider.data('slider').mousedown(mouse);
+      testSlider.data('slider').mousemove(mouse);
       expect(flag).not.toBeTruthy();
     });
 

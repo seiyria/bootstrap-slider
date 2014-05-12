@@ -415,7 +415,6 @@ $("#ex7-enabled").click(function() {
 
             </code></pre>
       	</div>
-      </div>
 
       <div class='slider-example'>
       		<h3>Example 8:</h3>
@@ -441,8 +440,34 @@ $("#ex8").slider({
 
             </code></pre>
       	</div>
-      </div>
 
+      <div class='slider-example'>
+      		<h3>Example 9:</h3>
+      		<p>Precision (number of places after the decimal) can be specified.</p>
+      		<div class="well">
+  				<input id="ex9" type="text"/>
+      		</div>
+      		<pre><code>
+###################
+       HTML	
+###################
+
+&ltinput id="ex9" type="text"/&gt
+
+###################
+    JavaScript	
+###################
+
+$("#ex9").slider({
+	precision: 2,
+	value: 8.115 // Slider will instantiate showing 8.12 due to specified precision
+});
+
+
+            </code></pre>
+      	</div>
+      
+      </div> <!-- /examples -->
     </div> <!-- /container -->
 
 
@@ -508,6 +533,12 @@ $("#ex8").slider({
 			/* Example 8 */
 			$("#ex8").slider({
 				tooltip: 'always'
+			});
+
+			/* Example 9 */
+			$("#ex9").slider({
+				step: 0.01,
+				value: 8.115
 			});
     	});
     </script>

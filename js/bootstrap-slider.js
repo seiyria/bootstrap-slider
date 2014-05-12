@@ -106,16 +106,23 @@
 		}
 
 		var self = this;
-		$.each(['min', 'max', 'step', 'value'], function(i, attr) {
-			if (typeof el.data('slider-' + attr) !== 'undefined') {
-				self[attr] = el.data('slider-' + attr);
-			} else if (typeof options[attr] !== 'undefined') {
-				self[attr] = options[attr];
-			} else if (typeof el.prop(attr) !== 'undefined') {
-				self[attr] = el.prop(attr);
-			} else {
-				self[attr] = 0; // to prevent empty string issues in calculations in IE
-			}
+		$.each(['min',
+				'max',
+				'step',
+				'precision',
+				'value',
+				'reversed',
+				'handle'
+			], function(i, attr) {
+				if (typeof el.data('slider-' + attr) !== 'undefined') {
+					self[attr] = el.data('slider-' + attr);
+				} else if (typeof options[attr] !== 'undefined') {
+					self[attr] = options[attr];
+				} else if (typeof el.prop(attr) !== 'undefined') {
+					self[attr] = el.prop(attr);
+				} else {
+					self[attr] = 0; // to prevent empty string issues in calculations in IE
+				}
 		});
 
 		if (this.value instanceof Array) {
@@ -149,8 +156,7 @@
 			this.handle2.removeClass('round triangle hide');
 		}
 
-		var handle = this.element.data('slider-handle')||options.handle;
-		switch(handle) {
+		switch(this.handle) {
 			case 'round':
 				this.handle1.addClass('round');
 				this.handle2.addClass('round');
@@ -161,46 +167,18 @@
 				break;
 		}
 
-		if (this.range) {
-			this.value[0] = Math.max(this.min, Math.min(this.max, this.value[0]));
-			this.value[1] = Math.max(this.min, Math.min(this.max, this.value[1]));
-		} else {
-			this.value = [ Math.max(this.min, Math.min(this.max, this.value))];
-			this.handle2.addClass('hide');
-			if (this.selection === 'after') {
-				this.value[1] = this.max;
-			} else {
-				this.value[1] = this.min;
-			}
-		}
-		this.diff = this.max - this.min;
-
-		if (this.diff > 0) {
-			this.percentage = [
-				(this.value[0] - this.min) * 100 / this.diff,
-				(this.value[1] - this.min) * 100 / this.diff,
-				this.step * 100 / this.diff
-			];
-		} else {
-			this.percentage = [0, 0, 100];
-		}
-
 		this.offset = this.picker.offset();
 		this.size = this.picker[0][this.sizePos];
-
 		this.formater = options.formater;
+		
 		this.tooltip_separator = options.tooltip_separator;
 		this.tooltip_split = options.tooltip_split;
 
-		this.reversed = this.element.data('slider-reversed')||options.reversed;
-
-		this.layout();
-		this.layout();
+		this.setValue(this.value);
 
 		this.handle1.on({
 			keydown: $.proxy(this.keydown, this, 0)
 		});
-
 		this.handle2.on({
 			keydown: $.proxy(this.keydown, this, 1)
 		});
@@ -370,13 +348,13 @@
 
 			this.inDrag = true;
 			var val = this.calculateValue();
-			this.setValue(val);
 			this.element.trigger({
 					type: 'slideStart',
 					value: val
 				})
 				.data('value', val)
 				.prop('value', val);
+			this.setValue(val);
 			return true;
 		},
 
@@ -424,7 +402,16 @@
 			this.layout();
 
 			var val = this.calculateValue();
-			this.setValue(val);
+			
+			this.element.trigger({
+					type: 'slideStart',
+					value: val
+				})
+				.data('value', val)
+				.prop('value', val);
+
+			this.slide(val);
+
 			this.element
 				.trigger({
 					type: 'slideStop',
@@ -450,10 +437,22 @@
 			this.layout();
 
 			var val = this.calculateValue();
-			this.setValue(val);
+			this.slide(val);
+
 			return false;
 		},
+		slide: function(val) {
+			this.setValue(val);
 
+			var slideEventValue = this.range ? this.value : this.value[0];
+			this.element
+				.trigger({
+					'type': 'slide',
+					'value': slideEventValue
+				})
+				.data('value', this.value)
+				.prop('value', this.value);
+		},
 		adjustPercentageForRangeSliders: function(percentage) {
 			if (this.range) {
 				if (this.dragged === 0 && this.percentage[1] < percentage) {
@@ -471,13 +470,13 @@
 				return false;
 			}
 			if (this.touchCapable) {
-				// Touch: Bind touch events:
+				// Touch: Unbind touch event handlers:
 				$(document).off({
 					touchmove: this.mousemove,
 					touchend: this.mouseup
 				});
 			}
-			// Bind mouse events:
+			// Unbind mouse event handlers:
 			$(document).off({
 				mousemove: this.mousemove,
 				mouseup: this.mouseup
@@ -505,9 +504,11 @@
 				val = [this.min,this.max];
                 if (this.percentage[0] !== 0){
                     val[0] = (Math.max(this.min, this.min + Math.round((this.diff * this.percentage[0]/100)/this.step)*this.step));
+                    val[0] = this.applyPrecision(val[0]);
                 }
                 if (this.percentage[1] !== 100){
                     val[1] = (Math.min(this.max, this.min + Math.round((this.diff * this.percentage[1]/100)/this.step)*this.step));
+                    val[1] = this.applyPrecision(val[1]);
                 }
 				this.value = val;
 			} else {
@@ -519,9 +520,28 @@
 					val = this.max;
 				}
 				val = parseFloat(val);
+				val = this.applyPrecision(val);
 				this.value = [val, this.value[1]];
 			}
 			return val;
+		},
+		applyPrecision: function(val) {
+			var precision = this.precision || this.getNumDigitsAfterDecimalPlace(this.step);
+			return this.applyToFixedAndParseFloat(val, precision);
+		},
+		/*
+			Credits to Mike Samuel for the following method!
+			Source: http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
+		*/
+		getNumDigitsAfterDecimalPlace: function(num) {
+			var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+			if (!match) { return 0; }
+			return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
+		},
+
+		applyToFixedAndParseFloat: function(num, toFixedInput) {
+			var truncatedNum = num.toFixed(toFixedInput);
+			return parseFloat(truncatedNum);
 		},
 
 		getPercentage: function(ev) {
@@ -541,17 +561,19 @@
 		},
 
 		setValue: function(val) {
-
 			if (!val) {
 				val = 0;
 			}
-
 			this.value = this.validateInputValue(val);
 
 			if (this.range) {
+				this.value[0] = this.applyPrecision(this.value[0]);
+				this.value[1] = this.applyPrecision(this.value[1]); 
+
 				this.value[0] = Math.max(this.min, Math.min(this.max, this.value[0]));
 				this.value[1] = Math.max(this.min, Math.min(this.max, this.value[1]));
 			} else {
+				this.value = this.applyPrecision(this.value);
 				this.value = [ Math.max(this.min, Math.min(this.max, this.value))];
 				this.handle2.addClass('hide');
 				if (this.selection === 'after') {
@@ -560,9 +582,8 @@
 					this.value[1] = this.min;
 				}
 			}
+
 			this.diff = this.max - this.min;
-
-
 			if (this.diff > 0) {
 				this.percentage = [
 					(this.value[0] - this.min) * 100 / this.diff,
@@ -574,15 +595,6 @@
 			}
 
 			this.layout();
-
-			var slideEventValue = this.range ? this.value : this.value[0];
-			this.element
-				.trigger({
-					'type': 'slide',
-					'value': slideEventValue
-				})
-				.data('value', this.value)
-				.prop('value', this.value);
 		},
 
 		validateInputValue : function(val) {
@@ -713,6 +725,7 @@
 		min: 0,
 		max: 10,
 		step: 1,
+		precision: 0,
 		orientation: 'horizontal',
 		value: 5,
 		range: false,
