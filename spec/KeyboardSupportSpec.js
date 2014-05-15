@@ -376,6 +376,81 @@ describe("Keyboard Support Tests", function() {
     });
   });
 
+  describe("For the natural arrow keys", function() {
+    var testCases = [{
+      reversed: false,
+      keyEvent: 37, // left
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'horizontal'
+    }, {
+      reversed: true,
+      keyEvent: 37, // left
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'horizontal'
+    }, {
+      reversed: false,
+      keyEvent: 39, // right
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'horizontal'
+    }, {
+      reversed: true,
+      keyEvent: 39, // right
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'horizontal'
+    }, {
+      reversed: false,
+      keyEvent: 38, // up
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'vertical'
+    }, {
+      reversed: true,
+      keyEvent: 38, // up
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'vertical'
+    }, {
+      reversed: false,
+      keyEvent: 40, // down
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'vertical'
+    }, {
+      reversed: true,
+      keyEvent: 40, // down
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'vertical'
+    }];
+    testCases.forEach(function(testCase) {
+      describe("when handle1 tries to overtake handle2 from the left", function() {
+        beforeEach(function() {
+          // Initialize the slider
+          testSlider = $("#testSlider1").slider({
+            id: 'testSlider',
+            min: initialMinVal,
+            max: initialMaxVal,
+            step: initialStepVal,
+            value: initialSliderVal,
+            naturalarrowkeys: true,
+            reversed: testCase.reversed,
+            orientation: testCase.orientation
+          });
+          handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+          handle1.focus();
+        });
+
+        it("moves to the left by the 'step' value when the LEFT arrow key is pressed", function() {
+          handle1.on("keydown", function() {
+            var sliderValue = testSlider.slider('getValue');
+            var expectedSliderValue = testCase.expectedSliderValue;
+
+            expect(sliderValue).toBe(expectedSliderValue);
+          });
+
+          var leftArrowKeyDownEvent = $.Event('keydown');
+          leftArrowKeyDownEvent.which = testCase.keyEvent;
+          handle1.trigger(leftArrowKeyDownEvent);
+        });
+      });
+    });
+  });
   afterEach(function() {
     if(testSlider) { testSlider.slider('destroy'); }
   });

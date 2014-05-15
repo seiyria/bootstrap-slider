@@ -223,6 +223,7 @@
 		} else {
 			this.disable();
 		}
+		this.naturalArrowKeys = this.element.data('slider-naturalarrowkeys') || options.naturalarrowkeys;
 	};
 
 	Slider.prototype = {
@@ -385,6 +386,13 @@
 			}
 			if (!dir) {
 				return;
+			}
+
+			// use natural arrow keys instead of from min to max
+			if (this.naturalArrowKeys) {
+				if ((this.orientation === 'vertical' && !this.reversed) || (this.orientation === 'horizontal' && this.reversed)) {
+					dir = dir * -1;
+				}
 			}
 
 			var oneStepValuePercentageChange = dir * this.percentage[2];
