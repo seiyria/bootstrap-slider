@@ -379,47 +379,55 @@ describe("Keyboard Support Tests", function() {
   describe("For the natural arrow keys", function() {
     var testCases = [{
       reversed: false,
-      keyEvent: 37, // left
+      keyEvent: 37,
       expectedSliderValue: initialSliderVal - initialStepVal,
-      orientation: 'horizontal'
+      orientation: 'horizontal',
+      key: 'left'
     }, {
       reversed: true,
-      keyEvent: 37, // left
+      keyEvent: 37,
       expectedSliderValue: initialSliderVal + initialStepVal,
-      orientation: 'horizontal'
+      orientation: 'horizontal',
+      key: 'left'
     }, {
       reversed: false,
-      keyEvent: 39, // right
+      keyEvent: 39,
       expectedSliderValue: initialSliderVal + initialStepVal,
-      orientation: 'horizontal'
+      orientation: 'horizontal',
+      key: 'right'
     }, {
       reversed: true,
-      keyEvent: 39, // right
+      keyEvent: 39,
       expectedSliderValue: initialSliderVal - initialStepVal,
-      orientation: 'horizontal'
+      orientation: 'horizontal',
+      key: 'right'
     }, {
       reversed: false,
-      keyEvent: 38, // up
+      keyEvent: 38,
       expectedSliderValue: initialSliderVal - initialStepVal,
-      orientation: 'vertical'
+      orientation: 'vertical',
+      key: 'up'
     }, {
       reversed: true,
-      keyEvent: 38, // up
+      keyEvent: 38,
       expectedSliderValue: initialSliderVal + initialStepVal,
-      orientation: 'vertical'
+      orientation: 'vertical',
+      key: 'up'
     }, {
       reversed: false,
-      keyEvent: 40, // down
+      keyEvent: 40,
       expectedSliderValue: initialSliderVal + initialStepVal,
-      orientation: 'vertical'
+      orientation: 'vertical',
+      key: 'down'
     }, {
       reversed: true,
-      keyEvent: 40, // down
+      keyEvent: 40,
       expectedSliderValue: initialSliderVal - initialStepVal,
-      orientation: 'vertical'
+      orientation: 'vertical',
+      key: 'down'
     }];
     testCases.forEach(function(testCase) {
-      describe("when handle1 tries to overtake handle2 from the left", function() {
+      describe("A"+((testCase.reversed)? " reversed" : "")+testCase.orientation+" slider is used for the arrow keys", function() {
         beforeEach(function() {
           // Initialize the slider
           testSlider = $("#testSlider1").slider({
@@ -436,7 +444,7 @@ describe("Keyboard Support Tests", function() {
           handle1.focus();
         });
 
-        it("moves to the left by the 'step' value when the LEFT arrow key is pressed", function() {
+        it("moves to the "+testCase.key+" by the 'step' value when the "+testCase.key+" arrow key is pressed", function() {
           handle1.on("keydown", function() {
             var sliderValue = testSlider.slider('getValue');
             var expectedSliderValue = testCase.expectedSliderValue;
