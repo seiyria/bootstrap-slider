@@ -376,6 +376,89 @@ describe("Keyboard Support Tests", function() {
     });
   });
 
+  describe("For the natural arrow keys", function() {
+    var testCases = [{
+      reversed: false,
+      keyEvent: 37,
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'horizontal',
+      key: 'left'
+    }, {
+      reversed: true,
+      keyEvent: 37,
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'horizontal',
+      key: 'left'
+    }, {
+      reversed: false,
+      keyEvent: 39,
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'horizontal',
+      key: 'right'
+    }, {
+      reversed: true,
+      keyEvent: 39,
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'horizontal',
+      key: 'right'
+    }, {
+      reversed: false,
+      keyEvent: 38,
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'vertical',
+      key: 'up'
+    }, {
+      reversed: true,
+      keyEvent: 38,
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'vertical',
+      key: 'up'
+    }, {
+      reversed: false,
+      keyEvent: 40,
+      expectedSliderValue: initialSliderVal + initialStepVal,
+      orientation: 'vertical',
+      key: 'down'
+    }, {
+      reversed: true,
+      keyEvent: 40,
+      expectedSliderValue: initialSliderVal - initialStepVal,
+      orientation: 'vertical',
+      key: 'down'
+    }];
+    testCases.forEach(function(testCase) {
+      describe("A"+((testCase.reversed)? " reversed" : "")+testCase.orientation+" slider is used for the arrow keys", function() {
+        beforeEach(function() {
+          // Initialize the slider
+          testSlider = $("#testSlider1").slider({
+            id: 'testSlider',
+            min: initialMinVal,
+            max: initialMaxVal,
+            step: initialStepVal,
+            value: initialSliderVal,
+            naturalarrowkeys: true,
+            reversed: testCase.reversed,
+            orientation: testCase.orientation
+          });
+          handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+          handle1.focus();
+        });
+
+        it("moves to the "+testCase.key+" by the 'step' value when the "+testCase.key+" arrow key is pressed", function() {
+          handle1.on("keydown", function() {
+            var sliderValue = testSlider.slider('getValue');
+            var expectedSliderValue = testCase.expectedSliderValue;
+
+            expect(sliderValue).toBe(expectedSliderValue);
+          });
+
+          var leftArrowKeyDownEvent = $.Event('keydown');
+          leftArrowKeyDownEvent.which = testCase.keyEvent;
+          handle1.trigger(leftArrowKeyDownEvent);
+        });
+      });
+    });
+  });
   afterEach(function() {
     if(testSlider) { testSlider.slider('destroy'); }
   });
