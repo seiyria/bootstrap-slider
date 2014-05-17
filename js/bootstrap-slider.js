@@ -674,7 +674,7 @@
 		isEnabled: Slider.prototype.isEnabled
 	};
 
-	$.fn.slider = function (option) {
+	$.fn.sliderstrap = function (option) {
 		if (typeof option === 'string' && option !== 'refresh') {
 			var args = Array.prototype.slice.call(arguments, 1);
 			return invokePublicMethod.call(this, option, args);
@@ -719,17 +719,17 @@
 			if (slider && !options) {
 				options = {};
 
-				$.each($.fn.slider.defaults, function(key) {
+				$.each($.fn.sliderstrap.defaults, function(key) {
 					options[key] = slider[key];
 				});
 			}
 
-			$this.data('slider', (new Slider(this, $.extend({}, $.fn.slider.defaults, options))));
+			$this.data('slider', (new Slider(this, $.extend({}, $.fn.sliderstrap.defaults, options))));
 		});
 		return $this;
 	}
 
-	$.fn.slider.defaults = {
+	$.fn.sliderstrap.defaults = {
 		min: 0,
 		max: 10,
 		step: 1,
@@ -750,7 +750,7 @@
 		}
 	};
 
-	$.fn.slider.Constructor = Slider;
+	$.fn.sliderstrap.Constructor = Slider;
 
 })( window.jQuery );
 
