@@ -436,7 +436,7 @@ describe("Keyboard Support Tests", function() {
             max: initialMaxVal,
             step: initialStepVal,
             value: initialSliderVal,
-            naturalarrowkeys: true,
+            natural_arrow_keys: true,
             reversed: testCase.reversed,
             orientation: testCase.orientation
           });

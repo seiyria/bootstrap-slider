@@ -223,7 +223,7 @@
 		} else {
 			this.disable();
 		}
-		this.naturalArrowKeys = this.element.data('slider-naturalarrowkeys') || options.naturalarrowkeys;
+		this.natural_arrow_keys = this.element.data('slider-natural_arrow_keys') || options.natural_arrow_keys;
 	};
 
 	Slider.prototype = {
@@ -389,7 +389,7 @@
 			}
 
 			// use natural arrow keys instead of from min to max
-			if (this.naturalArrowKeys) {
+			if (this.natural_arrow_keys) {
 				if ((this.orientation === 'vertical' && !this.reversed) || (this.orientation === 'horizontal' && this.reversed)) {
 					dir = dir * -1;
 				}
@@ -418,7 +418,7 @@
 				.data('value', val)
 				.prop('value', val);
 
-			this.slide(val);
+			this.setValue(val, true);
 
 			this.element
 				.trigger({
@@ -445,21 +445,9 @@
 			this.layout();
 
 			var val = this.calculateValue();
-			this.slide(val);
+			this.setValue(val, true);
 
 			return false;
-		},
-		slide: function(val) {
-			this.setValue(val);
-
-			var slideEventValue = this.range ? this.value : this.value[0];
-			this.element
-				.trigger({
-					'type': 'slide',
-					'value': slideEventValue
-				})
-				.data('value', this.value)
-				.prop('value', this.value);
 		},
 		adjustPercentageForRangeSliders: function(percentage) {
 			if (this.range) {
@@ -568,7 +556,7 @@
 			return this.value[0];
 		},
 
-		setValue: function(val) {
+		setValue: function(val, triggerSlideEvent) {
 			if (!val) {
 				val = 0;
 			}
@@ -603,6 +591,18 @@
 			}
 
 			this.layout();
+
+
+			if(triggerSlideEvent === true) {
+				var slideEventValue = this.range ? this.value : this.value[0];
+				this.element
+					.trigger({
+						'type': 'slide',
+						'value': slideEventValue
+					})
+					.data('value', this.value)
+					.prop('value', this.value);
+			}
 		},
 
 		validateInputValue : function(val) {
@@ -741,6 +741,7 @@
 		tooltip: 'show',
 		tooltip_separator: ':',
 		tooltip_split: false,
+		natural_arrow_keys: false,
 		handle: 'round',
 		reversed : false,
 		enabled: true,

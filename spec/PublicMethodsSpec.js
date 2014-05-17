@@ -342,6 +342,22 @@ describe("Public Method Tests", function() {
       };
       expect(settingValue).toThrow(new Error(callingContextNotSliderInstanceErrorMsg));
     });
+
+
+    it("if second argument is true, the 'slide' event is triggered", function() {
+      var testSlider = $("#testSlider1").slider({
+        value : 3
+      });
+
+      var newSliderVal = 5;
+
+      testSlider.on('slide', function(evt) {
+        expect(newSliderVal).toEqual(evt.value);
+      });
+
+      testSlider.slider('setValue', newSliderVal, true);
+    });
+
   });
 
 

@@ -45,7 +45,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | reversed | bool | false | whether or not the slider should be reversed |
 | enabled | bool | true | whether or not the slider is initially enabled |
 | formater |	function |	returns the plain value |	formatter callback. Return the value wanted to be displayed in the tooltip |
-| naturalarrowkeys | bool | false | The natural order is used for the arrow keys. Arrow up select the upper slider value for vertical sliders, arrow right the righter slider value for a horizontal slider - no matter if the slider was reversed or not. By default the arrow keys are oriented by arrow up/right to the higher slider value, arrow down/left to the lower slider value. |
+| natural_arrow_keys | bool | false | The natural order is used for the arrow keys. Arrow up select the upper slider value for vertical sliders, arrow right the righter slider value for a horizontal slider - no matter if the slider was reversed or not. By default the arrow keys are oriented by arrow up/right to the higher slider value, arrow down/left to the lower slider value. |
 
 Functions
 =========
@@ -53,7 +53,7 @@ Functions
 | -------- | ----------- |
 | .slider(options) | Initializes the slider |
 | .slider('getValue') | Get the current value from the slider |
-| .slider('setValue', newValue) | Set a new value for the slider |
+| .slider('setValue', newValue, [triggerSlideEvent]) | Set a new value for the slider. If optional triggerSlideEvent parameter is _true_, the 'slide' event will be triggered. |
 | .slider('destroy') | Properly clean up and remove the slider instance |
 | .slider('disable') | Disables the slider and prevents the user from changing the value |
 | .slider('enable') | Enables the slider |
