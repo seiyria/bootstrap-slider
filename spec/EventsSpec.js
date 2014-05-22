@@ -23,6 +23,15 @@ describe("Event Tests", function() {
     expect(flag).toBeTruthy();
   });
 
+  it("'slide' event sets the right value on the input", function() {
+    testSlider.on('slide', function() {
+      flag = true;
+      expect(isNaN(testSlider.val())).not.toBeTruthy();
+    });
+    testSlider.data('slider').mousemove(mouse);
+    expect(flag).toBeTruthy();
+  });
+
   it("'slideStop' event is triggered properly and can be binded to", function() {
     testSlider.on('slideStop', function() {
       flag = true;
