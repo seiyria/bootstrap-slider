@@ -600,8 +600,8 @@
 						'type': 'slide',
 						'value': slideEventValue
 					})
-					.data('value', this.value)
-					.prop('value', this.value);
+					.data('value', slideEventValue)
+					.prop('value', slideEventValue);
 			}
 		},
 
