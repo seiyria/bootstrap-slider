@@ -2,8 +2,6 @@ bootstrap-slider [![Build Status](https://travis-ci.org/seiyria/bootstrap-slider
 ================
 A "fork" of bootstrap-slider found on http://www.eyecon.ro/ originally by Stefan Petre.
 
-Want to use this with Rails? [Check it out!](https://github.com/stationkeeping/bootstrap-slider-rails)
-
 Installation
 ============
 Clone the repository, then run `npm install`
@@ -72,6 +70,11 @@ Events
 | slideStop | This event fires when the dragging stops |
 | slideEnabled | This event fires when the slider is enabled |
 | slideDisabled | This event fires when the slider is disabled |
+
+Other Platforms & Libraries
+===========================
+- [Ruby on Rails](https://github.com/stationkeeping/bootstrap-slider-rails)
+- [knockout.js](http://jsfiddle.net/ERz7u/21/) ([@cosminstefanxp](https://github.com/cosminstefanxp), [#81](https://github.com/seiyria/bootstrap-slider/issues/81))
 
 Maintainers
 ============
