@@ -74,7 +74,7 @@ Events
 Other Platforms & Libraries
 ===========================
 - [Ruby on Rails](https://github.com/stationkeeping/bootstrap-slider-rails)
-- [knockout.js](http://jsfiddle.net/ERz7u/21/) ([@cosminstefanxp](https://github.com/cosminstefanxp), [#81](https://github.com/seiyria/bootstrap-slider/issues/81))
+- [knockout.js](https://github.com/cosminstefanxp/bootstrap-slider-knockout-binding) ([@cosminstefanxp](https://github.com/cosminstefanxp), [#81](https://github.com/seiyria/bootstrap-slider/issues/81))
 
 Maintainers
 ============
