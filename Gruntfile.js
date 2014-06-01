@@ -95,6 +95,9 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      options : {
+        livereload: true
+      },
       js : {
         files: '<%= pkg.main %>',
         tasks: ['jshint:js', 'jasmine']
