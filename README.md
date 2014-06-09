@@ -39,7 +39,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', or 'always' |
 | tooltip_separator |	string |	':' |	tooltip separator |
 | tooltip_split |	bool |	false |	if false show one tootip if true show two tooltips one for each handler |
-| handle |	string |	'round' |	handle shape. Accepts: 'round', 'square' or 'triangle' |
+| handle |	string |	'round' |	handle shape. Accepts: 'round', 'square', 'triangle' or 'custom' |
 | reversed | bool | false | whether or not the slider should be reversed |
 | enabled | bool | true | whether or not the slider is initially enabled |
 | formater |	function |	returns the plain value |	formatter callback. Return the value wanted to be displayed in the tooltip |
