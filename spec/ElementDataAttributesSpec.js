@@ -64,6 +64,10 @@ describe("Element Data Attributes Tests", function() {
     slider = $("#handleSlider").slider();
     var handleIsSetToTriangle = $("#handleSlider").siblings("div.slider-track").children("div.slider-handle").hasClass("triangle");
     expect(handleIsSetToTriangle).toBeTruthy();
+
+    slider = $("#customHandleSlider").slider();
+    var handleIsSetToCustom = $("#customHandleSlider").siblings("div.slider-track").children("div.slider-handle").hasClass("custom");
+    expect(handleIsSetToCustom).toBeTruthy();
   });
 
   it("reads the 'data-slider-reversed' property and sets it on slider", function() {

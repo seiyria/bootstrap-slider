@@ -467,6 +467,46 @@ $("#ex9").slider({
             </code></pre>
       	</div>
       
+
+      <div class='slider-example'>
+      		<h3>Example 10:</h3>
+      		<p>Setting custom handlers.</p>
+      		<div class="well">
+  				<input id="ex10" type="text" data-slider-handle="custom"/>
+      		</div>
+      		<pre><code>
+###################
+       HTML
+###################
+
+&ltinput id="ex10" type="text" data-slider-handle="custom"/&gt
+
+
+###################
+    JavaScript
+###################
+
+$("#ex10").slider({});
+
+
+###################
+       CSS
+###################
+.slider-handle.custom {
+  background: transparent none;
+  /* You can customize the handle and set a background image */
+}
+
+/* Or display content like unicode characters or fontawesome icons */
+.slider-handle.custom::before {
+  line-height: 20px;
+  font-size: 20px;
+  content: '\2605'; /*unicode star character*/
+  color: #726204;
+}
+            </code></pre>
+      	</div>
+
       </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -540,6 +580,10 @@ $("#ex9").slider({
 				step: 0.01,
 				value: 8.115
 			});
+
+    	/* Example 10 */
+      $("#ex10").slider({});
+
     	});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->

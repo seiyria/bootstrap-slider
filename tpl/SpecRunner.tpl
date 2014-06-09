@@ -41,6 +41,8 @@
 
 	<input id="handleSlider" type="text" data-slider-handle="triangle"/>
 
+  <input id="customHandleSlider" type="text" data-slider-handle="custom"/>
+
 	<input id="reversedSlider" type="text" data-slider-reversed="true"/>
 
 	<input id="disabledSlider" type="text" data-slider-enabled="false"/>

@@ -115,4 +115,13 @@
 	&.triangle {
 		background: transparent none;
 	}
+	&.custom {
+		background: transparent none;
+		&::before{
+			line-height: @slider-line-height;
+			font-size: 20px;
+			content: '\2605'; //unicode star character
+			color: #726204;
+		}
+	}
 }

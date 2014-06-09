@@ -156,15 +156,10 @@
 			this.handle2.removeClass('round triangle hide');
 		}
 
-		switch(this.handle) {
-			case 'round':
-				this.handle1.addClass('round');
-				this.handle2.addClass('round');
-				break;
-			case 'triangle':
-				this.handle1.addClass('triangle');
-				this.handle2.addClass('triangle');
-				break;
+		var availableHandleModifiers = ['round', 'triangle', 'custom'];
+		if (availableHandleModifiers.indexOf(this.handle) !== -1){
+			this.handle1.addClass(this.handle);
+			this.handle2.addClass(this.handle);
 		}
 
 		this.offset = this.picker.offset();
