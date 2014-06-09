@@ -196,6 +196,19 @@
 		} else if(tooltip === 'always') {
 			this.showTooltip();
 			this.alwaysShowTooltip = true;
+		} else if(tooltip === 'drag') {
+			this.picker.on({
+				slideStart: $.proxy(this.showTooltip, this),
+				slideStop: $.proxy(this.hideTooltip, this)
+			});
+			this.handle1.on({
+				focus: $.proxy(this.showTooltip, this),
+				blur: $.proxy(this.hideTooltip, this)
+			});
+			this.handle2.on({
+				focus: $.proxy(this.showTooltip, this),
+				blur: $.proxy(this.hideTooltip, this)
+			});
 		} else {
 			this.picker.on({
 				mouseenter: $.proxy(this.showTooltip, this),
