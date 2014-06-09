@@ -90,6 +90,13 @@ describe("Element Data Attributes Tests", function() {
     expect(orientationClassApplied).toBeTruthy();
     expect(secondSliderHidden).toBeTruthy();
   });
+  
+  it("changes the tooltip behavior to only appear upon dragging", function() {
+    slider = $("#dragSlider").slider({ tooltip:"drag", max:100, min:0 });
+    slider.trigger('mouseover');
+    var tooltipVisible = $('#dragSlider #tooltip').is(":visible");
+    expect.not.toBeTruthy();
+  });
 
   afterEach(function() {
     if(slider) { slider.slider('destroy'); }

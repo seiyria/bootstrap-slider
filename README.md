@@ -36,7 +36,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | value |	float,array |	5	| initial value. Use array to have a range slider. |
 | range |	bool |	false	| make range slider. Optional if initial value is an array. If initial value is scalar, max will be used for second value. |
 | selection |	string |	'before' |	selection placement. Accepts: 'before', 'after' or 'none'. In case of a range slider, the selection will be placed between the handles |
-| tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', or 'always' |
+| tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', 'drag' or 'always'. The 'drag' option does not show the tooltip when mousing over the slider. |
 | tooltip_separator |	string |	':' |	tooltip separator |
 | tooltip_split |	bool |	false |	if false show one tootip if true show two tooltips one for each handler |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square' or 'triangle' |
