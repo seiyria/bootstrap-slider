@@ -219,6 +219,14 @@
 			this.disable();
 		}
 		this.natural_arrow_keys = this.element.data('slider-natural_arrow_keys') || options.natural_arrow_keys;
+		
+		this.responsive = this.element.data('slider-responsive') || options.responsive;
+		if (this.responsive) {
+		    var self = this;
+		    $(window).resize(function() {
+		        self.refreshLayout();
+		    });
+		}
 	};
 
 	Slider.prototype = {
@@ -653,6 +661,22 @@
 
 		getAttribute: function(attribute) {
 			return this[attribute];
+		},
+
+		refreshLayout: function () {
+			if (this.orientation=='horizontal') {
+				if (this.offset != this.picker.offset() && this.size != this.picker.width()) {
+					this.offset = this.picker.offset();
+					this.size = this.picker.width()
+					this.layout();
+				}
+			} else {
+				if (this.offset != this.picker.offset() && this.size != this.picker.height()) {
+					this.offset = this.picker.offset();
+					this.size = this.picker.height()
+					this.layout();
+				}
+			}
 		}
 
 	};
