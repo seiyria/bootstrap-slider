@@ -174,4 +174,5 @@ module.exports = function(grunt) {
   grunt.registerTask('production', ['less:production', 'less:production-min', 'test', 'uglify']);
   grunt.registerTask('dev', 'development');
   grunt.registerTask('dist', 'production');
+  grunt.registerTask('default', 'build');
 };
