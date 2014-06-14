@@ -165,7 +165,7 @@
 			</div>
 			<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 &ltinput id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/&gt
@@ -173,7 +173,7 @@
 
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 $('#ex1').slider({
@@ -185,7 +185,7 @@ $('#ex1').slider({
 
 
 ###################
-       CSS	
+       CSS
 ###################
 
 #ex1Slider .slider-selection {
@@ -203,14 +203,14 @@ $('#ex1').slider({
       		</div>
       		<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 Filter by price interval: &ltb&gt€ 10&lt/b&gt &ltinput id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/&gt &ltb&gt€ 1000&lt/b&gt
 
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 $("#ex2").slider({});
@@ -235,7 +235,7 @@ $("#ex2").slider({});
       		</div>
       		<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 &ltp&gt
@@ -251,7 +251,7 @@ $("#ex2").slider({});
 
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 var RGBChange = function() {
@@ -270,7 +270,7 @@ var b = $('#B').slider()
 
 
 ###################
-       CSS	
+       CSS
 ###################
 
 #RGB {
@@ -310,14 +310,14 @@ var b = $('#B').slider()
       		</div>
       		<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 &ltinput id="ex4" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="-3" data-slider-orientation="vertical"/&gt
 
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 $("#ex4").slider({
@@ -336,7 +336,7 @@ $("#ex4").slider({
       		</div>
       		<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 &ltinput id="ex5" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="0"/&gt
@@ -344,7 +344,7 @@ $("#ex4").slider({
 
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 $("#ex5").slider();
@@ -364,7 +364,7 @@ $("#destroyEx5Slider").click(function() {
       		</div>
       		<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 &ltinput id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/&t
@@ -372,7 +372,7 @@ $("#destroyEx5Slider").click(function() {
 
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 $("#ex6").slider();
@@ -392,7 +392,7 @@ $("#ex6").on('slide', function(slideEvt) {
       		</div>
       		<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 &ltinput id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/&gt
@@ -400,7 +400,7 @@ $("#ex6").on('slide', function(slideEvt) {
 
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 $("#ex7").slider();
@@ -424,14 +424,14 @@ $("#ex7-enabled").click(function() {
       		</div>
       		<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 &ltinput id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/&gt
 
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 $("#ex8").slider({
@@ -449,13 +449,13 @@ $("#ex8").slider({
       		</div>
       		<pre><code>
 ###################
-       HTML	
+       HTML
 ###################
 
 &ltinput id="ex9" type="text"/&gt
 
 ###################
-    JavaScript	
+    JavaScript
 ###################
 
 $("#ex9").slider({
@@ -466,7 +466,7 @@ $("#ex9").slider({
 
             </code></pre>
       	</div>
-      
+
 
       <div class='slider-example'>
       		<h3>Example 10:</h3>
@@ -507,6 +507,27 @@ $("#ex10").slider({});
             </code></pre>
       	</div>
 
+        <div class='slider-example'>
+            <h3>Example 11:</h3>
+            <p>Using a custom step interval.</p>
+            <div class="well">
+            <input id="ex11" type="text"/>
+            </div>
+            <pre><code>
+###################
+ HTML
+###################
+
+&ltinput id="ex11" type="text"/&gt
+
+
+###################
+JavaScript
+###################
+
+$("#ex11").slider({step: 20000, min: 0, max: 200000});
+            </code></pre>
+        </div>
       </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -583,6 +604,14 @@ $("#ex10").slider({});
 
     	/* Example 10 */
       $("#ex10").slider({});
+
+      /* Example 11 */
+      $("#ex11").slider({
+        step: 20000,
+        min: 0,
+        value: 0,
+        max: 200000
+      });
 
     	});
     </script>
