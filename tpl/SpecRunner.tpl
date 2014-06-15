@@ -50,5 +50,7 @@
 	<input id="changeOrientationSlider" type="text"/>
 
 	<input id="makeRangeSlider" type="text"/>
+
+	<input id="responsiveSlider" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-tooltip="always" data-slider-responsive="true" />
 </body>
 </html>

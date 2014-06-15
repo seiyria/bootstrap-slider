@@ -94,6 +94,17 @@ describe("Element Data Attributes Tests", function() {
     expect(orientationClassApplied).toBeTruthy();
     expect(secondSliderHidden).toBeTruthy();
   });
+  
+  it("reads the 'data-slider-responsive' property, changes window size and checks if tooltip position is responsive", function() {
+    slider = $("#responsiveSlider").slider();
+    slider.slider('setValue', 3);
+    $('#responsiveSlider').parent().css('width','100%');
+    $(window).trigger('resize');
+    var tooltip = $("#responsiveSlider").parent().find('.tooltip.in');
+    var posX = tooltip.offset().left + Math.round(tooltip.width()/2);
+    var expected = $(window).width() * slider.slider('getValue') / (slider.slider('getAttribute','max') - slider.slider('getAttribute','min'));
+    expect(posX).toBe(expected);
+  });
 
   afterEach(function() {
     if(slider) { slider.slider('destroy'); }

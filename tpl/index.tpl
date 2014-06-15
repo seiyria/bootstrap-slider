@@ -138,6 +138,11 @@
 		#R, #G, #B {
 			width: 300px;
 		}
+
+		/* Example 11 custom styles */
+		#ex11-container .slider {
+			width: 100%;
+		}
     </style>
 	<script type='text/javascript' src="<%= js.modernizr %>"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -466,6 +471,83 @@ $("#ex9").slider({
 
             </code></pre>
       	</div>
+
+		<div class='slider-example'>
+			<h3>Example 10:</h3>
+			<p>Setting custom handlers.</p>
+			<div class="well">
+				<input id="ex10" type="text" data-slider-handle="custom"/>
+			</div>
+			<pre><code>
+###################
+       HTML
+###################
+
+&ltinput id="ex10" type="text" data-slider-handle="custom"/&gt
+
+
+###################
+    JavaScript
+###################
+
+$("#ex10").slider({});
+
+
+###################
+       CSS
+###################
+
+.slider-handle.custom {
+  background: transparent none;
+  /* You can customize the handle and set a background image */
+}
+
+/* Or display content like unicode characters or fontawesome icons */
+.slider-handle.custom::before {
+  line-height: 20px;
+  font-size: 20px;
+  content: '\2605'; /*unicode star character*/
+  color: #726204;
+}
+			</code></pre>
+		</div>
+
+		<div class='slider-example'>
+			<h3>Example 11:</h3>
+			<p>Use the responsive attribute can be useful if you want a slider whose size depends on window size. If you resize the window the slider tooltip maintains the correct position.</p>
+			<div class="well">
+				<div id="ex11-container">
+					<input id="ex11" type="text"/>
+				</div>
+			</div>
+			<pre><code>
+###################
+       HTML	
+###################
+
+&ltdiv id="ex11-container"&gt
+  &ltinput id="ex11" type="text"/&gt
+&lt/div&gt
+
+###################
+    JavaScript	
+###################
+
+$("#ex11").slider({
+  min: 0, max: 10, step: 1, value: 4,
+  tooltip: 'always',
+  responsive: true
+});
+
+###################
+       CSS
+###################
+
+#ex11-container .slider {
+  width: 100%;
+}
+			</code></pre>
+		</div>
       
       </div> <!-- /examples -->
     </div> <!-- /container -->
@@ -539,6 +621,19 @@ $("#ex9").slider({
 			$("#ex9").slider({
 				step: 0.01,
 				value: 8.115
+			});
+
+			/* Example 10 */
+			$("#ex10").slider({});
+
+			/* Example 11 */
+			$("#ex11").slider({
+				min: 0,
+				max: 10,
+				step: 1,
+				value: 4,
+				tooltip: 'always',
+				responsive: true
 			});
     	});
     </script>
