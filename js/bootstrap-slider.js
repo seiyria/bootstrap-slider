@@ -222,10 +222,9 @@
 		
 		this.responsive = this.element.data('slider-responsive') || options.responsive;
 		if (this.responsive) {
-		    var self = this;
-		    $(window).resize(function() {
-		        self.refreshLayout();
-		    });
+			$(window).resize(function() {
+				self.refreshLayout();
+			});
 		}
 	};
 
@@ -664,16 +663,16 @@
 		},
 
 		refreshLayout: function () {
-			if (this.orientation=='horizontal') {
-				if (this.offset != this.picker.offset() && this.size != this.picker.width()) {
+			if (this.orientation === 'horizontal') {
+				if (this.offset !== this.picker.offset() && this.size !== this.picker.width()) {
 					this.offset = this.picker.offset();
-					this.size = this.picker.width()
+					this.size = this.picker.width();
 					this.layout();
 				}
 			} else {
-				if (this.offset != this.picker.offset() && this.size != this.picker.height()) {
+				if (this.offset !== this.picker.offset() && this.size !== this.picker.height()) {
 					this.offset = this.picker.offset();
-					this.size = this.picker.height()
+					this.size = this.picker.height();
 					this.layout();
 				}
 			}
@@ -764,6 +763,7 @@
 		handle: 'round',
 		reversed : false,
 		enabled: true,
+		responsive: false,
 		formater: function(value) {
 			return value;
 		}

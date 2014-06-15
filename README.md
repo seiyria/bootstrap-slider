@@ -44,6 +44,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | enabled | bool | true | whether or not the slider is initially enabled |
 | formater |	function |	returns the plain value |	formatter callback. Return the value wanted to be displayed in the tooltip |
 | natural_arrow_keys | bool | false | The natural order is used for the arrow keys. Arrow up select the upper slider value for vertical sliders, arrow right the righter slider value for a horizontal slider - no matter if the slider was reversed or not. By default the arrow keys are oriented by arrow up/right to the higher slider value, arrow down/left to the lower slider value. |
+| responsive | bool | false | Makes the slider responsive (useful if you want a slider whose size depends on window size). |
 
 Functions
 =========
