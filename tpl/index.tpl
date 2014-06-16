@@ -528,7 +528,7 @@ HTML
 JavaScript
 ###################
 
-$("#ex12").slider({step: 20000, min: 0, max: 200000});
+$("#ex11").slider({step: 20000, min: 0, max: 200000});
       </code></pre>
   </div>      
 
