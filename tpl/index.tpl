@@ -525,7 +525,29 @@ JavaScript
 
 $("#ex11").slider({step: 20000, min: 0, max: 200000});
       </code></pre>
-  </div>      
+  </div>
+
+        <div class='slider-example'>
+            <h3>Example 12:</h3>
+            <p>Have tick marks display on the slider track.</p>
+            <div class="well">
+            <input id="ex12" type="text"/>
+            </div>
+            <pre><code>
+###################
+ HTML
+###################
+
+&ltinput id="ex12" type="text"/&gt
+
+
+###################
+JavaScript
+###################
+
+$("#ex12").slider({tickMarks: 11});
+            </code></pre>
+        </div>
       </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -609,6 +631,11 @@ $("#ex11").slider({step: 20000, min: 0, max: 200000});
         min: 0,
         max: 200000
       });
+
+        /* Example 12 */
+        $("#ex12").slider({
+            tickMarks: 11
+        });
 
     	});
     </script>

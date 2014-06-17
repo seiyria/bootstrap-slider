@@ -95,6 +95,7 @@
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  z-index: 10;
 }
 .slider-selection {
   position: absolute;
@@ -108,6 +109,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   border-radius: 4px;
+  z-index: 13;
 }
 .slider-handle {
   position: absolute;
@@ -123,6 +125,7 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
   opacity: 0.8;
   border: 0px solid transparent;
+  z-index: 20;
 }
 .slider-handle.round {
   border-radius: 50%;
@@ -138,4 +141,12 @@
   font-size: 20px;
   content: '\2605';
   color: #726204;
+}
+.slider-tick-mark {
+    width: 1px;
+    height: 10px;
+    position: absolute;
+    z-index: 15;
+    background-color: #ccc;
+    border: 1px solid #ccc;
 }

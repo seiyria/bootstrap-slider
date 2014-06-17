@@ -84,6 +84,12 @@ describe("Element Data Attributes Tests", function() {
     expect(isEnabled).not.toBeTruthy();
   });
 
+  it("reads the 'data-slider-tick-marks' property and sets it on slider", function() {
+    slider = $("#tickMarkSlider").slider();
+    var tickMarks = slider.slider('tickMarks');
+    expect(tickMarks).toBe(11);
+  });
+
   it("changes the 'data-slider-orientation' property from horizontal to vertical", function() {
     slider = $("#changeOrientationSlider").slider();
     slider.slider('setAttribute', 'orientation', 'vertical').slider('refresh');

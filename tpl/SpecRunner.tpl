@@ -50,5 +50,7 @@
 	<input id="changeOrientationSlider" type="text"/>
 
 	<input id="makeRangeSlider" type="text"/>
+
+	<input id="tickMarkSlider" data-slider-tick-marks="11" type="text"/>
 </body>
 </html>

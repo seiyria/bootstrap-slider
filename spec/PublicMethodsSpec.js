@@ -146,6 +146,14 @@ describe("Public Method Tests", function() {
       expect(isEnabled).not.toBeTruthy();
     });
 
+    it("reads and sets the 'tickMarks' option properly", function() {
+        testSlider = $("#testSlider1").slider({
+            tickMarks: 11
+        });
+        var tickMarks = testSlider.slider('tickMarks');
+        expect(tickMarks).toBe(11);
+    });
+
     describe("reads and sets the 'tooltip' option properly", function() {
       it("tooltip is not shown if set to 'hide'", function() {
         testSlider = $("#testSlider1").slider({
@@ -261,6 +269,18 @@ describe("Public Method Tests", function() {
           expect(sliderValue).toBe(originalSliderValue);
         });
       });
+    });
+
+    describe("if slider has tickMarks set", function() {
+       beforeEach(function() {
+           testSlider = $("#testSlider1").slider({
+               tickMarks: 11
+           });
+       });
+
+       it("should have the correct amount of tick marks for children", function() {
+          expect($("#testSlider1").parent().find(".slider-tick-mark").size()).toBe(11);
+       });
     });
 
     describe("if slider is a range slider", function() {
