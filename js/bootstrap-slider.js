@@ -39,8 +39,8 @@
 			this.picker = $('<div class="slider">'+
 								'<div class="slider-track">'+
 									'<div class="slider-selection"></div>'+
-									'<div class="slider-handle"></div>'+
-									'<div class="slider-handle"></div>'+
+									'<div class="slider-handle min-slider-handle"></div>'+
+									'<div class="slider-handle max-slider-handle"></div>'+
 								'</div>'+
 								'<div id="tooltip" class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'+
 								'<div id="tooltip_min" class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'+
