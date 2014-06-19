@@ -219,13 +219,6 @@
 			this.disable();
 		}
 		this.natural_arrow_keys = this.element.data('slider-natural_arrow_keys') || options.natural_arrow_keys;
-		
-		this.responsive = this.element.data('slider-responsive') || options.responsive;
-		if (this.responsive) {
-			$(window).resize(function() {
-				self.refreshLayout();
-			});
-		}
 	};
 
 	Slider.prototype = {
@@ -289,12 +282,17 @@
 				this.tooltipInner.text(
 					this.formater(this.value[0]) + this.tooltip_separator + this.formater(this.value[1])
 				);
-				this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
-
-                this.tooltipInner_min.text(
+				//this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+				//this.tooltip[0].style[this.stylePos] = positionPercentages[0] + '%';
+				if (this.orientation === 'vertical') {
+				    this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
+				} else {
+				    this.tooltip.css('margin-left', -this.tooltip.outerWidth() / 2 + 'px');
+				}
+                		this.tooltipInner_min.text(
 					this.formater(this.value[0])
 				);
-                this.tooltipInner_max.text(
+                		this.tooltipInner_max.text(
 					this.formater(this.value[1])
 				);
 
@@ -305,7 +303,12 @@
 				this.tooltipInner.text(
 					this.formater(this.value[0])
 				);
-				this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+				this.tooltip[0].style[this.stylePos] = positionPercentages[0] + '%';
+				if (this.orientation === 'vertical') {
+				    this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
+				} else {
+				    this.tooltip.css('margin-left', -this.tooltip.outerWidth() / 2 + 'px');
+				}
 			}
 		},
 
@@ -660,22 +663,6 @@
 
 		getAttribute: function(attribute) {
 			return this[attribute];
-		},
-
-		refreshLayout: function () {
-			if (this.orientation === 'horizontal') {
-				if (this.offset !== this.picker.offset() && this.size !== this.picker.width()) {
-					this.offset = this.picker.offset();
-					this.size = this.picker.width();
-					this.layout();
-				}
-			} else {
-				if (this.offset !== this.picker.offset() && this.size !== this.picker.height()) {
-					this.offset = this.picker.offset();
-					this.size = this.picker.height();
-					this.layout();
-				}
-			}
 		}
 
 	};
@@ -763,7 +750,6 @@
 		handle: 'round',
 		reversed : false,
 		enabled: true,
-		responsive: false,
 		formater: function(value) {
 			return value;
 		}
