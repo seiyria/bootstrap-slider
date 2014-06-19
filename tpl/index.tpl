@@ -138,11 +138,6 @@
 		#R, #G, #B {
 			width: 300px;
 		}
-
-		/* Example 12 custom styles */
-		#ex12-container .slider {
-			width: 100%;
-		}
     </style>
 	<script type='text/javascript' src="<%= js.modernizr %>"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -531,44 +526,6 @@ JavaScript
 $("#ex11").slider({step: 20000, min: 0, max: 200000});
       </code></pre>
   </div>      
-
-		<div class='slider-example'>
-			<h3>Example 12:</h3>
-			<p>Use the responsive attribute can be useful if you want a slider whose size depends on window size. If you resize the window the slider tooltip maintains the correct position.</p>
-			<div class="well">
-				<div id="ex12-container">
-					<input id="ex12" type="text"/>
-				</div>
-			</div>
-			<pre><code>
-###################
-       HTML	
-###################
-
-&ltdiv id="ex12-container"&gt
-  &ltinput id="ex12" type="text"/&gt
-&lt/div&gt
-
-###################
-    JavaScript	
-###################
-
-$("#ex12").slider({
-  min: 0, max: 10, step: 1, value: 4,
-  tooltip: 'always',
-  responsive: true
-});
-
-###################
-       CSS
-###################
-
-#ex12-container .slider {
-  width: 100%;
-}
-			</code></pre>
-		</div>
-
       </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -653,16 +610,6 @@ $("#ex12").slider({
         max: 200000
       });
 
-			/* Example 12 */
-			$("#ex12").slider({
-				min: 0,
-				max: 10,
-				step: 1,
-				value: 4,
-				tooltip: 'always',
-				responsive: true
-			});
-      
     	});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
