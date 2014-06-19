@@ -282,7 +282,7 @@
 				this.tooltipInner.text(
 					this.formater(this.value[0]) + this.tooltip_separator + this.formater(this.value[1])
 				);
-				this.tooltip[0].style[this.stylePos] = (positionPercentages[1] - positionPercentages[0])/2 + '%';
+				this.tooltip[0].style[this.stylePos] = (positionPercentages[1] + positionPercentages[0])/2 + '%';
 				if (this.orientation === 'vertical') {
 				    this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
 				} else {
