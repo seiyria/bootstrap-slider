@@ -282,23 +282,47 @@
 				this.tooltipInner.text(
 					this.formater(this.value[0]) + this.tooltip_separator + this.formater(this.value[1])
 				);
-				this.tooltip[0].style[this.stylePos] = this.size * (positionPercentages[0] + (positionPercentages[1] - positionPercentages[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
-
-                this.tooltipInner_min.text(
+				this.tooltip[0].style[this.stylePos] = (positionPercentages[1] + positionPercentages[0])/2 + '%';
+				if (this.orientation === 'vertical') {
+					this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
+				} else {
+					this.tooltip.css('margin-left', -this.tooltip.outerWidth() / 2 + 'px');
+				}
+				
+				if (this.orientation === 'vertical') {
+					this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
+				} else {
+					this.tooltip.css('margin-left', -this.tooltip.outerWidth() / 2 + 'px');
+				}
+				this.tooltipInner_min.text(
 					this.formater(this.value[0])
 				);
-                this.tooltipInner_max.text(
+				this.tooltipInner_max.text(
 					this.formater(this.value[1])
 				);
 
-				this.tooltip_min[0].style[this.stylePos] = this.size * ( (positionPercentages[0])/100) - (this.orientation === 'vertical' ? this.tooltip_min.outerHeight()/2 : this.tooltip_min.outerWidth()/2) +'px';
-				this.tooltip_max[0].style[this.stylePos] = this.size * ( (positionPercentages[1])/100) - (this.orientation === 'vertical' ? this.tooltip_max.outerHeight()/2 : this.tooltip_max.outerWidth()/2) +'px';
-
+				this.tooltip_min[0].style[this.stylePos] = positionPercentages[0] + '%';
+				if (this.orientation === 'vertical') {
+					this.tooltip_min.css('margin-top', -this.tooltip_min.outerHeight() / 2 + 'px');
+				} else {
+					this.tooltip_min.css('margin-left', -this.tooltip_min.outerWidth() / 2 + 'px');
+				}
+				this.tooltip_max[0].style[this.stylePos] = positionPercentages[1] + '%';
+				if (this.orientation === 'vertical') {
+					this.tooltip_max.css('margin-top', -this.tooltip_max.outerHeight() / 2 + 'px');
+				} else {
+					this.tooltip_max.css('margin-left', -this.tooltip_max.outerWidth() / 2 + 'px');
+				}
 			} else {
 				this.tooltipInner.text(
 					this.formater(this.value[0])
 				);
-				this.tooltip[0].style[this.stylePos] = this.size * positionPercentages[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
+				this.tooltip[0].style[this.stylePos] = positionPercentages[0] + '%';
+				if (this.orientation === 'vertical') {
+					this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
+				} else {
+					this.tooltip.css('margin-left', -this.tooltip.outerWidth() / 2 + 'px');
+				}
 			}
 		},
 
