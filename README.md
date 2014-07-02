@@ -77,6 +77,7 @@ Other Platforms & Libraries
 - [knockout.js](https://github.com/cosminstefanxp/bootstrap-slider-knockout-binding) ([@cosminstefanxp](https://github.com/cosminstefanxp), [#81](https://github.com/seiyria/bootstrap-slider/issues/81))
 - [AngularJS](https://github.com/seiyria/angular-bootstrap-slider)
 - [NuGet](https://www.nuget.org/packages/bootstrap.slider)
+- [MeteorJS](https://github.com/kidovate/meteor-bootstrap-slider)
 
 Maintainers
 ============
