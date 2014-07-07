@@ -286,13 +286,13 @@
 				if (this.orientation === 'vertical') {
 					this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
 				} else {
-					this.tooltip.css('margin-left', -this.tooltip.outerWidth() / 2 + 'px');
+					this.tooltip.css('margin-left', -Math.floor(this.tooltip.outerWidth() / 2) + 'px');
 				}
 				
 				if (this.orientation === 'vertical') {
 					this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
 				} else {
-					this.tooltip.css('margin-left', -this.tooltip.outerWidth() / 2 + 'px');
+					this.tooltip.css('margin-left', -Math.floor(this.tooltip.outerWidth() / 2) + 'px');
 				}
 				this.tooltipInner_min.text(
 					this.formater(this.value[0])
@@ -305,13 +305,13 @@
 				if (this.orientation === 'vertical') {
 					this.tooltip_min.css('margin-top', -this.tooltip_min.outerHeight() / 2 + 'px');
 				} else {
-					this.tooltip_min.css('margin-left', -this.tooltip_min.outerWidth() / 2 + 'px');
+					this.tooltip_min.css('margin-left', -Math.floor(this.tooltip_min.outerWidth() / 2) + 'px');
 				}
 				this.tooltip_max[0].style[this.stylePos] = positionPercentages[1] + '%';
 				if (this.orientation === 'vertical') {
 					this.tooltip_max.css('margin-top', -this.tooltip_max.outerHeight() / 2 + 'px');
 				} else {
-					this.tooltip_max.css('margin-left', -this.tooltip_max.outerWidth() / 2 + 'px');
+					this.tooltip_max.css('margin-left', -Math.floor(this.tooltip_max.outerWidth() / 2) + 'px');
 				}
 			} else {
 				this.tooltipInner.text(
@@ -321,7 +321,7 @@
 				if (this.orientation === 'vertical') {
 					this.tooltip.css('margin-top', -this.tooltip.outerHeight() / 2 + 'px');
 				} else {
-					this.tooltip.css('margin-left', -this.tooltip.outerWidth() / 2 + 'px');
+					this.tooltip.css('margin-left', -Math.floor(this.tooltip.outerWidth() / 2) + 'px');
 				}
 			}
 		},
