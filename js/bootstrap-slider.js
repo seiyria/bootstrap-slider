@@ -738,6 +738,10 @@
 			if (slider && !options) {
 				options = {};
 
+				slider.handle1.off();
+				slider.handle2.off();
+				slider.picker.off();
+
 				$.each($.fn.slider.defaults, function(key) {
 					options[key] = slider[key];
 				});
