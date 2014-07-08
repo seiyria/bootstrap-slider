@@ -98,6 +98,16 @@ describe("Event Tests", function() {
     expect(flag).toBeTruthy();
   });
 
+  it("slider should not have duplicate events after calling 'refresh'", function() {
+    flag = 0;
+    testSlider.on('slideStop', function() {
+      flag += 1;
+    });
+    testSlider.slider('refresh');
+    testSlider.data('slider').mouseup();
+    expect(flag).toEqual(1);
+  });
+
   afterEach(function() {
     if(testSlider) {
       testSlider.slider('destroy');
