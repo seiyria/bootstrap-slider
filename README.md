@@ -8,6 +8,14 @@ Clone the repository, then run `npm install`
 
 Want to use bower? `bower install seiyria-bootstrap-slider`
 
+
+Include the javascript in your html (obviously) and the less file in your less stylesheet.  bootstrap-slider will use values defined in variables.less and mixins.less, so ensure that they're available (if we're using bootstrap, bower, and less, then these are likely already available).
+
+```less
+// adjust to taste
+@import "../bower_components/seiyria-bootstrap-slider/less/bootstrap-slider.less";
+```
+
 Examples
 ========
 You can see all of our API examples [here](http://seiyria.github.io/bootstrap-slider/).
