@@ -109,6 +109,7 @@
 		$.each(['min',
 				'max',
 				'step',
+                'tickMarks',
 				'precision',
 				'value',
 				'reversed',
@@ -219,6 +220,10 @@
 			this.disable();
 		}
 		this.natural_arrow_keys = this.element.data('slider-natural_arrow_keys') || options.natural_arrow_keys;
+
+        if(this.tickMarks) {
+            this.drawTickMarks();
+        }
 	};
 
 	Slider.prototype = {
@@ -246,6 +251,15 @@
 			}
 			this.over = false;
 		},
+
+        drawTickMarks: function() {
+            var spacing = 100 / (this.tickMarks-1);
+            for(var i=0; i<this.tickMarks; i++) {
+                $("<span class='slider-tick-mark'></span>")
+                    .css('left', (i*spacing)+"%")
+                    .appendTo(this.element.parent().find(".slider-track"));
+            }
+        },
 
 		layout: function(){
 			var positionPercentages;
@@ -671,6 +685,10 @@
 			return this.enabled;
 		},
 
+        tickMarks: function() {
+            return this.tickMarks;
+        },
+
 		setAttribute: function(attribute, value) {
 			this[attribute] = value;
 		},
@@ -690,6 +708,7 @@
 		disable : Slider.prototype.disable,
 		enable : Slider.prototype.enable,
 		toggle : Slider.prototype.toggle,
+        tickMarks : Slider.prototype.tickMarks,
 		isEnabled: Slider.prototype.isEnabled
 	};
 

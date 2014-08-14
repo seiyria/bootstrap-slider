@@ -466,59 +466,57 @@ $("#ex9").slider({
 
             </code></pre>
       	</div>
-
-
-      <div class='slider-example'>
-      		<h3>Example 10:</h3>
-      		<p>Setting custom handlers.</p>
-      		<div class="well">
-  				<input id="ex10" type="text" data-slider-handle="custom"/>
-      		</div>
-      		<pre><code>
+<div class='slider-example'>
+    <h3>Example 10:</h3>
+    <p>Setting custom handlers.</p>
+    <div class="well">
+    <input id="ex10" type="text" data-slider-handle="custom"/>
+    </div>
+    <pre><code>
 ###################
-       HTML
+ HTML
 ###################
 
 &ltinput id="ex10" type="text" data-slider-handle="custom"/&gt
 
 
 ###################
-    JavaScript
+JavaScript
 ###################
 
 $("#ex10").slider({});
 
 
 ###################
-       CSS
+ CSS
 ###################
 .slider-handle.custom {
-  background: transparent none;
-  /* You can customize the handle and set a background image */
+background: transparent none;
+/* You can customize the handle and set a background image */
 }
 
 /* Or display content like unicode characters or fontawesome icons */
 .slider-handle.custom::before {
-  line-height: 20px;
-  font-size: 20px;
-  content: '\2605'; /*unicode star character*/
-  color: #726204;
+line-height: 20px;
+font-size: 20px;
+content: '\2605'; /*unicode star character*/
+color: #726204;
 }
-            </code></pre>
-      	</div>
+      </code></pre>
+  </div>
 
-        <div class='slider-example'>
-            <h3>Example 11:</h3>
-            <p>Using a custom step interval.</p>
-            <div class="well">
-            <input id="ex11" type="text"/>
-            </div>
-            <pre><code>
+  <div class='slider-example'>
+      <h3>Example 11:</h3>
+      <p>Using a custom step interval.</p>
+      <div class="well">
+      <input id="ex11" type="text" data-slider-handle="custom"/>
+      </div>
+      <pre><code>
 ###################
- HTML
+HTML
 ###################
 
-&ltinput id="ex11" type="text"/&gt
+&ltinput id="ex11" type="text" data-slider-handle="custom"/&gt
 
 
 ###################
@@ -526,6 +524,28 @@ JavaScript
 ###################
 
 $("#ex11").slider({step: 20000, min: 0, max: 200000});
+      </code></pre>
+  </div>
+
+        <div class='slider-example'>
+            <h3>Example 12:</h3>
+            <p>Have tick marks display on the slider track.</p>
+            <div class="well">
+            <input id="ex12" type="text"/>
+            </div>
+            <pre><code>
+###################
+ HTML
+###################
+
+&ltinput id="ex12" type="text"/&gt
+
+
+###################
+JavaScript
+###################
+
+$("#ex12").slider({tickMarks: 11});
             </code></pre>
         </div>
       </div> <!-- /examples -->
@@ -602,16 +622,20 @@ $("#ex11").slider({step: 20000, min: 0, max: 200000});
 				value: 8.115
 			});
 
-    	/* Example 10 */
+      /* Example 10 */
       $("#ex10").slider({});
 
       /* Example 11 */
       $("#ex11").slider({
         step: 20000,
         min: 0,
-        value: 0,
         max: 200000
       });
+
+        /* Example 12 */
+        $("#ex12").slider({
+            tickMarks: 11
+        });
 
     	});
     </script>
