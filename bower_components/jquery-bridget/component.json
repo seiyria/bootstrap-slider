@@ -1,8 +1,0 @@
-{
-  "name": "jquery-bridget",
-  "repo": "desandro/jquery-bridget",
-  "description": "Bridget makes jQuery widgets",
-  "version": "1.0.1",
-  "scripts": ["jquery.bridget.js"],
-  "main": "jquery.bridget.js"
-}
