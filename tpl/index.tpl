@@ -159,7 +159,7 @@
       <div class="examples">
       	<div class='slider-example'>
       		<h3>Example 1:</h3>
-      		<p>Basic example with custom formater and colored selected region via CSS.</p>
+      		<p>Basic example with custom formatter and colored selected region via CSS.</p>
       		<div class="well">
 				<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
 			</div>
@@ -176,12 +176,19 @@
     JavaScript
 ###################
 
+// With JQuery
 $('#ex1').slider({
-	formater: function(value) {
+	formatter: function(value) {
 		return 'Current value: ' + value;
 	}
 });
 
+// Without JQuery
+var slider = new Slider('#ex1', {
+	formatter: function(value) {
+		return 'Current value: ' + value;
+	}
+});
 
 
 ###################
@@ -213,7 +220,11 @@ Filter by price interval: &ltb&gt€ 10&lt/b&gt &ltinput id="ex2" type="text" cl
     JavaScript
 ###################
 
+// With JQuery
 $("#ex2").slider({});
+
+// Without JQuery
+var slider = new Slider('#ex2', {});
 
             </code></pre>
       	</div>
@@ -320,7 +331,13 @@ var b = $('#B').slider()
     JavaScript
 ###################
 
+// With JQuery
 $("#ex4").slider({
+	reversed : true
+});
+
+// Without JQuery
+var slider = new Slider("#ex4", {
 	reversed : true
 });
 
@@ -347,10 +364,21 @@ $("#ex4").slider({
     JavaScript
 ###################
 
+// With JQuery
 $("#ex5").slider();
+
+// Without JQuery
+var slider = new Slider('#ex5');
+
 $("#destroyEx5Slider").click(function() {
+	
+	// With JQuery
 	$("#ex5").slider('destroy');
+
+	// Without JQuery
+	slider.destroy();
 });
+
 
             </code></pre>
       	</div>
@@ -375,10 +403,17 @@ $("#destroyEx5Slider").click(function() {
     JavaScript
 ###################
 
+// With JQuery
 $("#ex6").slider();
-$("#ex6").on('slide', function(slideEvt) {
+$("#ex6").on("slide", function(slideEvt) {
 	$("#ex6SliderVal").text(slideEvt.value);
 });
+
+// Without JQuery
+var slider = new Slider("#ex6");
+slider.on("slide", function(slideEvt) {
+	$("#ex6SliderVal").text(slideEvt.value);
+});)
 
             </code></pre>
       	</div>
@@ -403,13 +438,26 @@ $("#ex6").on('slide', function(slideEvt) {
     JavaScript
 ###################
 
+// With JQuery
 $("#ex7").slider();
+
+// Without JQuery
+var slider = new Slider("#ex7");
+
 $("#ex7-enabled").click(function() {
 	if(this.checked) {
+		// With JQuery
 		$("#ex7").slider("enable");
+
+		// Without JQuery
+		slider.enable();
 	}
 	else {
+		// With JQuery
 		$("#ex7").slider("disable");
+
+		// Without JQuery
+		slider.disable();
 	}
 });
 
@@ -434,7 +482,13 @@ $("#ex7-enabled").click(function() {
     JavaScript
 ###################
 
+// With JQuery
 $("#ex8").slider({
+	tooltip: 'always'
+});
+
+// Without JQuery
+var slider = new Slider("#ex8", {
 	tooltip: 'always'
 });
 
@@ -458,7 +512,14 @@ $("#ex8").slider({
     JavaScript
 ###################
 
+// With JQuery
 $("#ex9").slider({
+	precision: 2,
+	value: 8.115 // Slider will instantiate showing 8.12 due to specified precision
+});
+
+// Without JQuery
+var slider = new Slider("#ex9", {
 	precision: 2,
 	value: 8.115 // Slider will instantiate showing 8.12 due to specified precision
 });
@@ -484,8 +545,11 @@ $("#ex9").slider({
 JavaScript
 ###################
 
+// With JQuery
 $("#ex10").slider({});
 
+// Without JQuery
+var slider = new Slider("#ex10", {});
 
 ###################
  CSS
@@ -523,7 +587,16 @@ HTML
 JavaScript
 ###################
 
+// With JQuery
 $("#ex11").slider({step: 20000, min: 0, max: 200000});
+
+// Without JQuery
+var slider = new Slider("#ex11", {
+	step: 20000,
+	min: 0,
+	max: 200000
+});
+
       </code></pre>
   </div>      
       </div> <!-- /examples -->
@@ -538,7 +611,7 @@ $("#ex11").slider({step: 20000, min: 0, max: 200000});
     	$(document).ready(function() {
     		/* Example 1 */
 	    	$('#ex1').slider({
-	          	formater: function(value) {
+	          	formatter: function(value) {
 	            	return 'Current value: ' + value;
 	          	}
 	        });
@@ -596,19 +669,19 @@ $("#ex11").slider({step: 20000, min: 0, max: 200000});
 
 			/* Example 9 */
 			$("#ex9").slider({
-				step: 0.01,
-				value: 8.115
+				precision: 2,
+				value: 8.115 
 			});
 
-      /* Example 10 */
-      $("#ex10").slider({});
+	      	/* Example 10 */
+	      	$("#ex10").slider({});
 
-      /* Example 11 */
-      $("#ex11").slider({
-        step: 20000,
-        min: 0,
-        max: 200000
-      });
+	      	/* Example 11 */
+	      	$("#ex11").slider({
+		        step: 20000,
+		        min: 0,
+		        max: 200000
+	      	});
 
     	});
     </script>

@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-slider",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Slider view component for Twitter Bootstrap.",
   "main": "js/bootstrap-slider.js",
   "scripts": {
@@ -25,13 +25,16 @@
     "grunt-template": "~0.2.0",
     "grunt-open": "~0.2.2",
     "bower": "latest",
-    "grunt-contrib-less": "~0.7.0"
+    "grunt-contrib-less": "~0.7.0",
+    "grunt-header": "^1.0.0",
+    "grunt-contrib-clean": "^0.6.0"
   },
   "gruntConfig": {
     "devPort": 9000,
     "js": {
       "modernizr": "bower_components/modernizr/modernizr.js",
-      "jquery": "bower_components/jquery/dist/jquery.min.js"
+      "jquery": "bower_components/jquery/dist/jquery.min.js",
+      "bindPolyfill": "test/phantom_bind_polyfill.js"
     },
     "less": {
       "slider": "less/bootstrap-slider.less"
@@ -44,12 +47,17 @@
       "SpecRunner": "tpl/SpecRunner.tpl",
       "index": "tpl/index.tpl"
     },
+    "temp": {
+      "js": "temp/bootstrap-slider.min.js",
+      "css": "temp/bootstrap-slider.css",
+      "cssMin": "temp/bootstrap-slider.min.css"
+    },
     "dist": {
       "js": "dist/bootstrap-slider.min.js",
       "css": "dist/css/bootstrap-slider.css",
       "cssMin": "dist/css/bootstrap-slider.min.css"
     },
-    "spec": "spec/**/*.js"
+    "spec": "test/specs/**/*.js"
   },
   "devDependencies": {
     "grunt": "~0.4.4"

@@ -11,7 +11,7 @@ describe("Event Tests", function() {
     testSlider.on('slideStart', function() {
       flag = true;
     });
-    testSlider.data('slider').mousedown(mouse);
+    testSlider.data('slider')._mousedown(mouse);
     expect(flag).toBeTruthy();
   });
 
@@ -19,7 +19,7 @@ describe("Event Tests", function() {
     testSlider.on('slide', function() {
       flag = true;
     });
-    testSlider.data('slider').mousemove(mouse);
+    testSlider.data('slider')._mousemove(mouse);
     expect(flag).toBeTruthy();
   });
 
@@ -28,7 +28,7 @@ describe("Event Tests", function() {
       flag = true;
       expect(isNaN(testSlider.val())).not.toBeTruthy();
     });
-    testSlider.data('slider').mousemove(mouse);
+    testSlider.data('slider')._mousemove(mouse);
     expect(flag).toBeTruthy();
   });
 
@@ -36,7 +36,7 @@ describe("Event Tests", function() {
     testSlider.on('slideStop', function() {
       flag = true;
     });
-    testSlider.data('slider').mouseup();
+    testSlider.data('slider')._mouseup();
     expect(flag).toBeTruthy();
   });
 
@@ -54,7 +54,7 @@ describe("Event Tests", function() {
       testSlider.on('slideStart', function() {
         flag = true;
       });
-      testSlider.data('slider').mousedown(mouse);
+      testSlider.data('slider')._mousedown(mouse);
       expect(flag).not.toBeTruthy();
     });
 
@@ -62,7 +62,7 @@ describe("Event Tests", function() {
       testSlider.on('slide', function() {
         flag = true;
       });
-      testSlider.data('slider').mousemove(mouse);
+      testSlider.data('slider')._mousemove(mouse);
       expect(flag).not.toBeTruthy();
     });
 
@@ -70,7 +70,7 @@ describe("Event Tests", function() {
       testSlider.on('slideStop', function() {
         flag = true;
       });
-      testSlider.data('slider').mouseup();
+      testSlider.data('slider')._mouseup();
       expect(flag).not.toBeTruthy();
     });
 
@@ -104,7 +104,7 @@ describe("Event Tests", function() {
       flag += 1;
     });
     testSlider.slider('refresh');
-    testSlider.data('slider').mouseup();
+    testSlider.data('slider')._mouseup();
     expect(flag).toEqual(1);
   });
 

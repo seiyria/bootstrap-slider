@@ -6,11 +6,6 @@
 <% css.forEach(function(style){ %>
   <link rel="stylesheet" type="text/css" href="<%= style %>">
 <% }) %>
-<% with (scripts) { %>
-  <% [].concat(jasmine, vendor, src, specs, reporters, start).forEach(function(script){ %>
-  <script src="<%= script %>"></script>
-  <% }) %>
-<% }; %>
 </head>
 <body>
 	<!-- Slider used for PublicMethodsSpec and EventsSpec -->
@@ -41,7 +36,7 @@
 
 	<input id="handleSlider" type="text" data-slider-handle="triangle"/>
 
-  <input id="customHandleSlider" type="text" data-slider-handle="custom"/>
+  	<input id="customHandleSlider" type="text" data-slider-handle="custom"/>
 
 	<input id="reversedSlider" type="text" data-slider-reversed="true"/>
 
@@ -50,5 +45,11 @@
 	<input id="changeOrientationSlider" type="text"/>
 
 	<input id="makeRangeSlider" type="text"/>
+
+	<% with (scripts) { %>
+	  <% [].concat(jasmine, vendor, src, specs, reporters, start).forEach(function(script){ %>
+	  <script src="<%= script %>"></script>
+	  <% }) %>
+	<% }; %>
 </body>
 </html>
