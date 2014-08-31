@@ -296,12 +296,12 @@
 		for(var i = 0; i < optionTypes.length; i++) {
 			var optName = optionTypes[i];
 
-			// First check the data atrributes
-			var val = getDataAttrib(this.element, optName);
-			// If no data attrib, then check if an option was passed in via the constructor
-			val = (val !== null) ? val : options[optName];
+			// First check if an option was passed in via the constructor
+			var val = options[optName];
+			// If no data attrib, then check data atrributes
+			val = (typeof val !== 'undefined') ? val : getDataAttrib(this.element, optName);
 			// Finally, if nothing was specified, use the defaults
-			val = (typeof val !== 'undefined') ? val : this.defaultOptions[optName];
+			val = (val !== null) ? val : this.defaultOptions[optName];
 
 			// Set all options on the instance of the Slider
 			if(!this.options) {
@@ -598,6 +598,9 @@
 			// Clear out custom event bindings
 			this._cleanUpEventCallbacksMap();
 
+			// Remove data values
+			this.element.removeAttribute("data");
+
 			// Remove JQuery handlers/data
 			if(window.$) {
 				this._unbindJQueryEventHandlers();
@@ -731,7 +734,7 @@
 			}
 			this.over = false;
 		},
-		_layout: function() {			
+			_layout: function() {			
 			var positionPercentages;
 
 			if(this.options.reversed) {
@@ -742,7 +745,6 @@
 
 			this.handle1.style[this.stylePos] = positionPercentages[0]+'%';
 			this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
-
 
 			if (this.options.orientation === 'vertical') {
 				this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
