@@ -30,9 +30,9 @@
  * v1.0.1
  * MIT license
  */
-(function(window) {
+( function( $ ) {
 
-	( function( window ) {
+	( function( $ ) {
 
 		'use strict';
 
@@ -161,16 +161,10 @@
 
 		}
 
-		// transport
-		if ( typeof define === 'function' && define.amd ) {
-		  // AMD
-		  define( [ 'jquery' ], defineBridget );
-		} else {
-		  // get jquery from browser global
-		  defineBridget( window.jQuery );
-		}
+	  	// get jquery from browser global
+	  	defineBridget( $ );
 
-	})( window );
+	})( $ );
 
 
 	/*************************************************
@@ -281,7 +275,7 @@
 				this.element.style.display = "none";
 			}
 			/* If JQuery exists, cache JQ references */
-			if(window.$) {
+			if($) {
 				this.$element = $(this.element);
 				this.$sliderElem = $(this.sliderElem);
 			}
@@ -603,7 +597,7 @@
 				this.element.removeAttribute("data");
 
 				// Remove JQuery handlers/data
-				if(window.$) {
+				if($) {
 					this._unbindJQueryEventHandlers();
 					this.$element.removeData('slider');
 				}
@@ -644,7 +638,7 @@
 			},
 
 			on: function(evt, callback) {
-				if(window.$) {
+				if($) {
 					this.$element.on(evt, callback);
 					this.$sliderElem.on(evt, callback);
 				} else {
@@ -1096,7 +1090,7 @@
 				}
 
 				/* If JQuery exists, trigger JQuery events */
-				if(window.$) {
+				if($) {
 					this._triggerJQueryEvent(evt, val);
 				}
 			},
@@ -1174,10 +1168,11 @@
 		if($) {
 			var namespace = $.fn.slider ? 'bootstrapSlider' : 'slider';
 			$.bridget(namespace, Slider);
+		} else {
+			window.Slider = Slider;
 		}
-		window.Slider = Slider;
 
 
-	})( window.jQuery );
+	})( $ );
 
-})( window );
+})( window.jQuery );
