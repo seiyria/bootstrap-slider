@@ -325,7 +325,7 @@
 			this.eventToCallbackMap = {};
 			this.sliderElem.id = this.options.id;
 
-			this.touchCapable = 'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch;
+			this.touchCapable = 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch);
 
 			this.tooltip = this.sliderElem.querySelector('.tooltip-main');
 			this.tooltipInner = this.tooltip.querySelector('.tooltip-inner');
@@ -827,11 +827,6 @@
 					return false;
 				}
 
-				// Touch: Get the original event:
-				if (this.touchCapable && ev.type === 'touchstart') {
-					ev = ev.originalEvent;
-				}
-
 				this._triggerFocusOnHandle();
 
 				this.offset = this._offset(this.sliderElem);
@@ -952,11 +947,6 @@
 			_mousemove: function(ev) {
 				if(!this.options.enabled) {
 					return false;
-				}
-
-				// Touch: Get the original event:
-				if (this.touchCapable && ev.type === 'touchmove') {
-					ev = ev.originalEvent;
 				}
 
 				var percentage = this._getPercentage(ev);
