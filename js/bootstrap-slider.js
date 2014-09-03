@@ -431,7 +431,6 @@
 
 			this.offset = this._offset(this.sliderElem);
 			this.size = this.sliderElem[this.sizePos];
-			
 			this.setValue(this.options.value);
 
 			/******************************************
@@ -572,10 +571,11 @@
 
 				this._layout();
 
+				var sliderValue = this.options.range ? this.options.value : this.options.value[0];
+				this._setDataVal(sliderValue);
+
 				if(triggerSlideEvent === true) {
-					var slideEventValue = this.options.range ? this.options.value : this.options.value[0];
-					this._trigger('slide', slideEventValue);
-					this._setDataVal(slideEventValue);
+					this._trigger('slide', sliderValue);
 				}
 
 				return this;
@@ -1067,6 +1067,7 @@
 			_setDataVal: function(val) {
 				var value = "value: '" + val + "'";
 				this.element.setAttribute('data', value);
+				this.element.setAttribute('value', val);
 			},
 			_trigger: function(evt, val) {
 				val = val || undefined;

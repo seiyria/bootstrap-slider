@@ -82,7 +82,6 @@ describe("Element Data Attributes Tests", function() {
     });
   });
 
-
   it("reads the 'data-slider-reversed' property and sets it on slider", function() {
     slider = $("#reversedSlider").slider({
       id: "reversedSliderElem"  
@@ -97,6 +96,19 @@ describe("Element Data Attributes Tests", function() {
     slider = $("#disabledSlider").slider();
     var isEnabled = slider.slider('isEnabled');
     expect(isEnabled).not.toBeTruthy();
+  });
+
+  it("always sets the 'value' attribute of the original <input> element to be the current slider value", function() {
+    var $slider = $("#testSliderGeneric");
+    var val = 7;
+
+    slider = $slider.slider({
+      value: val
+    });
+    var sliderValueAttrib = $slider.val();
+    var valAsString = val.toString();
+
+    expect(sliderValueAttrib).toBe(valAsString);
   });
 
   afterEach(function() {

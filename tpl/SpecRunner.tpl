@@ -8,6 +8,8 @@
 <% }) %>
 </head>
 <body>
+	<input id="testSliderGeneric" type="text"/>
+
 	<!-- Slider used for PublicMethodsSpec and EventsSpec -->
 	<input id="testSlider1" type="text"/>
 
