@@ -96,7 +96,7 @@ describe("Public Method Tests", function() {
       testSlider.slider('setValue', maxSliderVal);
 
       var sliderSelectionWidthAtMaxValue = $("#testSlider1").siblings(".slider").children("div.slider-track").children("div.slider-selection").width();
-      expect(sliderSelectionWidthAtMaxValue).toBe(210);
+      expect(sliderSelectionWidthAtMaxValue).toBe(0);
     });
 
     it("reads and sets the 'handle' option properly", function() {
@@ -123,6 +123,7 @@ describe("Public Method Tests", function() {
       expect(sliderSelectionHeightAtMaxValue).toBe(0);
     });
 
+    /* TODO: Fix this test! It keeps throwing a weird bug where is says '955' instead of '9' for the value */
     // it("reads and sets the 'formatter' option properly", function() {
     //   var tooltipFormater = function(value) {
     //     return 'Current value: ' + value;

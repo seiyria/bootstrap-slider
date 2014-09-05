@@ -551,7 +551,7 @@
 					this.options.value = applyPrecision(this.options.value);
 					this.options.value = [ Math.max(this.options.min, Math.min(this.options.max, this.options.value))];
 					this._addClass(this.handle2, 'hide');
-					if (this.selection === 'after') {
+					if (this.options.selection === 'after') {
 						this.options.value[1] = this.options.max;
 					} else {
 						this.options.value[1] = this.options.min;
