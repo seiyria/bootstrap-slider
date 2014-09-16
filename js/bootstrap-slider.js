@@ -698,12 +698,10 @@
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
 			},
 			_bindNonQueryEventHandler: function(evt, callback) {
-				var callbacksArray = this.eventToCallbackMap[evt];
-				if(callbacksArray) {
-					callbacksArray.push(callback);
-				} else {
+				if(this.eventToCallbackMap[evt]===undefined) {
 					this.eventToCallbackMap[evt] = [];
 				}
+				this.eventToCallbackMap[evt].push(callback);
 			},
 			_cleanUpEventCallbacksMap: function() {
 				var eventNames = Object.keys(this.eventToCallbackMap);
