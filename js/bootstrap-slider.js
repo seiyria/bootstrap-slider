@@ -702,7 +702,7 @@
 				if(callbacksArray) {
 					callbacksArray.push(callback);
 				} else {
-					this.eventToCallbackMap[evt] = [];
+					this.eventToCallbackMap[evt] = [callback];
 				}
 			},
 			_cleanUpEventCallbacksMap: function() {
