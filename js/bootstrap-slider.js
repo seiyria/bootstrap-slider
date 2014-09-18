@@ -520,6 +520,7 @@
 						return val;
 					}
 				},
+				useHTML: false,
 				natural_arrow_keys: false
 			},
 			
@@ -1096,11 +1097,16 @@
 				this.$sliderElem.off();
 			},
 			_setText: function(element, text) {
-				if(typeof element.innerText !== "undefined") {
-			 		element.innerText = text;
-			 	} else if(typeof element.textContent !== "undefined") {
-			 		element.textContent = text;
-			 	}
+				if(this.options.useHTML) {
+			 		element.innerHTML = text;
+				}
+				else {
+					if(typeof element.innerText !== "undefined") {
+			 			element.innerText = text;
+			 		} else if(typeof element.textContent !== "undefined") {
+			 			element.textContent = text;
+			 		}
+				}
 			},
 			_removeClass: function(element, classString) {
 				var classes = classString.split(" ");
