@@ -2,10 +2,10 @@
   "name": "seiyria-bootstrap-slider",
   "version": "3.1.0",
   "dependencies": {
-    "jquery": "",
-    "bootstrap": "",
-    "modernizr": "",
-    "jquery-bridget": ""
+    "jquery": "*",
+    "bootstrap": "*",
+    "modernizr": "*",
+    "jquery-bridget": "*"
   },
   "homepage": "https://github.com/seiyria/bootstrap-slider",
   "authors": [
