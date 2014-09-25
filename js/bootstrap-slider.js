@@ -510,12 +510,13 @@
 				selection: 'before',
 				tooltip: 'show',
 				tooltip_split: false,
+				tooltip_separator: " : ",
 				handle: 'round',
 				reversed: false,
 				enabled: true,
 				formatter: function(val) {
 					if(val instanceof Array) {
-						return val[0] + " : " + val[1];
+						return val[0] + this.options.tooltip_separator + val[1];
 					} else {
 						return val;
 					}
