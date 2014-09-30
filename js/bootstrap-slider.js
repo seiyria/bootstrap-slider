@@ -401,12 +401,20 @@
 				this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
 			}
 
-			if (this.options.value instanceof Array) {
-				this.options.range = true;
-			} else if (this.options.range) {
-				// User wants a range, but value is not an array
-				this.options.value = [this.options.value, this.options.max];
-			}
+			// Fix issue, setValue chnage the value always into an array, on refresh normal slider changes in range slider.
+                        // downsinde of this fix you can not change a normal slider into a range slider
+                        if (updateSlider === true && !this.options.range) { 
+                            if (this.options.value instanceof Array) {
+                                this.options.value = this.options.value[0];
+                            }
+                        } else { // end fix
+                            if (this.options.value instanceof Array) {
+                                    this.options.range = true;
+                            } else if (this.options.range) {
+                                    // User wants a range, but value is not an array
+                                    this.options.value = [this.options.value, this.options.max];
+                            }
+                        }
 
 			this.trackSelection = sliderTrackSelection || this.trackSelection;
 			if (this.options.selection === 'none') {
