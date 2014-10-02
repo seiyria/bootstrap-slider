@@ -1019,7 +1019,7 @@
 				return val;
 			},
 			_applyPrecision: function(val) {
-				var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.step);
+				var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step);
 				return this._applyToFixedAndParseFloat(val, precision);
 			},
 			_getNumDigitsAfterDecimalPlace: function(num) {
