@@ -11,6 +11,8 @@
 */	
 describe("Conflicting Options Tests", function() {
 	
+	var testSlider;
+	
 	it("Should have the value zero when it is slided to zero", function() {
 		var testSlider = $("#testSlider1").slider({
 			value: 0,
@@ -40,4 +42,11 @@ describe("Conflicting Options Tests", function() {
 		// Run tests
 		expect(value).toBe(8.12);
 	});
+	
+	afterEach(function() {
+	    if(testSlider) {
+	      testSlider.slider('destroy');
+	      testSlider = null;
+	    }
+  	});
 });
