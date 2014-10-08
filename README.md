@@ -108,7 +108,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 
 Functions
 =========
-__NOTE:__ Optional parameters are italisized.
+__NOTE:__ Optional parameters are italicized.
 
 | Function | Parameters | Description |
 | -------- | ----------- | ----------- |
