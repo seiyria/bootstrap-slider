@@ -125,17 +125,17 @@ describe("Public Method Tests", function() {
 
     /* TODO: Fix this test! It keeps throwing a weird bug where is says '955' instead of '9' for the value */
     // it("reads and sets the 'formatter' option properly", function() {
-    //   var tooltipFormater = function(value) {
+    //   var tooltipFormatter = function(value) {
     //     return 'Current value: ' + value;
     //   };
 
     //   testSlider = $("#testSlider1").slider({
-    //     formatter : tooltipFormater
+    //     formatter : tooltipFormatter
     //   });
     //   testSlider.slider('setValue', 9);
 
     //   var tooltipMessage = $("#testSlider1").siblings(".slider").find("div.tooltip").children("div.tooltip-inner").text();
-    //   var expectedMessage = tooltipFormater(9);
+    //   var expectedMessage = tooltipFormatter(9);
     //   expect(tooltipMessage).toBe(expectedMessage);
     // });
 
