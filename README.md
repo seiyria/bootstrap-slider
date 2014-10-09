@@ -83,7 +83,7 @@ mySlider
 
 Options
 =======
-Options can be passed either as a data (data-slider-foo) attribute, or as part of an object in the slider call. The only exception here is the formater argument - that can not be passed as a data- attribute.
+Options can be passed either as a data (data-slider-foo) attribute, or as part of an object in the slider call. The only exception here is the formatter argument - that can not be passed as a data- attribute.
 
 
 | Name | Type |	Default |	Description |
