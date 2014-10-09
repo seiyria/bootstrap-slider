@@ -12,9 +12,9 @@
 describe("Conflicting Options Tests", function() {
 	
 	var testSlider;
-	
+
 	it("Should have the value zero when it is slided to zero", function() {
-		var testSlider = $("#testSlider1").slider({
+		testSlider = $("#testSlider1").slider({
 			value: 0,
 			step: 1
 		});
@@ -26,23 +26,22 @@ describe("Conflicting Options Tests", function() {
 			flag = true;
 		});
 
-	      	testSlider.data('slider')._mousemove(mouse);
+      		testSlider.data('slider')._mousemove(mouse);
 		expect(flag).toBeTruthy();
-	
     	});
-    
+
 	it("should set the `precision` to be the number of digits after the decimal of the `step` (assuming no `precision` is specified)", function() {
 		// Create Slider
-		var $testSlider = $("#testSlider1").slider({
+		testSlider = $("#testSlider1").slider({
 			value: 8.115,
 			step: 0.01
 		});
 		// Retrieve slider value
-		var value = $testSlider.slider("getValue");
+		var value = testSlider.slider("getValue");
 		// Run tests
 		expect(value).toBe(8.12);
 	});
-	
+
 	afterEach(function() {
 	    if(testSlider) {
 	      testSlider.slider('destroy');
