@@ -1065,7 +1065,7 @@
 				this.element.setAttribute('value', val);
 			},
 			_trigger: function(evt, val) {
-				val = val || undefined;
+				val = (val || val === 0) ? val : undefined;
 
 				var callbackFnArray = this.eventToCallbackMap[evt];
 				if(callbackFnArray && callbackFnArray.length) {
