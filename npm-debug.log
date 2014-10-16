@@ -1,0 +1,27 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/0.10.26/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'version',
+1 verbose cli   'patch' ]
+2 info using npm@1.4.3
+3 info using node@v0.10.26
+4 error Error: Git working directory not clean.
+4 error M dist/bootstrap-slider.min.js
+4 error M dist/css/bootstrap-slider.css
+4 error M dist/css/bootstrap-slider.min.css
+4 error     at /usr/local/Cellar/node/0.10.26/lib/node_modules/npm/lib/version.js:98:35
+4 error     at ChildProcess.exithandler (child_process.js:635:7)
+4 error     at ChildProcess.EventEmitter.emit (events.js:98:17)
+4 error     at maybeClose (child_process.js:743:16)
+4 error     at Socket.<anonymous> (child_process.js:956:11)
+4 error     at Socket.EventEmitter.emit (events.js:95:17)
+4 error     at Pipe.close (net.js:465:12)
+5 error If you need help, you may report this *entire* log,
+5 error including the npm and node versions, at:
+5 error     <http://github.com/npm/npm/issues>
+6 error System Darwin 13.4.0
+7 error command "/usr/local/Cellar/node/0.10.26/bin/node" "/usr/local/bin/npm" "version" "patch"
+8 error cwd /Users/rohitkalkur/Workspace/bootstrap-slider
+9 error node -v v0.10.26
+10 error npm -v 1.4.3
+11 verbose exit [ 1, true ]
