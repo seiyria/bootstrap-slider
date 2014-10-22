@@ -1154,7 +1154,14 @@
 				};
 			},
 			_css: function(elementRef, styleName, value) {
-				elementRef.style[styleName] = value;
+                if ($) {
+                    $.style(elementRef, styleName, value);
+                } else {
+                    var style = styleName.replace(/^-ms-/, "ms-").replace(/-([\da-z])/gi, function (all, letter) {
+                        return letter.toUpperCase();
+                    });
+                    elementRef.style[style] = value;
+                }
 			}
 		};
 
