@@ -756,7 +756,7 @@
 			        } else {
 			            this._removeClass(this.tooltip_max, 'bottom');
 			            this._addClass(this.tooltip_max, 'top');
-			            this.tooltip_max.style.top = -30 + 'px';
+			            this.tooltip_max.style.top = this.tooltip_min.style.top;
 			        }
 	 			}
 
