@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-slider",
-  "version": "4.0.8",
+  "version": "4.0.10",
   "description": "Slider view component for Twitter Bootstrap.",
   "main": "js/bootstrap-slider.js",
   "scripts": {
@@ -27,7 +27,8 @@
     "bower": "latest",
     "grunt-contrib-less": "~0.7.0",
     "grunt-header": "^1.0.0",
-    "grunt-contrib-clean": "^0.6.0"
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-bump": "0.0.16"
   },
   "gruntConfig": {
     "devPort": 9000,
@@ -57,7 +58,8 @@
       "css": "dist/css/bootstrap-slider.css",
       "cssMin": "dist/css/bootstrap-slider.min.css"
     },
-    "spec": "test/specs/**/*.js"
+    "spec": "test/specs/**/*.js",
+    "bumpFiles": ["package.json", "bower.json", "composer.json"]
   },
   "devDependencies": {
     "grunt": "~0.4.4"
