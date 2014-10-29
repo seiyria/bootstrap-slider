@@ -1,10 +1,13 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
+  var packageJSON = grunt.file.readJSON('package.json');
+  var bumpFiles = ["package.json", "bower.json", "composer.json"];
+
   // Project configuration.
   grunt.initConfig({
     // Metadata.
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: packageJSON,
     header: {
       dist: {
         options: {
@@ -179,7 +182,21 @@ module.exports = function(grunt) {
         }
       }
     },
-    clean: ["temp"]
+    clean: ["temp"],
+    bump: {
+      options: {
+        files: bumpFiles,
+        updateConfigs: [],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: bumpFiles,
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: true,
+        pushTo: 'origin'
+      }
+    }
   });
 
 
@@ -194,6 +211,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-template');
   grunt.loadNpmTasks('grunt-header');
+  grunt.loadNpmTasks('grunt-bump');
 
   // Create custom tasks
   grunt.registerTask('test', ['jshint', 'jasmine']);

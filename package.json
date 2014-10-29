@@ -58,8 +58,7 @@
       "css": "dist/css/bootstrap-slider.css",
       "cssMin": "dist/css/bootstrap-slider.min.css"
     },
-    "spec": "test/specs/**/*.js",
-    "bumpFiles": ["package.json", "bower.json", "composer.json"]
+    "spec": "test/specs/**/*.js"
   },
   "devDependencies": {
     "grunt": "~0.4.4"
