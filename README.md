@@ -134,6 +134,10 @@ Events
 | slideEnabled | This event fires when the slider is enabled |
 | slideDisabled | This event fires when the slider is disabled |
 
+Version Bumping (Maintainers Only)
+=======
+To bump the version number across all the various packagement systems the plugin is registered with, please use the [grunt bump](https://github.com/vojtajina/grunt-bump) plugin.
+
 Other Platforms & Libraries
 ===========================
 - [Ruby on Rails](https://github.com/stationkeeping/bootstrap-slider-rails)
