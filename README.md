@@ -81,6 +81,18 @@ mySlider
 	.setValue(7);
 ```
 
+Loading as CommonJS module
+=======
+When loading bootstrap-slider as a CommonJS module via [Browserify](https://github.com/substack/node-browserify), [Webpack](https://github.com/webpack/webpack), or some other library, the JQuery dependency is considered to be optional.
+
+For example, to exclude JQuery from being part of your Browserify build, you would call something like the following (assuming main.js is requiring bootstrap-slider as a dependency):
+
+```
+browserify -u jquery main.js > bundle.js
+```
+
+Please see the documentation for the specific CommonJS loader you are using to find out how to exclude dependencies.
+
 Options
 =======
 Options can be passed either as a data (data-slider-foo) attribute, or as part of an object in the slider call. The only exception here is the formatter argument - that can not be passed as a data- attribute.
@@ -137,6 +149,11 @@ Events
 Version Bumping (Maintainers Only)
 =======
 To bump the version number across all the various packagement systems the plugin is registered with, please use the [grunt bump](https://github.com/vojtajina/grunt-bump) plugin.
+
+* _grunt bump:patch_ - patch version bump, __0.0.0 -> 0.0.1__
+* _grunt bump:minor_ - minor version bump, __0.0.0 -> 0.1.0__
+* _grunt bump:major_ - major version bump, __0.0.0 -> 1.0.0__
+
 
 Other Platforms & Libraries
 ===========================

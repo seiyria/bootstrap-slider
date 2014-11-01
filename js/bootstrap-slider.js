@@ -35,8 +35,9 @@
 	if(typeof define === "function" && define.amd) {
 		define(["jquery"], factory);
 	} else if(typeof module === "object" && module.exports) {
+		var jQuery;
 		try {
-			var jQuery = require("jquery");
+			jQuery = require("jquery");
 		} catch (err) {
 			jQuery = null;
 		}
