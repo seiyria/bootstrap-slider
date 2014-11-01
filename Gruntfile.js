@@ -54,7 +54,9 @@ module.exports = function(grunt) {
           $ : true,
           Modernizr : true,
           console: true,
-          define: true
+          define: true,
+          module: true,
+          require: true
         },
         "-W099": true,
       },

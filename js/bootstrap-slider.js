@@ -30,9 +30,26 @@
  * v1.0.1
  * MIT license
  */
-( function( $ ) {
 
-	( function( $ ) {
+(function(root, factory) {
+	if(typeof define === "function" && define.amd) {
+		define(["jquery"], factory);
+	} else if(typeof module === "object" && module.exports) {
+		try {
+			var jQuery = require("jquery");
+		} catch (err) {
+			jQuery = null;
+		}
+		module.exports = factory(jQuery);
+	} else {
+		root.Slider = factory(root.jQuery);
+	}
+}(this, function($) {
+	// Reference to Slider constructor
+	var Slider;
+
+
+	(function( $ ) {
 
 		'use strict';
 
@@ -173,7 +190,7 @@
 
 	**************************************************/
 
-	(function( $ ) {
+	(function($) {
 
 		var ErrorMsgs = {
 			formatInvalidInputErrorMsg : function(input) {
@@ -189,7 +206,7 @@
 							CONSTRUCTOR
 
 		**************************************************/
-		var Slider = function(element, options) {
+		Slider = function(element, options) {
 			createNewSlider.call(this, element, options);
 			return this;
 		};
@@ -1174,11 +1191,9 @@
 		if($) {
 			var namespace = $.fn.slider ? 'bootstrapSlider' : 'slider';
 			$.bridget(namespace, Slider);
-		} else {
-			window.Slider = Slider;
 		}
-
 
 	})( $ );
 
-})( window.jQuery );
+	return Slider;
+}));
