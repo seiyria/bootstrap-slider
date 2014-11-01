@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-slider",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Slider view component for Twitter Bootstrap.",
   "main": "js/bootstrap-slider.js",
   "scripts": {
