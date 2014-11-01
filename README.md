@@ -12,6 +12,8 @@ Clone the repository, then run `npm install`
 
 Want to use bower? `bower install seiyria-bootstrap-slider`
 
+Want to use npm? `npm install bootstrap-slider`
+
 Then load the plugin CSS and JavaScript into your web page, and everything should work!
 
 Remember to load the plugin code after loading the Bootstrap CSS and JQuery.
