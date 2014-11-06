@@ -85,9 +85,15 @@ mySlider
 
 Loading as CommonJS module
 =======
-When loading bootstrap-slider as a CommonJS module via [Browserify](https://github.com/substack/node-browserify), [Webpack](https://github.com/webpack/webpack), or some other library, the JQuery dependency is considered to be optional.
+bootstrap-slider can be loaded as a CommonJS module via [Browserify](https://github.com/substack/node-browserify), [Webpack](https://github.com/webpack/webpack), or some other library.
 
-For example, to exclude JQuery from being part of your Browserify build, you would call something like the following (assuming main.js is requiring bootstrap-slider as a dependency):
+```
+var Slider = require("bootstrap-slider");
+
+var mySlider = new Slider();
+```
+
+Note that the JQuery dependency is considered to be optional. For example, to exclude JQuery from being part of your Browserify build, you would call something like the following (assuming main.js is requiring bootstrap-slider as a dependency):
 
 ```
 browserify -u jquery main.js > bundle.js
