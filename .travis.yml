@@ -3,4 +3,4 @@ node_js:
   - "0.10"
 before_install:
   - npm install -g grunt-cli bower
-  - npm install grunt grunt-contrib-uglify grunt-contrib-jshint grunt-contrib-watch grunt-contrib-connect grunt-contrib-jasmine grunt-template grunt-open grunt-contrib-less grunt-header grunt-contrib-clean grunt-bump
+  - npm install 
