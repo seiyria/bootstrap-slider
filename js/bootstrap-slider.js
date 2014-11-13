@@ -461,7 +461,7 @@
 			this.handle1Keydown = this._keydown.bind(this, 0);
 			this.handle1.addEventListener("keydown", this.handle1Keydown, false);
 
-			this.handle2Keydown = this._keydown.bind(this, 0);
+			this.handle2Keydown = this._keydown.bind(this, 1);
 			this.handle2.addEventListener("keydown", this.handle2Keydown, false);
 
 			if (this.touchCapable) {
