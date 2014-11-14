@@ -16,7 +16,7 @@
   "readmeFilename": "README.md",
   "gitHead": "67eb8fe3c26205efc94ae95b3ef37a469eef0b81",
   "devDependencies": {
-    "grunt": "~0.4.1",
+    "grunt": "~0.4.4",
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-watch": "~0.5.3",
@@ -59,8 +59,5 @@
       "cssMin": "dist/css/bootstrap-slider.min.css"
     },
     "spec": "test/specs/**/*.js"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.4"
   }
 }
