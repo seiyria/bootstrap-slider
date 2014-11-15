@@ -30,9 +30,27 @@
  * v1.0.1
  * MIT license
  */
-( function( $ ) {
 
-	( function( $ ) {
+(function(root, factory) {
+	if(typeof define === "function" && define.amd) {
+		define(["jquery"], factory);
+	} else if(typeof module === "object" && module.exports) {
+		var jQuery;
+		try {
+			jQuery = require("jquery");
+		} catch (err) {
+			jQuery = null;
+		}
+		module.exports = factory(jQuery);
+	} else {
+		root.Slider = factory(root.jQuery);
+	}
+}(this, function($) {
+	// Reference to Slider constructor
+	var Slider;
+
+
+	(function( $ ) {
 
 		'use strict';
 
@@ -173,7 +191,7 @@
 
 	**************************************************/
 
-	(function( $ ) {
+	(function($) {
 
 		var ErrorMsgs = {
 			formatInvalidInputErrorMsg : function(input) {
@@ -189,7 +207,7 @@
 							CONSTRUCTOR
 
 		**************************************************/
-		var Slider = function(element, options) {
+		Slider = function(element, options) {
 			createNewSlider.call(this, element, options);
 			return this;
 		};
@@ -431,7 +449,6 @@
 
 			this.offset = this._offset(this.sliderElem);
 			this.size = this.sliderElem[this.sizePos];
-			
 			this.setValue(this.options.value);
 
 			/******************************************
@@ -444,7 +461,7 @@
 			this.handle1Keydown = this._keydown.bind(this, 0);
 			this.handle1.addEventListener("keydown", this.handle1Keydown, false);
 
-			this.handle2Keydown = this._keydown.bind(this, 0);
+			this.handle2Keydown = this._keydown.bind(this, 1);
 			this.handle2.addEventListener("keydown", this.handle2Keydown, false);
 
 			if (this.touchCapable) {
@@ -552,7 +569,7 @@
 					this.options.value = applyPrecision(this.options.value);
 					this.options.value = [ Math.max(this.options.min, Math.min(this.options.max, this.options.value))];
 					this._addClass(this.handle2, 'hide');
-					if (this.selection === 'after') {
+					if (this.options.selection === 'after') {
 						this.options.value[1] = this.options.max;
 					} else {
 						this.options.value[1] = this.options.min;
@@ -572,10 +589,11 @@
 
 				this._layout();
 
+				var sliderValue = this.options.range ? this.options.value : this.options.value[0];
+				this._setDataVal(sliderValue);
+
 				if(triggerSlideEvent === true) {
-					var slideEventValue = this.options.range ? this.options.value : this.options.value[0];
-					this._trigger('slide', slideEventValue);
-					this._setDataVal(slideEventValue);
+					this._trigger('slide', sliderValue);
 				}
 
 				return this;
@@ -698,12 +716,10 @@
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
 			},
 			_bindNonQueryEventHandler: function(evt, callback) {
-				var callbacksArray = this.eventToCallbackMap[evt];
-				if(callbacksArray) {
-					callbacksArray.push(callback);
-				} else {
+				if(this.eventToCallbackMap[evt]===undefined) {
 					this.eventToCallbackMap[evt] = [];
 				}
+				this.eventToCallbackMap[evt].push(callback);
 			},
 			_cleanUpEventCallbacksMap: function() {
 				var eventNames = Object.keys(this.eventToCallbackMap);
@@ -844,6 +860,18 @@
 
 				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
 				this._layout();
+				
+				if (this.touchCapable) {
+					document.removeEventListener("touchmove", this.mousemove, false);
+					document.removeEventListener("touchend", this.mouseup, false);
+				}
+
+				if(this.mousemove){
+					document.removeEventListener("mousemove", this.mousemove, false);
+				}
+				if(this.mouseup){
+					document.removeEventListener("mouseup", this.mouseup, false);
+				}
 
 				this.mousemove = this._mousemove.bind(this);
 				this.mouseup = this._mouseup.bind(this);
@@ -852,11 +880,10 @@
 					// Touch: Bind touch events:
 					document.addEventListener("touchmove", this.mousemove, false);
 					document.addEventListener("touchend", this.mouseup, false);
-				} else {
-					// Bind mouse events:
-					document.addEventListener("mousemove", this.mousemove, false);
-					document.addEventListener("mouseup", this.mouseup, false);
 				}
+                                // Bind mouse events:
+                                document.addEventListener("mousemove", this.mousemove, false);
+                                document.addEventListener("mouseup", this.mouseup, false);
 
 				this.inDrag = true;
 
@@ -978,11 +1005,10 @@
 					// Touch: Unbind touch event handlers:
 					document.removeEventListener("touchmove", this.mousemove, false);
 					document.removeEventListener("touchend", this.mouseup, false);
-				} else {
-					// Unbind mouse event handlers:
-					document.removeEventListener("mousemove", this.mousemove, false);
-					document.removeEventListener("mouseup", this.mouseup, false);
 				}
+                                // Unbind mouse event handlers:
+                                document.removeEventListener("mousemove", this.mousemove, false);
+                                document.removeEventListener("mouseup", this.mouseup, false);
 				
 				this.inDrag = false;
 				if (this.over === false) {
@@ -1024,7 +1050,7 @@
 				return val;
 			},
 			_applyPrecision: function(val) {
-				var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.step);
+				var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step);
 				return this._applyToFixedAndParseFloat(val, precision);
 			},
 			_getNumDigitsAfterDecimalPlace: function(num) {
@@ -1067,9 +1093,10 @@
 			_setDataVal: function(val) {
 				var value = "value: '" + val + "'";
 				this.element.setAttribute('data', value);
+				this.element.setAttribute('value', val);
 			},
 			_trigger: function(evt, val) {
-				val = val || undefined;
+				val = (val || val === 0) ? val : undefined;
 
 				var callbackFnArray = this.eventToCallbackMap[evt];
 				if(callbackFnArray && callbackFnArray.length) {
@@ -1146,7 +1173,14 @@
 				};
 			},
 			_css: function(elementRef, styleName, value) {
-				elementRef.style[styleName] = value;
+                if ($) {
+                    $.style(elementRef, styleName, value);
+                } else {
+                    var style = styleName.replace(/^-ms-/, "ms-").replace(/-([\da-z])/gi, function (all, letter) {
+                        return letter.toUpperCase();
+                    });
+                    elementRef.style[style] = value;
+                }
 			}
 		};
 
@@ -1158,11 +1192,9 @@
 		if($) {
 			var namespace = $.fn.slider ? 'bootstrapSlider' : 'slider';
 			$.bridget(namespace, Slider);
-		} else {
-			window.Slider = Slider;
 		}
-
 
 	})( $ );
 
-})( window.jQuery );
+	return Slider;
+}));
