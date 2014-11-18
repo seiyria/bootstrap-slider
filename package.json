@@ -4,7 +4,7 @@
   "description": "Slider view component for Twitter Bootstrap.",
   "main": "js/bootstrap-slider.js",
   "scripts": {
-    "install": "bower install",
+    "prepublish": "bower install",
     "test": "grunt test"
   },
   "repository": {
