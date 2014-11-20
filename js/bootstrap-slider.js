@@ -65,7 +65,7 @@
 			var func = this;
 			return function() {
 				return func.apply(that, arguments);
-			}
+			};
 		};
 
 		// -------------------------- definition -------------------------- //
