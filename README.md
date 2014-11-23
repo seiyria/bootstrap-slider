@@ -150,7 +150,8 @@ Events
 | ----- | ----------- |
 | slide | This event fires when the slider is dragged |
 | slideStart | This event fires when dragging starts |
-| slideStop | This event fires when the dragging stops |
+| slideStop | This event fires when the dragging stops or has been clicked on |
+| change | This event fires when the slider value has changed |
 | slideEnabled | This event fires when the slider is enabled |
 | slideDisabled | This event fires when the slider is disabled |
 
