@@ -588,13 +588,13 @@
 				}
 
 				this._layout();
-
 				var sliderValue = this.options.range ? this.options.value : this.options.value[0];
-				this._setDataVal(sliderValue);
 
 				if(triggerSlideEvent === true) {
 					this._trigger('slide', sliderValue);
 				}
+				this._triggerChangeEvent(sliderValue);
+				this._setDataVal(sliderValue);
 
 				return this;
 			},
@@ -745,7 +745,7 @@
 				}
 				this.over = false;
 			},
-				_layout: function() {			
+			_layout: function() {			
 				var positionPercentages;
 
 				if(this.options.reversed) {
@@ -777,7 +777,6 @@
 			            this.tooltip_max.style.top = -30 + 'px';
 			        }
 	 			}
-
 
 	 			var formattedTooltipVal;
 
@@ -881,16 +880,18 @@
 					document.addEventListener("touchmove", this.mousemove, false);
 					document.addEventListener("touchend", this.mouseup, false);
 				}
-                                // Bind mouse events:
-                                document.addEventListener("mousemove", this.mousemove, false);
-                                document.addEventListener("mouseup", this.mouseup, false);
+				// Bind mouse events:
+				document.addEventListener("mousemove", this.mousemove, false);
+				document.addEventListener("mouseup", this.mouseup, false);
 
 				this.inDrag = true;
+				var newValue = this._calculateValue();
+				
+				this._trigger('slideStart', newValue);
+				this._triggerChangeEvent(newValue);
 
-				var val = this._calculateValue();
-				this._trigger('slideStart', val);
-				this._setDataVal(val);
-				this.setValue(val);
+				this._setDataVal(newValue);
+				this.setValue(newValue);
 
 				this._pauseEvent(ev);
 
@@ -902,6 +903,12 @@
 				}
 				if(handleIdx === 1) {
 					this.handle2.focus();
+				}
+			},
+			_triggerChangeEvent: function(newValue) {
+				var oldValue = this.getValue();
+				if(oldValue !== newValue) {
+					this._trigger('slideStart', newValue);
 				}
 			},
 			_keydown: function(handleIdx, ev) {
@@ -1006,9 +1013,9 @@
 					document.removeEventListener("touchmove", this.mousemove, false);
 					document.removeEventListener("touchend", this.mouseup, false);
 				}
-                                // Unbind mouse event handlers:
-                                document.removeEventListener("mousemove", this.mousemove, false);
-                                document.removeEventListener("mouseup", this.mouseup, false);
+                // Unbind mouse event handlers:
+                document.removeEventListener("mousemove", this.mousemove, false);
+                document.removeEventListener("mouseup", this.mouseup, false);
 				
 				this.inDrag = false;
 				if (this.over === false) {
@@ -1017,8 +1024,9 @@
 				var val = this._calculateValue();
 				
 				this._layout();
-				this._setDataVal(val);
+				this._triggerChangeEvent(val);
 				this._trigger('slideStop', val);
+				this._setDataVal(val);
 				
 				return false;
 			},

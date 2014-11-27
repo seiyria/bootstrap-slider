@@ -146,12 +146,12 @@ __NOTE:__ Optional parameters are italicized.
 
 Events
 ======
-| Event | Description |
+| Event | Description | Value |
 | ----- | ----------- |
-| slide | This event fires when the slider is dragged |
-| slideStart | This event fires when dragging starts |
-| slideStop | This event fires when the dragging stops or has been clicked on |
-| change | This event fires when the slider value has changed |
+| slide | This event fires when the slider is dragged | The new slider value
+| slideStart | This event fires when dragging starts | The new slider value
+| slideStop | This event fires when the dragging stops or has been clicked on | The new slider value
+| change | This event fires when the slider value has changed | The new slider value
 | slideEnabled | This event fires when the slider is enabled |
 | slideDisabled | This event fires when the slider is disabled |
 

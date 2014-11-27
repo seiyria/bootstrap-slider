@@ -46,12 +46,27 @@ describe("Event Tests", function() {
       expect(flag).toBeTruthy();
     });
 
-    it("'change' event is triggered properly and can be binded to", function() {
-      testSlider.on('change', function() {
-        flag = true;
+    describe("'change' event is triggered properly and can be binded to", function() {
+      beforeEach(function() {
+        testSlider.on('change', function() {
+          flag = true;
+        });
       });
-      testSlider.data('slider')._mouseup();
-      expect(flag).toBeTruthy();
+
+      it("triggers for _mouseup()", function() {
+        testSlider.data('slider')._mouseup();
+        expect(flag).toBeTruthy();
+      });
+
+      it("Works for _mousedown()", function() {
+        testSlider.data('slider')._mousedown();
+        expect(flag).toBeTruthy();
+      });
+
+      it("Works for _mousemove()", function() {
+        testSlider.data('slider')._mousemove();
+        expect(flag).toBeTruthy();
+      });
     });
 
     it("slider should not have duplicate events after calling 'refresh'", function() {
@@ -163,15 +178,30 @@ describe("Event Tests", function() {
       expect(flag).toBeTruthy();
     });
 
-    it("'change' event is triggered properly and can be binded to", function() {
-      touch.initEvent("touchstop");
-
-      testSlider.on('change', function() {
-        flag = true;
+    describe("'change' event is triggered properly and can be binded to", function() {
+      beforeEach(function() {
+        testSlider.on('change', function() {
+          flag = true;
+        });
       });
-      testSlider.data('slider')._mouseup();
-      
-      expect(flag).toBeTruthy();
+
+      it("triggers for _mouseup()", function() {
+        touch.initEvent("touchend");
+        testSlider.data('slider')._mouseup();
+        expect(flag).toBeTruthy();
+      });
+
+      it("Works for _mousedown()", function() {
+        touch.initEvent("touchstop");
+        testSlider.data('slider')._mousedown();
+        expect(flag).toBeTruthy();
+      });
+
+      it("Works for _mousemove()", function() {
+        touch.initEvent("touchmove");
+        testSlider.data('slider')._mousemove();
+        expect(flag).toBeTruthy();
+      });
     });
 
     it("slider should not have duplicate events after calling 'refresh'", function() {
