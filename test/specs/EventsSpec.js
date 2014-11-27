@@ -46,6 +46,14 @@ describe("Event Tests", function() {
       expect(flag).toBeTruthy();
     });
 
+    it("'change' event is triggered properly and can be binded to", function() {
+      testSlider.on('change', function() {
+        flag = true;
+      });
+      testSlider.data('slider')._mouseup();
+      expect(flag).toBeTruthy();
+    });
+
     it("slider should not have duplicate events after calling 'refresh'", function() {
       flag = 0;
       testSlider.on('slideStop', function() {
@@ -84,8 +92,16 @@ describe("Event Tests", function() {
         testSlider.data('slider')._mouseup();
         expect(flag).not.toBeTruthy();
       });
-    });
 
+      it("should not trigger 'change' event when disabled", function() {
+        testSlider.on('change', function() {
+          flag = true;
+        });
+        testSlider.data('slider')._mouseup();
+        expect(flag).not.toBeTruthy();
+      });
+
+    });
   });
 
   describe("Touch Events", function() {
@@ -140,6 +156,17 @@ describe("Event Tests", function() {
       touch.initEvent("touchstop");
 
       testSlider.on('slideStop', function() {
+        flag = true;
+      });
+      testSlider.data('slider')._mouseup();
+      
+      expect(flag).toBeTruthy();
+    });
+
+    it("'change' event is triggered properly and can be binded to", function() {
+      touch.initEvent("touchstop");
+
+      testSlider.on('change', function() {
         flag = true;
       });
       testSlider.data('slider')._mouseup();
@@ -211,8 +238,18 @@ describe("Event Tests", function() {
         expect(flag).not.toBeTruthy();
       });
 
-    });
+      it("should not trigger 'change' event when disabled", function() {
+        touch.initEvent("touchend");
 
+        testSlider.on('change', function() {
+          flag = true;
+        });
+        testSlider.data('slider')._mouseup();
+        
+        expect(flag).not.toBeTruthy();
+      });
+
+    });
   });
 
   describe("Enabled/Disabled tests", function() {

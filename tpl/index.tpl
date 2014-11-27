@@ -598,7 +598,9 @@ var slider = new Slider("#ex11", {
 });
 
       </code></pre>
-  </div>      
+  </div> 
+
+
       </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -682,7 +684,6 @@ var slider = new Slider("#ex11", {
 		        min: 0,
 		        max: 200000
 	      	});
-
     	});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
