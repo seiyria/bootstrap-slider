@@ -593,7 +593,6 @@
 				if(triggerSlideEvent === true) {
 					this._trigger('slide', sliderValue);
 				}
-				this._triggerChangeEvent(sliderValue);
 				this._setDataVal(sliderValue);
 
 				return this;
@@ -888,7 +887,6 @@
 				var newValue = this._calculateValue();
 				
 				this._trigger('slideStart', newValue);
-				this._triggerChangeEvent(newValue);
 
 				this._setDataVal(newValue);
 				this.setValue(newValue);
@@ -905,10 +903,9 @@
 					this.handle2.focus();
 				}
 			},
-			_triggerChangeEvent: function(newValue) {
-				var oldValue = this.getValue();
+			_triggerChangeEvent: function(oldValue, newValue) {
 				if(oldValue !== newValue) {
-					this._trigger('slideStart', newValue);
+					this._trigger('change', newValue);
 				}
 			},
 			_keydown: function(handleIdx, ev) {
@@ -988,7 +985,9 @@
 				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
 				this._layout();
 
+				var oldValue = this.getValue();
 				var val = this._calculateValue();
+				this._triggerChangeEvent(oldValue, val);
 				this.setValue(val, true);
 
 				return false;
@@ -1021,10 +1020,11 @@
 				if (this.over === false) {
 					this._hideTooltip();
 				}
+				var oldValue = this.getValue();
 				var val = this._calculateValue();
 				
 				this._layout();
-				this._triggerChangeEvent(val);
+				this._triggerChangeEvent(oldValue, val);
 				this._trigger('slideStop', val);
 				this._setDataVal(val);
 				

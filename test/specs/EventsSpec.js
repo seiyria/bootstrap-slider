@@ -42,29 +42,16 @@ describe("Event Tests", function() {
       testSlider.on('slideStop', function() {
         flag = true;
       });
-      testSlider.data('slider')._mouseup();
+      testSlider.data('slider')._mouseup(mouse);
       expect(flag).toBeTruthy();
     });
 
     describe("'change' event is triggered properly and can be binded to", function() {
-      beforeEach(function() {
+      it('triggers on mouseup', function() {
         testSlider.on('change', function() {
           flag = true;
         });
-      });
-
-      it("triggers for _mouseup()", function() {
-        testSlider.data('slider')._mouseup();
-        expect(flag).toBeTruthy();
-      });
-
-      it("Works for _mousedown()", function() {
-        testSlider.data('slider')._mousedown();
-        expect(flag).toBeTruthy();
-      });
-
-      it("Works for _mousemove()", function() {
-        testSlider.data('slider')._mousemove();
+        testSlider.data('slider')._mouseup(mouse);
         expect(flag).toBeTruthy();
       });
     });
@@ -107,15 +94,6 @@ describe("Event Tests", function() {
         testSlider.data('slider')._mouseup();
         expect(flag).not.toBeTruthy();
       });
-
-      it("should not trigger 'change' event when disabled", function() {
-        testSlider.on('change', function() {
-          flag = true;
-        });
-        testSlider.data('slider')._mouseup();
-        expect(flag).not.toBeTruthy();
-      });
-
     });
   });
 
@@ -178,31 +156,6 @@ describe("Event Tests", function() {
       expect(flag).toBeTruthy();
     });
 
-    describe("'change' event is triggered properly and can be binded to", function() {
-      beforeEach(function() {
-        testSlider.on('change', function() {
-          flag = true;
-        });
-      });
-
-      it("triggers for _mouseup()", function() {
-        touch.initEvent("touchend");
-        testSlider.data('slider')._mouseup();
-        expect(flag).toBeTruthy();
-      });
-
-      it("Works for _mousedown()", function() {
-        touch.initEvent("touchstop");
-        testSlider.data('slider')._mousedown();
-        expect(flag).toBeTruthy();
-      });
-
-      it("Works for _mousemove()", function() {
-        touch.initEvent("touchmove");
-        testSlider.data('slider')._mousemove();
-        expect(flag).toBeTruthy();
-      });
-    });
 
     it("slider should not have duplicate events after calling 'refresh'", function() {
       touch.initEvent("touchstop");
@@ -261,17 +214,6 @@ describe("Event Tests", function() {
         touch.initEvent("touchend");
 
         testSlider.on('slideStop', function() {
-          flag = true;
-        });
-        testSlider.data('slider')._mouseup();
-        
-        expect(flag).not.toBeTruthy();
-      });
-
-      it("should not trigger 'change' event when disabled", function() {
-        touch.initEvent("touchend");
-
-        testSlider.on('change', function() {
           flag = true;
         });
         testSlider.data('slider')._mouseup();
