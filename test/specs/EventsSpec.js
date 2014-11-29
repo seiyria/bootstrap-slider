@@ -2,7 +2,9 @@ describe("Event Tests", function() {
   var testSlider, flag;
 
   beforeEach(function() {
-    testSlider = $("#testSlider2").slider();
+    testSlider = $("#testSlider2").slider({
+      value: 1
+    });
     flag = false;
   });
 
@@ -44,16 +46,6 @@ describe("Event Tests", function() {
       });
       testSlider.data('slider')._mouseup(mouse);
       expect(flag).toBeTruthy();
-    });
-
-    describe("'change' event is triggered properly and can be binded to", function() {
-      it('triggers on mouseup', function() {
-        testSlider.on('change', function() {
-          flag = true;
-        });
-        testSlider.data('slider')._mouseup(mouse);
-        expect(flag).toBeTruthy();
-      });
     });
 
     it("slider should not have duplicate events after calling 'refresh'", function() {
@@ -124,12 +116,12 @@ describe("Event Tests", function() {
 
     it("'slide' event is triggered properly and can be binded to", function() {
       touch.initEvent("touchmove");
-      
+
       testSlider.on('slide', function() {
         flag = true;
       });
       testSlider.data('slider')._mousemove(touch);
-      
+
       expect(flag).toBeTruthy();
     });
 
@@ -141,7 +133,7 @@ describe("Event Tests", function() {
         expect(isNaN(testSlider.val())).not.toBeTruthy();
       });
       testSlider.data('slider')._mousemove(touch);
-      
+
       expect(flag).toBeTruthy();
     });
 
@@ -152,7 +144,7 @@ describe("Event Tests", function() {
         flag = true;
       });
       testSlider.data('slider')._mouseup();
-      
+
       expect(flag).toBeTruthy();
     });
 
@@ -217,7 +209,7 @@ describe("Event Tests", function() {
           flag = true;
         });
         testSlider.data('slider')._mouseup();
-        
+
         expect(flag).not.toBeTruthy();
       });
 
@@ -241,6 +233,14 @@ describe("Event Tests", function() {
       testSlider.slider('enable');
       expect(flag).toBeTruthy();
     });
+  });
+
+  it("'change' event is triggered properly and can be binded to", function() {
+    testSlider.on('change', function() {
+      flag = true;
+    });
+    testSlider.slider("setValue", 3);
+    expect(flag).toBeTruthy();
   });
 
   afterEach(function() {

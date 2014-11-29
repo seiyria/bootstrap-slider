@@ -151,9 +151,9 @@ Events
 | slide | This event fires when the slider is dragged | The new slider value
 | slideStart | This event fires when dragging starts | The new slider value
 | slideStop | This event fires when the dragging stops or has been clicked on | The new slider value
-| change | This event fires when the slider value has changed | The new slider value
-| slideEnabled | This event fires when the slider is enabled |
-| slideDisabled | This event fires when the slider is disabled |
+| change | This event fires when the slider value has changed | An object with 2 properties: "oldValue" and "newValue"
+| slideEnabled | This event fires when the slider is enabled | N/A
+| slideDisabled | This event fires when the slider is disabled | N/A
 
 Version Bumping (Maintainers Only)
 =======

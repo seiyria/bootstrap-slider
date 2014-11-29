@@ -1,8 +1,8 @@
 /*! =========================================================
  * bootstrap-slider.js
  *
- * Maintainers: 
- *		Kyle Kemp 
+ * Maintainers:
+ *		Kyle Kemp
  *			- Twitter: @seiyria
  *			- Github:  seiyria
  *		Rohit Kalkur
@@ -186,7 +186,7 @@
 
 
 	/*************************************************
-					
+
 			BOOTSTRAP-SLIDER SOURCE CODE
 
 	**************************************************/
@@ -203,7 +203,7 @@
 
 
 		/*************************************************
-						
+
 							CONSTRUCTOR
 
 		**************************************************/
@@ -214,7 +214,7 @@
 
 		function createNewSlider(element, options) {
 			/*************************************************
-						
+
 							Create Markup
 
 			**************************************************/
@@ -223,7 +223,7 @@
 			} else if(element instanceof HTMLElement) {
 				this.element = element;
 			}
-			
+
 			var origWidth = this.element.style.width;
 			var updateSlider = false;
 			var parent = this.element.parentNode;
@@ -288,7 +288,7 @@
 
 				/* Append slider element to parent container, right before the original <input> element */
 				parent.insertBefore(this.sliderElem, this.element);
-				
+
 				/* Hide original <input> element */
 				this.element.style.display = "none";
 			}
@@ -299,7 +299,7 @@
 			}
 
 			/*************************************************
-						
+
 							Process Options
 
 			**************************************************/
@@ -326,7 +326,7 @@
 			function getDataAttrib(element, optName) {
 				var dataName = "data-slider-" + optName;
 				var dataValString = element.getAttribute(dataName);
-				
+
 				try {
 					return JSON.parse(dataValString);
 				}
@@ -336,7 +336,7 @@
 			}
 
 			/*************************************************
-						
+
 								Setup
 
 			**************************************************/
@@ -370,7 +370,7 @@
 				// Undo inline styles on handles
 				[this.handle1, this.handle2].forEach(function(handle) {
 					this._removeProperty(handle, 'left');
-					this._removeProperty(handle, 'top');	
+					this._removeProperty(handle, 'top');
 				}, this);
 
 				// Undo inline styles and classes on tooltips
@@ -387,14 +387,14 @@
 
 			if(this.options.orientation === 'vertical') {
 				this._addClass(this.sliderElem,'slider-vertical');
-				
+
 				this.stylePos = 'top';
 				this.mousePos = 'pageY';
 				this.sizePos = 'offsetHeight';
 
 				this._addClass(this.tooltip, 'right');
 				this.tooltip.style.left = '100%';
-				
+
 				this._addClass(this.tooltip_min, 'right');
 				this.tooltip_min.style.left = '100%';
 
@@ -408,10 +408,10 @@
 				this.stylePos = 'left';
 				this.mousePos = 'pageX';
 				this.sizePos = 'offsetWidth';
-				
+
 				this._addClass(this.tooltip, 'top');
 				this.tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
-				
+
 				this._addClass(this.tooltip_min, 'top');
 				this.tooltip_min.style.top = -this.tooltip_min.outerHeight - 14 + 'px';
 
@@ -452,7 +452,7 @@
 			this.setValue(this.options.value);
 
 			/******************************************
-						
+
 						Bind Event Listeners
 
 			******************************************/
@@ -504,10 +504,10 @@
 		}
 
 		/*************************************************
-						
+
 					INSTANCE PROPERTIES/METHODS
 
-		- Any methods bound to the prototype are considered 
+		- Any methods bound to the prototype are considered
 		part of the plugin's `public` interface
 
 		**************************************************/
@@ -540,9 +540,9 @@
 				},
 				natural_arrow_keys: false
 			},
-			
+
 			over: false,
-			
+
 			inDrag: false,
 
 			getValue: function() {
@@ -556,12 +556,13 @@
 				if (!val) {
 					val = 0;
 				}
+				var oldValue = this.getValue();
 				this.options.value = this._validateInputValue(val);
 				var applyPrecision = this._applyPrecision.bind(this);
 
 				if (this.options.range) {
 					this.options.value[0] = applyPrecision(this.options.value[0]);
-					this.options.value[1] = applyPrecision(this.options.value[1]); 
+					this.options.value[1] = applyPrecision(this.options.value[1]);
 
 					this.options.value[0] = Math.max(this.options.min, Math.min(this.options.max, this.options.value[0]));
 					this.options.value[1] = Math.max(this.options.min, Math.min(this.options.max, this.options.value[1]));
@@ -588,12 +589,18 @@
 				}
 
 				this._layout();
-				var sliderValue = this.options.range ? this.options.value : this.options.value[0];
+				var newValue = this.options.range ? this.options.value : this.options.value[0];
 
 				if(triggerSlideEvent === true) {
-					this._trigger('slide', sliderValue);
+					this._trigger('slide', newValue);
 				}
-				this._setDataVal(sliderValue);
+				if(oldValue !== newValue) {
+					this._trigger('change', {
+						oldValue: oldValue,
+						newValue: newValue
+					});
+				}
+				this._setDataVal(newValue);
 
 				return this;
 			},
@@ -666,7 +673,7 @@
 
 			getAttribute: function(attribute) {
 				if(attribute) {
-					return this.options[attribute];		
+					return this.options[attribute];
 				} else {
 					return this.options;
 				}
@@ -686,9 +693,9 @@
 				}
 				return this;
 			},
-			
+
 			/******************************+
-					
+
 						HELPERS
 
 			- Any method that is not part of the public interface.
@@ -744,7 +751,7 @@
 				}
 				this.over = false;
 			},
-			_layout: function() {			
+			_layout: function() {
 				var positionPercentages;
 
 				if(this.options.reversed) {
@@ -789,13 +796,13 @@
 					} else {
 						this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
 					}
-					
+
 					if (this.options.orientation === 'vertical') {
 						this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
 					} else {
 						this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
 					}
-					
+
 					var innerTooltipMinText = this.options.formatter(this.options.value[0]);
 					this._setText(this.tooltipInner_min, innerTooltipMinText);
 
@@ -858,7 +865,7 @@
 
 				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
 				this._layout();
-				
+
 				if (this.touchCapable) {
 					document.removeEventListener("touchmove", this.mousemove, false);
 					document.removeEventListener("touchend", this.mouseup, false);
@@ -885,7 +892,7 @@
 
 				this.inDrag = true;
 				var newValue = this._calculateValue();
-				
+
 				this._trigger('slideStart', newValue);
 
 				this._setDataVal(newValue);
@@ -901,11 +908,6 @@
 				}
 				if(handleIdx === 1) {
 					this.handle2.focus();
-				}
-			},
-			_triggerChangeEvent: function(oldValue, newValue) {
-				if(oldValue !== newValue) {
-					this._trigger('change', newValue);
 				}
 			},
 			_keydown: function(handleIdx, ev) {
@@ -953,14 +955,14 @@
 				this._layout();
 
 				var val = this._calculateValue();
-				
+
 				this._trigger('slideStart', val);
 				this._setDataVal(val);
 				this.setValue(val, true);
 
 				this._trigger('slideStop', val);
 				this._setDataVal(val);
-				
+
 				this._pauseEvent(ev);
 
 				return false;
@@ -973,7 +975,7 @@
 			    	ev.preventDefault();
 			    }
 			    ev.cancelBubble=true;
-			    ev.returnValue=false;			
+			    ev.returnValue=false;
 			},
 			_mousemove: function(ev) {
 				if(!this.options.enabled) {
@@ -985,9 +987,7 @@
 				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
 				this._layout();
 
-				var oldValue = this.getValue();
 				var val = this._calculateValue();
-				this._triggerChangeEvent(oldValue, val);
 				this.setValue(val, true);
 
 				return false;
@@ -1015,19 +1015,17 @@
                 // Unbind mouse event handlers:
                 document.removeEventListener("mousemove", this.mousemove, false);
                 document.removeEventListener("mouseup", this.mouseup, false);
-				
+
 				this.inDrag = false;
 				if (this.over === false) {
 					this._hideTooltip();
 				}
-				var oldValue = this.getValue();
 				var val = this._calculateValue();
-				
+
 				this._layout();
-				this._triggerChangeEvent(oldValue, val);
 				this._trigger('slideStop', val);
 				this._setDataVal(val);
-				
+
 				return false;
 			},
 			_calculateValue: function() {
@@ -1042,7 +1040,6 @@
 			            val[1] = (Math.min(this.options.max, this.options.min + Math.round((this.diff * this.percentage[1]/100)/this.options.step)*this.options.step));
 			            val[1] = this._applyPrecision(val[1]);
 			        }
-					this.options.value = val;
 				} else {
 					val = (this.options.min + Math.round((this.diff * this.percentage[0]/100)/this.options.step)*this.options.step);
 					if (val < this.options.min) {
@@ -1053,7 +1050,6 @@
 					}
 					val = parseFloat(val);
 					val = this._applyPrecision(val);
-					this.options.value = [val, this.options.value[1]];
 				}
 				return val;
 			},
@@ -1158,7 +1154,7 @@
 					var classTag = classes[i];
 					var regex = new RegExp("(?:\\s|^)" + classTag + "(?:\\s|$)");
 					var ifClassExists = regex.test(newClasses);
-					
+
 					if(!ifClassExists) {
 						newClasses += " " + classTag;
 					}
