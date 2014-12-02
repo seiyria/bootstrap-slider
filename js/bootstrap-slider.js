@@ -896,7 +896,7 @@
 				this._trigger('slideStart', newValue);
 
 				this._setDataVal(newValue);
-				this.setValue(newValue);
+				this.setValue(newValue, true);
 
 				this._pauseEvent(ev);
 
