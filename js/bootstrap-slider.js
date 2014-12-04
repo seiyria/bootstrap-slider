@@ -531,6 +531,7 @@
 				handle: 'round',
 				reversed: false,
 				enabled: true,
+				triggerSlideEvent: true,
 				formatter: function(val) {
 					if(val instanceof Array) {
 						return val[0] + " : " + val[1];
@@ -591,7 +592,7 @@
 				this._layout();
 				var newValue = this.options.range ? this.options.value : this.options.value[0];
 
-				if(triggerSlideEvent === true) {
+				if(this.options.triggerSlideEvent === true) {
 					this._trigger('slide', newValue);
 				}
 				if(oldValue !== newValue) {
@@ -958,7 +959,7 @@
 
 				this._trigger('slideStart', val);
 				this._setDataVal(val);
-				this.setValue(val, true);
+				this.setValue(val);
 
 				this._trigger('slideStop', val);
 				this._setDataVal(val);
@@ -988,7 +989,7 @@
 				this._layout();
 
 				var val = this._calculateValue();
-				this.setValue(val, true);
+				this.setValue(val);
 
 				return false;
 			},
