@@ -1112,10 +1112,7 @@
 				}
 				
 				if(oldValue !== val) {
-					this._trigger('change', {
-						oldValue: oldValue,
-						newValue: newValue
-					});
+					this._trigger('change', val);
 				}
 			},
 			_triggerJQueryEvent: function(evt, val) {
