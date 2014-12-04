@@ -896,7 +896,6 @@
 
 				this._trigger('slideStart', newValue);
 
-				this._setDataVal(newValue);
 				this.setValue(newValue);
 
 				this._pauseEvent(ev);
@@ -958,11 +957,10 @@
 				var val = this._calculateValue();
 
 				this._trigger('slideStart', val);
-				this._setDataVal(val);
 				this.setValue(val);
 
 				this._trigger('slideStop', val);
-				this._setDataVal(val);
+				this.setValue(val);
 
 				this._pauseEvent(ev);
 
@@ -1025,7 +1023,7 @@
 
 				this._layout();
 				this._trigger('slideStop', val);
-				this._setDataVal(val);
+				this.setValue(val);
 
 				return false;
 			},
