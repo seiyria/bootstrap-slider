@@ -595,12 +595,7 @@
 				if(this.options.triggerSlideEvent === true) {
 					this._trigger('slide', newValue);
 				}
-				if(oldValue !== newValue) {
-					this._trigger('change', {
-						oldValue: oldValue,
-						newValue: newValue
-					});
-				}
+
 				this._setDataVal(newValue);
 
 				return this;
@@ -1101,6 +1096,8 @@
 			_trigger: function(evt, val) {
 				val = (val || val === 0) ? val : undefined;
 
+				var oldValue = this.getValue();
+
 				var callbackFnArray = this.eventToCallbackMap[evt];
 				if(callbackFnArray && callbackFnArray.length) {
 					for(var i = 0; i < callbackFnArray.length; i++) {
@@ -1112,6 +1109,13 @@
 				/* If JQuery exists, trigger JQuery events */
 				if($) {
 					this._triggerJQueryEvent(evt, val);
+				}
+				
+				if(oldValue !== val) {
+					this._trigger('change', {
+						oldValue: oldValue,
+						newValue: newValue
+					});
 				}
 			},
 			_triggerJQueryEvent: function(evt, val) {
