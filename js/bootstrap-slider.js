@@ -1111,7 +1111,7 @@
 					this._triggerJQueryEvent(evt, val);
 				}
 				
-				if(oldValue !== val) {
+				if(evt !== 'change') {
 					this._trigger('change', val);
 				}
 			},
