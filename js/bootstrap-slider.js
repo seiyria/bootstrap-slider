@@ -553,7 +553,7 @@
 				return this.options.value[0];
 			},
 
-			setValue: function(val, triggerSlideEvent) {
+			setValue: function(val) {
 				if (!val) {
 					val = 0;
 				}
