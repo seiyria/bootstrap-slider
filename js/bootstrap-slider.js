@@ -424,6 +424,11 @@
 					// User wants a range, but value is not an array
 					this.options.value = [this.options.value, this.options.max];
 				}
+			} else {
+				if (this.options.value instanceof Array) {
+					// User wants a scalar, but value is an array
+					this.options.value = this.options.value[0];
+				}
 			}
 
 			this.trackSelection = sliderTrackSelection || this.trackSelection;
