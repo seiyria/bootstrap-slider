@@ -419,11 +419,11 @@
 				this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
 			}
 
-			if (this.options.value instanceof Array) {
-				this.options.range = true;
-			} else if (this.options.range) {
-				// User wants a range, but value is not an array
-				this.options.value = [this.options.value, this.options.max];
+			if (this.options.range) {
+				if (!(this.options.value instanceof Array)) {
+					// User wants a range, but value is not an array
+					this.options.value = [this.options.value, this.options.max];
+				}
 			}
 
 			this.trackSelection = sliderTrackSelection || this.trackSelection;
