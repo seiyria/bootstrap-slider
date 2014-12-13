@@ -184,7 +184,10 @@ module.exports = function(grunt) {
         }
       }
     },
-    clean: ["temp"],
+    clean: {
+      dist: ["dist"],
+      temp: ["temp"]
+    },
     bump: {
       options: {
         files: bumpFiles,
@@ -219,8 +222,8 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint', 'jasmine']);
   grunt.registerTask('build', ['less:development', 'test', 'template']);
   grunt.registerTask('development', ['template', 'connect', 'open:development', 'watch']);
-  grunt.registerTask('append-header', ['header', 'clean']);
-  grunt.registerTask('production', ['less:production', 'less:production-min', 'test', 'uglify', 'append-header']);
+  grunt.registerTask('append-header', ['header', 'clean:temp']);
+  grunt.registerTask('production', ['less:production', 'less:production-min', 'test', 'uglify', "clean:dist", 'append-header']);
   grunt.registerTask('dev', 'development');
   grunt.registerTask('prod', 'production');
   grunt.registerTask('dist', 'production');
