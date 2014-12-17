@@ -419,11 +419,16 @@
 				this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
 			}
 
-			if (this.options.value instanceof Array) {
-				this.options.range = true;
-			} else if (this.options.range) {
-				// User wants a range, but value is not an array
-				this.options.value = [this.options.value, this.options.max];
+			if (this.options.range) {
+				if (!(this.options.value instanceof Array)) {
+					// User wants a range, but value is not an array
+					this.options.value = [this.options.value, this.options.max];
+				}
+			} else {
+				if (this.options.value instanceof Array) {
+					// User wants a scalar, but value is an array
+					this.options.value = this.options.value[0];
+				}
 			}
 
 			this.trackSelection = sliderTrackSelection || this.trackSelection;
@@ -531,6 +536,7 @@
 				handle: 'round',
 				reversed: false,
 				enabled: true,
+				triggerSlideEvent: true,
 				formatter: function(val) {
 					if(val instanceof Array) {
 						return val[0] + " : " + val[1];
@@ -552,7 +558,7 @@
 				return this.options.value[0];
 			},
 
-			setValue: function(val, triggerSlideEvent) {
+			setValue: function(val) {
 				if (!val) {
 					val = 0;
 				}
@@ -591,15 +597,10 @@
 				this._layout();
 				var newValue = this.options.range ? this.options.value : this.options.value[0];
 
-				if(triggerSlideEvent === true) {
+				if(this.options.triggerSlideEvent === true) {
 					this._trigger('slide', newValue);
 				}
-				if(oldValue !== newValue) {
-					this._trigger('change', {
-						oldValue: oldValue,
-						newValue: newValue
-					});
-				}
+
 				this._setDataVal(newValue);
 
 				return this;
@@ -895,7 +896,6 @@
 
 				this._trigger('slideStart', newValue);
 
-				this._setDataVal(newValue);
 				this.setValue(newValue);
 
 				this._pauseEvent(ev);
@@ -957,11 +957,10 @@
 				var val = this._calculateValue();
 
 				this._trigger('slideStart', val);
-				this._setDataVal(val);
-				this.setValue(val, true);
+				this.setValue(val);
 
 				this._trigger('slideStop', val);
-				this._setDataVal(val);
+				this.setValue(val);
 
 				this._pauseEvent(ev);
 
@@ -988,7 +987,7 @@
 				this._layout();
 
 				var val = this._calculateValue();
-				this.setValue(val, true);
+				this.setValue(val);
 
 				return false;
 			},
@@ -1024,7 +1023,7 @@
 
 				this._layout();
 				this._trigger('slideStop', val);
-				this._setDataVal(val);
+				this.setValue(val);
 
 				return false;
 			},
@@ -1097,10 +1096,12 @@
 			_setDataVal: function(val) {
 				var value = "value: '" + val + "'";
 				this.element.setAttribute('data', value);
-				this.element.setAttribute('value', val);
+				this.element.value = val;
 			},
 			_trigger: function(evt, val) {
 				val = (val || val === 0) ? val : undefined;
+
+				var oldValue = this.getValue();
 
 				var callbackFnArray = this.eventToCallbackMap[evt];
 				if(callbackFnArray && callbackFnArray.length) {
@@ -1113,6 +1114,10 @@
 				/* If JQuery exists, trigger JQuery events */
 				if($) {
 					this._triggerJQueryEvent(evt, val);
+				}
+				
+				if(evt !== 'change') {
+					this._trigger('change', val);
 				}
 			},
 			_triggerJQueryEvent: function(evt, val) {
