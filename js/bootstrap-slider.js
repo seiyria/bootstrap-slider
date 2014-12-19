@@ -694,6 +694,11 @@
 				return this;
 			},
 
+			relayout: function() {
+				this._layout();
+				return this;
+			},
+
 			/******************************+
 
 						HELPERS
