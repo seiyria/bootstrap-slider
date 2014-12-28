@@ -220,7 +220,7 @@
 			**************************************************/
 			if(typeof element === "string") {
 				this.element = document.querySelector(element);
-			} else if(element instanceof HTMLElement) {
+			} else if(typeof element.nodeType !== "undefined") {
 				this.element = element;
 			}
 
@@ -410,13 +410,13 @@
 				this.sizePos = 'offsetWidth';
 
 				this._addClass(this.tooltip, 'top');
-				this.tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
+				//this.tooltip.style.top = -$(this.tooltip).outerHeight() + 20 + 'px';
 
 				this._addClass(this.tooltip_min, 'top');
-				this.tooltip_min.style.top = -this.tooltip_min.outerHeight - 14 + 'px';
+				//this.tooltip_min.style.top = -$(this.tooltip_min).outerHeight() + 20 + 'px';
 
 				this._addClass(this.tooltip_max, 'top');
-				this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
+				//this.tooltip_max.style.top = -$(this.tooltip_max).outerHeight() + 20 + 'px';
 			}
 
 			if (this.options.value instanceof Array) {
@@ -459,19 +459,19 @@
 
 			// Bind keyboard handlers
 			this.handle1Keydown = this._keydown.bind(this, 0);
-			this.handle1.addEventListener("keydown", this.handle1Keydown, false);
+			$(this.handle1).on("keydown", this.handle1Keydown);
 
 			this.handle2Keydown = this._keydown.bind(this, 1);
-			this.handle2.addEventListener("keydown", this.handle2Keydown, false);
+			$(this.handle2).on("keydown", this.handle2Keydown);
 
 			if (this.touchCapable) {
 				// Bind touch handlers
 				this.mousedown = this._mousedown.bind(this);
-				this.sliderElem.addEventListener("touchstart", this.mousedown, false);
+				$(this.sliderElem).on("touchstart", this.mousedown);
 			} else {
 				// Bind mouse handlers
 				this.mousedown = this._mousedown.bind(this);
-				this.sliderElem.addEventListener("mousedown", this.mousedown, false);
+				$(this.sliderElem).on("mousedown", this.mousedown);
 			}
 
 			// Bind tooltip-related handlers
@@ -486,14 +486,14 @@
 				this.showTooltip = this._showTooltip.bind(this);
 				this.hideTooltip = this._hideTooltip.bind(this);
 
-				this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
-				this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+				$(this.sliderElem).on("mouseenter", this.showTooltip);
+				$(this.sliderElem).on("mouseleave", this.hideTooltip);
 
-				this.handle1.addEventListener("focus", this.showTooltip, false);
-				this.handle1.addEventListener("blur", this.hideTooltip, false);
+				$(this.handle1).on("focus", this.showTooltip);
+				$(this.handle1).on("blur", this.hideTooltip);
 
-				this.handle2.addEventListener("focus", this.showTooltip, false);
-				this.handle2.addEventListener("blur", this.hideTooltip, false);
+				$(this.handle2).on("focus", this.showTooltip);
+				$(this.handle2).on("blur", this.hideTooltip);
 			}
 
 			if(this.options.enabled) {
@@ -706,20 +706,20 @@
 			********************************/
 			_removeSliderEventHandlers: function() {
 				// Remove event listeners from handle1
-				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
-				this.handle1.removeEventListener("focus", this.showTooltip, false);
-				this.handle1.removeEventListener("blur", this.hideTooltip, false);
+				$(this.handle1).off("keydown", this.handle1Keydown);
+				$(this.handle1).off("focus", this.showTooltip);
+				$(this.handle1).off("blur", this.hideTooltip);
 
 				// Remove event listeners from handle2
-				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
-				this.handle2.removeEventListener("focus", this.handle2Keydown, false);
-				this.handle2.removeEventListener("blur", this.handle2Keydown, false);
+				$(this.handle2).off("keydown", this.handle2Keydown);
+				$(this.handle2).off("focus", this.handle2Keydown);
+				$(this.handle2).off("blur", this.handle2Keydown);
 
 				// Remove event listeners from sliderElem
-				this.sliderElem.removeEventListener("mouseenter", this.showTooltip, false);
-				this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
-				this.sliderElem.removeEventListener("touchstart", this.mousedown, false);
-				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
+				$(this.sliderElem).off("mouseenter", this.showTooltip);
+				$(this.sliderElem).off("mouseleave", this.hideTooltip);
+				$(this.sliderElem).off("touchstart", this.mousedown);
+				$(this.sliderElem).off("mousedown", this.mousedown);
 			},
 			_bindNonQueryEventHandler: function(evt, callback) {
 				if(this.eventToCallbackMap[evt]===undefined) {
@@ -867,15 +867,15 @@
 				this._layout();
 
 				if (this.touchCapable) {
-					document.removeEventListener("touchmove", this.mousemove, false);
-					document.removeEventListener("touchend", this.mouseup, false);
+					$(document).off("touchmove", this.mousemove);
+					$(document).off("touchend", this.mouseup);
 				}
 
 				if(this.mousemove){
-					document.removeEventListener("mousemove", this.mousemove, false);
+					$(document).off("mousemove", this.mousemove);
 				}
 				if(this.mouseup){
-					document.removeEventListener("mouseup", this.mouseup, false);
+					$(document).off("mouseup", this.mouseup);
 				}
 
 				this.mousemove = this._mousemove.bind(this);
@@ -883,12 +883,12 @@
 
 				if (this.touchCapable) {
 					// Touch: Bind touch events:
-					document.addEventListener("touchmove", this.mousemove, false);
-					document.addEventListener("touchend", this.mouseup, false);
+					$(document).on("touchmove", this.mousemove);
+					$(document).on("touchend", this.mouseup);
 				}
 				// Bind mouse events:
-				document.addEventListener("mousemove", this.mousemove, false);
-				document.addEventListener("mouseup", this.mouseup, false);
+				$(document).on("mousemove", this.mousemove);
+				$(document).on("mouseup", this.mouseup);
 
 				this.inDrag = true;
 				var newValue = this._calculateValue();
@@ -1009,12 +1009,12 @@
 				}
 				if (this.touchCapable) {
 					// Touch: Unbind touch event handlers:
-					document.removeEventListener("touchmove", this.mousemove, false);
-					document.removeEventListener("touchend", this.mouseup, false);
+					$(document).off("touchmove", this.mousemove);
+					$(document).off("touchend", this.mouseup);
 				}
-                // Unbind mouse event handlers:
-                document.removeEventListener("mousemove", this.mousemove, false);
-                document.removeEventListener("mouseup", this.mouseup, false);
+		                // Unbind mouse event handlers:
+		                $(document).off("mousemove", this.mousemove);
+		                $(document).off("mouseup", this.mouseup);
 
 				this.inDrag = false;
 				if (this.over === false) {
