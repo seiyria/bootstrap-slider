@@ -89,6 +89,9 @@ $baseBorderRadius: 4px;
   input {
     display: none;
   }
+  input {
+    pointer-events: none; // prevent tooltip from blocking other targets
+  }
   .tooltip-inner {
     white-space: nowrap;
   }
