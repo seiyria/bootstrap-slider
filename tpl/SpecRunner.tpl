@@ -48,6 +48,10 @@
 
 	<input id="makeRangeSlider" type="text"/>
 
+	<div id="relayoutSliderContainer" style="display: none">
+		<input id="relayoutSliderInput" type="text"/>
+	</div>
+
 	<% with (scripts) { %>
 	  <% [].concat(jasmine, vendor, src, specs, reporters, start).forEach(function(script){ %>
 	  <script src="<%= script %>"></script>
