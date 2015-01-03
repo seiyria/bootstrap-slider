@@ -72,7 +72,9 @@ module.exports = function(grunt) {
           globals : {
             document: true,
             console: false,
+            Slider: false,
             $: false,
+            jQuery: false,
             _: false,
             _V_: false,
             afterEach: false,

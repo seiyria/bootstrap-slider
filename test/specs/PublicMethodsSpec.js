@@ -529,9 +529,29 @@ describe("Public Method Tests", function() {
     expect(orientationClassApplied).toBeTruthy();
   });
 
+  it("relayout: if slider is not displayed on initialization and then displayed later on, relayout() will re-adjust the margin-left of the tooltip", function() {
+    // Setup
+    testSlider = new Slider("#relayoutSliderInput", {
+      id: "relayoutSlider",
+      min: 0,
+      max: 10,
+      value: 5
+    });
+    var mainTooltipDOMRef = document.querySelector("#relayoutSlider .tooltip-main");
+    var relayoutSliderContainerDOMRef = document.querySelector("#relayoutSliderContainer");
+    // Main tooltip margin-left offset should be 0 on slider intialization 
+    expect(mainTooltipDOMRef.style.marginLeft).toBe('0px');
+    // Show slider and Call relayout()
+    relayoutSliderContainerDOMRef.style.display = "block";
+    testSlider.relayout();
+    // Main tooltip margin-left offset should re-adjust to be > 0
+    expect(mainTooltipDOMRef.style.marginLeft).toBeGreaterThan(0);
+  });
+
   afterEach(function() {
     if(testSlider) {
-      testSlider.slider('destroy');
+      if(testSlider instanceof jQuery) { testSlider.slider('destroy'); }
+      if(testSlider instanceof Slider) { testSlider.destroy(); }
       testSlider = null;
     }
   });
