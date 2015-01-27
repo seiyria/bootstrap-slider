@@ -1170,17 +1170,10 @@
 			_offset: function (obj) {
 				var ol = 0;
 				var ot = 0;
-				var tr, mat;
 				if (obj.offsetParent) {
 					do {
-						ol += obj.offsetLeft;
-						ot += obj.offsetTop;
-						tr = $(obj).css("transform");
-						if (tr !== "none"){
-							mat = tr.substr(7, tr.length - 8).split(",");
-							ol += parseInt( mat[4], 10 );
-							ot += parseInt( mat[5], 10 );
-						}
+					  ol += obj.offsetLeft;
+					  ot += obj.offsetTop;
 					} while (obj = obj.offsetParent);
 				}
 				return {
