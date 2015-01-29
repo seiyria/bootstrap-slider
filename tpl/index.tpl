@@ -371,7 +371,7 @@ $("#ex5").slider();
 var slider = new Slider('#ex5');
 
 $("#destroyEx5Slider").click(function() {
-	
+
 	// With JQuery
 	$("#ex5").slider('destroy');
 
@@ -598,7 +598,40 @@ var slider = new Slider("#ex11", {
 });
 
       </code></pre>
-  </div> 
+  </div>
+
+  <div class='slider-example'>
+      <h3>Example 12:</h3>
+      <p>Using ticks.</p>
+      <div class="well">
+      <input id="ex12" type="text" data-slider-ticks="[0, 100, 200, 300, 400, 500]" data-slider-tick-snap="10" />
+      </div>
+      <pre><code>
+###################
+HTML
+###################
+
+&ltinput id="ex12" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-tick-snap="30"/&gt
+
+
+###################
+JavaScript
+###################
+
+// With JQuery
+$("#ex12").slider({
+    ticks: [0, 100, 200, 300, 400],
+    snap: 30
+});
+
+// Without JQuery
+var slider = new Slider("#ex12", {
+    ticks: [0, 100, 200, 300, 400],
+    snap: 30
+});
+
+      </code></pre>
+  </div>
 
 
       </div> <!-- /examples -->
@@ -672,7 +705,7 @@ var slider = new Slider("#ex11", {
 			/* Example 9 */
 			$("#ex9").slider({
 				precision: 2,
-				value: 8.115 
+				value: 8.115
 			});
 
 	      	/* Example 10 */
@@ -684,6 +717,12 @@ var slider = new Slider("#ex11", {
 		        min: 0,
 		        max: 200000
 	      	});
+
+	      	/* Example 12 */
+	      	$("#ex12").slider({
+		        ticks: [0, 100, 200, 300, 400],
+		        snap: 30
+		    });
     	});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->

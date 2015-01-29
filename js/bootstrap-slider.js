@@ -213,89 +213,11 @@
 		};
 
 		function createNewSlider(element, options) {
-			/*************************************************
 
-							Create Markup
-
-			**************************************************/
 			if(typeof element === "string") {
 				this.element = document.querySelector(element);
 			} else if(element instanceof HTMLElement) {
 				this.element = element;
-			}
-
-			var origWidth = this.element.style.width;
-			var updateSlider = false;
-			var parent = this.element.parentNode;
-			var sliderTrackSelection;
-			var sliderMinHandle;
-			var sliderMaxHandle;
-
-			if (this.sliderElem) {
-				updateSlider = true;
-			} else {
-				/* Create elements needed for slider */
-				this.sliderElem = document.createElement("div");
-				this.sliderElem.className = "slider";
-
-				/* Create slider track elements */
-				var sliderTrack = document.createElement("div");
-				sliderTrack.className = "slider-track";
-
-				sliderTrackSelection = document.createElement("div");
-				sliderTrackSelection.className = "slider-selection";
-
-				sliderMinHandle = document.createElement("div");
-				sliderMinHandle.className = "slider-handle min-slider-handle";
-
-				sliderMaxHandle = document.createElement("div");
-				sliderMaxHandle.className = "slider-handle max-slider-handle";
-
-				sliderTrack.appendChild(sliderTrackSelection);
-				sliderTrack.appendChild(sliderMinHandle);
-				sliderTrack.appendChild(sliderMaxHandle);
-
-				var createAndAppendTooltipSubElements = function(tooltipElem) {
-					var arrow = document.createElement("div");
-					arrow.className = "tooltip-arrow";
-
-					var inner = document.createElement("div");
-					inner.className = "tooltip-inner";
-
-					tooltipElem.appendChild(arrow);
-					tooltipElem.appendChild(inner);
-				};
-
-				/* Create tooltip elements */
-				var sliderTooltip = document.createElement("div");
-				sliderTooltip.className = "tooltip tooltip-main";
-				createAndAppendTooltipSubElements(sliderTooltip);
-
-				var sliderTooltipMin = document.createElement("div");
-				sliderTooltipMin.className = "tooltip tooltip-min";
-				createAndAppendTooltipSubElements(sliderTooltipMin);
-
-				var sliderTooltipMax = document.createElement("div");
-				sliderTooltipMax.className = "tooltip tooltip-max";
-				createAndAppendTooltipSubElements(sliderTooltipMax);
-
-
-				/* Append components to sliderElem */
-				this.sliderElem.appendChild(sliderTrack);
-				this.sliderElem.appendChild(sliderTooltip);
-				this.sliderElem.appendChild(sliderTooltipMin);
-				this.sliderElem.appendChild(sliderTooltipMax);
-
-				/* Append slider element to parent container, right before the original <input> element */
-				parent.insertBefore(this.sliderElem, this.element);
-
-				/* Hide original <input> element */
-				this.element.style.display = "none";
-			}
-			/* If JQuery exists, cache JQ references */
-			if($) {
-				this.$element = $(this.element);
-				this.$sliderElem = $(this.sliderElem);
 			}
 
 			/*************************************************
@@ -333,6 +255,100 @@
 				catch(err) {
 					return dataValString;
 				}
+			}
+
+			/*************************************************
+
+							Create Markup
+
+			**************************************************/
+
+			var origWidth = this.element.style.width;
+			var updateSlider = false;
+			var parent = this.element.parentNode;
+			var sliderTrackSelection;
+			var sliderMinHandle;
+			var sliderMaxHandle;
+
+			if (this.sliderElem) {
+				updateSlider = true;
+			} else {
+				/* Create elements needed for slider */
+				this.sliderElem = document.createElement("div");
+				this.sliderElem.className = "slider";
+
+				/* Create slider track elements */
+				var sliderTrack = document.createElement("div");
+				sliderTrack.className = "slider-track";
+
+				sliderTrackSelection = document.createElement("div");
+				sliderTrackSelection.className = "slider-selection";
+
+				sliderMinHandle = document.createElement("div");
+				sliderMinHandle.className = "slider-handle min-slider-handle";
+
+				sliderMaxHandle = document.createElement("div");
+				sliderMaxHandle.className = "slider-handle max-slider-handle";
+
+				sliderTrack.appendChild(sliderTrackSelection);
+
+				/* Create ticks */
+				this.ticks = [];
+				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					for (i = 0; i < this.options.ticks.length; i++) {
+						var tick = document.createElement('div');
+						tick.className = 'slider-tick';
+
+						this.ticks.push(tick);
+						sliderTrack.appendChild(tick);
+					}
+				}
+
+				sliderTrack.appendChild(sliderMinHandle);
+				sliderTrack.appendChild(sliderMaxHandle);
+
+				var createAndAppendTooltipSubElements = function(tooltipElem) {
+					var arrow = document.createElement("div");
+					arrow.className = "tooltip-arrow";
+
+					var inner = document.createElement("div");
+					inner.className = "tooltip-inner";
+
+					tooltipElem.appendChild(arrow);
+					tooltipElem.appendChild(inner);
+
+				};
+
+				/* Create tooltip elements */
+				var sliderTooltip = document.createElement("div");
+				sliderTooltip.className = "tooltip tooltip-main";
+				createAndAppendTooltipSubElements(sliderTooltip);
+
+				var sliderTooltipMin = document.createElement("div");
+				sliderTooltipMin.className = "tooltip tooltip-min";
+				createAndAppendTooltipSubElements(sliderTooltipMin);
+
+				var sliderTooltipMax = document.createElement("div");
+				sliderTooltipMax.className = "tooltip tooltip-max";
+				createAndAppendTooltipSubElements(sliderTooltipMax);
+
+
+				/* Append components to sliderElem */
+				this.sliderElem.appendChild(sliderTrack);
+				this.sliderElem.appendChild(sliderTooltip);
+				this.sliderElem.appendChild(sliderTooltipMin);
+				this.sliderElem.appendChild(sliderTooltipMax);
+
+				/* Append slider element to parent container, right before the original <input> element */
+				parent.insertBefore(this.sliderElem, this.element);
+
+				/* Hide original <input> element */
+				this.element.style.display = "none";
+			}
+			/* If JQuery exists, cache JQ references */
+			if($) {
+				this.$element = $(this.element);
+				this.$sliderElem = $(this.sliderElem);
 			}
 
 			/*************************************************
@@ -419,6 +435,13 @@
 				this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
 			}
 
+			/* In case ticks are specified, overwrite the min and max bounds */
+			if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					this.options.max = Math.max.apply(Math, this.options.ticks);
+					this.options.min = Math.min.apply(Math, this.options.ticks);
+			}
+
+
 			if (this.options.value instanceof Array) {
 				this.options.range = true;
 			} else if (this.options.range) {
@@ -438,6 +461,10 @@
 				// Reset classes
 				this._removeClass(this.handle1, 'round triangle');
 				this._removeClass(this.handle2, 'round triangle hide');
+
+				for (i = 0; i < this.ticks.length; i++) {
+					this._removeClass(this.ticks[i], 'round triangle hide');
+				}
 			}
 
 			var availableHandleModifiers = ['round', 'triangle', 'custom'];
@@ -445,6 +472,10 @@
 			if (isValidHandleType) {
 				this._addClass(this.handle1, this.options.handle);
 				this._addClass(this.handle2, this.options.handle);
+
+				for (i = 0; i < this.ticks.length; i++) {
+					this._addClass(this.ticks[i], this.options.handle);
+				}
 			}
 
 			this.offset = this._offset(this.sliderElem);
@@ -538,7 +569,9 @@
 						return val;
 					}
 				},
-				natural_arrow_keys: false
+				natural_arrow_keys: false,
+				ticks: [],
+				snap: 0
 			},
 
 			over: false,
@@ -767,6 +800,16 @@
 
 				this.handle1.style[this.stylePos] = positionPercentages[0]+'%';
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
+
+				/* Position ticks */
+				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					var maxTickValue = Math.max.apply(Math, this.options.ticks);
+					var minTickValue = Math.min.apply(Math, this.options.ticks);
+
+					for (var i = 0; i < this.options.ticks.length; i++) {
+						this.ticks[i].style[this.stylePos] = 100 * this.options.ticks[i] / (maxTickValue - minTickValue) + '%';
+					}
+				}
 
 				if (this.options.orientation === 'vertical') {
 					this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
@@ -1056,6 +1099,14 @@
 					val = parseFloat(val);
 					val = this._applyPrecision(val);
 				}
+
+				/* Snap to nearest tick */
+				for (var i = 0; i < this.options.ticks.length; i++) {
+					if (Math.abs(this.options.ticks[i] - val) <= this.options.snap) {
+						return this.options.ticks[i];
+					}
+				}
+
 				return val;
 			},
 			_applyPrecision: function(val) {
