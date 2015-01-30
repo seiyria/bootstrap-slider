@@ -47,14 +47,14 @@ describe("Left/Right Track Tests", function() {
 			var rightColor = rightTrack.css("background-color");
 			var isTransparent = rightColor.match(/rgba\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}, 0\)/);
 			expect(isTransparent).toBeTruthy();
-		})
+		});
 
 		afterEach(function() {
 			if(testSlider) {
 				testSlider.slider('destroy');
 				testSlider = null;
 			}
-		})
+		});
 	});
 
 	describe("Single-value sliders, with styling", function() {
@@ -88,14 +88,14 @@ describe("Left/Right Track Tests", function() {
 			var rightTrack = $("#" + id + " .slider-track-right");
 			var rightColor = rightTrack.css("background-color");
 			expect(rightColor).toBe("rgb(255, 0, 0)");
-		})
+		});
 
 		afterEach(function() {
 			if(testSlider) {
 				testSlider.slider('destroy');
 				testSlider = null;
 			}
-		})
+		});
 	});
 
 	describe("Range sliders, no styling", function() {
@@ -143,7 +143,7 @@ describe("Left/Right Track Tests", function() {
 			var leftColor = leftTrack.css("background-color");
 			var isTransparent = leftColor.match(/rgba\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}, 0\)/);
 			expect(isTransparent).toBeTruthy();
-		})
+		});
 
 		it("right segment is transparent", function()
 		{
@@ -151,14 +151,14 @@ describe("Left/Right Track Tests", function() {
 			var rightColor = rightTrack.css("background-color");
 			var isTransparent = rightColor.match(/rgba\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}, 0\)/);
 			expect(isTransparent).toBeTruthy();
-		})
+		});
 
 		afterEach(function() {
 			if(testSlider) {
 				testSlider.slider('destroy');
 				testSlider = null;
 			}
-		})
+		});
 	});
 
 	describe("Range sliders, with styling", function() {
@@ -205,20 +205,20 @@ describe("Left/Right Track Tests", function() {
 			var leftTrack = $("#" + id + " .slider-track-left");
 			var leftColor = leftTrack.css("background-color");
 			expect(leftColor).toBe("rgb(0, 255, 0)");
-		})
+		});
 
 		it("right segment is red", function()
 		{
 			var rightTrack = $("#" + id + " .slider-track-right");
 			var rightColor = rightTrack.css("background-color");
 			expect(rightColor).toBe("rgb(255, 0, 0)");
-		})
+		});
 
 		afterEach(function() {
 			if(testSlider) {
 				testSlider.slider('destroy');
 				testSlider = null;
 			}
-		})
+		});
 	});
 });
