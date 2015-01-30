@@ -33,6 +33,18 @@ describe("Slider with ticks tests", function() {
 		});
 	});
 
+	it("Should have the tick labels you specify", function() {
+		var tickLabels = ['$0', '$100', '$200', '$300', '$400'];
+		testSlider = $("#testSlider1").slider({
+			ticks: [100, 200, 300, 400, 500],
+		    tick_labels: tickLabels
+		});
+
+		$("#testSlider1").siblings('div.slider').find('.slider-tick-label').each(function(i) {
+			expect(this.innerHTML).toBe(tickLabels[i]);
+		});
+	});
+
 	it("Should overwrite the min/max values", function() {
 		testSlider = $("#testSlider1").slider({
 			ticks: [100, 200, 300, 400, 500],

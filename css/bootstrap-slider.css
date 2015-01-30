@@ -57,6 +57,14 @@
   border-bottom-color: #0480be;
   margin-top: 0;
 }
+.slider.slider-horizontal .slider-tick-label-container {
+  white-space: nowrap;
+}
+.slider.slider-horizontal .slider-tick-label-container .slider-tick-label {
+  margin-top: 24px;
+  display: inline-block;
+  text-align: center;
+}
 .slider.slider-vertical {
   height: 210px;
   width: 20px;

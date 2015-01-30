@@ -307,6 +307,22 @@
 				sliderTrack.appendChild(sliderMinHandle);
 				sliderTrack.appendChild(sliderMaxHandle);
 
+				this.tickLabels = [];
+				if (this.options.tick_labels instanceof Array && this.options.tick_labels.length > 0) {
+					this.tickLabelContainer = document.createElement('div');
+					this.tickLabelContainer.className = 'slider-tick-label-container';
+
+					for (i = 0; i < this.options.tick_labels.length; i++) {
+						var label = document.createElement('div');
+						label.className = 'slider-tick-label';
+						label.innerHTML = this.options.tick_labels[i];
+
+						this.tickLabels.push(label);
+						this.tickLabelContainer.appendChild(label);
+					}
+				}
+
+
 				var createAndAppendTooltipSubElements = function(tooltipElem) {
 					var arrow = document.createElement("div");
 					arrow.className = "tooltip-arrow";
@@ -338,6 +354,10 @@
 				this.sliderElem.appendChild(sliderTooltip);
 				this.sliderElem.appendChild(sliderTooltipMin);
 				this.sliderElem.appendChild(sliderTooltipMax);
+
+				if (this.tickLabelContainer) {
+					this.sliderElem.appendChild(this.tickLabelContainer);
+				}
 
 				/* Append slider element to parent container, right before the original <input> element */
 				parent.insertBefore(this.sliderElem, this.element);
@@ -571,6 +591,7 @@
 				},
 				natural_arrow_keys: false,
 				ticks: [],
+				tick_labels: [],
 				snap: 0
 			},
 
@@ -801,13 +822,28 @@
 				this.handle1.style[this.stylePos] = positionPercentages[0]+'%';
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
 
-				/* Position ticks */
+				/* Position ticks and labels */
 				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
 					var maxTickValue = Math.max.apply(Math, this.options.ticks);
 					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
+					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
+					var styleMargin = this.options.orientation === 'vertical' ? 'margin-top' : 'margin-left';
+					var labelSize = this.size / (this.options.ticks.length - 1);
+
+					if (this.tickLabelContainer) {
+						this.tickLabelContainer.style[styleMargin] = -labelSize/2 + 'px';
+						if (this.options.orientation === 'horizontal') {
+							var extraHeight = this.tickLabelContainer.offsetHeight - this.sliderElem.offsetHeight;
+							this.sliderElem.style.marginBottom = extraHeight + 'px';
+						}
+					}
 					for (var i = 0; i < this.options.ticks.length; i++) {
-						this.ticks[i].style[this.stylePos] = 100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue) + '%';
+						var percentage = 100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
+						this.ticks[i].style[this.stylePos] = percentage + '%';
+						if (this.tickLabels[i]) {
+							this.tickLabels[i].style[styleSize] = labelSize + 'px';
+						}
 					}
 				}
 
