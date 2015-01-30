@@ -807,7 +807,7 @@
 					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
 					for (var i = 0; i < this.options.ticks.length; i++) {
-						this.ticks[i].style[this.stylePos] = 100 * this.options.ticks[i] / (maxTickValue - minTickValue) + '%';
+						this.ticks[i].style[this.stylePos] = 100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue) + '%';
 					}
 				}
 
