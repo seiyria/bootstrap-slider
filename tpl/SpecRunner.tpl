@@ -6,6 +6,17 @@
 <% css.forEach(function(style){ %>
   <link rel="stylesheet" type="text/css" href="<%= style %>">
 <% }) %>
+	<style type="text/css">
+		#left-right-slider-styled .slider-track-left
+		{
+			background: rgb(0, 255, 0);
+		}
+
+		#left-right-slider-styled .slider-track-right
+		{
+			background: rgb(255, 0, 0);
+		}
+	</style>
 </head>
 <body>
 	<input id="testSliderGeneric" type="text"/>
