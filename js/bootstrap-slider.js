@@ -308,14 +308,14 @@
 				sliderTrack.appendChild(sliderMaxHandle);
 
 				this.tickLabels = [];
-				if (this.options.tick_labels instanceof Array && this.options.tick_labels.length > 0) {
+				if (this.options.ticks_labels instanceof Array && this.options.ticks_labels.length > 0) {
 					this.tickLabelContainer = document.createElement('div');
 					this.tickLabelContainer.className = 'slider-tick-label-container';
 
-					for (i = 0; i < this.options.tick_labels.length; i++) {
+					for (i = 0; i < this.options.ticks_labels.length; i++) {
 						var label = document.createElement('div');
 						label.className = 'slider-tick-label';
-						label.innerHTML = this.options.tick_labels[i];
+						label.innerHTML = this.options.ticks_labels[i];
 
 						this.tickLabels.push(label);
 						this.tickLabelContainer.appendChild(label);
@@ -591,8 +591,8 @@
 				},
 				natural_arrow_keys: false,
 				ticks: [],
-				tick_labels: [],
-				snap: 0
+				ticks_labels: [],
+				ticks_snap: 0
 			},
 
 			over: false,
@@ -1138,7 +1138,7 @@
 
 				/* Snap to nearest tick */
 				for (var i = 0; i < this.options.ticks.length; i++) {
-					if (Math.abs(this.options.ticks[i] - val) <= this.options.snap) {
+					if (Math.abs(this.options.ticks[i] - val) <= this.options.ticks_snap) {
 						return this.options.ticks[i];
 					}
 				}

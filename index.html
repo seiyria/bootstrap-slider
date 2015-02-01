@@ -604,14 +604,14 @@ var slider = new Slider("#ex11", {
       <h3>Example 12:</h3>
       <p>Using ticks.</p>
       <div class="well">
-      <input id="ex12" type="text" data-slider-ticks="[0, 100, 200, 300, 400, 500]" data-slider-tick-snap="10" />
+      <input id="ex12" type="text"/>
       </div>
       <pre><code>
 ###################
 HTML
 ###################
 
-&ltinput id="ex12" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-tick-snap="30" tick_labels="['$0', '$100', '$200', '$300', '$400']"/&gt
+&ltinput id="ex12" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']"/&gt
 
 
 ###################
@@ -621,15 +621,15 @@ JavaScript
 // With JQuery
 $("#ex12").slider({
     ticks: [0, 100, 200, 300, 400],
-    tick_labels: ['$0', '$100', '$200', '$300', '$400'],
-    snap: 30
+    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+    ticks_snap: 30
 });
 
 // Without JQuery
 var slider = new Slider("#ex12", {
     ticks: [0, 100, 200, 300, 400],
-    tick_labels: ['$0', '$100', '$200', '$300', '$400'],
-    snap: 30
+    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+    ticks_snap: 30
 });
 
       </code></pre>
@@ -723,8 +723,8 @@ var slider = new Slider("#ex12", {
 	      	/* Example 12 */
 	      	$("#ex12").slider({
 		        ticks: [0, 100, 200, 300, 400],
-		        tick_labels: ['$0', '$100', '$200', '$300', '$400'],
-		        snap: 30
+		        ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+		        ticks_snap: 30
 		    });
     	});
     </script>
