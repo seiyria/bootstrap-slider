@@ -37,10 +37,12 @@ describe("Slider with ticks tests", function() {
 		var tickLabels = ['$0', '$100', '$200', '$300', '$400'];
 		testSlider = $("#testSlider1").slider({
 			ticks: [100, 200, 300, 400, 500],
-		    tick_labels: tickLabels
+		    ticks_labels: tickLabels
 		});
 
-		$("#testSlider1").siblings('div.slider').find('.slider-tick-label').each(function(i) {
+		var tickLabelElements = $("#testSlider1").siblings('div.slider').find('.slider-tick-label');
+		expect(tickLabelElements.length).toBe(tickLabels.length);
+		tickLabelElements.each(function(i) {
 			expect(this.innerHTML).toBe(tickLabels[i]);
 		});
 	});
