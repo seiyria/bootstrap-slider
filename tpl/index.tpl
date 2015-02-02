@@ -104,6 +104,19 @@
 		#ex6SliderVal {
 			color: green;
 		}
+
+		#slider12a .slider-track-right, #slider12c .slider-track-right {
+			background: green;
+		}
+
+		#slider12b .slider-track-left, #slider12c .slider-track-left {
+			background: red;
+		}
+
+		#slider12c .slider-selection {
+			background: yellow;
+		}
+
     </style>
 
     <style type='text/css'>
@@ -598,10 +611,76 @@ var slider = new Slider("#ex11", {
 });
 
       </code></pre>
-  </div> 
+  </div>
 
 
-      </div> <!-- /examples -->
+  <div class='slider-example'>
+    <h3>Example 12:</h3>
+    <p>Coloring the left and right track segments.</p>
+	<div class="well">
+      Single-value slider, right track:<br/>
+      <input id="ex12a" type="text"/><br/>
+      Note that there is no left track on the single-value slider.  The
+      area to the left of the handle is the selection.
+      <br/><br/>
+      Range slider, left track:<br/>
+      <input id="ex12b" type="text"/>
+      <br/><br/>
+      Range slider, left and right tracks, and selection:<br/>
+      <input id="ex12c" type="text"/>
+    </div>
+    <pre><code>
+###################
+HTML
+###################
+
+Single-value slider, right track:
+&ltinput id="ex12a" type="text"/&gt&ltbr/&gt
+Note that there is no left track on the single-value slider. The area to the left of the handle is the selection.
+
+Range slider, left track:
+&ltinput id="ex12b" type="text"/&gt&ltbr/&gt
+
+
+Range slider, left and right tracks, and selection:
+&ltinput id="ex12c" type="text"/&gt&ltbr/&gt
+
+###################
+JavaScript
+###################
+
+// With JQuery
+$("#ex12a").slider({ id: "slider12a", min: 0, max: 10, value: 5 });
+$("#ex12b").slider({ id: "slider12a", min: 0, max: 10, range: true, value: [3, 7] });
+$("#ex12c").slider({ id: "slider12a", min: 0, max: 10, range: true, value: [3, 7] });
+
+// Without JQuery
+new Slider("#ex12a", { id: "slider12a", min: 0, max: 10, value: 5 });
+new Slider("#ex12b", { id: "slider12a", min: 0, max: 10, range: true, value: [3, 7] });
+new Slider("#ex12c", { id: "slider12a", min: 0, max: 10, range: true, value: [3, 7] });
+
+###################
+CSS
+###################
+
+#slider12a .slider-track-right, #slider12c .slider-track-right {
+	background: green;
+}
+
+#slider12b .slider-track-left, #slider12c .slider-track-left {
+	background: red;
+}
+
+#slider12c .slider-selection {
+	background: yellow;
+}
+
+
+		</code></pre>
+  </div>
+
+
+	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
 
@@ -684,6 +763,28 @@ var slider = new Slider("#ex11", {
 		        min: 0,
 		        max: 200000
 	      	});
+
+			/* Example 12 */
+			$("#ex12a").slider({
+				id: "slider12a",
+				min: 0,
+				max: 10,
+				value: 5
+            });
+			$("#ex12b").slider({
+				id: "slider12b",
+				min: 0,
+				max: 10,
+				range: true,
+				value: [ 3, 7 ]
+			});
+			$("#ex12c").slider({
+				id: "slider12c",
+				min: 0,
+				max: 10,
+				range: true,
+				value: [ 3, 7 ]
+			});
     	});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
