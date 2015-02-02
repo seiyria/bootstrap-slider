@@ -651,13 +651,13 @@ JavaScript
 
 // With JQuery
 $("#ex12a").slider({ id: "slider12a", min: 0, max: 10, value: 5 });
-$("#ex12b").slider({ id: "slider12a", min: 0, max: 10, range: true, value: [3, 7] });
-$("#ex12c").slider({ id: "slider12a", min: 0, max: 10, range: true, value: [3, 7] });
+$("#ex12b").slider({ id: "slider12b", min: 0, max: 10, range: true, value: [3, 7] });
+$("#ex12c").slider({ id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
 
 // Without JQuery
 new Slider("#ex12a", { id: "slider12a", min: 0, max: 10, value: 5 });
-new Slider("#ex12b", { id: "slider12a", min: 0, max: 10, range: true, value: [3, 7] });
-new Slider("#ex12c", { id: "slider12a", min: 0, max: 10, range: true, value: [3, 7] });
+new Slider("#ex12b", { id: "slider12b", min: 0, max: 10, range: true, value: [3, 7] });
+new Slider("#ex12c", { id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
 
 ###################
 CSS
