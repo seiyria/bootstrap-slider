@@ -841,6 +841,15 @@
 					for (var i = 0; i < this.options.ticks.length; i++) {
 						var percentage = 100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
 						this.ticks[i].style[this.stylePos] = percentage + '%';
+
+						/* Set class labels to denote whether ticks are in the selection */
+						this._removeClass(this.ticks[i], 'in-selection');
+						if (percentage <= positionPercentages[0] && !this.options.range) {
+							this._addClass(this.ticks[i], 'in-selection');
+						} else if (percentage >= positionPercentages[0] && percentage <= positionPercentages[1]) {
+							this._addClass(this.ticks[i], 'in-selection');
+						}
+
 						if (this.tickLabels[i]) {
 							this.tickLabels[i].style[styleSize] = labelSize + 'px';
 						}
@@ -1038,7 +1047,7 @@
 				this.percentage[this.dragged] = percentage;
 				this._layout();
 
-				var val = this._calculateValue();
+				var val = this._calculateValue(false);
 
 				this._trigger('slideStart', val);
 				this._setDataVal(val);
@@ -1071,7 +1080,7 @@
 				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
 				this._layout();
 
-				var val = this._calculateValue();
+				var val = this._calculateValue(true);
 				this.setValue(val, true);
 
 				return false;
@@ -1104,7 +1113,7 @@
 				if (this.over === false) {
 					this._hideTooltip();
 				}
-				var val = this._calculateValue();
+				var val = this._calculateValue(true);
 
 				this._layout();
 				this._trigger('slideStop', val);
@@ -1112,7 +1121,7 @@
 
 				return false;
 			},
-			_calculateValue: function() {
+			_calculateValue: function(snapToClosestTick) {
 				var val;
 				if (this.options.range) {
 					val = [this.options.min,this.options.max];
@@ -1136,10 +1145,16 @@
 					val = this._applyPrecision(val);
 				}
 
-				/* Snap to nearest tick */
-				for (var i = 0; i < this.options.ticks.length; i++) {
-					if (Math.abs(this.options.ticks[i] - val) <= this.options.ticks_snap) {
-						return this.options.ticks[i];
+				if (snapToClosestTick) {
+					var min = [val, Infinity];
+					for (var i = 0; i < this.options.ticks.length; i++) {
+						var diff = Math.abs(this.options.ticks[i] - val);
+						if (diff <= min[1]) {
+							min = [this.options.ticks[i], diff];
+						}
+					}
+					if (min[1] <= this.options.ticks_snap) {
+						return min[0];
 					}
 				}
 

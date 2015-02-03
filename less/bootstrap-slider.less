@@ -132,7 +132,7 @@
 }
 .slider-selection {
 	position: absolute;
-	#gradient > .vertical(#f9f9f9, #f5f5f5);
+	#gradient > .vertical(#89cdef, #81bfde);
 	.box-shadow(inset 0 -1px 0 rgba(0,0,0,.15));
 	.box-sizing(border-box);
 	border-radius: @border-radius-base;
@@ -187,5 +187,8 @@
 			color: #726204;
 		}
 	}
-
+	&.in-selection {
+		#gradient > .vertical(#89cdef, #81bfde);
+		opacity: 1;
+	}
 }
