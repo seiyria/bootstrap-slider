@@ -531,9 +531,11 @@
 				handle: 'round',
 				reversed: false,
 				enabled: true,
-				formatter: function(val) {
+				tooltip_separator: ' : ',
+				formatter: function(val, sep) {
+					sep = sep || ' : ';
 					if(val instanceof Array) {
-						return val[0] + " : " + val[1];
+						return val[0] + sep + val[1];
 					} else {
 						return val;
 					}
@@ -792,7 +794,7 @@
 	 			var formattedTooltipVal;
 
 				if (this.options.range) {
-					formattedTooltipVal = this.options.formatter(this.options.value);
+					formattedTooltipVal = this.options.formatter(this.options.value, this.options['tooltip_separator']);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 					this.tooltip.style[this.stylePos] = (positionPercentages[1] + positionPercentages[0])/2 + '%';
 
@@ -808,10 +810,10 @@
 						this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
 					}
 
-					var innerTooltipMinText = this.options.formatter(this.options.value[0]);
+					var innerTooltipMinText = this.options.formatter(this.options.value[0], this.options['tooltip_separator']);
 					this._setText(this.tooltipInner_min, innerTooltipMinText);
 
-					var innerTooltipMaxText = this.options.formatter(this.options.value[1]);
+					var innerTooltipMaxText = this.options.formatter(this.options.value[1], this.options['tooltip_separator']);
 					this._setText(this.tooltipInner_max, innerTooltipMaxText);
 
 					this.tooltip_min.style[this.stylePos] = positionPercentages[0] + '%';
@@ -830,7 +832,7 @@
 						this._css(this.tooltip_max, 'margin-left', -this.tooltip_max.offsetWidth / 2 + 'px');
 					}
 				} else {
-					formattedTooltipVal = this.options.formatter(this.options.value[0]);
+					formattedTooltipVal = this.options.formatter(this.options.value[0], this.options['tooltip_separator']);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 
 					this.tooltip.style[this.stylePos] = positionPercentages[0] + '%';
