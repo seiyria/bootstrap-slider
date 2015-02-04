@@ -228,6 +228,7 @@
 			var updateSlider = false;
 			var parent = this.element.parentNode;
 			var sliderTrackSelection;
+			var sliderTrackLeft, sliderTrackRight;
 			var sliderMinHandle;
 			var sliderMaxHandle;
 
@@ -242,8 +243,14 @@
 				var sliderTrack = document.createElement("div");
 				sliderTrack.className = "slider-track";
 
+				sliderTrackLeft = document.createElement("div");
+				sliderTrackLeft.className = "slider-track-left";
+
 				sliderTrackSelection = document.createElement("div");
 				sliderTrackSelection.className = "slider-selection";
+
+				sliderTrackRight = document.createElement("div");
+				sliderTrackRight.className = "slider-track-right";
 
 				sliderMinHandle = document.createElement("div");
 				sliderMinHandle.className = "slider-handle min-slider-handle";
@@ -251,7 +258,9 @@
 				sliderMaxHandle = document.createElement("div");
 				sliderMaxHandle.className = "slider-handle max-slider-handle";
 
+				sliderTrack.appendChild(sliderTrackLeft);
 				sliderTrack.appendChild(sliderTrackSelection);
+				sliderTrack.appendChild(sliderTrackRight);
 				sliderTrack.appendChild(sliderMinHandle);
 				sliderTrack.appendChild(sliderMaxHandle);
 
@@ -364,7 +373,9 @@
 
 				// Undo existing inline styles for track
 				["left", "top", "width", "height"].forEach(function(prop) {
+					this._removeProperty(this.trackLeft, prop);
 					this._removeProperty(this.trackSelection, prop);
+					this._removeProperty(this.trackRight, prop);
 				}, this);
 
 				// Undo inline styles on handles
@@ -426,9 +437,14 @@
 				this.options.value = [this.options.value, this.options.max];
 			}
 
+			this.trackLeft = sliderTrackLeft || this.trackLeft;
 			this.trackSelection = sliderTrackSelection || this.trackSelection;
+			this.trackRight = sliderTrackRight || this.trackRight;
+
 			if (this.options.selection === 'none') {
+				this._addClass(this.trackLeft, 'hide');
 				this._addClass(this.trackSelection, 'hide');
+				this._addClass(this.trackRight, 'hide');
 			}
 
 			this.handle1 = sliderMinHandle || this.handle1;
@@ -769,11 +785,23 @@
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
 
 				if (this.options.orientation === 'vertical') {
+					this.trackLeft.style.top = '0';
+					this.trackLeft.style.height = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+
 					this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
 					this.trackSelection.style.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+
+					this.trackRight.style.bottom = '0';
+					this.trackRight.style.height = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
 				} else {
+					this.trackLeft.style.left = '0';
+					this.trackLeft.style.width = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+
 					this.trackSelection.style.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
 					this.trackSelection.style.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+
+					this.trackRight.style.right = '0';
+					this.trackRight.style.width = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
 
 			        var offset_min = this.tooltip_min.getBoundingClientRect();
 			        var offset_max = this.tooltip_max.getBoundingClientRect();
