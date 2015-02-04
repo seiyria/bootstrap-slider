@@ -58,6 +58,33 @@ describe("Slider with ticks tests", function() {
 		expect(testSlider.slider('getAttribute','max')).toBe(500);
 	});
 
+	it("Should not snap to a tick within tick bounds when using the keyboard navigation", function() {
+		testSlider = $("#testSlider1").slider({
+			ticks: [100, 200, 300, 400, 500],
+			ticks_snap_bounds: 30
+		});
+
+		// Focus on handle1
+		var handle1 = $("#testSlider1").siblings('div.slider:first').find('.slider-handle');
+		handle1.focus();
+
+		// Create keyboard event
+		var keyboardEvent = document.createEvent("Events");
+		keyboardEvent.initEvent("keydown", true, true);
+
+		var keyPresses = 0;
+		handle1.on("keydown", function() {
+			keyPresses++;
+			var value = $("#testSlider1").slider('getValue');
+			expect(value).toBe(100 + keyPresses);
+		});
+
+		keyboardEvent.keyCode = keyboardEvent.which = 39; // RIGHT
+		for (var i = 0; i < 5; i++) {
+			handle1[0].dispatchEvent(keyboardEvent);
+		}
+	});
+
 
 	afterEach(function() {
 	    if(testSlider) {

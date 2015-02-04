@@ -592,7 +592,7 @@
 				natural_arrow_keys: false,
 				ticks: [],
 				ticks_labels: [],
-				ticks_snap: 0
+				ticks_snap_bounds: 0
 			},
 
 			over: false,
@@ -1153,7 +1153,7 @@
 							min = [this.options.ticks[i], diff];
 						}
 					}
-					if (min[1] <= this.options.ticks_snap) {
+					if (min[1] <= this.options.ticks_snap_bounds) {
 						return min[0];
 					}
 				}

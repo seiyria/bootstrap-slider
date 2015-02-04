@@ -611,7 +611,7 @@ var slider = new Slider("#ex11", {
 HTML
 ###################
 
-&ltinput id="ex12" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']"/&gt
+&ltinput id="ex12" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']"/&gt
 
 
 ###################
@@ -622,14 +622,14 @@ JavaScript
 $("#ex12").slider({
     ticks: [0, 100, 200, 300, 400],
     ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
-    ticks_snap: 30
+    ticks_snap_bounds: 30
 });
 
 // Without JQuery
 var slider = new Slider("#ex12", {
     ticks: [0, 100, 200, 300, 400],
     ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
-    ticks_snap: 30
+    ticks_snap_bounds: 30
 });
 
       </code></pre>
@@ -724,7 +724,7 @@ var slider = new Slider("#ex12", {
 	      	$("#ex12").slider({
 		        ticks: [0, 100, 200, 300, 400],
 		        ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
-		        ticks_snap: 30
+		        ticks_snap_bounds: 30
 		    });
     	});
     </script>

@@ -127,7 +127,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | natural_arrow_keys | bool | false | The natural order is used for the arrow keys. Arrow up select the upper slider value for vertical sliders, arrow right the righter slider value for a horizontal slider - no matter if the slider was reversed or not. By default the arrow keys are oriented by arrow up/right to the higher slider value, arrow down/left to the lower slider value. |
 | ticks | array | [] | Used to define the values of ticks. Tick marks are indicators to denote special values in the range. This option overwrites min and max options. |
 | ticks_labels | array | [] | Defines the labels below the tick marks. Accepts HTML input. |
-| ticks_snap | float | 0 | Used to define the snap bounds of a tick. Snaps to the tick if value is within these bounds. |
+| ticks_snap_bounds | float | 0 | Used to define the snap bounds of a tick. Snaps to the tick if value is within these bounds. |
 
 Functions
 =========
