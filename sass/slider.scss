@@ -118,7 +118,7 @@ $baseBorderRadius: 4px;
 .slider-track-left, .slider-track-right {
   position: absolute;
   background: transparent;
-  .box-sizing(border-box);
+  @include box-sizing(border-box);
   border-radius: border-radius($baseBorderRadius);
 }
 
