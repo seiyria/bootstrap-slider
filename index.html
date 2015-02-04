@@ -104,6 +104,19 @@
 		#ex6SliderVal {
 			color: green;
 		}
+
+		#slider12a .slider-track-right, #slider12c .slider-track-right {
+			background: green;
+		}
+
+		#slider12b .slider-track-left, #slider12c .slider-track-left {
+			background: red;
+		}
+
+		#slider12c .slider-selection {
+			background: yellow;
+		}
+
     </style>
 
     <style type='text/css'>
@@ -601,17 +614,82 @@ var slider = new Slider("#ex11", {
   </div>
 
   <div class='slider-example'>
-      <h3>Example 12:</h3>
-      <p>Using ticks.</p>
+    <h3>Example 12:</h3>
+    <p>Coloring the left and right track segments.</p>
+	<div class="well">
+      Single-value slider, right track:<br/>
+      <input id="ex12a" type="text"/><br/>
+      Note that there is no left track on the single-value slider.  The
+      area to the left of the handle is the selection.
+      <br/><br/>
+      Range slider, left track:<br/>
+      <input id="ex12b" type="text"/>
+      <br/><br/>
+      Range slider, left and right tracks, and selection:<br/>
+      <input id="ex12c" type="text"/>
+    </div>
+    <pre><code>
+###################
+HTML
+###################
+
+Single-value slider, right track:
+&ltinput id="ex12a" type="text"/&gt&ltbr/&gt
+Note that there is no left track on the single-value slider. The area to the left of the handle is the selection.
+
+Range slider, left track:
+&ltinput id="ex12b" type="text"/&gt&ltbr/&gt
+
+
+Range slider, left and right tracks, and selection:
+&ltinput id="ex12c" type="text"/&gt&ltbr/&gt
+
+###################
+JavaScript
+###################
+
+// With JQuery
+$("#ex12a").slider({ id: "slider12a", min: 0, max: 10, value: 5 });
+$("#ex12b").slider({ id: "slider12b", min: 0, max: 10, range: true, value: [3, 7] });
+$("#ex12c").slider({ id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
+
+// Without JQuery
+new Slider("#ex12a", { id: "slider12a", min: 0, max: 10, value: 5 });
+new Slider("#ex12b", { id: "slider12b", min: 0, max: 10, range: true, value: [3, 7] });
+new Slider("#ex12c", { id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
+
+###################
+CSS
+###################
+
+#slider12a .slider-track-right, #slider12c .slider-track-right {
+	background: green;
+}
+
+#slider12b .slider-track-left, #slider12c .slider-track-left {
+	background: red;
+}
+
+#slider12c .slider-selection {
+	background: yellow;
+}
+
+
+		</code></pre>
+  </div>
+
+  <div class='slider-example'>
+      <h3>Example 13:</h3>
+      <p>Using tick marks and labels.</p>
       <div class="well">
-      <input id="ex12" type="text"/>
+      <input id="ex13" type="text"/>
       </div>
       <pre><code>
 ###################
 HTML
 ###################
 
-&ltinput id="ex12" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']"/&gt
+&ltinput id="ex13" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']"/&gt
 
 
 ###################
@@ -619,14 +697,14 @@ JavaScript
 ###################
 
 // With JQuery
-$("#ex12").slider({
+$("#ex13").slider({
     ticks: [0, 100, 200, 300, 400],
     ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
     ticks_snap_bounds: 30
 });
 
 // Without JQuery
-var slider = new Slider("#ex12", {
+var slider = new Slider("#ex13", {
     ticks: [0, 100, 200, 300, 400],
     ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
     ticks_snap_bounds: 30
@@ -636,7 +714,7 @@ var slider = new Slider("#ex12", {
   </div>
 
 
-      </div> <!-- /examples -->
+	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
 
@@ -720,11 +798,34 @@ var slider = new Slider("#ex12", {
 		        max: 200000
 	      	});
 
-	      	/* Example 12 */
-	      	$("#ex12").slider({
+			/* Example 12 */
+			$("#ex12a").slider({
+				id: "slider12a",
+				min: 0,
+				max: 10,
+				value: 5
+            });
+			$("#ex12b").slider({
+				id: "slider12b",
+				min: 0,
+				max: 10,
+				range: true,
+				value: [ 3, 7 ]
+			});
+			$("#ex12c").slider({
+				id: "slider12c",
+				min: 0,
+				max: 10,
+				range: true,
+				value: [ 3, 7 ]
+			});
+
+	      	/* Example 13 */
+	      	$("#ex13").slider({
 		        ticks: [0, 100, 200, 300, 400],
 		        ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
-		        ticks_snap_bounds: 30
+		        ticks_snap_bounds: 30,
+		        value: 200
 		    });
     	});
     </script>

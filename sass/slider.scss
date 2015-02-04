@@ -41,7 +41,7 @@ $baseBorderRadius: 4px;
       top:  50%;
       left: 0;
     }
-    .slider-selection {
+    .slider-selection, .slider-track-left, .slider-track-right {
       height: 100%;
       top: 0;
       bottom: 0;
@@ -74,6 +74,11 @@ $baseBorderRadius: 4px;
       top: 0;
       bottom: 0;
     }
+	.slider-track-left, .slider-track-right {
+	  width: 100%;
+	  left: 0;
+	  right: 0;
+	}
     .slider-handle {
       margin-left: -$baseLineHeight/4;
       margin-top: -$baseLineHeight/2;
@@ -108,6 +113,13 @@ $baseBorderRadius: 4px;
   	@include box-shadow(inset 0 -1px 0 rgba(0,0,0,0.15));
   	@include box-sizing(border-box);
 	@include border-radius($baseBorderRadius);
+}
+
+.slider-track-left, .slider-track-right {
+  position: absolute;
+  background: transparent;
+  @include box-sizing(border-box);
+  border-radius: border-radius($baseBorderRadius);
 }
 
 .slider-handle {
