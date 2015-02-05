@@ -200,6 +200,48 @@
 			callingContextNotSliderInstance : "Calling context element does not have instance of Slider bound to it. Check your code to make sure the JQuery object returned from the call to the slider() initializer is calling the method"
 		};
 
+		var SliderScale = {
+			linear: {
+				toValue: function(percentage) {
+					var rawValue = percentage/100 * (this.options.max - this.options.min);
+					var value = this.options.min + Math.round(rawValue / this.options.step) * this.options.step;
+
+					if (value < this.options.min) {
+						return this.options.min;
+					} else if (value > this.options.max) {
+						return this.options.max;
+					} else {
+						return value;
+					}
+				},
+				toPercentage: function(value) {
+					if (this.options.max === this.options.min) {
+						return 0;
+					} else {
+						return 100 * (value - this.options.min) / (this.options.max - this.options.min);
+					}
+				}
+			},
+
+			logarithmic: {
+				/* Based on http://stackoverflow.com/questions/846221/logarithmic-slider */
+				toValue: function(percentage) {
+					var min = (this.options.min === 0) ? 0 : Math.log(this.options.min);
+					var max = Math.log(this.options.max);
+					return Math.exp(min + (max - min) * percentage / 100);
+				},
+				toPercentage: function(value) {
+					if (this.options.max === this.options.min) {
+						return 0;
+					} else {
+						var max = Math.log(this.options.max);
+						var min = this.options.min === 0 ? 0 : Math.log(this.options.min);
+						var v = value === 0 ? 0 : Math.log(value);
+						return 100 * (v - min) / (max - min);
+					}
+				}
+			}
+		};
 
 
 		/*************************************************
@@ -399,6 +441,10 @@
 			this.tooltip_max = this.sliderElem.querySelector('.tooltip-max');
 			this.tooltipInner_max= this.tooltip_max.querySelector('.tooltip-inner');
 
+			if (SliderScale[this.options.scale]) {
+				this.options.scale = SliderScale[this.options.scale];
+			}
+
 			if (updateSlider === true) {
 				// Reset classes
 				this._removeClass(this.sliderElem, 'slider-horizontal');
@@ -570,6 +616,8 @@
 			}
 		}
 
+
+
 		/*************************************************
 
 					INSTANCE PROPERTIES/METHODS
@@ -608,7 +656,8 @@
 				natural_arrow_keys: false,
 				ticks: [],
 				ticks_labels: [],
-				ticks_snap_bounds: 0
+				ticks_snap_bounds: 0,
+				scale: 'linear'
 			},
 
 			over: false,
@@ -647,12 +696,11 @@
 					}
 				}
 
-				this.diff = this.options.max - this.options.min;
-				if (this.diff > 0) {
+				if (this.options.max > this.options.min) {
 					this.percentage = [
-						(this.options.value[0] - this.options.min) * 100 / this.diff,
-						(this.options.value[1] - this.options.min) * 100 / this.diff,
-						this.options.step * 100 / this.diff
+						this._toPercentage(this.options.value[0]),
+						this._toPercentage(this.options.value[1]),
+						this.options.step * 100 / (this.options.max - this.options.min)
 					];
 				} else {
 					this.percentage = [0, 0, 100];
@@ -1154,21 +1202,15 @@
 				if (this.options.range) {
 					val = [this.options.min,this.options.max];
 			        if (this.percentage[0] !== 0){
-			            val[0] = (Math.max(this.options.min, this.options.min + Math.round((this.diff * this.percentage[0]/100)/this.options.step)*this.options.step));
+			            val[0] = this._toValue(this.percentage[0]);
 			            val[0] = this._applyPrecision(val[0]);
 			        }
 			        if (this.percentage[1] !== 100){
-			            val[1] = (Math.min(this.options.max, this.options.min + Math.round((this.diff * this.percentage[1]/100)/this.options.step)*this.options.step));
+			            val[1] = this._toValue(this.percentage[1]);
 			            val[1] = this._applyPrecision(val[1]);
 			        }
 				} else {
-					val = (this.options.min + Math.round((this.diff * this.percentage[0]/100)/this.options.step)*this.options.step);
-					if (val < this.options.min) {
-						val = this.options.min;
-					}
-					else if (val > this.options.max) {
-						val = this.options.max;
-					}
+		            val = this._toValue(this.percentage[0]);
 					val = parseFloat(val);
 					val = this._applyPrecision(val);
 				}
@@ -1320,7 +1362,14 @@
                     });
                     elementRef.style[style] = value;
                 }
+			},
+			_toValue: function(percentage) {
+				return this.options.scale.toValue.apply(this, [percentage]);
+			},
+			_toPercentage: function(value) {
+				return this.options.scale.toPercentage.apply(this, [value]);
 			}
+
 		};
 
 		/*********************************
