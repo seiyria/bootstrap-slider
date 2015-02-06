@@ -267,7 +267,7 @@
 			var updateSlider = false;
 			var parent = this.element.parentNode;
 			var sliderTrackSelection;
-			var sliderTrackLeft, sliderTrackRight;
+			var sliderTrackLow, sliderTrackHigh;
 			var sliderMinHandle;
 			var sliderMaxHandle;
 
@@ -282,14 +282,14 @@
 				var sliderTrack = document.createElement("div");
 				sliderTrack.className = "slider-track";
 
-				sliderTrackLeft = document.createElement("div");
-				sliderTrackLeft.className = "slider-track-left";
+				sliderTrackLow = document.createElement("div");
+				sliderTrackLow.className = "slider-track-low";
 
 				sliderTrackSelection = document.createElement("div");
 				sliderTrackSelection.className = "slider-selection";
 
-				sliderTrackRight = document.createElement("div");
-				sliderTrackRight.className = "slider-track-right";
+				sliderTrackHigh = document.createElement("div");
+				sliderTrackHigh.className = "slider-track-high";
 
 				sliderMinHandle = document.createElement("div");
 				sliderMinHandle.className = "slider-handle min-slider-handle";
@@ -297,9 +297,9 @@
 				sliderMaxHandle = document.createElement("div");
 				sliderMaxHandle.className = "slider-handle max-slider-handle";
 
-				sliderTrack.appendChild(sliderTrackLeft);
+				sliderTrack.appendChild(sliderTrackLow);
 				sliderTrack.appendChild(sliderTrackSelection);
-				sliderTrack.appendChild(sliderTrackRight);
+				sliderTrack.appendChild(sliderTrackHigh);
 
 				/* Create ticks */
 				this.ticks = [];
@@ -480,9 +480,9 @@
 				this.options.value = [this.options.value, this.options.max];
 			}
 
-			this.trackLeft = sliderTrackLeft || this.trackLeft;
+			this.trackLeft = sliderTrackLow || this.trackLeft;
 			this.trackSelection = sliderTrackSelection || this.trackSelection;
-			this.trackRight = sliderTrackRight || this.trackRight;
+			this.trackRight = sliderTrackHigh || this.trackRight;
 
 			if (this.options.selection === 'none') {
 				this._addClass(this.trackLeft, 'hide');
