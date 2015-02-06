@@ -1,8 +1,8 @@
 /*! =========================================================
  * bootstrap-slider.js
  *
- * Maintainers: 
- *		Kyle Kemp 
+ * Maintainers:
+ *		Kyle Kemp
  *			- Twitter: @seiyria
  *			- Github:  seiyria
  *		Rohit Kalkur
@@ -186,7 +186,7 @@
 
 
 	/*************************************************
-					
+
 			BOOTSTRAP-SLIDER SOURCE CODE
 
 	**************************************************/
@@ -203,7 +203,7 @@
 
 
 		/*************************************************
-						
+
 							CONSTRUCTOR
 
 		**************************************************/
@@ -213,93 +213,15 @@
 		};
 
 		function createNewSlider(element, options) {
-			/*************************************************
-						
-							Create Markup
 
-			**************************************************/
 			if(typeof element === "string") {
 				this.element = document.querySelector(element);
 			} else if(element instanceof HTMLElement) {
 				this.element = element;
 			}
-			
-			var origWidth = this.element.style.width;
-			var updateSlider = false;
-			var parent = this.element.parentNode;
-			var sliderTrackSelection;
-			var sliderMinHandle;
-			var sliderMaxHandle;
-
-			if (this.sliderElem) {
-				updateSlider = true;
-			} else {
-				/* Create elements needed for slider */
-				this.sliderElem = document.createElement("div");
-				this.sliderElem.className = "slider";
-
-				/* Create slider track elements */
-				var sliderTrack = document.createElement("div");
-				sliderTrack.className = "slider-track";
-
-				sliderTrackSelection = document.createElement("div");
-				sliderTrackSelection.className = "slider-selection";
-
-				sliderMinHandle = document.createElement("div");
-				sliderMinHandle.className = "slider-handle min-slider-handle";
-
-				sliderMaxHandle = document.createElement("div");
-				sliderMaxHandle.className = "slider-handle max-slider-handle";
-
-				sliderTrack.appendChild(sliderTrackSelection);
-				sliderTrack.appendChild(sliderMinHandle);
-				sliderTrack.appendChild(sliderMaxHandle);
-
-				var createAndAppendTooltipSubElements = function(tooltipElem) {
-					var arrow = document.createElement("div");
-					arrow.className = "tooltip-arrow";
-
-					var inner = document.createElement("div");
-					inner.className = "tooltip-inner";
-
-					tooltipElem.appendChild(arrow);
-					tooltipElem.appendChild(inner);
-				};
-
-				/* Create tooltip elements */
-				var sliderTooltip = document.createElement("div");
-				sliderTooltip.className = "tooltip tooltip-main";
-				createAndAppendTooltipSubElements(sliderTooltip);
-
-				var sliderTooltipMin = document.createElement("div");
-				sliderTooltipMin.className = "tooltip tooltip-min";
-				createAndAppendTooltipSubElements(sliderTooltipMin);
-
-				var sliderTooltipMax = document.createElement("div");
-				sliderTooltipMax.className = "tooltip tooltip-max";
-				createAndAppendTooltipSubElements(sliderTooltipMax);
-
-
-				/* Append components to sliderElem */
-				this.sliderElem.appendChild(sliderTrack);
-				this.sliderElem.appendChild(sliderTooltip);
-				this.sliderElem.appendChild(sliderTooltipMin);
-				this.sliderElem.appendChild(sliderTooltipMax);
-
-				/* Append slider element to parent container, right before the original <input> element */
-				parent.insertBefore(this.sliderElem, this.element);
-				
-				/* Hide original <input> element */
-				this.element.style.display = "none";
-			}
-			/* If JQuery exists, cache JQ references */
-			if($) {
-				this.$element = $(this.element);
-				this.$sliderElem = $(this.sliderElem);
-			}
 
 			/*************************************************
-						
+
 							Process Options
 
 			**************************************************/
@@ -326,7 +248,7 @@
 			function getDataAttrib(element, optName) {
 				var dataName = "data-slider-" + optName;
 				var dataValString = element.getAttribute(dataName);
-				
+
 				try {
 					return JSON.parse(dataValString);
 				}
@@ -336,7 +258,130 @@
 			}
 
 			/*************************************************
-						
+
+							Create Markup
+
+			**************************************************/
+
+			var origWidth = this.element.style.width;
+			var updateSlider = false;
+			var parent = this.element.parentNode;
+			var sliderTrackSelection;
+			var sliderTrackLeft, sliderTrackRight;
+			var sliderMinHandle;
+			var sliderMaxHandle;
+
+			if (this.sliderElem) {
+				updateSlider = true;
+			} else {
+				/* Create elements needed for slider */
+				this.sliderElem = document.createElement("div");
+				this.sliderElem.className = "slider";
+
+				/* Create slider track elements */
+				var sliderTrack = document.createElement("div");
+				sliderTrack.className = "slider-track";
+
+				sliderTrackLeft = document.createElement("div");
+				sliderTrackLeft.className = "slider-track-left";
+
+				sliderTrackSelection = document.createElement("div");
+				sliderTrackSelection.className = "slider-selection";
+
+				sliderTrackRight = document.createElement("div");
+				sliderTrackRight.className = "slider-track-right";
+
+				sliderMinHandle = document.createElement("div");
+				sliderMinHandle.className = "slider-handle min-slider-handle";
+
+				sliderMaxHandle = document.createElement("div");
+				sliderMaxHandle.className = "slider-handle max-slider-handle";
+
+				sliderTrack.appendChild(sliderTrackLeft);
+				sliderTrack.appendChild(sliderTrackSelection);
+				sliderTrack.appendChild(sliderTrackRight);
+
+				/* Create ticks */
+				this.ticks = [];
+				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					for (i = 0; i < this.options.ticks.length; i++) {
+						var tick = document.createElement('div');
+						tick.className = 'slider-tick';
+
+						this.ticks.push(tick);
+						sliderTrack.appendChild(tick);
+					}
+				}
+
+				sliderTrack.appendChild(sliderMinHandle);
+				sliderTrack.appendChild(sliderMaxHandle);
+
+				this.tickLabels = [];
+				if (this.options.ticks_labels instanceof Array && this.options.ticks_labels.length > 0) {
+					this.tickLabelContainer = document.createElement('div');
+					this.tickLabelContainer.className = 'slider-tick-label-container';
+
+					for (i = 0; i < this.options.ticks_labels.length; i++) {
+						var label = document.createElement('div');
+						label.className = 'slider-tick-label';
+						label.innerHTML = this.options.ticks_labels[i];
+
+						this.tickLabels.push(label);
+						this.tickLabelContainer.appendChild(label);
+					}
+				}
+
+
+				var createAndAppendTooltipSubElements = function(tooltipElem) {
+					var arrow = document.createElement("div");
+					arrow.className = "tooltip-arrow";
+
+					var inner = document.createElement("div");
+					inner.className = "tooltip-inner";
+
+					tooltipElem.appendChild(arrow);
+					tooltipElem.appendChild(inner);
+
+				};
+
+				/* Create tooltip elements */
+				var sliderTooltip = document.createElement("div");
+				sliderTooltip.className = "tooltip tooltip-main";
+				createAndAppendTooltipSubElements(sliderTooltip);
+
+				var sliderTooltipMin = document.createElement("div");
+				sliderTooltipMin.className = "tooltip tooltip-min";
+				createAndAppendTooltipSubElements(sliderTooltipMin);
+
+				var sliderTooltipMax = document.createElement("div");
+				sliderTooltipMax.className = "tooltip tooltip-max";
+				createAndAppendTooltipSubElements(sliderTooltipMax);
+
+
+				/* Append components to sliderElem */
+				this.sliderElem.appendChild(sliderTrack);
+				this.sliderElem.appendChild(sliderTooltip);
+				this.sliderElem.appendChild(sliderTooltipMin);
+				this.sliderElem.appendChild(sliderTooltipMax);
+
+				if (this.tickLabelContainer) {
+					this.sliderElem.appendChild(this.tickLabelContainer);
+				}
+
+				/* Append slider element to parent container, right before the original <input> element */
+				parent.insertBefore(this.sliderElem, this.element);
+
+				/* Hide original <input> element */
+				this.element.style.display = "none";
+			}
+			/* If JQuery exists, cache JQ references */
+			if($) {
+				this.$element = $(this.element);
+				this.$sliderElem = $(this.sliderElem);
+			}
+
+			/*************************************************
+
 								Setup
 
 			**************************************************/
@@ -364,13 +409,15 @@
 
 				// Undo existing inline styles for track
 				["left", "top", "width", "height"].forEach(function(prop) {
+					this._removeProperty(this.trackLeft, prop);
 					this._removeProperty(this.trackSelection, prop);
+					this._removeProperty(this.trackRight, prop);
 				}, this);
 
 				// Undo inline styles on handles
 				[this.handle1, this.handle2].forEach(function(handle) {
 					this._removeProperty(handle, 'left');
-					this._removeProperty(handle, 'top');	
+					this._removeProperty(handle, 'top');
 				}, this);
 
 				// Undo inline styles and classes on tooltips
@@ -387,14 +434,14 @@
 
 			if(this.options.orientation === 'vertical') {
 				this._addClass(this.sliderElem,'slider-vertical');
-				
+
 				this.stylePos = 'top';
 				this.mousePos = 'pageY';
 				this.sizePos = 'offsetHeight';
 
 				this._addClass(this.tooltip, 'right');
 				this.tooltip.style.left = '100%';
-				
+
 				this._addClass(this.tooltip_min, 'right');
 				this.tooltip_min.style.left = '100%';
 
@@ -408,16 +455,23 @@
 				this.stylePos = 'left';
 				this.mousePos = 'pageX';
 				this.sizePos = 'offsetWidth';
-				
+
 				this._addClass(this.tooltip, 'top');
 				this.tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
-				
+
 				this._addClass(this.tooltip_min, 'top');
 				this.tooltip_min.style.top = -this.tooltip_min.outerHeight - 14 + 'px';
 
 				this._addClass(this.tooltip_max, 'top');
 				this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
 			}
+
+			/* In case ticks are specified, overwrite the min and max bounds */
+			if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					this.options.max = Math.max.apply(Math, this.options.ticks);
+					this.options.min = Math.min.apply(Math, this.options.ticks);
+			}
+
 
 			if (this.options.value instanceof Array) {
 				this.options.range = true;
@@ -426,9 +480,14 @@
 				this.options.value = [this.options.value, this.options.max];
 			}
 
+			this.trackLeft = sliderTrackLeft || this.trackLeft;
 			this.trackSelection = sliderTrackSelection || this.trackSelection;
+			this.trackRight = sliderTrackRight || this.trackRight;
+
 			if (this.options.selection === 'none') {
+				this._addClass(this.trackLeft, 'hide');
 				this._addClass(this.trackSelection, 'hide');
+				this._addClass(this.trackRight, 'hide');
 			}
 
 			this.handle1 = sliderMinHandle || this.handle1;
@@ -438,6 +497,10 @@
 				// Reset classes
 				this._removeClass(this.handle1, 'round triangle');
 				this._removeClass(this.handle2, 'round triangle hide');
+
+				for (i = 0; i < this.ticks.length; i++) {
+					this._removeClass(this.ticks[i], 'round triangle hide');
+				}
 			}
 
 			var availableHandleModifiers = ['round', 'triangle', 'custom'];
@@ -445,6 +508,10 @@
 			if (isValidHandleType) {
 				this._addClass(this.handle1, this.options.handle);
 				this._addClass(this.handle2, this.options.handle);
+
+				for (i = 0; i < this.ticks.length; i++) {
+					this._addClass(this.ticks[i], this.options.handle);
+				}
 			}
 
 			this.offset = this._offset(this.sliderElem);
@@ -452,7 +519,7 @@
 			this.setValue(this.options.value);
 
 			/******************************************
-						
+
 						Bind Event Listeners
 
 			******************************************/
@@ -504,10 +571,10 @@
 		}
 
 		/*************************************************
-						
+
 					INSTANCE PROPERTIES/METHODS
 
-		- Any methods bound to the prototype are considered 
+		- Any methods bound to the prototype are considered
 		part of the plugin's `public` interface
 
 		**************************************************/
@@ -538,11 +605,14 @@
 						return val;
 					}
 				},
-				natural_arrow_keys: false
+				natural_arrow_keys: false,
+				ticks: [],
+				ticks_labels: [],
+				ticks_snap_bounds: 0
 			},
-			
+
 			over: false,
-			
+
 			inDrag: false,
 
 			getValue: function() {
@@ -556,12 +626,13 @@
 				if (!val) {
 					val = 0;
 				}
+				var oldValue = this.getValue();
 				this.options.value = this._validateInputValue(val);
 				var applyPrecision = this._applyPrecision.bind(this);
 
 				if (this.options.range) {
 					this.options.value[0] = applyPrecision(this.options.value[0]);
-					this.options.value[1] = applyPrecision(this.options.value[1]); 
+					this.options.value[1] = applyPrecision(this.options.value[1]);
 
 					this.options.value[0] = Math.max(this.options.min, Math.min(this.options.max, this.options.value[0]));
 					this.options.value[1] = Math.max(this.options.min, Math.min(this.options.max, this.options.value[1]));
@@ -588,13 +659,18 @@
 				}
 
 				this._layout();
-
-				var sliderValue = this.options.range ? this.options.value : this.options.value[0];
-				this._setDataVal(sliderValue);
+				var newValue = this.options.range ? this.options.value : this.options.value[0];
 
 				if(triggerSlideEvent === true) {
-					this._trigger('slide', sliderValue);
+					this._trigger('slide', newValue);
 				}
+				if(oldValue !== newValue) {
+					this._trigger('change', {
+						oldValue: oldValue,
+						newValue: newValue
+					});
+				}
+				this._setDataVal(newValue);
 
 				return this;
 			},
@@ -667,7 +743,7 @@
 
 			getAttribute: function(attribute) {
 				if(attribute) {
-					return this.options[attribute];		
+					return this.options[attribute];
 				} else {
 					return this.options;
 				}
@@ -687,9 +763,14 @@
 				}
 				return this;
 			},
-			
+
+			relayout: function() {
+				this._layout();
+				return this;
+			},
+
 			/******************************+
-					
+
 						HELPERS
 
 			- Any method that is not part of the public interface.
@@ -745,7 +826,7 @@
 				}
 				this.over = false;
 			},
-				_layout: function() {			
+			_layout: function() {
 				var positionPercentages;
 
 				if(this.options.reversed) {
@@ -757,12 +838,58 @@
 				this.handle1.style[this.stylePos] = positionPercentages[0]+'%';
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
 
+				/* Position ticks and labels */
+				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					var maxTickValue = Math.max.apply(Math, this.options.ticks);
+					var minTickValue = Math.min.apply(Math, this.options.ticks);
+
+					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
+					var styleMargin = this.options.orientation === 'vertical' ? 'margin-top' : 'margin-left';
+					var labelSize = this.size / (this.options.ticks.length - 1);
+
+					if (this.tickLabelContainer) {
+						this.tickLabelContainer.style[styleMargin] = -labelSize/2 + 'px';
+						if (this.options.orientation === 'horizontal') {
+							var extraHeight = this.tickLabelContainer.offsetHeight - this.sliderElem.offsetHeight;
+							this.sliderElem.style.marginBottom = extraHeight + 'px';
+						}
+					}
+					for (var i = 0; i < this.options.ticks.length; i++) {
+						var percentage = 100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
+						this.ticks[i].style[this.stylePos] = percentage + '%';
+
+						/* Set class labels to denote whether ticks are in the selection */
+						this._removeClass(this.ticks[i], 'in-selection');
+						if (percentage <= positionPercentages[0] && !this.options.range) {
+							this._addClass(this.ticks[i], 'in-selection');
+						} else if (percentage >= positionPercentages[0] && percentage <= positionPercentages[1]) {
+							this._addClass(this.ticks[i], 'in-selection');
+						}
+
+						if (this.tickLabels[i]) {
+							this.tickLabels[i].style[styleSize] = labelSize + 'px';
+						}
+					}
+				}
+
 				if (this.options.orientation === 'vertical') {
+					this.trackLeft.style.top = '0';
+					this.trackLeft.style.height = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+
 					this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
 					this.trackSelection.style.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+
+					this.trackRight.style.bottom = '0';
+					this.trackRight.style.height = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
 				} else {
+					this.trackLeft.style.left = '0';
+					this.trackLeft.style.width = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+
 					this.trackSelection.style.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
 					this.trackSelection.style.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+
+					this.trackRight.style.right = '0';
+					this.trackRight.style.width = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
 
 			        var offset_min = this.tooltip_min.getBoundingClientRect();
 			        var offset_max = this.tooltip_max.getBoundingClientRect();
@@ -774,10 +901,9 @@
 			        } else {
 			            this._removeClass(this.tooltip_max, 'bottom');
 			            this._addClass(this.tooltip_max, 'top');
-			            this.tooltip_max.style.top = -30 + 'px';
+			            this.tooltip_max.style.top = this.tooltip_min.style.top;
 			        }
 	 			}
-
 
 	 			var formattedTooltipVal;
 
@@ -791,13 +917,13 @@
 					} else {
 						this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
 					}
-					
+
 					if (this.options.orientation === 'vertical') {
 						this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
 					} else {
 						this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
 					}
-					
+
 					var innerTooltipMinText = this.options.formatter(this.options.value[0]);
 					this._setText(this.tooltipInner_min, innerTooltipMinText);
 
@@ -860,7 +986,7 @@
 
 				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
 				this._layout();
-				
+
 				if (this.touchCapable) {
 					document.removeEventListener("touchmove", this.mousemove, false);
 					document.removeEventListener("touchend", this.mouseup, false);
@@ -881,16 +1007,17 @@
 					document.addEventListener("touchmove", this.mousemove, false);
 					document.addEventListener("touchend", this.mouseup, false);
 				}
-                                // Bind mouse events:
-                                document.addEventListener("mousemove", this.mousemove, false);
-                                document.addEventListener("mouseup", this.mouseup, false);
+				// Bind mouse events:
+				document.addEventListener("mousemove", this.mousemove, false);
+				document.addEventListener("mouseup", this.mouseup, false);
 
 				this.inDrag = true;
+				var newValue = this._calculateValue();
 
-				var val = this._calculateValue();
-				this._trigger('slideStart', val);
-				this._setDataVal(val);
-				this.setValue(val);
+				this._trigger('slideStart', newValue);
+
+				this._setDataVal(newValue);
+				this.setValue(newValue);
 
 				this._pauseEvent(ev);
 
@@ -948,15 +1075,15 @@
 				this.percentage[this.dragged] = percentage;
 				this._layout();
 
-				var val = this._calculateValue();
-				
+				var val = this._calculateValue(false);
+
 				this._trigger('slideStart', val);
 				this._setDataVal(val);
 				this.setValue(val, true);
 
 				this._trigger('slideStop', val);
 				this._setDataVal(val);
-				
+
 				this._pauseEvent(ev);
 
 				return false;
@@ -969,7 +1096,7 @@
 			    	ev.preventDefault();
 			    }
 			    ev.cancelBubble=true;
-			    ev.returnValue=false;			
+			    ev.returnValue=false;
 			},
 			_mousemove: function(ev) {
 				if(!this.options.enabled) {
@@ -981,7 +1108,7 @@
 				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
 				this._layout();
 
-				var val = this._calculateValue();
+				var val = this._calculateValue(true);
 				this.setValue(val, true);
 
 				return false;
@@ -1006,23 +1133,23 @@
 					document.removeEventListener("touchmove", this.mousemove, false);
 					document.removeEventListener("touchend", this.mouseup, false);
 				}
-                                // Unbind mouse event handlers:
-                                document.removeEventListener("mousemove", this.mousemove, false);
-                                document.removeEventListener("mouseup", this.mouseup, false);
-				
+                // Unbind mouse event handlers:
+                document.removeEventListener("mousemove", this.mousemove, false);
+                document.removeEventListener("mouseup", this.mouseup, false);
+
 				this.inDrag = false;
 				if (this.over === false) {
 					this._hideTooltip();
 				}
-				var val = this._calculateValue();
-				
+				var val = this._calculateValue(true);
+
 				this._layout();
-				this._setDataVal(val);
 				this._trigger('slideStop', val);
-				
+				this._setDataVal(val);
+
 				return false;
 			},
-			_calculateValue: function() {
+			_calculateValue: function(snapToClosestTick) {
 				var val;
 				if (this.options.range) {
 					val = [this.options.min,this.options.max];
@@ -1034,7 +1161,6 @@
 			            val[1] = (Math.min(this.options.max, this.options.min + Math.round((this.diff * this.percentage[1]/100)/this.options.step)*this.options.step));
 			            val[1] = this._applyPrecision(val[1]);
 			        }
-					this.options.value = val;
 				} else {
 					val = (this.options.min + Math.round((this.diff * this.percentage[0]/100)/this.options.step)*this.options.step);
 					if (val < this.options.min) {
@@ -1045,8 +1171,21 @@
 					}
 					val = parseFloat(val);
 					val = this._applyPrecision(val);
-					this.options.value = [val, this.options.value[1]];
 				}
+
+				if (snapToClosestTick) {
+					var min = [val, Infinity];
+					for (var i = 0; i < this.options.ticks.length; i++) {
+						var diff = Math.abs(this.options.ticks[i] - val);
+						if (diff <= min[1]) {
+							min = [this.options.ticks[i], diff];
+						}
+					}
+					if (min[1] <= this.options.ticks_snap_bounds) {
+						return min[0];
+					}
+				}
+
 				return val;
 			},
 			_applyPrecision: function(val) {
@@ -1150,7 +1289,7 @@
 					var classTag = classes[i];
 					var regex = new RegExp("(?:\\s|^)" + classTag + "(?:\\s|$)");
 					var ifClassExists = regex.test(newClasses);
-					
+
 					if(!ifClassExists) {
 						newClasses += " " + classTag;
 					}
