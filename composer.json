@@ -1,7 +1,7 @@
 {
     "name": "seiyria/bootstrap-slider",
     "type": "library",
-    "version": "4.4.1",
+    "version": "4.4.2",
     "description": "A less buggy fork of the original bootstrap slider found on http://www.eyecon.ro/ by Stefan Petre. It was forked so we could update the slider since the original wasn't under version control.",
     "keywords": ["slider", "css", "bootstrap", "javascript"],
     "homepage": "https://github.com/seiyria/bootstrap-slider",
