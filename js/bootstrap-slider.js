@@ -213,16 +213,55 @@
 		};
 
 		function createNewSlider(element, options) {
-			/*************************************************
 
-							Create Markup
-
-			**************************************************/
 			if(typeof element === "string") {
 				this.element = document.querySelector(element);
 			} else if(element instanceof HTMLElement) {
 				this.element = element;
 			}
+
+			/*************************************************
+
+							Process Options
+
+			**************************************************/
+			options = options ? options : {};
+			var optionTypes = Object.keys(this.defaultOptions);
+
+			for(var i = 0; i < optionTypes.length; i++) {
+				var optName = optionTypes[i];
+
+				// First check if an option was passed in via the constructor
+				var val = options[optName];
+				// If no data attrib, then check data atrributes
+				val = (typeof val !== 'undefined') ? val : getDataAttrib(this.element, optName);
+				// Finally, if nothing was specified, use the defaults
+				val = (val !== null) ? val : this.defaultOptions[optName];
+
+				// Set all options on the instance of the Slider
+				if(!this.options) {
+					this.options = {};
+				}
+				this.options[optName] = val;
+			}
+
+			function getDataAttrib(element, optName) {
+				var dataName = "data-slider-" + optName;
+				var dataValString = element.getAttribute(dataName);
+
+				try {
+					return JSON.parse(dataValString);
+				}
+				catch(err) {
+					return dataValString;
+				}
+			}
+
+			/*************************************************
+
+							Create Markup
+
+			**************************************************/
 
 			var origWidth = this.element.style.width;
 			var updateSlider = false;
@@ -261,8 +300,37 @@
 				sliderTrack.appendChild(sliderTrackLeft);
 				sliderTrack.appendChild(sliderTrackSelection);
 				sliderTrack.appendChild(sliderTrackRight);
+
+				/* Create ticks */
+				this.ticks = [];
+				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					for (i = 0; i < this.options.ticks.length; i++) {
+						var tick = document.createElement('div');
+						tick.className = 'slider-tick';
+
+						this.ticks.push(tick);
+						sliderTrack.appendChild(tick);
+					}
+				}
+
 				sliderTrack.appendChild(sliderMinHandle);
 				sliderTrack.appendChild(sliderMaxHandle);
+
+				this.tickLabels = [];
+				if (this.options.ticks_labels instanceof Array && this.options.ticks_labels.length > 0) {
+					this.tickLabelContainer = document.createElement('div');
+					this.tickLabelContainer.className = 'slider-tick-label-container';
+
+					for (i = 0; i < this.options.ticks_labels.length; i++) {
+						var label = document.createElement('div');
+						label.className = 'slider-tick-label';
+						label.innerHTML = this.options.ticks_labels[i];
+
+						this.tickLabels.push(label);
+						this.tickLabelContainer.appendChild(label);
+					}
+				}
+
 
 				var createAndAppendTooltipSubElements = function(tooltipElem) {
 					var arrow = document.createElement("div");
@@ -273,6 +341,7 @@
 
 					tooltipElem.appendChild(arrow);
 					tooltipElem.appendChild(inner);
+
 				};
 
 				/* Create tooltip elements */
@@ -295,6 +364,10 @@
 				this.sliderElem.appendChild(sliderTooltipMin);
 				this.sliderElem.appendChild(sliderTooltipMax);
 
+				if (this.tickLabelContainer) {
+					this.sliderElem.appendChild(this.tickLabelContainer);
+				}
+
 				/* Append slider element to parent container, right before the original <input> element */
 				parent.insertBefore(this.sliderElem, this.element);
 
@@ -305,43 +378,6 @@
 			if($) {
 				this.$element = $(this.element);
 				this.$sliderElem = $(this.sliderElem);
-			}
-
-			/*************************************************
-
-							Process Options
-
-			**************************************************/
-			options = options ? options : {};
-			var optionTypes = Object.keys(this.defaultOptions);
-
-			for(var i = 0; i < optionTypes.length; i++) {
-				var optName = optionTypes[i];
-
-				// First check if an option was passed in via the constructor
-				var val = options[optName];
-				// If no data attrib, then check data atrributes
-				val = (typeof val !== 'undefined') ? val : getDataAttrib(this.element, optName);
-				// Finally, if nothing was specified, use the defaults
-				val = (val !== null) ? val : this.defaultOptions[optName];
-
-				// Set all options on the instance of the Slider
-				if(!this.options) {
-					this.options = {};
-				}
-				this.options[optName] = val;
-			}
-
-			function getDataAttrib(element, optName) {
-				var dataName = "data-slider-" + optName;
-				var dataValString = element.getAttribute(dataName);
-
-				try {
-					return JSON.parse(dataValString);
-				}
-				catch(err) {
-					return dataValString;
-				}
 			}
 
 			/*************************************************
@@ -430,6 +466,13 @@
 				this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
 			}
 
+			/* In case ticks are specified, overwrite the min and max bounds */
+			if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					this.options.max = Math.max.apply(Math, this.options.ticks);
+					this.options.min = Math.min.apply(Math, this.options.ticks);
+			}
+
+
 			if (this.options.value instanceof Array) {
 				this.options.range = true;
 			} else if (this.options.range) {
@@ -454,6 +497,10 @@
 				// Reset classes
 				this._removeClass(this.handle1, 'round triangle');
 				this._removeClass(this.handle2, 'round triangle hide');
+
+				for (i = 0; i < this.ticks.length; i++) {
+					this._removeClass(this.ticks[i], 'round triangle hide');
+				}
 			}
 
 			var availableHandleModifiers = ['round', 'triangle', 'custom'];
@@ -461,6 +508,10 @@
 			if (isValidHandleType) {
 				this._addClass(this.handle1, this.options.handle);
 				this._addClass(this.handle2, this.options.handle);
+
+				for (i = 0; i < this.ticks.length; i++) {
+					this._addClass(this.ticks[i], this.options.handle);
+				}
 			}
 
 			this.offset = this._offset(this.sliderElem);
@@ -554,7 +605,10 @@
 						return val;
 					}
 				},
-				natural_arrow_keys: false
+				natural_arrow_keys: false,
+				ticks: [],
+				ticks_labels: [],
+				ticks_snap_bounds: 0
 			},
 
 			over: false,
@@ -784,6 +838,40 @@
 				this.handle1.style[this.stylePos] = positionPercentages[0]+'%';
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
 
+				/* Position ticks and labels */
+				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+					var maxTickValue = Math.max.apply(Math, this.options.ticks);
+					var minTickValue = Math.min.apply(Math, this.options.ticks);
+
+					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
+					var styleMargin = this.options.orientation === 'vertical' ? 'margin-top' : 'margin-left';
+					var labelSize = this.size / (this.options.ticks.length - 1);
+
+					if (this.tickLabelContainer) {
+						this.tickLabelContainer.style[styleMargin] = -labelSize/2 + 'px';
+						if (this.options.orientation === 'horizontal') {
+							var extraHeight = this.tickLabelContainer.offsetHeight - this.sliderElem.offsetHeight;
+							this.sliderElem.style.marginBottom = extraHeight + 'px';
+						}
+					}
+					for (var i = 0; i < this.options.ticks.length; i++) {
+						var percentage = 100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
+						this.ticks[i].style[this.stylePos] = percentage + '%';
+
+						/* Set class labels to denote whether ticks are in the selection */
+						this._removeClass(this.ticks[i], 'in-selection');
+						if (percentage <= positionPercentages[0] && !this.options.range) {
+							this._addClass(this.ticks[i], 'in-selection');
+						} else if (percentage >= positionPercentages[0] && percentage <= positionPercentages[1]) {
+							this._addClass(this.ticks[i], 'in-selection');
+						}
+
+						if (this.tickLabels[i]) {
+							this.tickLabels[i].style[styleSize] = labelSize + 'px';
+						}
+					}
+				}
+
 				if (this.options.orientation === 'vertical') {
 					this.trackLeft.style.top = '0';
 					this.trackLeft.style.height = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
@@ -987,7 +1075,7 @@
 				this.percentage[this.dragged] = percentage;
 				this._layout();
 
-				var val = this._calculateValue();
+				var val = this._calculateValue(false);
 
 				this._trigger('slideStart', val);
 				this._setDataVal(val);
@@ -1020,7 +1108,7 @@
 				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
 				this._layout();
 
-				var val = this._calculateValue();
+				var val = this._calculateValue(true);
 				this.setValue(val, true);
 
 				return false;
@@ -1053,7 +1141,7 @@
 				if (this.over === false) {
 					this._hideTooltip();
 				}
-				var val = this._calculateValue();
+				var val = this._calculateValue(true);
 
 				this._layout();
 				this._trigger('slideStop', val);
@@ -1061,7 +1149,7 @@
 
 				return false;
 			},
-			_calculateValue: function() {
+			_calculateValue: function(snapToClosestTick) {
 				var val;
 				if (this.options.range) {
 					val = [this.options.min,this.options.max];
@@ -1084,6 +1172,20 @@
 					val = parseFloat(val);
 					val = this._applyPrecision(val);
 				}
+
+				if (snapToClosestTick) {
+					var min = [val, Infinity];
+					for (var i = 0; i < this.options.ticks.length; i++) {
+						var diff = Math.abs(this.options.ticks[i] - val);
+						if (diff <= min[1]) {
+							min = [this.options.ticks[i], diff];
+						}
+					}
+					if (min[1] <= this.options.ticks_snap_bounds) {
+						return min[0];
+					}
+				}
+
 				return val;
 			},
 			_applyPrecision: function(val) {

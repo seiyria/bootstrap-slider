@@ -384,7 +384,7 @@ $("#ex5").slider();
 var slider = new Slider('#ex5');
 
 $("#destroyEx5Slider").click(function() {
-	
+
 	// With JQuery
 	$("#ex5").slider('destroy');
 
@@ -613,7 +613,6 @@ var slider = new Slider("#ex11", {
       </code></pre>
   </div>
 
-
   <div class='slider-example'>
     <h3>Example 12:</h3>
     <p>Coloring the left and right track segments.</p>
@@ -677,6 +676,41 @@ CSS
 
 
 		</code></pre>
+  </div>
+
+  <div class='slider-example'>
+      <h3>Example 13:</h3>
+      <p>Using tick marks and labels.</p>
+      <div class="well">
+      <input id="ex13" type="text"/>
+      </div>
+      <pre><code>
+###################
+HTML
+###################
+
+&ltinput id="ex13" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']"/&gt
+
+
+###################
+JavaScript
+###################
+
+// With JQuery
+$("#ex13").slider({
+    ticks: [0, 100, 200, 300, 400],
+    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+    ticks_snap_bounds: 30
+});
+
+// Without JQuery
+var slider = new Slider("#ex13", {
+    ticks: [0, 100, 200, 300, 400],
+    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+    ticks_snap_bounds: 30
+});
+
+      </code></pre>
   </div>
 
 
@@ -751,7 +785,7 @@ CSS
 			/* Example 9 */
 			$("#ex9").slider({
 				precision: 2,
-				value: 8.115 
+				value: 8.115
 			});
 
 	      	/* Example 10 */
@@ -785,6 +819,14 @@ CSS
 				range: true,
 				value: [ 3, 7 ]
 			});
+
+	      	/* Example 13 */
+	      	$("#ex13").slider({
+		        ticks: [0, 100, 200, 300, 400],
+		        ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+		        ticks_snap_bounds: 30,
+		        value: 200
+		    });
     	});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
