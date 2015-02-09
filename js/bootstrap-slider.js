@@ -1105,25 +1105,11 @@
 					var ifHorizontalAndReversed = (this.options.orientation === 'horizontal' && this.options.reversed);
 
 					if (ifVerticalAndNotReversed || ifHorizontalAndReversed) {
-						dir = dir * -1;
+						dir = -dir;
 					}
 				}
 
-				var oneStepValuePercentageChange = dir * this.percentage[2];
-				var percentage = this.percentage[handleIdx] + oneStepValuePercentageChange;
-
-				if (percentage > 100) {
-					percentage = 100;
-				} else if (percentage < 0) {
-					percentage = 0;
-				}
-
-				this.dragged = handleIdx;
-				this._adjustPercentageForRangeSliders(percentage);
-				this.percentage[this.dragged] = percentage;
-				this._layout();
-
-				var val = this._calculateValue(false);
+				var val = this.options.value[handleIdx] + dir * this.options.step;
 
 				this._trigger('slideStart', val);
 				this._setDataVal(val);
@@ -1131,6 +1117,7 @@
 
 				this._trigger('slideStop', val);
 				this._setDataVal(val);
+				this._layout();
 
 				this._pauseEvent(ev);
 

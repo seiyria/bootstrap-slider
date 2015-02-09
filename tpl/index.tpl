@@ -735,14 +735,16 @@ var slider = new Slider("#ex13", {
 $("#ex14").slider({
 	min: 1000,
 	max: 10000000,
-	scale: 'logarithmic'
+	scale: 'logarithmic',
+	step: 10
 });
 
 // Without JQuery
 var slider = new Slider('#ex14', {
 	min: 1000,
 	max: 10000000,
-	scale: 'logarithmic'
+	scale: 'logarithmic',
+	step: 10
 });
 
 
@@ -866,7 +868,8 @@ var slider = new Slider('#ex14', {
 			$("#ex14").slider({
 				min: 10,
 				max: 1000,
-				scale: 'logarithmic'
+				scale: 'logarithmic',
+				step: 10
 			});
     	});
     </script>
