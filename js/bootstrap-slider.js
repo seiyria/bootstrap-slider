@@ -1298,9 +1298,9 @@
 				element.className = newClasses.trim();
 			},
       _offset: function (obj) {
-        var rect = obj.getBoundingClientRect()
-          , ol = rect.left
-          , ot = rect.top;
+        var rect = obj.getBoundingClientRect(),
+          ol = rect.left,
+          ot = rect.top;
 
         return {
           left: ol,
