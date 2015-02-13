@@ -23,13 +23,25 @@ describe("Slider with ticks tests", function() {
 		expect(numTicks).toBe(5);
 	});
 
-	it("Should have the number of tick marks you specify", function() {
+	it("Should be at the default positions", function() {
 		testSlider = $("#testSlider1").slider({
 			ticks: [100, 200, 300, 400, 500]
 		});
 
 		$("#testSlider1").siblings('div.slider').find('.slider-tick').each(function(i) {
 			expect(this.style.left).toBe(100 * i / 4.0 + '%');
+		});
+	});
+
+	it("Should be at the positions you specify", function() {
+		var tickPositions = [0, 10, 20, 30, 100];
+		testSlider = $("#testSlider1").slider({
+			ticks: [100, 200, 300, 400, 500],
+			ticks_positions: tickPositions
+		});
+
+		$("#testSlider1").siblings('div.slider').find('.slider-tick').each(function(i) {
+			expect(this.style.left).toBe(tickPositions[i] + '%');
 		});
 	});
 

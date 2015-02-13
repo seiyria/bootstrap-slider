@@ -61,9 +61,10 @@
 }
 .slider.slider-horizontal .slider-tick-label-container {
   white-space: nowrap;
+  margin-top: 20px;
 }
 .slider.slider-horizontal .slider-tick-label-container .slider-tick-label {
-  margin-top: 24px;
+  padding-top: 4px;
   display: inline-block;
   text-align: center;
 }

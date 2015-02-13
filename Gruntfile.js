@@ -143,7 +143,7 @@ module.exports = function(grunt) {
         tasks: ['jshint:spec', 'jasmine:src']
       },
       css : {
-        files: '<%= pkg.gruntConfig.less.slider %>',
+        files: ['<%= pkg.gruntConfig.less.slider %>', '<%= pkg.gruntConfig.less.rules %>', '<%= pkg.gruntConfig.less.variables %>'],
         tasks: ['less:development']
       },
       index : {
