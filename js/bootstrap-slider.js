@@ -311,6 +311,8 @@
 						this.ticks.push(tick);
 						sliderTrack.appendChild(tick);
 					}
+
+					sliderTrackSelection.className += " tick-slider-selection";
 				}
 
 				sliderTrack.appendChild(sliderMinHandle);
