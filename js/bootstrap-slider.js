@@ -1299,20 +1299,16 @@
 
 				element.className = newClasses.trim();
 			},
-			_offset: function (obj) {
-				var ol = 0;
-				var ot = 0;
-				if (obj.offsetParent) {
-					do {
-					  ol += obj.offsetLeft;
-					  ot += obj.offsetTop;
-					} while (obj = obj.offsetParent);
-				}
-				return {
-					left: ol,
-					top: ot
-				};
-			},
+      _offset: function (obj) {
+        var rect = obj.getBoundingClientRect(),
+          ol = rect.left,
+          ot = rect.top;
+
+        return {
+          left: ol,
+          top: ot
+        };
+      },
 			_css: function(elementRef, styleName, value) {
                 if ($) {
                     $.style(elementRef, styleName, value);
