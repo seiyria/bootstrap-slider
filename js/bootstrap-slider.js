@@ -1235,6 +1235,7 @@
 				var value = "value: '" + val + "'";
 				this.element.setAttribute('data', value);
 				this.element.setAttribute('value', val);
+                this.element.value = val;
 			},
 			_trigger: function(evt, val) {
 				val = (val || val === 0) ? val : undefined;
