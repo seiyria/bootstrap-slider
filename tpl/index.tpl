@@ -105,11 +105,11 @@
 			color: green;
 		}
 
-		#slider12a .slider-track-right, #slider12c .slider-track-right {
+		#slider12a .slider-track-high, #slider12c .slider-track-high {
 			background: green;
 		}
 
-		#slider12b .slider-track-left, #slider12c .slider-track-left {
+		#slider12b .slider-track-low, #slider12c .slider-track-low {
 			background: red;
 		}
 
