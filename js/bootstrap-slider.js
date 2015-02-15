@@ -1110,6 +1110,10 @@
 				}
 
 				var val = this.options.value[handleIdx] + dir * this.options.step;
+				if (this.options.range) {
+					val = [ (!handleIdx) ? val : this.options.value[0],
+						    ( handleIdx) ? val : this.options.value[1]];
+				}
 
 				this._trigger('slideStart', val);
 				this._setDataVal(val);
