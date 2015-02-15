@@ -240,6 +240,26 @@ describe("Public Method Tests", function() {
         expect(sliderValue).toBe(minValue);
       });
 
+      it("sets the 'value' property of the slider <input> element", function() {
+        var value = 9;
+        testSlider.slider('setValue', value);
+
+        var currentValue = document.querySelector("#testSlider1").value;
+        currentValue = parseFloat(currentValue);
+
+        expect(currentValue).toBe(value);
+      });
+
+       it("sets the 'value' attribute of the slider <input> element", function() {
+        var value = 9;
+        testSlider.slider('setValue', value);
+
+        var currentValue = document.querySelector("#testSlider1").getAttribute("value");
+        currentValue = parseFloat(currentValue);
+
+        expect(currentValue).toBe(value);
+      });
+
       describe("when an invalid value type is passed in", function() {
         var invalidValue;
 

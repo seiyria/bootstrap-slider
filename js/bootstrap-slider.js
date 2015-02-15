@@ -311,6 +311,8 @@
 						this.ticks.push(tick);
 						sliderTrack.appendChild(tick);
 					}
+
+					sliderTrackSelection.className += " tick-slider-selection";
 				}
 
 				sliderTrack.appendChild(sliderMinHandle);
@@ -1233,6 +1235,7 @@
 				var value = "value: '" + val + "'";
 				this.element.setAttribute('data', value);
 				this.element.setAttribute('value', val);
+                this.element.value = val;
 			},
 			_trigger: function(evt, val) {
 				val = (val || val === 0) ? val : undefined;
@@ -1297,20 +1300,16 @@
 
 				element.className = newClasses.trim();
 			},
-			_offset: function (obj) {
-				var ol = 0;
-				var ot = 0;
-				if (obj.offsetParent) {
-					do {
-					  ol += obj.offsetLeft;
-					  ot += obj.offsetTop;
-					} while (obj = obj.offsetParent);
-				}
-				return {
-					left: ol,
-					top: ot
-				};
-			},
+      _offset: function (obj) {
+        var rect = obj.getBoundingClientRect(),
+          ol = rect.left,
+          ot = rect.top;
+
+        return {
+          left: ol,
+          top: ot
+        };
+      },
 			_css: function(elementRef, styleName, value) {
                 if ($) {
                     $.style(elementRef, styleName, value);
