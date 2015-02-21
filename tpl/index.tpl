@@ -713,6 +713,43 @@ var slider = new Slider("#ex13", {
   </div>
 
 
+      	<div class='slider-example'>
+      		<h3>Example 14:</h3>
+      		<p>With a logarithmic scale.</p>
+      		<div class="well">
+				<input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" />
+      		</div>
+      		<pre><code>
+###################
+       HTML
+###################
+
+&gt;input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" /&lt;
+
+###################
+    JavaScript
+###################
+
+// With JQuery
+$("#ex14").slider({
+	min: 1000,
+	max: 10000000,
+	scale: 'logarithmic',
+	step: 10
+});
+
+// Without JQuery
+var slider = new Slider('#ex14', {
+	min: 1000,
+	max: 10000000,
+	scale: 'logarithmic',
+	step: 10
+});
+
+
+            </code></pre>
+      	</div>
+
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -826,6 +863,13 @@ var slider = new Slider("#ex13", {
 		        ticks_snap_bounds: 30,
 		        value: 200
 		    });
+			/* Example 14 */
+			$("#ex14").slider({
+				min: 10,
+				max: 1000,
+				scale: 'logarithmic',
+				step: 10
+			});
     	});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
