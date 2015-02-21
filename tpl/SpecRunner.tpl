@@ -7,12 +7,12 @@
   <link rel="stylesheet" type="text/css" href="<%= style %>">
 <% }) %>
 	<style type="text/css">
-		#left-right-slider-styled .slider-track-left
+		#low-high-slider-styled .slider-track-low
 		{
 			background: rgb(0, 255, 0);
 		}
 
-		#left-right-slider-styled .slider-track-right
+		#low-high-slider-styled .slider-track-high
 		{
 			background: rgb(255, 0, 0);
 		}

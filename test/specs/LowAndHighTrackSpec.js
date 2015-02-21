@@ -8,10 +8,10 @@
 	This spec has tests for checking that the widths of the left and right
 	segments are the correct widths and colors, based on their CSS.
  */
-describe("Left/Right Track Tests", function() {
+describe("Low/High Track Tests", function() {
 
-	var unstyledID = "left-right-slider";
-	var styledID = "left-right-slider-styled";
+	var unstyledID = "low-high-slider";
+	var styledID = "low-high-slider-styled";
 
 	var testSlider;
 
@@ -28,22 +28,22 @@ describe("Left/Right Track Tests", function() {
 			});
 		});
 
-		it("left width is zero", function()
+		it("low track width is zero", function()
 		{
-			var leftTrack = $("#" + id + " .slider-track-left");
+			var leftTrack = $("#" + id + " .slider-track-low");
 			expect($(leftTrack).css("width")).toBe("0px");
 		});
 
-		it("right segment width is 50%", function()
+		it("high track width is 50%", function()
 		{
-			var rightTrack = $("#" + id + " .slider-track-right");
+			var rightTrack = $("#" + id + " .slider-track-high");
 			var trackWidth = rightTrack.parent().width();
 			expect($(rightTrack).css("width")).toBe((trackWidth / 2) + "px");
 		});
 
-		it("right segment is transparent", function()
+		it("high track is transparent", function()
 		{
-			var rightTrack = $("#" + id + " .slider-track-right");
+			var rightTrack = $("#" + id + " .slider-track-high");
 			var rightColor = rightTrack.css("background-color");
 			var isTransparent = rightColor.match(/rgba\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}, 0\)/);
 			expect(isTransparent).toBeTruthy();
@@ -70,22 +70,22 @@ describe("Left/Right Track Tests", function() {
 			});
 		});
 
-		it("left width is zero", function()
+		it("low track width is zero", function()
 		{
-			var leftTrack = $("#" + id + " .slider-track-left");
+			var leftTrack = $("#" + id + " .slider-track-low");
 			expect($(leftTrack).css("width")).toBe("0px");
 		});
 
-		it("right segment width is 50%", function()
+		it("high track width is 50%", function()
 		{
-			var rightTrack = $("#" + id + " .slider-track-right");
+			var rightTrack = $("#" + id + " .slider-track-high");
 			var trackWidth = rightTrack.parent().width();
 			expect($(rightTrack).css("width")).toBe((trackWidth / 2) + "px");
 		});
 
-		it("right segment is red", function()
+		it("high track is red", function()
 		{
-			var rightTrack = $("#" + id + " .slider-track-right");
+			var rightTrack = $("#" + id + " .slider-track-high");
 			var rightColor = rightTrack.css("background-color");
 			expect(rightColor).toBe("rgb(255, 0, 0)");
 		});
@@ -117,9 +117,9 @@ describe("Left/Right Track Tests", function() {
 			});
 		});
 
-		it("left width is zero", function()
+		it("low track width is correct", function()
 		{
-			var leftTrack = $("#" + id + " .slider-track-left");
+			var leftTrack = $("#" + id + " .slider-track-low");
 
 			var trackWidth = leftTrack.parent().width();
 			var expectedWidth = ((values.values[0] - values.min) / (values.max - values.min)) * trackWidth;
@@ -127,9 +127,9 @@ describe("Left/Right Track Tests", function() {
 			expect($(leftTrack).css("width")).toBe(expectedWidth + "px");
 		});
 
-		it("right segment width is 50%", function()
+		it("high track width is correct", function()
 		{
-			var rightTrack = $("#" + id + " .slider-track-right");
+			var rightTrack = $("#" + id + " .slider-track-high");
 			var trackWidth = rightTrack.parent().width();
 
 			var expectedWidth = ((values.max - values.values[1]) / (values.max - values.min)) * trackWidth;
@@ -137,17 +137,17 @@ describe("Left/Right Track Tests", function() {
 			expect($(rightTrack).css("width")).toBe(expectedWidth + "px");
 		});
 
-		it("left segment is transparent", function()
+		it("low track is transparent", function()
 		{
-			var leftTrack = $("#" + id + " .slider-track-left");
+			var leftTrack = $("#" + id + " .slider-track-low");
 			var leftColor = leftTrack.css("background-color");
 			var isTransparent = leftColor.match(/rgba\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}, 0\)/);
 			expect(isTransparent).toBeTruthy();
 		});
 
-		it("right segment is transparent", function()
+		it("high track is transparent", function()
 		{
-			var rightTrack = $("#" + id + " .slider-track-right");
+			var rightTrack = $("#" + id + " .slider-track-high");
 			var rightColor = rightTrack.css("background-color");
 			var isTransparent = rightColor.match(/rgba\([0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}, 0\)/);
 			expect(isTransparent).toBeTruthy();
@@ -180,9 +180,9 @@ describe("Left/Right Track Tests", function() {
 			});
 		});
 
-		it("left width is zero", function()
+		it("low track width is correct", function()
 		{
-			var leftTrack = $("#" + id + " .slider-track-left");
+			var leftTrack = $("#" + id + " .slider-track-low");
 
 			var trackWidth = leftTrack.parent().width();
 			var expectedWidth = ((values.values[0] - values.min) / (values.max - values.min)) * trackWidth;
@@ -190,9 +190,9 @@ describe("Left/Right Track Tests", function() {
 			expect($(leftTrack).css("width")).toBe(expectedWidth + "px");
 		});
 
-		it("right segment width is 50%", function()
+		it("high track width is correct", function()
 		{
-			var rightTrack = $("#" + id + " .slider-track-right");
+			var rightTrack = $("#" + id + " .slider-track-high");
 			var trackWidth = rightTrack.parent().width();
 
 			var expectedWidth = ((values.max - values.values[1]) / (values.max - values.min)) * trackWidth;
@@ -200,16 +200,16 @@ describe("Left/Right Track Tests", function() {
 			expect($(rightTrack).css("width")).toBe(expectedWidth + "px");
 		});
 
-		it("left segment is green", function()
+		it("low track is green", function()
 		{
-			var leftTrack = $("#" + id + " .slider-track-left");
+			var leftTrack = $("#" + id + " .slider-track-low");
 			var leftColor = leftTrack.css("background-color");
 			expect(leftColor).toBe("rgb(0, 255, 0)");
 		});
 
-		it("right segment is red", function()
+		it("high track is red", function()
 		{
-			var rightTrack = $("#" + id + " .slider-track-right");
+			var rightTrack = $("#" + id + " .slider-track-high");
 			var rightColor = rightTrack.css("background-color");
 			expect(rightColor).toBe("rgb(255, 0, 0)");
 		});
