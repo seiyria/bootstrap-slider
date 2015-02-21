@@ -632,15 +632,14 @@ var slider = new Slider("#ex11", {
 ###################
 HTML
 ###################
-
-Single-value slider, high track:
+&lt;!-- Single-value slider, high track: --&gt;
 &ltinput id="ex12a" type="text"/&gt&ltbr/&gt
 Note that there is no low track on the single-value slider. The area to lesser than the value of the handle is the selection.
 
-Range slider, low track:
+&lt;!-- Range slider, low track: --&gt;
 &ltinput id="ex12b" type="text"/&gt&ltbr/&gt
 
-Range slider, low and high tracks, and selection:
+&lt;!-- Range slider, low and high tracks, and selection: --&gt;
 &ltinput id="ex12c" type="text"/&gt&ltbr/&gt
 
 ###################
@@ -724,7 +723,7 @@ var slider = new Slider("#ex13", {
        HTML
 ###################
 
-&gt;input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" /&lt;
+&lt;input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" /&gt;
 
 ###################
     JavaScript

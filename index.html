@@ -105,11 +105,11 @@
 			color: green;
 		}
 
-		#slider12a .slider-track-right, #slider12c .slider-track-right {
+		#slider12a .slider-track-high, #slider12c .slider-track-high {
 			background: green;
 		}
 
-		#slider12b .slider-track-left, #slider12c .slider-track-left {
+		#slider12b .slider-track-low, #slider12c .slider-track-low {
 			background: red;
 		}
 
@@ -615,33 +615,31 @@ var slider = new Slider("#ex11", {
 
   <div class='slider-example'>
     <h3>Example 12:</h3>
-    <p>Coloring the left and right track segments.</p>
+    <p>Coloring the low and high track segments.</p>
 	<div class="well">
-      Single-value slider, right track:<br/>
+      Single-value slider, high track:<br/>
       <input id="ex12a" type="text"/><br/>
-      Note that there is no left track on the single-value slider.  The
-      area to the left of the handle is the selection.
+      Note that there is no low track on the single-value slider.  The
+      area lesser than the value of the handle is the selection.
       <br/><br/>
-      Range slider, left track:<br/>
+      Range slider, low track:<br/>
       <input id="ex12b" type="text"/>
       <br/><br/>
-      Range slider, left and right tracks, and selection:<br/>
+      Range slider, low and high tracks, and selection:<br/>
       <input id="ex12c" type="text"/>
     </div>
     <pre><code>
 ###################
 HTML
 ###################
-
-Single-value slider, right track:
+&lt;!-- Single-value slider, high track: --&gt;
 &ltinput id="ex12a" type="text"/&gt&ltbr/&gt
-Note that there is no left track on the single-value slider. The area to the left of the handle is the selection.
+Note that there is no low track on the single-value slider. The area to lesser than the value of the handle is the selection.
 
-Range slider, left track:
+&lt;!-- Range slider, low track: --&gt;
 &ltinput id="ex12b" type="text"/&gt&ltbr/&gt
 
-
-Range slider, left and right tracks, and selection:
+&lt;!-- Range slider, low and high tracks, and selection: --&gt;
 &ltinput id="ex12c" type="text"/&gt&ltbr/&gt
 
 ###################
@@ -662,11 +660,11 @@ new Slider("#ex12c", { id: "slider12c", min: 0, max: 10, range: true, value: [3,
 CSS
 ###################
 
-#slider12a .slider-track-right, #slider12c .slider-track-right {
+#slider12a .slider-track-high, #slider12c .slider-track-high {
 	background: green;
 }
 
-#slider12b .slider-track-left, #slider12c .slider-track-left {
+#slider12b .slider-track-low, #slider12c .slider-track-low {
 	background: red;
 }
 
@@ -725,7 +723,7 @@ var slider = new Slider("#ex13", {
        HTML
 ###################
 
-&gt;input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" /&lt;
+&lt;input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" /&gt;
 
 ###################
     JavaScript
