@@ -104,12 +104,12 @@
 		#ex6SliderVal {
 			color: green;
 		}
-
-		#slider12a .slider-track-right, #slider12c .slider-track-right {
+		
+		#slider12a .slider-track-high, #slider12c .slider-track-high {
 			background: green;
 		}
 
-		#slider12b .slider-track-left, #slider12c .slider-track-left {
+		#slider12b .slider-track-low, #slider12c .slider-track-low {
 			background: red;
 		}
 
@@ -711,6 +711,44 @@ var slider = new Slider("#ex13", {
       </code></pre>
   </div>
 
+
+  	<div class='slider-example'>
+  		<h3>Example 14:</h3>
+  		<p>With a logarithmic scale.</p>
+  		<div class="well">
+			<input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" />
+  		</div>
+  		<pre><code>
+###################
+   HTML
+###################
+
+&lt;input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" /&gt;
+
+###################
+JavaScript
+###################
+
+// With JQuery
+$("#ex14").slider({
+	min: 1000,
+	max: 10000000,
+	scale: 'logarithmic',
+	step: 10
+});
+
+// Without JQuery
+var slider = new Slider('#ex14', {
+	min: 1000,
+	max: 10000000,
+	scale: 'logarithmic',
+	step: 10
+});
+
+
+        </code></pre>
+  	</div>
+
       </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -824,6 +862,14 @@ var slider = new Slider("#ex13", {
 		        ticks_snap_bounds: 30,
 		        value: 200
 		    });
+
+		    /* Example 14 */
+			$("#ex14").slider({
+				min: 10,
+				max: 1000,
+				scale: 'logarithmic',
+				step: 10
+			});
 
     	});
     </script>
