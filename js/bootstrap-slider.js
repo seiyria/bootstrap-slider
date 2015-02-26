@@ -345,7 +345,7 @@
 
 				/* Create ticks */
 				this.ticks = [];
-				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 					for (i = 0; i < this.options.ticks.length; i++) {
 						var tick = document.createElement('div');
 						tick.className = 'slider-tick';
@@ -361,7 +361,7 @@
 				sliderTrack.appendChild(sliderMaxHandle);
 
 				this.tickLabels = [];
-				if (this.options.ticks_labels instanceof Array && this.options.ticks_labels.length > 0) {
+				if (Array.isArray(this.options.ticks_labels) && this.options.ticks_labels.length > 0) {
 					this.tickLabelContainer = document.createElement('div');
 					this.tickLabelContainer.className = 'slider-tick-label-container';
 
@@ -515,13 +515,13 @@
 			}
 
 			/* In case ticks are specified, overwrite the min and max bounds */
-			if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+			if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 					this.options.max = Math.max.apply(Math, this.options.ticks);
 					this.options.min = Math.min.apply(Math, this.options.ticks);
 			}
 
 
-			if (this.options.value instanceof Array) {
+			if (Array.isArray(this.options.value)) {
 				this.options.range = true;
 			} else if (this.options.range) {
 				// User wants a range, but value is not an array
@@ -649,7 +649,7 @@
 				reversed: false,
 				enabled: true,
 				formatter: function(val) {
-					if(val instanceof Array) {
+					if (Array.isArray(val)) {
 						return val[0] + " : " + val[1];
 					} else {
 						return val;
@@ -889,7 +889,7 @@
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
 
 				/* Position ticks and labels */
-				if (this.options.ticks instanceof Array && this.options.ticks.length > 0) {
+				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 					var maxTickValue = Math.max.apply(Math, this.options.ticks);
 					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
@@ -1249,9 +1249,9 @@
 				return Math.max(0, Math.min(100, percentage));
 			},
 			_validateInputValue: function(val) {
-				if(typeof val === 'number') {
+				if (typeof val === 'number') {
 					return val;
-				} else if(val instanceof Array) {
+				} else if (Array.isArray(val)) {
 					this._validateArray(val);
 					return val;
 				} else {
