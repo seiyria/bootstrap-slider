@@ -583,11 +583,11 @@
 				// Bind touch handlers
 				this.mousedown = this._mousedown.bind(this);
 				this.sliderElem.addEventListener("touchstart", this.mousedown, false);
-			} else {
-				// Bind mouse handlers
-				this.mousedown = this._mousedown.bind(this);
-				this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 			}
+            // Bind mouse handlers
+            this.mousedown = this._mousedown.bind(this);
+            this.sliderElem.addEventListener("mousedown", this.mousedown, false);
+
 
 			// Bind tooltip-related handlers
 			if(this.options.tooltip === 'hide') {
