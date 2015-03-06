@@ -771,7 +771,6 @@
 				} else {
 					this.enable();
 				}
-
 				return this;
 			},
 
@@ -1242,8 +1241,17 @@
 				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove')) {
 					ev = ev.touches[0];
 				}
-				var percentage = (ev[this.mousePos] - this.offset[this.stylePos])*100/this.size;
-				percentage = Math.round(percentage/this.percentage[2])*this.percentage[2];
+
+				var eventPosition = ev[this.mousePos];
+				var sliderOffset = this.offset[this.stylePos];
+				var distanceToSlide = eventPosition - sliderOffset;
+				// Calculate what percent of the length the slider handle has slid
+				var percentage = (distanceToSlide / this.size) * 100;
+				percentage = Math.round(percentage / this.percentage[2]) * this.percentage[2];
+
+				// Make sure the percent is within the bounds of the slider.
+				// 0% corresponds to the 'min' value of the slide
+				// 100% corresponds to the 'max' value of the slide
 				return Math.max(0, Math.min(100, percentage));
 			},
 			_validateInputValue: function(val) {
@@ -1331,16 +1339,12 @@
 
 				element.className = newClasses.trim();
 			},
-      _offset: function (obj) {
-        var rect = obj.getBoundingClientRect(),
-          ol = rect.left,
-          ot = rect.top;
-
-        return {
-          left: ol,
-          top: ot
-        };
-      },
+		    _offset: function (obj) {
+		        return {
+		          left: obj.offsetLeft,
+		          top: obj.offsetTop
+		   		};
+		    },
 			_css: function(elementRef, styleName, value) {
                 if ($) {
                     $.style(elementRef, styleName, value);
