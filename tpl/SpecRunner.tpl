@@ -42,6 +42,8 @@
 	<input id="precisionSlider" type="text" data-slider-precision="2"/>
 
 	<input id="valueSlider" type="text" data-slider-value="5"/>
+	
+	<input id="sliderWithTickMarksAndLabels" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]'/>
 
 	<input id="selectionSlider" type="text" data-slider-selection="after"/>
 

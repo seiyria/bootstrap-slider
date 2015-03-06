@@ -288,7 +288,7 @@
 			}
 
 			function getDataAttrib(element, optName) {
-				var dataName = "data-slider-" + optName;
+				var dataName = "data-slider-" + optName.replace(/_/g, '-');
 				var dataValString = element.getAttribute(dataName);
 
 				try {

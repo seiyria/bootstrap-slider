@@ -45,6 +45,24 @@ describe("Element Data Attributes Tests", function() {
     var sliderValue = slider.slider('getValue');
     expect(sliderValue).toBe(5);
   });
+  
+  it("reads the 'data-slider-ticks-labels' property and sets it on slider", function() {
+    slider = $("#sliderWithTickMarksAndLabels").slider();
+      
+    var ticksLabelsAreCorrect = arraysEqual($("#sliderWithTickMarksAndLabels").data('slider').options.ticks_labels, ['$0', '$100', '$200', '$300', '$400']);
+    expect(ticksLabelsAreCorrect).toBeTruthy();
+	
+	function arraysEqual(a, b) {
+	  if (a === b) {return true;}
+	  if (a == null || b == null){return false;}
+	  if (a.length !== b.length) {return false;}
+
+	  for (var i = 0; i < a.length; ++i) {
+		if (a[i] !== b[i]) {return false;}
+	  }
+	  return true;
+	}
+  });
 
   it("reads the 'data-slider-selection' property and sets it on slider", function() {
     slider = $("#selectionSlider").slider({
