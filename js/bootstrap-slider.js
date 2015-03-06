@@ -584,7 +584,7 @@
 				// Bind touch handlers
 				this.sliderElem.addEventListener("touchstart", this.mousedown, false);
 			}
-            this.sliderElem.addEventListener("mousedown", this.mousedown, false);
+			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
 
 			// Bind tooltip-related handlers
