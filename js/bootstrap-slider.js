@@ -34,15 +34,18 @@
 (function(root, factory) {
 	if(typeof define === "function" && define.amd) {
 		define(["jquery"], factory);
-	} else if(typeof module === "object" && module.exports) {
+	}
+	else if(typeof module === "object" && module.exports) {
 		var jQuery;
 		try {
 			jQuery = require("jquery");
-		} catch (err) {
+		}
+		catch (err) {
 			jQuery = null;
 		}
 		module.exports = factory(jQuery);
-	} else {
+	}
+	else {
 		root.Slider = factory(root.jQuery);
 	}
 }(this, function($) {
@@ -779,12 +782,7 @@
 			},
 
 			on: function(evt, callback) {
-				if($) {
-					this.$element.on(evt, callback);
-					this.$sliderElem.on(evt, callback);
-				} else {
-					this._bindNonQueryEventHandler(evt, callback);
-				}
+				this._bindNonQueryEventHandler(evt, callback);
 				return this;
 			},
 
