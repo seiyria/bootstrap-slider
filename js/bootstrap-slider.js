@@ -660,7 +660,8 @@
 				ticks: [],
 				ticks_labels: [],
 				ticks_snap_bounds: 0,
-				scale: 'linear'
+				scale: 'linear',
+				focus: false
 			},
 
 			over: false,
@@ -1014,8 +1015,6 @@
 					return false;
 				}
 
-				this._triggerFocusOnHandle();
-
 				this.offset = this._offset(this.sliderElem);
 				this.size = this.sliderElem[this.sizePos];
 
@@ -1065,6 +1064,10 @@
 				this.setValue(newValue);
 
 				this._pauseEvent(ev);
+
+				if (this.options.focus) {
+					this._triggerFocusOnHandle(this.dragged);
+				}
 
 				return true;
 			},

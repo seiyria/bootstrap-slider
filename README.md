@@ -128,6 +128,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | ticks_labels | array | [ ] | Defines the labels below the tick marks. Accepts HTML input. |
 | ticks_snap_bounds | float | 0 | Used to define the snap bounds of a tick. Snaps to the tick if value is within these bounds. |
 | scale | string | 'linear' | Set to 'logarithmic' to use a logarithmic scale. |
+| focus | bool | false | Focus the appropriate slider handle after a value change. |
 
 Functions
 =========
