@@ -20,7 +20,7 @@ describe("Focus Option Tests", function() {
     target.dispatchEvent(myEvent);
   };
 
-  it("should not be focused after value change when 'focus' is false", function() {
+  it("handle should not be focused after value change when 'focus' is false", function() {
     testSlider = $("#testSlider1").slider({
       min  : 0,
       max  : 10,
