@@ -1337,12 +1337,15 @@
 
 				element.className = newClasses.trim();
 			},
-		    _offset: function (obj) {
-		        return {
-		          left: obj.offsetLeft,
-		          top: obj.offsetTop
-		   		};
-		    },
+			_offset: function (obj) {
+				var rect = obj.getBoundingClientRect(),
+				ol = rect.left,
+				ot = rect.top;
+				return {
+					left: ol,
+					top: ot
+				};
+			},
 			_css: function(elementRef, styleName, value) {
                 if ($) {
                     $.style(elementRef, styleName, value);
