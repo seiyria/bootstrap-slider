@@ -749,6 +749,45 @@ var slider = new Slider('#ex14', {
             </code></pre>
       	</div>
 
+      <div class="slider-example">
+        <h3>Example 15:</h3>
+        <p>Focus the slider handle after a value change.</p>
+        <div class="well">
+          Single-value slider:<br/>
+          <input id="ex15a" type="text"/><br/>
+          <br/><br/>
+          Range slider:<br/>
+          <input id="ex15b" type="text"/>
+        </div>
+        <pre>
+          <code>
+
+###################
+HTML
+###################
+&lt;!-- Single-value slider: --&gt;
+&ltinput id="ex15a" type="text"/&gt&ltbr/&gt
+
+&lt;!-- Range slider: --&gt;
+&ltinput id="ex15b" type="text"/&gt&ltbr/&gt
+Note that the slider handle that caused the value change is focused.
+
+###################
+JavaScript
+###################
+
+// With JQuery
+$("#ex15a").slider({ min: 0, max: 10, value: 0, focus: true });
+$("#ex15b").slider({ min: 0, max: 10, value: [0, 10], focus: true });
+
+// Without JQuery
+new Slider("#ex15a", { min: 0, max: 10, value: 0, focus: true });
+new Slider("#ex15b", { min: 0, max: 10, value: [0, 10], focus: true });
+
+          </code>
+        </pre>
+      </div>
+
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -870,6 +909,20 @@ var slider = new Slider('#ex14', {
 				step: 10
 			});
     	});
+
+      /* Example 15 */
+      $("#ex15a").slider({
+        min  : 0,
+        max  : 10,
+        value: 0,
+        focus: true
+      });
+      $("#ex15b").slider({
+        min  : 0,
+        max  : 10,
+        value: [ 0, 10 ],
+        focus: true
+      });
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
