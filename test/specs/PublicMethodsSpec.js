@@ -354,18 +354,65 @@ describe("Public Method Tests", function() {
       });
     });
 
-    it("if second argument is true, the 'slide' event is triggered", function() {
-      var testSlider = $("#testSlider1").slider({
-        value : 3
+    describe("triggerSlideEvent argument", function() {
+      it("if triggerSlideEvent argument is true, the 'slide' event is triggered", function() {
+        var testSlider = $("#testSlider1").slider({
+          value : 3
+        });
+  
+          var newSliderVal = 5;
+  
+          testSlider.on('slide', function(evt) {
+            expect(newSliderVal).toEqual(evt.value);
+          });
+  
+        testSlider.slider('setValue', newSliderVal, true);
       });
 
-      var newSliderVal = 5;
+      it("if triggerSlideEvent argument is false, the 'slide' event is not triggered", function() {
+        var newSliderVal = 5;
+        var slideEventTriggered = false; 
+        var testSlider = $("#testSlider1").slider({
+          value : 3
+        });
+  
+        testSlider.on('slide', function() {
+          slideEventTriggered = true;
+        });
+        testSlider.slider('setValue', newSliderVal, false);
 
-      testSlider.on('slide', function(evt) {
-        expect(newSliderVal).toEqual(evt.value);
+        expect(slideEventTriggered).toEqual(false);
+      });
+    });
+
+    describe("triggerChangeEvent argument", function() {
+      it("if triggerChangeEvent argument is true, the 'change' event is triggered", function() {
+        var testSlider = $("#testSlider1").slider({
+          value : 3
+        });
+  
+        var newSliderVal = 5;
+
+        testSlider.on('change', function(evt) {
+          expect(newSliderVal).toEqual(evt.value.newValue);
+        });
+  
+        testSlider.slider('setValue', newSliderVal, true);
       });
 
-      testSlider.slider('setValue', newSliderVal, true);
+      it("if triggerChangeEvent argument is false, the 'change' event is not triggered", function() {
+        var changeEventTriggered = false; 
+        var testSlider = $("#testSlider1").slider({
+          value : 3
+        });
+  
+        testSlider.on('change', function() {
+          changeEventTriggered = true;
+        });
+        testSlider.slider('setValue', 5, false);
+
+        expect(changeEventTriggered).toEqual(false);
+      });
     });
 
   });

@@ -137,7 +137,7 @@ __NOTE:__ Optional parameters are italicized.
 | Function | Parameters | Description |
 | -------- | ----------- | ----------- |
 | getValue | --- | Get the current value from the slider |
-| setValue | newValue, _triggerSlideEvent_ | Set a new value for the slider. If optional triggerSlideEvent parameter is _true_, the 'slide' event will be triggered. |
+| setValue | newValue, _triggerSlideEvent_, _triggerChangeEvent_ | Set a new value for the slider. If optional triggerSlideEvent parameter is _true_, 'slide' events will be triggered. If optional triggerChangeEvent parameter is _true_, 'change' events will be triggered. |
 | destroy | --- | Properly clean up and remove the slider instance |
 | disable | ---| Disables the slider and prevents the user from changing the value |
 | enable | --- | Enables the slider |

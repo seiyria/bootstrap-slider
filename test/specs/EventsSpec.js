@@ -246,7 +246,7 @@ describe("Event Tests", function() {
         testSlider.on('change', function() {
           flag = true;
         });
-        testSlider.slider("setValue", 3);
+        testSlider.slider("setValue", 3, false, true);
         expect(flag).toBeTruthy();
       });
     });
@@ -294,7 +294,7 @@ describe("Event Tests", function() {
         testSlider.on('change', function() {
           numTimesFired++;
         });
-        testSlider.setValue(3);
+        testSlider.setValue(3, false, true);
         expect(numTimesFired).toEqual(1);
       });
     });
