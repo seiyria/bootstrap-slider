@@ -3,6 +3,7 @@ module.exports = function(grunt) {
 
   var packageJSON = grunt.file.readJSON('package.json');
   var bumpFiles = ["package.json", "bower.json", "composer.json"];
+  var commitFiles = bumpFiles.concat(["./dist/*"]);
 
   // Project configuration.
   grunt.initConfig({
@@ -196,7 +197,7 @@ module.exports = function(grunt) {
         updateConfigs: [],
         commit: true,
         commitMessage: 'Release v%VERSION%',
-        commitFiles: bumpFiles.push("./dist/*"),
+        commitFiles: commitFiles,
         createTag: true,
         tagName: 'v%VERSION%',
         tagMessage: 'Version %VERSION%',
