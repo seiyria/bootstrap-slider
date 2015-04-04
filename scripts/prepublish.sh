@@ -12,5 +12,5 @@ grunt prod
 git add dist/ -f
 git commit -m "new dist"
 
-# Push commits to master branch on remote 'origin'
+# Push commits/tags to master branch on remote 'origin'
 git push origin master && git push --tags origin master
