@@ -196,7 +196,7 @@ module.exports = function(grunt) {
         updateConfigs: [],
         commit: true,
         commitMessage: 'Release v%VERSION%',
-        commitFiles: bumpFiles,
+        commitFiles: bumpFiles.push("./dist/*"),
         createTag: true,
         tagName: 'v%VERSION%',
         tagMessage: 'Version %VERSION%',
