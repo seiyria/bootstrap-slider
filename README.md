@@ -14,7 +14,13 @@ Want to use bower? `bower install seiyria-bootstrap-slider`
 
 Want to use npm? `npm install bootstrap-slider`
 
-Then load the plugin CSS and JavaScript into your web page, and everything should work!
+__NOTE for NPM users__: In order to keep the version numbers in our dist/ file consistent with our Github tags, we do a patch version bump, generate a new dist, and create a commit/tag on postpublish.
+
+This does mean the Github repo will always be one patch commit off of what is published to NPM. Note that this will not affect functionality, and is only used to keep package management system files and the dist file version numbers in sync.
+
+Basic Setup
+============
+Load the plugin CSS and JavaScript into your web page, and everything should work!
 
 Remember to load the plugin code after loading the Bootstrap CSS and JQuery.
 
@@ -83,9 +89,9 @@ mySlider
 	.setValue(7);
 ```
 
-Loading as CommonJS module
+Using as CommonJS module
 =======
-bootstrap-slider can be loaded as a CommonJS module via [Browserify](https://github.com/substack/node-browserify), [Webpack](https://github.com/webpack/webpack), or some other library.
+bootstrap-slider can be loaded as a CommonJS module via [Browserify](https://github.com/substack/node-browserify), [Webpack](https://github.com/webpack/webpack), or some other build tool.
 
 ```
 var Slider = require("bootstrap-slider");
@@ -160,13 +166,15 @@ Events
 | slideEnabled | This event fires when the slider is enabled | N/A |
 | slideDisabled | This event fires when the slider is disabled | N/A |
 
-Version Bumping (Maintainers Only)
+Version Bumping and Publishing (Maintainers Only)
 =======
 To bump the version number across all the various packagement systems the plugin is registered with, please use the [grunt bump](https://github.com/vojtajina/grunt-bump) plugin.
 
 * _grunt bump:patch_ - patch version bump, __0.0.0 -> 0.0.1__
 * _grunt bump:minor_ - minor version bump, __0.0.0 -> 0.1.0__
 * _grunt bump:major_ - major version bump, __0.0.0 -> 1.0.0__
+
+After bumping, type `npm publish` to update on NPM.
 
 
 Other Platforms & Libraries
