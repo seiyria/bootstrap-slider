@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Install bower deps
+# Install bower deps (NOTE: I have no idea why this is here but will keep it for time being)
 bower install
 
-# Version bump (minor by default)
-grunt bump-only:minor
+# Version bump (patch by default)
+grunt bump-only:patch
 grunt bump-commit
 
 # Generate new dist and commit
 grunt prod
-git add dist/*
+git add dist/ -f
 git commit -m "new dist"
 
 # Push commits to master branch on remote 'origin'
