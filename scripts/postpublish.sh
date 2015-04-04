@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# Install bower deps (NOTE: I have no idea why this is here but will keep it for time being)
-bower install
-
-# Version bump (patch by default)
+# Version bump (patch)
 grunt bump-only:patch
 # Generate new dist
 grunt prod
