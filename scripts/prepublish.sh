@@ -7,8 +7,6 @@ bower install
 grunt bump-only:patch
 # Generate new dist
 grunt prod
-git add dist/ -f
-
 # Commit new release tag
 grunt bump-commit
 
