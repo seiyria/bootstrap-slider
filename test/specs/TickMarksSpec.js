@@ -85,6 +85,23 @@ describe("Slider with ticks tests", function() {
 		}
 	});
 
+	it("Should show the correct tick marks as 'in-selection', according to the `selection` property", function() {
+		var options = {
+			ticks: [100, 200, 300, 400, 500],
+			value: 250,
+			selection: 'after'
+		},
+		$el = $("#testSlider1");
+
+		testSlider = $el.slider(options);
+		expect($el.siblings('div.slider').find('.in-selection').length).toBe(3);
+
+		testSlider.slider('destroy');
+
+		options.selection = 'before';
+		testSlider = $el.slider(options);
+		expect($el.siblings('div.slider').find('.in-selection').length).toBe(2);
+});
 
 	afterEach(function() {
 	    if(testSlider) {

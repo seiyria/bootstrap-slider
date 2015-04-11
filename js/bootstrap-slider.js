@@ -906,8 +906,12 @@
 
 						/* Set class labels to denote whether ticks are in the selection */
 						this._removeClass(this.ticks[i], 'in-selection');
-						if (percentage <= positionPercentages[0] && !this.options.range) {
-							this._addClass(this.ticks[i], 'in-selection');
+						if (!this.options.range) {
+							if (this.options.selection === 'after' && percentage >= positionPercentages[0]){
+								this._addClass(this.ticks[i], 'in-selection');
+							} else if (this.options.selection === 'before' && percentage <= positionPercentages[0]) {
+								this._addClass(this.ticks[i], 'in-selection');
+							}
 						} else if (percentage >= positionPercentages[0] && percentage <= positionPercentages[1]) {
 							this._addClass(this.ticks[i], 'in-selection');
 						}
