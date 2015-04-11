@@ -54,7 +54,10 @@ var value = mySlider.slider('getValue');
 		.slider('setValue', 7);
 ```
 
-If there is already a JQuery plugin named _slider_ bound to the namespace, then this plugin will take on the alternate namespace _bootstrapSlider_.
+What if there is already a _slider_ plugin bound to the JQuery namespace?
+======================
+
+If there is already a JQuery plugin named _slider_ bound to the JQuery namespace, then this plugin will take on the alternate namespace _bootstrapSlider_.
 
 ```
 // Instantiate a slider
