@@ -1340,23 +1340,25 @@
 
 				element.className = newClasses.trim();
 			},
+			_offsetLeft: function(obj){
+				var offsetLeft = obj.offsetLeft;
+				while((obj = obj.offsetParent) && !isNaN(obj.offsetLeft)){
+					offsetLeft += obj.offsetLeft;
+				}
+				return offsetLeft;
+			},
+			_offsetTop: function(obj){
+				var offsetTop = obj.offsetTop;
+				while((obj = obj.offsetParent) && !isNaN(obj.offsetTop)){
+					offsetTop += obj.offsetTop;
+				}
+				return offsetTop;
+			},
 		    _offset: function (obj) {
-				// TODO: Need to find a better solution to fix vertical sliders
-				if(this.options.orientation === "vertical") {
-					return {
-                        left: obj.offsetLeft,
-                        top: obj.offsetTop
-                    };
-				}
-				else {
-					var rect = obj.getBoundingClientRect(),
-					ol = rect.left,
-					ot = rect.top;
-					return {
-						left: ol,
-						top: ot
-					};
-				}
+				return {
+					left: this._offsetLeft(obj),
+					top: this._offsetTop(obj)
+				};
 		    },
 			_css: function(elementRef, styleName, value) {
                 if ($) {
