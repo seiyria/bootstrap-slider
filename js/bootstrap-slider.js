@@ -266,7 +266,17 @@
 				toValue: function(percentage) {
 					var min = (this.options.min === 0) ? 0 : Math.log(this.options.min);
 					var max = Math.log(this.options.max);
-					return Math.exp(min + (max - min) * percentage / 100);
+					var value = Math.exp(min + (max - min) * percentage / 100);
+					value = this.options.min + Math.round((value - this.options.min) / this.options.step) * this.options.step;
+					/* Rounding to the nearest step could exceed the min or
+					 * max, so clip to those values. */
+					if (value < this.options.min) {
+						return this.options.min;
+					} else if (value > this.options.max) {
+						return this.options.max;
+					} else {
+						return value;
+					}
 				},
 				toPercentage: function(value) {
 					if (this.options.max === this.options.min) {
