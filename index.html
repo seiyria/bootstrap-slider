@@ -711,26 +711,61 @@ var slider = new Slider("#ex13", {
       </code></pre>
   </div>
 
+	<div class='slider-example'>
+      <h3>Example 14:</h3>
+      <p>Using tick marks at specific positions..</p>
+      <div class="well">
+      <input id="ex14" type="text"/>
+      </div>
+      <pre><code>
+###################
+HTML
+###################
+
+&ltinput id="ex14" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']" ticks_positions="[0, 30, 60, 70, 90, 100]" /&gt
+
+###################
+JavaScript
+###################
+
+// With JQuery
+$("#ex14").slider({
+    ticks: [0, 100, 200, 300, 400],
+    ticks_positions: [0, 30, 60, 70, 90, 100],
+    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+    ticks_snap_bounds: 30
+});
+
+// Without JQuery
+var slider = new Slider("#ex14", {
+    ticks: [0, 100, 200, 300, 400],
+    ticks_positions: [0, 30, 60, 70, 90, 100],
+    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+    ticks_snap_bounds: 30
+});
+
+	</code></pre>
+	</div>
 
       	<div class='slider-example'>
-      		<h3>Example 14:</h3>
+      		<h3>Example 15:</h3>
       		<p>With a logarithmic scale.</p>
       		<div class="well">
-				<input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" />
+				<input id="ex15" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" />
       		</div>
       		<pre><code>
 ###################
        HTML
 ###################
 
-&lt;input id="ex14" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" /&gt;
+&lt;input id="ex15" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" /&gt;
 
 ###################
     JavaScript
 ###################
 
 // With JQuery
-$("#ex14").slider({
+$("#ex15").slider({
 	min: 1000,
 	max: 10000000,
 	scale: 'logarithmic',
@@ -738,26 +773,25 @@ $("#ex14").slider({
 });
 
 // Without JQuery
-var slider = new Slider('#ex14', {
+var slider = new Slider('#ex15', {
 	min: 1000,
 	max: 10000000,
 	scale: 'logarithmic',
 	step: 10
 });
 
-
             </code></pre>
-      	</div>
+      </div>
 
       <div class="slider-example">
-        <h3>Example 15:</h3>
+        <h3>Example 16:</h3>
         <p>Focus the slider handle after a value change.</p>
         <div class="well">
           Single-value slider:<br/>
-          <input id="ex15a" type="text"/><br/>
+          <input id="ex16a" type="text"/><br/>
           <br/><br/>
           Range slider:<br/>
-          <input id="ex15b" type="text"/>
+          <input id="ex16b" type="text"/>
         </div>
         <pre>
           <code>
@@ -766,10 +800,10 @@ var slider = new Slider('#ex14', {
 HTML
 ###################
 &lt;!-- Single-value slider: --&gt;
-&ltinput id="ex15a" type="text"/&gt&ltbr/&gt
+&ltinput id="ex16a" type="text"/&gt&ltbr/&gt
 
 &lt;!-- Range slider: --&gt;
-&ltinput id="ex15b" type="text"/&gt&ltbr/&gt
+&ltinput id="ex16b" type="text"/&gt&ltbr/&gt
 Note that the slider handle that caused the value change is focused.
 
 ###################
@@ -777,16 +811,17 @@ JavaScript
 ###################
 
 // With JQuery
-$("#ex15a").slider({ min: 0, max: 10, value: 0, focus: true });
-$("#ex15b").slider({ min: 0, max: 10, value: [0, 10], focus: true });
+$("#ex16a").slider({ min: 0, max: 10, value: 0, focus: true });
+$("#ex16b").slider({ min: 0, max: 10, value: [0, 10], focus: true });
 
 // Without JQuery
-new Slider("#ex15a", { min: 0, max: 10, value: 0, focus: true });
-new Slider("#ex15b", { min: 0, max: 10, value: [0, 10], focus: true });
+new Slider("#ex16a", { min: 0, max: 10, value: 0, focus: true });
+new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 
           </code>
         </pre>
       </div>
+
 
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
@@ -894,35 +929,45 @@ new Slider("#ex15b", { min: 0, max: 10, value: [0, 10], focus: true });
 				value: [ 3, 7 ]
 			});
 
-	      	/* Example 13 */
-	      	$("#ex13").slider({
-		        ticks: [0, 100, 200, 300, 400],
-		        ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
-		        ticks_snap_bounds: 30,
-		        value: 200
-		    });
+			/* Example 13 */
+			$("#ex13").slider({
+				ticks: [0, 100, 200, 300, 400],
+				ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+				ticks_snap_bounds: 30,
+				value: 200
+			});
+
 			/* Example 14 */
 			$("#ex14").slider({
+				ticks: [0, 100, 200, 300, 400],
+				ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+				ticks_positions: [0, 30, 70, 90, 100],
+				ticks_snap_bounds: 20,
+				value: 200
+			});
+
+			/* Example 15 */
+			$("#ex15").slider({
 				min: 10,
 				max: 1000,
 				scale: 'logarithmic',
 				step: 10
 			});
-    	});
 
-      /* Example 15 */
-      $("#ex15a").slider({
-        min  : 0,
-        max  : 10,
-        value: 0,
-        focus: true
-      });
-      $("#ex15b").slider({
-        min  : 0,
-        max  : 10,
-        value: [ 0, 10 ],
-        focus: true
-      });
+			/* Example 16 */
+			$("#ex16a").slider({
+				min  : 0,
+				max  : 10,
+				value: 0,
+				focus: true
+			});
+			$("#ex16b").slider({
+				min  : 0,
+				max  : 10,
+				value: [ 0, 10 ],
+				focus: true
+			});
+		});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
   </body>

@@ -39,7 +39,9 @@
       "bindPolyfill": "test/phantom_bind_polyfill.js"
     },
     "less": {
-      "slider": "less/bootstrap-slider.less"
+      "slider": "less/bootstrap-slider.less",
+      "rules": "less/rules.less",
+      "variables": "less/variables.less"
     },
     "css": {
       "bootstrap": "bower_components/bootstrap/dist/css/bootstrap.min.css",
