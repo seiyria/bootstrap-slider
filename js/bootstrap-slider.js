@@ -1222,10 +1222,13 @@
 			},
 			_adjustPercentageForRangeSliders: function(percentage) {
 				if (this.options.range) {
-					if (this.dragged === 0 && this.percentage[1] < percentage) {
+					var precision = this._getNumDigitsAfterDecimalPlace(percentage);
+					precision = precision ? precision - 1 : 0;
+					var percentageWithAdjustedPrecision = percentage.toFixed(precision);
+					if (this.dragged === 0 && this.percentage[1].toFixed(precision) < percentageWithAdjustedPrecision) {
 						this.percentage[0] = this.percentage[1];
 						this.dragged = 1;
-					} else if (this.dragged === 1 && this.percentage[0] > percentage) {
+					} else if (this.dragged === 1 && this.percentage[0].toFixed(precision) > percentageWithAdjustedPrecision) {
 						this.percentage[1] = this.percentage[0];
 						this.dragged = 0;
 					}
