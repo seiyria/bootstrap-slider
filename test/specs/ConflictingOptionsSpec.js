@@ -42,50 +42,6 @@ describe("Conflicting Options Tests", function() {
     expect(value).toBe(8.12);
   });
 
-  it("Should have `tooltip-main` displayed with `in` class and `tooltip-min, tooltip-max` not displayed", function() {
-    var sliderId = "tooltipedSlider";
-    testSlider = $("#testSlider1").slider({
-      id: sliderId,
-      value: [0, 10],
-      tooltip: "always", // for the sake of testing, always display the tooltip
-      tooltip_split: false
-    });
-
-    var $slider = $("#"+sliderId),
-        $tooltipMain = $slider.find(".tooltip-main"),
-        $tooltipMin = $slider.find(".tooltip-min"),
-        $tooltipMax = $slider.find(".tooltip-max");
-
-    expect($tooltipMain.css("display")).not.toBe("none");
-    expect($tooltipMain.hasClass("in")).toBeTruthy();
-    expect($tooltipMin.css("display")).toBe("none");
-    expect($tooltipMin.hasClass("in")).toBeFalsy();
-    expect($tooltipMax.css("display")).toBe("none");
-    expect($tooltipMax.hasClass("in")).toBeFalsy();
-  });
-
-  it("Should have `tooltip-min, tooltip-max` displayed with `in` class and `tooltip-main` not displayed", function() {
-    var sliderId = "tooltipedSlider";
-    testSlider = $("#testSlider1").slider({
-      id: sliderId,
-      value: [0, 10],
-      tooltip: "always", // for the sake of testing, always display the tooltip
-      tooltip_split: true
-    });
-
-    var $slider = $("#"+sliderId),
-        $tooltipMain = $slider.find(".tooltip-main"),
-        $tooltipMin = $slider.find(".tooltip-min"),
-        $tooltipMax = $slider.find(".tooltip-max");
-
-    expect($tooltipMain.css("display")).toBe("none");
-    expect($tooltipMain.hasClass("in")).toBeFalsy();
-    expect($tooltipMin.css("display")).not.toBe("none");
-    expect($tooltipMin.hasClass("in")).toBeTruthy();
-    expect($tooltipMax.css("display")).not.toBe("none");
-    expect($tooltipMax.hasClass("in")).toBeTruthy();
-  });
-
   afterEach(function() {
     if(testSlider) {
       testSlider.slider('destroy');
