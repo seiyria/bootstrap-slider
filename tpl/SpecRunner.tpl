@@ -25,9 +25,9 @@
 	<input id="testSlider1" type="text"/>
 
 	<input id="testSlider2" type="text"/>
-	
+
 	<!-- Note: Two input elements with class 'makeSlider' are required for tests to run properly -->
-    <input class="makeSlider" type="text"/>
+  <input class="makeSlider" type="text"/>
 	<input class="makeSlider" type="text"/>
 
 	<!-- Sliders used for ElementDataSttributesSpec -->
@@ -42,7 +42,7 @@
 	<input id="precisionSlider" type="text" data-slider-precision="2"/>
 
 	<input id="valueSlider" type="text" data-slider-value="5"/>
-	
+
 	<input id="sliderWithTickMarksAndLabels" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]'/>
 
 	<input id="selectionSlider" type="text" data-slider-selection="after"/>
@@ -51,7 +51,7 @@
 
 	<input id="handleSlider" type="text" data-slider-handle="triangle"/>
 
-  	<input id="customHandleSlider" type="text" data-slider-handle="custom"/>
+  <input id="customHandleSlider" type="text" data-slider-handle="custom"/>
 
 	<input id="reversedSlider" type="text" data-slider-reversed="true"/>
 
