@@ -535,14 +535,26 @@
 				this.mousePos = 'pageY';
 				this.sizePos = 'offsetHeight';
 
-				this._addClass(this.tooltip, 'right');
-				this.tooltip.style.left = '100%';
+				if (this.options.tooltip_position === 'left'){
+					this._addClass(this.tooltip, 'left');
+					this.tooltip.style.right = '100%';
 
-				this._addClass(this.tooltip_min, 'right');
-				this.tooltip_min.style.left = '100%';
+					this._addClass(this.tooltip_min, 'left');
+					this.tooltip_min.style.right = '100%';
 
-				this._addClass(this.tooltip_max, 'right');
-				this.tooltip_max.style.left = '100%';
+					this._addClass(this.tooltip_max, 'left');
+					this.tooltip_max.style.right = '100%';
+				}
+				else{
+					this._addClass(this.tooltip, 'right');
+					this.tooltip.style.left = '100%';
+
+					this._addClass(this.tooltip_min, 'right');
+					this.tooltip_min.style.left = '100%';
+
+					this._addClass(this.tooltip_max, 'right');
+					this.tooltip_max.style.left = '100%';
+				}
 			} else {
 				this._addClass(this.sliderElem, 'slider-horizontal');
 				this.sliderElem.style.width = origWidth;
@@ -552,14 +564,25 @@
 				this.mousePos = 'pageX';
 				this.sizePos = 'offsetWidth';
 
-				this._addClass(this.tooltip, 'top');
-				this.tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
+				if(this.options.tooltip_position === 'bottom'){
+					this._addClass(this.tooltip, 'bottom');
+					this.tooltip.style.marginTop = 24 + 'px';
 
-				this._addClass(this.tooltip_min, 'top');
-				this.tooltip_min.style.top = -this.tooltip_min.outerHeight - 14 + 'px';
+					this._addClass(this.tooltip_min, 'bottom');
+					this.tooltip_min.style.marginTop = 24 + 'px';
 
-				this._addClass(this.tooltip_max, 'top');
-				this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
+					this._addClass(this.tooltip_max, 'bottom');
+					this.tooltip_max.style.marginTop = 24 + 'px';
+				} else {
+					this._addClass(this.tooltip, 'top');
+					this.tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
+
+					this._addClass(this.tooltip_min, 'top');
+					this.tooltip_min.style.top = -this.tooltip_min.outerHeight - 14 + 'px';
+
+					this._addClass(this.tooltip_max, 'top');
+					this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
+				}
 			}
 
 			/* In case ticks are specified, overwrite the min and max bounds */
@@ -706,7 +729,8 @@
 				ticks_labels: [],
 				ticks_snap_bounds: 0,
 				scale: 'linear',
-				focus: false
+				focus: false,
+				tooltip_position: null
 			},
 
 			over: false,
