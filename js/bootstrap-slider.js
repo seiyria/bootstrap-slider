@@ -535,26 +535,15 @@
 				this.mousePos = 'pageY';
 				this.sizePos = 'offsetHeight';
 
-				if (this.options.tooltip_position === 'left'){
-					this._addClass(this.tooltip, 'left');
-					this.tooltip.style.right = '100%';
+				this.options.tooltip_position = this.options.tooltip_position || 'right';
+				var oppositeSide = this.options.tooltip_position === 'left' ? 'right' : 'left';
+				this._addClass(this.tooltip, this.options.tooltip_position);
+				this.tooltip.style[oppositeSide] = '100%';
+				this._addClass(this.tooltip_min, this.options.tooltip_position);
+				this.tooltip_min.style[oppositeSide] = '100%';
+				this._addClass(this.tooltip_max, this.options.tooltip_position);
+				this.tooltip_max.style[oppositeSide] = '100%';
 
-					this._addClass(this.tooltip_min, 'left');
-					this.tooltip_min.style.right = '100%';
-
-					this._addClass(this.tooltip_max, 'left');
-					this.tooltip_max.style.right = '100%';
-				}
-				else{
-					this._addClass(this.tooltip, 'right');
-					this.tooltip.style.left = '100%';
-
-					this._addClass(this.tooltip_min, 'right');
-					this.tooltip_min.style.left = '100%';
-
-					this._addClass(this.tooltip_max, 'right');
-					this.tooltip_max.style.left = '100%';
-				}
 			} else {
 				this._addClass(this.sliderElem, 'slider-horizontal');
 				this.sliderElem.style.width = origWidth;
@@ -566,13 +555,13 @@
 
 				if(this.options.tooltip_position === 'bottom'){
 					this._addClass(this.tooltip, 'bottom');
-					this.tooltip.style.marginTop = 24 + 'px';
+					this.tooltip.style.top = 22 + 'px';
 
 					this._addClass(this.tooltip_min, 'bottom');
-					this.tooltip_min.style.marginTop = 24 + 'px';
+					this.tooltip_min.style.top = 22 + 'px';
 
 					this._addClass(this.tooltip_max, 'bottom');
-					this.tooltip_max.style.marginTop = 24 + 'px';
+					this.tooltip_max.style.top = 22 + 'px';
 				} else {
 					this._addClass(this.tooltip, 'top');
 					this.tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
