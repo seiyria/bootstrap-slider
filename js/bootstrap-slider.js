@@ -903,9 +903,12 @@
 			_showTooltip: function() {
 				if (this.options.tooltip_split === false ){
 	            	this._addClass(this.tooltip, 'in');
+	            	this.tooltip_min.style.display = 'none';
+	            	this.tooltip_max.style.display = 'none';
 		        } else {
 		            this._addClass(this.tooltip_min, 'in');
 		            this._addClass(this.tooltip_max, 'in');
+		            this.tooltip.style.display = 'none';
 		        }
 				this.over = true;
 			},
