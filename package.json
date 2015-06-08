@@ -16,6 +16,9 @@
   "license": "BSD",
   "readmeFilename": "README.md",
   "gitHead": "67eb8fe3c26205efc94ae95b3ef37a469eef0b81",
+  "dependencies": {
+    "jquery": "*"
+  },
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-uglify": "~0.2.4",
