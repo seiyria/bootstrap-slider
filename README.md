@@ -128,7 +128,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | selection |	string |	'before' |	selection placement. Accepts: 'before', 'after' or 'none'. In case of a range slider, the selection will be placed between the handles |
 | tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', or 'always' |
 | tooltip_split |	bool |	false |	if false show one tootip if true show two tooltips one for each handler |
-| tooltip_position |	string |	null |	Position of tooltip, relative to slider. Accepts 'top'/'bottom' for horizontal sliders and 'left', 'right' for vertically orientated sliders. Default positions are 'top' for horizontal and 'right' for vertical slider. |
+| tooltip_position |	string |	null |	Position of tooltip, relative to slider. Accepts 'top'/'bottom' for horizontal sliders and 'left'/'right' for vertically orientated sliders. Default positions are 'top' for horizontal and 'right' for vertical slider. |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square', 'triangle' or 'custom' |
 | reversed | bool | false | whether or not the slider should be reversed |
 | enabled | bool | true | whether or not the slider is initially enabled |
