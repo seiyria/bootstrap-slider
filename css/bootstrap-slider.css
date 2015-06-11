@@ -218,7 +218,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   filter: none;
-  opacity: 0.8;
+  opacity: 1;
   border: 0px solid transparent;
 }
 .slider-tick.round {
