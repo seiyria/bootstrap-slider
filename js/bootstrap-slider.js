@@ -530,50 +530,19 @@
 
 			if(this.options.orientation === 'vertical') {
 				this._addClass(this.sliderElem,'slider-vertical');
-
 				this.stylePos = 'top';
 				this.mousePos = 'pageY';
 				this.sizePos = 'offsetHeight';
-
-				this.options.tooltip_position = this.options.tooltip_position || 'right';
-				var oppositeSide = this.options.tooltip_position === 'left' ? 'right' : 'left';
-				this._addClass(this.tooltip, this.options.tooltip_position);
-				this.tooltip.style[oppositeSide] = '100%';
-				this._addClass(this.tooltip_min, this.options.tooltip_position);
-				this.tooltip_min.style[oppositeSide] = '100%';
-				this._addClass(this.tooltip_max, this.options.tooltip_position);
-				this.tooltip_max.style[oppositeSide] = '100%';
-
 			} else {
 				this._addClass(this.sliderElem, 'slider-horizontal');
 				this.sliderElem.style.width = origWidth;
-
 				this.options.orientation = 'horizontal';
 				this.stylePos = 'left';
 				this.mousePos = 'pageX';
 				this.sizePos = 'offsetWidth';
 
-				if(this.options.tooltip_position === 'bottom'){
-					this._addClass(this.tooltip, 'bottom');
-					this.tooltip.style.top = 22 + 'px';
-
-					this._addClass(this.tooltip_min, 'bottom');
-					this.tooltip_min.style.top = 22 + 'px';
-
-					this._addClass(this.tooltip_max, 'bottom');
-					this.tooltip_max.style.top = 22 + 'px';
-				} else {
-					this._addClass(this.tooltip, 'top');
-					this.tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
-
-					this._addClass(this.tooltip_min, 'top');
-					this.tooltip_min.style.top = -this.tooltip_min.outerHeight - 14 + 'px';
-
-					this._addClass(this.tooltip_max, 'top');
-					this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
-				}
 			}
-
+			this._setTooltipPosition();
 			/* In case ticks are specified, overwrite the min and max bounds */
 			if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 					this.options.max = Math.max.apply(Math, this.options.ticks);
@@ -1459,8 +1428,30 @@
 			},
 			_toPercentage: function(value) {
 				return this.options.scale.toPercentage.apply(this, [value]);
+			},
+			_setTooltipPosition: function(){
+				var tooltips = [this.tooltip, this.tooltip_min, this.tooltip_max];
+				if (this.options.orientation === 'vertical'){
+					this.options.tooltip_position = this.options.tooltip_position || 'right';
+					var oppositeSide = this.options.tooltip_position === 'left' ? 'right' : 'left';
+					tooltips.forEach(function(tooltip){
+						this._addClass(tooltip, this.options.tooltip_position);
+						tooltip.style[oppositeSide] = '100%';
+					}.bind(this));
+				} else {
+					if(this.options.tooltip_position === 'bottom'){
+						tooltips.forEach(function(tooltip){
+							this._addClass(tooltip, 'bottom');
+							tooltip.style.top = 22 + 'px';
+						}.bind(this));
+					} else {
+						tooltips.forEach(function(tooltip){
+							this._addClass(tooltip, 'top');
+							tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
+						}.bind(this));
+					}
+				}
 			}
-
 		};
 
 		/*********************************
