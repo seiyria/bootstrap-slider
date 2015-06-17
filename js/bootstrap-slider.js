@@ -832,6 +832,15 @@
 				return this;
 			},
 
+            off: function(evt, callback) {
+                if($) {
+                    this.$element.off(evt, callback);
+                    this.$sliderElem.off(evt, callback);
+                } else {
+                    this._unbindNonQueryEventHandler(evt, callback);
+                }
+            },
+
 			getAttribute: function(attribute) {
 				if(attribute) {
 					return this.options[attribute];
@@ -893,6 +902,15 @@
 				}
 				this.eventToCallbackMap[evt].push(callback);
 			},
+            _unbindNonQueryEventHandler: function(evt, callback) {
+                if(this.eventToCallbackMap[evt]!==undefined) {
+                    for (var i = 0; i < this.eventToCallbackMap[evt].length(); i++) {
+                        if (this.eventToCallbackMap[evt][i] == callback) {
+                            this.eventToCallbackMap[evt].splice(i, 1);
+                        }
+                    }
+                }
+            },
 			_cleanUpEventCallbacksMap: function() {
 				var eventNames = Object.keys(this.eventToCallbackMap);
 				for(var i = 0; i < eventNames.length; i++) {
