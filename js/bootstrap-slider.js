@@ -897,16 +897,17 @@
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
 			},
 			_bindNonQueryEventHandler: function(evt, callback) {
-				if(this.eventToCallbackMap[evt]===undefined) {
+				if(this.eventToCallbackMap[evt] === undefined) {
 					this.eventToCallbackMap[evt] = [];
 				}
 				this.eventToCallbackMap[evt].push(callback);
 			},
             _unbindNonQueryEventHandler: function(evt, callback) {
-                if(this.eventToCallbackMap[evt]!==undefined) {
-                    for (var i = 0; i < this.eventToCallbackMap[evt].length(); i++) {
+                if(this.eventToCallbackMap[evt] !== undefined) {
+                    for (var i = 0; i < this.eventToCallbackMap[evt].length; i++) {
                         if (this.eventToCallbackMap[evt][i] == callback) {
                             this.eventToCallbackMap[evt].splice(i, 1);
+                            break;
                         }
                     }
                 }
