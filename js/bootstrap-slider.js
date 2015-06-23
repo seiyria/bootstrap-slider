@@ -905,7 +905,7 @@
             _unbindNonQueryEventHandler: function(evt, callback) {
                 if(this.eventToCallbackMap[evt] !== undefined) {
                     for (var i = 0; i < this.eventToCallbackMap[evt].length; i++) {
-                        if (this.eventToCallbackMap[evt][i] == callback) {
+                        if (this.eventToCallbackMap[evt][i] === callback) {
                             this.eventToCallbackMap[evt].splice(i, 1);
                             break;
                         }
