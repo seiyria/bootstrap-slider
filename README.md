@@ -157,6 +157,7 @@ __NOTE:__ Optional parameters are italicized.
 | getAttribute | attribute | Get the slider's [attributes](#options) |
 | refresh | --- | Refreshes the current slider |
 | on | eventType, callback | When the slider event _eventType_ is triggered, the callback function will be invoked |
+| off | eventType, callback | Removes callback function from the slider event _eventType_  |
 | relayout | --- | Renders the tooltip again, after initialization. Useful in situations when the slider and tooltip are initially hidden. |
 
 Events

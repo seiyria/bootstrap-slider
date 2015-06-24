@@ -20,7 +20,7 @@ describe("'off()' test", function() {
     });
 
 
-    it("'slideStart' event is triggered properly and can be binded to", function() {
+    it("should properly unbind an event listener", function() {
         testSlider = $("#testSlider1").slider();
 
         testSlider.on('slideStart', onStart);
