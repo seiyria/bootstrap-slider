@@ -713,7 +713,7 @@ var slider = new Slider("#ex13", {
 
 	<div class='slider-example'>
       <h3>Example 14:</h3>
-      <p>Using tick marks at specific positions..</p>
+      <p>Using tick marks at specific positions, with a range slider.</p>
       <div class="well">
       <input id="ex14" type="text"/>
       </div>
@@ -730,18 +730,20 @@ JavaScript
 
 // With JQuery
 $("#ex14").slider({
-    ticks: [0, 100, 200, 300, 400],
-    ticks_positions: [0, 30, 60, 70, 90, 100],
-    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
-    ticks_snap_bounds: 30
+	range: true,
+	ticks: [0, 100, 200, 300, 400],
+	ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+	ticks_positions: [0, 30, 70, 90, 100],
+	ticks_snap_bounds: 20
 });
 
 // Without JQuery
 var slider = new Slider("#ex14", {
-    ticks: [0, 100, 200, 300, 400],
-    ticks_positions: [0, 30, 60, 70, 90, 100],
-    ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
-    ticks_snap_bounds: 30
+	range: true,
+	ticks: [0, 100, 200, 300, 400],
+	ticks_positions: [0, 30, 60, 70, 90, 100],
+	ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+	ticks_snap_bounds: 30
 });
 
 	</code></pre>
@@ -939,11 +941,12 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 
 			/* Example 14 */
 			$("#ex14").slider({
+				range: true,
 				ticks: [0, 100, 200, 300, 400],
 				ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
 				ticks_positions: [0, 30, 70, 90, 100],
 				ticks_snap_bounds: 20,
-				value: 200
+				value: [ 200, 400 ]
 			});
 
 			/* Example 15 */
