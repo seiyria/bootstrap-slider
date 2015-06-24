@@ -832,6 +832,15 @@
 				return this;
 			},
 
+            off: function(evt, callback) {
+                if($) {
+                    this.$element.off(evt, callback);
+                    this.$sliderElem.off(evt, callback);
+                } else {
+                    this._unbindNonQueryEventHandler(evt, callback);
+                }
+            },
+
 			getAttribute: function(attribute) {
 				if(attribute) {
 					return this.options[attribute];
@@ -888,11 +897,22 @@
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
 			},
 			_bindNonQueryEventHandler: function(evt, callback) {
-				if(this.eventToCallbackMap[evt]===undefined) {
+				if(this.eventToCallbackMap[evt] === undefined) {
 					this.eventToCallbackMap[evt] = [];
 				}
 				this.eventToCallbackMap[evt].push(callback);
 			},
+            _unbindNonQueryEventHandler: function(evt, callback) {
+                var callbacks = this.eventToCallbackMap[evt];
+                if(callbacks !== undefined) {
+                    for (var i = 0; i < callbacks.length; i++) {
+                        if (callbacks[i] === callback) {
+                            callbacks.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+            },
 			_cleanUpEventCallbacksMap: function() {
 				var eventNames = Object.keys(this.eventToCallbackMap);
 				for(var i = 0; i < eventNames.length; i++) {
