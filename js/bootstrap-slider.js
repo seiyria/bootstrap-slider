@@ -448,8 +448,7 @@
 				var sliderTooltipMax = document.createElement("div");
 				sliderTooltipMax.className = "tooltip tooltip-max";
 				createAndAppendTooltipSubElements(sliderTooltipMax);
-
-
+				
 				/* Append components to sliderElem */
 				this.sliderElem.appendChild(sliderTrack);
 				this.sliderElem.appendChild(sliderTooltip);
@@ -461,10 +460,13 @@
 				}
 
 				/* Append slider element to parent container, right before the original <input> element */
-				parent.insertBefore(this.sliderElem, this.element);
+				var elemInsertBefore = this.options.insertBefore ? this.element : this.element.nextSibling;
+				parent.insertBefore(this.sliderElem, elemInsertBefore);
 
 				/* Hide original <input> element */
-				this.element.style.display = "none";
+				if (this.options.hideElement) {
+					this.element.style.display = "none";
+				}
 			}
 			/* If JQuery exists, cache JQ references */
 			if($) {
@@ -706,7 +708,9 @@
 				ticks_labels: [],
 				ticks_snap_bounds: 0,
 				scale: 'linear',
-				focus: false
+				focus: false,
+				insertBefore: true,
+				hideElement: true
 			},
 
 			over: false,
