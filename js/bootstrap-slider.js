@@ -903,10 +903,11 @@
 				this.eventToCallbackMap[evt].push(callback);
 			},
             _unbindNonQueryEventHandler: function(evt, callback) {
-                if(this.eventToCallbackMap[evt] !== undefined) {
-                    for (var i = 0; i < this.eventToCallbackMap[evt].length; i++) {
-                        if (this.eventToCallbackMap[evt][i] === callback) {
-                            this.eventToCallbackMap[evt].splice(i, 1);
+                var callbacks = this.eventToCallbackMap[evt];
+                if(callbacks !== undefined) {
+                    for (var i = 0; i < callbacks.length; i++) {
+                        if (callbacks[i] === callback) {
+                            callbacks.splice(i, 1);
                             break;
                         }
                     }
