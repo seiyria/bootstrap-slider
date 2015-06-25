@@ -958,7 +958,14 @@
 					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
-					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
+					var styleMargin;
+                    if (this.options.orientation === 'vertical' ){
+                        styleMargin = 'marginTop';
+                    }else{
+                        styleMargin = 'marginLeft';
+                        if (this.options.reversed === true) styleMargin = 'marginRight';
+                    }
+                    
 					var labelSize = this.size / (this.options.ticks.length - 1);
 
 					if (this.tickLabelContainer) {
