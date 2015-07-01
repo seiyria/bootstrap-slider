@@ -368,6 +368,9 @@
 				this.sliderElem = document.createElement("div");
 				this.sliderElem.className = "slider";
 
+				// get classes from the this.element and add them to the slider
+				this._addClass(this.sliderElem,this.element.className);
+				
 				/* Create slider track elements */
 				var sliderTrack = document.createElement("div");
 				sliderTrack.className = "slider-track";
@@ -704,6 +707,8 @@
 				ticks: [],
 				ticks_positions: [],
 				ticks_labels: [],
+				ticks_classes: [],
+				set_tick_classes: 'greatest',
 				ticks_snap_bounds: 0,
 				scale: 'linear',
 				focus: false
@@ -1093,6 +1098,7 @@
 						this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
 					}
 				}
+				this._setTicksClass();
 			},
 			_removeProperty: function(element, prop) {
 				if (element.style.removeProperty) {
@@ -1469,6 +1475,58 @@
 			},
 			_toPercentage: function(value) {
 				return this.options.scale.toPercentage.apply(this, [value]);
+			},
+			_setTicksCSSClass: function(index) {
+				if(typeof this.options.ticks_classes[index] !== 'undefined') {
+					// remove all the classes
+					this._removeClass(this.sliderElem, this.options.ticks_classes.join(" "));
+					// set new classname
+					this._addClass(this.sliderElem,this.options.ticks_classes[index]);
+				}	
+			},
+			_setTicksClass: function() {
+				if (this.options.ticks_classes.length) {
+					var val = this._calculateValue();
+					var greatestTick;
+					var smallestTick = Infinity;
+					
+					// create a values array just to be sure to have an array
+					var values = [];
+					if (this.options.range==false) {
+						values[0]=val;
+					} else {
+						values = val;
+					}
+
+					for (var j=0; j < values.length; j++) {
+						//var min = [values[j], Infinity];  // not used was for test with closest checking see commentet text below
+						for (var i = 0; i < this.options.ticks.length; i++) {
+							diff = this.options.ticks[i] - values[j];
+							if (diff <= 0 ) {
+								greatestTick = i;
+							}
+							if (diff >= 0) {
+								if (i < smallestTick) {
+									smallestTick= i;	
+								}
+							}
+							
+							//this would be the closest test but  i think this is wrong if the value is closer to the next tick that it should get his css class.
+							// var diff = Math.abs(this.options.ticks[i] - values[j]);
+							// if (diff <= min[1]) {
+							// 	closestTick= i;
+							// 	min = [this.options.ticks[i], diff];
+							// }
+						}
+					}
+					// smallestTick is now the index of the smallest tick which has both values in it
+					// greatestTick is now the index of the greatest tick which has both values in it
+					if(this.options.set_tick_classes=='greatest') {
+						this._setTicksCSSClass(greatestTick);
+					} else {
+						this._setTicksCSSClass(smallestTick);
+					}
+				}
 			}
 
 		};
