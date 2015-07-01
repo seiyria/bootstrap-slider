@@ -1492,7 +1492,7 @@
 					
 					// create a values array just to be sure to have an array
 					var values = [];
-					if (this.options.range==false) {
+					if (this.options.range===false) {
 						values[0]=val;
 					} else {
 						values = val;
@@ -1501,7 +1501,7 @@
 					for (var j=0; j < values.length; j++) {
 						//var min = [values[j], Infinity];  // not used was for test with closest checking see commentet text below
 						for (var i = 0; i < this.options.ticks.length; i++) {
-							diff = this.options.ticks[i] - values[j];
+							var diff = this.options.ticks[i] - values[j];
 							if (diff <= 0 ) {
 								greatestTick = i;
 							}
@@ -1521,7 +1521,7 @@
 					}
 					// smallestTick is now the index of the smallest tick which has both values in it
 					// greatestTick is now the index of the greatest tick which has both values in it
-					if(this.options.set_tick_classes=='greatest') {
+					if(this.options.set_tick_classes==='greatest') {
 						this._setTicksCSSClass(greatestTick);
 					} else {
 						this._setTicksCSSClass(smallestTick);
