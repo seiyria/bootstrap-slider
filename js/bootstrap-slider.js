@@ -420,7 +420,6 @@
 						var label = document.createElement('div');
 						label.className = 'slider-tick-label';
 						label.innerHTML = this.options.ticks_labels[i];
-
 						this.tickLabels.push(label);
 						this.tickLabelContainer.appendChild(label);
 					}
@@ -958,25 +957,22 @@
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
 
 				/* Position ticks and labels */
+
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 					var maxTickValue = Math.max.apply(Math, this.options.ticks);
 					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
 					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
-					var labelSize = this.size / (this.options.ticks.length - 1);
-
+					var labelSize = 100 / (this.options.ticks.length); // label size now in % instead of px
+					
 					if (this.tickLabelContainer) {
 						var extraMargin = 0;
-						if (this.options.ticks_positions.length === 0) {
-							this.tickLabelContainer.style[styleMargin] = -labelSize/2 + 'px';
-							extraMargin = this.tickLabelContainer.offsetHeight;
-						} else {
-							/* Chidren are position absolute, calculate height by finding the max offsetHeight of a child */
-							for (i = 0 ; i < this.tickLabelContainer.childNodes.length; i++) {
-								if (this.tickLabelContainer.childNodes[i].offsetHeight > extraMargin) {
-									extraMargin = this.tickLabelContainer.childNodes[i].offsetHeight;
-								}
+							
+						// All Chidren are now position absolute, calculate height by finding the max offsetHeight of a child 
+						for (i = 0 ; i < this.tickLabelContainer.childNodes.length; i++) {
+							if (this.tickLabelContainer.childNodes[i].offsetHeight > extraMargin) {
+								extraMargin = this.tickLabelContainer.childNodes[i].offsetHeight;
 							}
 						}
 						if (this.options.orientation === 'horizontal') {
@@ -989,8 +985,8 @@
 							100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
 
 						this.ticks[i].style[this.stylePos] = percentage + '%';
-
-						/* Set class labels to denote whether ticks are in the selection */
+						
+						// Set class labels to denote whether ticks are in the selection 
 						this._removeClass(this.ticks[i], 'in-selection');
 						if (!this.options.range) {
 							if (this.options.selection === 'after' && percentage >= positionPercentages[0]){
@@ -1003,12 +999,22 @@
 						}
 
 						if (this.tickLabels[i]) {
-							this.tickLabels[i].style[styleSize] = labelSize + 'px';
-
+							this.tickLabels[i].style[styleSize] = labelSize + '%';
+							
+							/* // moved to css but could also be done here if there is need to. e.g. browser switch of not supported browsers.
+							if (this.options.orientation === 'horizontal') {
+								//this.tickLabels[i].style['textIndent'] = '-'+labelSize + '%'; // textIndent would only work on horizontal sliders
+								this.tickLabels[i].style['transform'] = 'translate(-50%, 0%)';
+							} else {
+								this.tickLabels[i].style['transform'] = 'translate(50%, -50%)';
+							}
+							*/
+						
+							this.tickLabels[i].style.position = 'absolute';
 							if (this.options.ticks_positions[i] !== undefined) {
-								this.tickLabels[i].style.position = 'absolute';
 								this.tickLabels[i].style[this.stylePos] = this.options.ticks_positions[i] + '%';
-								this.tickLabels[i].style[styleMargin] = -labelSize/2 + 'px';
+							} else {
+								this.tickLabels[i].style[this.stylePos] = (100 / (this.options.ticks.length-1)) *  i  + '%';
 							}
 						}
 					}
@@ -1489,6 +1495,7 @@
 					var val = this._calculateValue();
 					var greatestTick;
 					var smallestTick = Infinity;
+					var diff;
 					
 					// create a values array just to be sure to have an array
 					var values = [];
@@ -1501,7 +1508,7 @@
 					for (var j=0; j < values.length; j++) {
 						//var min = [values[j], Infinity];  // not used was for test with closest checking see commentet text below
 						for (var i = 0; i < this.options.ticks.length; i++) {
-							var diff = this.options.ticks[i] - values[j];
+							diff = this.options.ticks[i] - values[j];
 							if (diff <= 0 ) {
 								greatestTick = i;
 							}
