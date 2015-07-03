@@ -963,7 +963,6 @@
 					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
-					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
 					var labelSize = 100 / (this.options.ticks.length); // label size now in % instead of px
 					
 					if (this.tickLabelContainer) {
