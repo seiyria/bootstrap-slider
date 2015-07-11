@@ -1210,8 +1210,8 @@
 				this._setDataVal(val);
 				this.setValue(val, true, true);
 
-				this._trigger('slideStop', val);
 				this._setDataVal(val);
+				this._trigger('slideStop', val);
 				this._layout();
 
 				this._pauseEvent(ev);
@@ -1277,8 +1277,8 @@
 				var val = this._calculateValue(true);
 
 				this._layout();
-				this._trigger('slideStop', val);
 				this._setDataVal(val);
+				this._trigger('slideStop', val);
 
 				return false;
 			},
