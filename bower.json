@@ -1,6 +1,6 @@
 {
   "name": "seiyria-bootstrap-slider",
-  "version": "4.8.4",
+  "version": "4.10.3",
   "dependencies": {
     "jquery": "*",
     "bootstrap": "*",
