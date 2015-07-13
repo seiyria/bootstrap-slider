@@ -1438,18 +1438,16 @@
 						this._addClass(tooltip, this.options.tooltip_position);
 						tooltip.style[oppositeSide] = '100%';
 					}.bind(this));
+				} else if(this.options.tooltip_position === 'bottom') {
+					tooltips.forEach(function(tooltip){
+						this._addClass(tooltip, 'bottom');
+						tooltip.style.top = 22 + 'px';
+					}.bind(this));
 				} else {
-					if(this.options.tooltip_position === 'bottom'){
-						tooltips.forEach(function(tooltip){
-							this._addClass(tooltip, 'bottom');
-							tooltip.style.top = 22 + 'px';
-						}.bind(this));
-					} else {
-						tooltips.forEach(function(tooltip){
-							this._addClass(tooltip, 'top');
-							tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
-						}.bind(this));
-					}
+					tooltips.forEach(function(tooltip){
+						this._addClass(tooltip, 'top');
+						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
+					}.bind(this));
 				}
 			}
 		};
