@@ -944,7 +944,7 @@
 				var positionPercentages;
 
 				if(this.options.reversed) {
-					positionPercentages = [ 100 - this.percentage[0], this.percentage[1] ];
+					positionPercentages = [ 100 - this.percentage[0], this.options.range ? 100 - this.percentage[1] : this.percentage[1]];
 				} else {
 					positionPercentages = [ this.percentage[0], this.percentage[1] ];
 				}
@@ -1119,7 +1119,7 @@
 					this.dragged = 0;
 				}
 
-				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
+				this.percentage[this.dragged] = percentage;
 				this._layout();
 
 				if (this.touchCapable) {
@@ -1210,8 +1210,8 @@
 				this._setDataVal(val);
 				this.setValue(val, true, true);
 
-				this._trigger('slideStop', val);
 				this._setDataVal(val);
+				this._trigger('slideStop', val);
 				this._layout();
 
 				this._pauseEvent(ev);
@@ -1235,7 +1235,7 @@
 
 				var percentage = this._getPercentage(ev);
 				this._adjustPercentageForRangeSliders(percentage);
-				this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
+				this.percentage[this.dragged] =  percentage;
 				this._layout();
 
 				var val = this._calculateValue(true);
@@ -1277,8 +1277,8 @@
 				var val = this._calculateValue(true);
 
 				this._layout();
-				this._trigger('slideStop', val);
 				this._setDataVal(val);
+				this._trigger('slideStop', val);
 
 				return false;
 			},
@@ -1343,6 +1343,9 @@
 				// Calculate what percent of the length the slider handle has slid
 				var percentage = (distanceToSlide / this.size) * 100;
 				percentage = Math.round(percentage / this.percentage[2]) * this.percentage[2];
+				if (this.options.reversed) {
+					percentage = 100 - percentage;
+				}
 
 				// Make sure the percent is within the bounds of the slider.
 				// 0% corresponds to the 'min' value of the slide

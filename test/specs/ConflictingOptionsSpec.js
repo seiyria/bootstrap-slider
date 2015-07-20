@@ -42,6 +42,27 @@ describe("Conflicting Options Tests", function() {
     expect(value).toBe(8.12);
   });
 
+  it("should properly allow for a slider that has `range` set to true and `reversed` set to true", function() {
+    // Create Slider
+    testSlider = new Slider("#testSlider1", {
+      reversed: true,
+      range: true,
+      min: -5,
+      max: 20
+    });
+
+    // Set Value
+    testSlider.setValue([-5, 20]);
+
+    // Assert that selection slider section is 100% of slider width
+    var selectedSectionWidth = testSlider.sliderElem.querySelector(".slider-selection").style.width;
+    expect(selectedSectionWidth).toBe("100%");
+
+    // Cleanup
+    testSlider.destroy();
+    testSlider = null;
+  });
+
   afterEach(function() {
     if(testSlider) {
       testSlider.slider('destroy');
