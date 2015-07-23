@@ -713,6 +713,10 @@
 
 			inDrag: false,
 
+			getElement: function() {
+				return this.sliderElem;
+			},
+
 			getValue: function() {
 				if (this.options.range) {
 					return this.options.value;
