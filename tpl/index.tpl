@@ -687,7 +687,7 @@ CSS
 HTML
 ###################
 
-&ltinput id="ex13" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]'/&gt
+&lt;input id="ex13" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]'/&gt;
 
 
 ###################
@@ -820,6 +820,41 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 
           </code>
         </pre>
+      </div>
+
+      <div class="slider-example">
+      		<h3>Example 17:</h3>
+      		<p>Unusual tooltip positions</p>
+
+      		<div class="well">
+      			Horizontal slider with tooltip on the bottom<br/><br/>
+      			<input id="ex17a" type="text"/><br/><br/><br/>
+
+      			Vertical slider with tooltip on the left<br/><br/>
+      			<input id="ex17b" type="text"/>
+      		</div>
+              <pre>
+      <code>
+      ###################
+      HTML
+      ###################
+
+      &ltinput id="ex17a" type="text"/&gt
+      &ltinput id="ex17b" type="text"/&gt
+
+      ###################
+      JavaScript
+      ###################
+
+      // With JQuery
+      $("#ex17a").slider({min  : 0, max  : 10, value: 0, tooltip_position:'bottom'});
+      $("#ex17b").slider({min  : 0, max  : 10, value: 0, orientation: 'vertical', tooltip_position:'left'});
+
+      // Without JQuery
+      new Slider("#ex17a", {min  : 0, max  : 10, value: 0, tooltip_position:'bottom'});
+      new Slider("#ex17b", {min  : 0, max  : 10, value: 0, orientation: 'vertical', tooltip_position:'left'});
+      </code>
+              </pre>
       </div>
 
 
@@ -966,6 +1001,21 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 				max  : 10,
 				value: [ 0, 10 ],
 				focus: true
+			});
+
+			/* Example 17 */
+			$("#ex17a").slider({
+				min  : 0,
+				max  : 10,
+				value: 0,
+				tooltip_position:'bottom'
+			});
+			$("#ex17b").slider({
+				min  : 0,
+				max  : 10,
+				value: 0,
+				orientation: 'vertical',
+				tooltip_position:'left'
 			});
 		});
     </script>
