@@ -1442,11 +1442,7 @@
 				element.className = newClasses.trim();
 			},
 			_offsetLeft: function(obj){
-				var offsetLeft = obj.offsetLeft;
-				while((obj = obj.offsetParent) && !isNaN(obj.offsetLeft)){
-					offsetLeft += obj.offsetLeft;
-				}
-				return offsetLeft;
+				return obj.getBoundingClientRect().left;
 			},
 			_offsetTop: function(obj){
 				var offsetTop = obj.offsetTop;
