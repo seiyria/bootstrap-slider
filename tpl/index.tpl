@@ -687,7 +687,7 @@ CSS
 HTML
 ###################
 
-&ltinput id="ex13" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]'/&gt
+&lt;input id="ex13" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]'/&gt;
 
 
 ###################
@@ -834,12 +834,13 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
       			<input id="ex17b" type="text"/>
       		</div>
               <pre>
-      <code>###################
+      <code>
+      ###################
       HTML
       ###################
 
-      $lt;input id="ex17a" type="text"/$gt;
-      $lt;input id="ex18a" type="text"/$gt;
+      &ltinput id="ex17a" type="text"/&gt
+      &ltinput id="ex17b" type="text"/&gt
 
       ###################
       JavaScript
@@ -851,9 +852,10 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 
       // Without JQuery
       new Slider("#ex17a", {min  : 0, max  : 10, value: 0, tooltip_position:'bottom'});
-      new Slider("#ex17b", {min  : 0, max  : 10, value: 0, orientation: 'vertical', tooltip_position:'left'});</code>
+      new Slider("#ex17b", {min  : 0, max  : 10, value: 0, orientation: 'vertical', tooltip_position:'left'});
+      </code>
               </pre>
-      	</div>
+      </div>
 
 
 	  </div> <!-- /examples -->
