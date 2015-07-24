@@ -335,6 +335,23 @@
 				this.options[optName] = val;
 			}
 
+			/*
+				Validate `tooltip_position` against 'orientation`
+				- if `tooltip_position` is incompatible with orientation, swith it to a default compatible with specified `orientation`
+					-- default for "vertical" -> "right"
+					-- default for "horizontal" -> "left"
+			*/
+			if(this.options.orientation === "vertical" && (this.options.tooltip_position === "top" || this.options.tooltip_position === "bottom")) {
+
+				this.options.tooltip_position	= "right";
+
+			}
+			else if(this.options.orientation === "horizontal" && (this.options.tooltip_position === "left" || this.options.tooltip_position === "right")) {
+
+				this.options.tooltip_position	= "top";
+
+			}
+
 			function getDataAttrib(element, optName) {
 				var dataName = "data-slider-" + optName.replace(/_/g, '-');
 				var dataValString = element.getAttribute(dataName);
@@ -661,7 +678,7 @@
 
 			defaultOptions: {
 				id: "",
-			  	min: 0,
+			  min: 0,
 				max: 10,
 				step: 1,
 				precision: 0,
