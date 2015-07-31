@@ -508,7 +508,7 @@
 			this.tooltip_max = this.sliderElem.querySelector('.tooltip-max');
 			this.tooltipInner_max= this.tooltip_max.querySelector('.tooltip-inner');
 
-			if (SliderScale[this.options.scale]) {
+			if (typeof this.options.scale != 'Object' && SliderScale[this.options.scale]) {
 				this.options.scale = SliderScale[this.options.scale];
 			}
 
@@ -717,10 +717,21 @@
 			},
 
 			getValue: function() {
+				return this.options.value;
+			},
+
+			getFirstValue: function() {
 				if (this.options.range) {
-					return this.options.value;
+					return this.options.value[0];
 				}
-				return this.options.value[0];
+				return this.options.value;
+			},
+
+			getSecondValue: function() {
+				if (this.options.range) {
+					return this.options.value[1]
+				}
+				return this.options.selection === 'after' ? this.options.max : this.options.min;
 			},
 
 			setValue: function(val, triggerSlideEvent, triggerChangeEvent) {
@@ -739,19 +750,14 @@
 					this.options.value[1] = Math.max(this.options.min, Math.min(this.options.max, this.options.value[1]));
 				} else {
 					this.options.value = applyPrecision(this.options.value);
-					this.options.value = [ Math.max(this.options.min, Math.min(this.options.max, this.options.value))];
+					this.options.value = Math.max(this.options.min, Math.min(this.options.max, this.options.value));
 					this._addClass(this.handle2, 'hide');
-					if (this.options.selection === 'after') {
-						this.options.value[1] = this.options.max;
-					} else {
-						this.options.value[1] = this.options.min;
-					}
 				}
 
 				if (this.options.max > this.options.min) {
 					this.percentage = [
-						this._toPercentage(this.options.value[0]),
-						this._toPercentage(this.options.value[1]),
+						this._toPercentage(this.getFirstValue()),
+						this._toPercentage(this.getSecondValue()),
 						this.options.step * 100 / (this.options.max - this.options.min)
 					];
 				} else {
@@ -759,7 +765,7 @@
 				}
 
 				this._layout();
-				var newValue = this.options.range ? this.options.value : this.options.value[0];
+				var newValue = this.options.range ? this.options.value[0] : this.options.value;
 
 				if(triggerSlideEvent === true) {
 					this._trigger('slide', newValue);
@@ -1086,7 +1092,7 @@
 						this._css(this.tooltip_max, 'margin-left', -this.tooltip_max.offsetWidth / 2 + 'px');
 					}
 				} else {
-					formattedTooltipVal = this.options.formatter(this.options.value[0]);
+					formattedTooltipVal = this.options.formatter(this.options.value);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 
 					this.tooltip.style[this.stylePos] = positionPercentages[0] + '%';
@@ -1203,10 +1209,12 @@
 					}
 				}
 
-				var val = this.options.value[handleIdx] + dir * this.options.step;
+				var val = null;
 				if (this.options.range) {
 					val = [ (!handleIdx) ? val : this.options.value[0],
 						    ( handleIdx) ? val : this.options.value[1]];
+				} else {
+					val = this.options.value + dir * this.options.step;
 				}
 
 				this._trigger('slideStart', val);
