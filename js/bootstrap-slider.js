@@ -508,7 +508,7 @@
 			this.tooltip_max = this.sliderElem.querySelector('.tooltip-max');
 			this.tooltipInner_max= this.tooltip_max.querySelector('.tooltip-inner');
 
-			if (typeof this.options.scale != 'Object' && SliderScale[this.options.scale]) {
+			if (typeof this.options.scale !== 'Object' && SliderScale[this.options.scale]) {
 				this.options.scale = SliderScale[this.options.scale];
 			}
 
@@ -729,7 +729,7 @@
 
 			getSecondValue: function() {
 				if (this.options.range) {
-					return this.options.value[1]
+					return this.options.value[1];
 				}
 				return this.options.selection === 'after' ? this.options.max : this.options.min;
 			},
