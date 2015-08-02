@@ -12,8 +12,20 @@
     "type": "git",
     "url": "git://github.com/seiyria/bootstrap-slider.git"
   },
-  "author": "",
-  "license": "BSD",
+  "author": "bootstrap-slider ",
+  "contributors": [
+    {
+      "name": "Kyle Kemp",
+      "twitter": "@seiyria",
+      "github": "seiyria"
+    },
+    {
+      "name": "Rohit Kalkur",
+      "twitter": "@Rovolutionary",
+      "github": "rovolution"
+    }
+  ],
+  "license": "MIT",
   "readmeFilename": "README.md",
   "gitHead": "67eb8fe3c26205efc94ae95b3ef37a469eef0b81",
   "devDependencies": {
