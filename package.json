@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-slider",
-  "version": "4.14.1",
+  "version": "4.14.2",
   "description": "Slider view component for Twitter Bootstrap.",
   "main": "js/bootstrap-slider.js",
   "scripts": {
@@ -8,9 +8,13 @@
     "postpublish": "sh ./scripts/postpublish.sh",
     "test": "grunt test"
   },
+  "homepage": "http://github.com/seiyria/bootstrap-slider",
   "repository": {
     "type": "git",
     "url": "git://github.com/seiyria/bootstrap-slider.git"
+  },
+  "bugs": {
+    "url": "http://github.com/seiyria/bootstrap-slider/issues"
   },
   "author": "bootstrap-slider ",
   "contributors": [
@@ -25,9 +29,17 @@
       "github": "rovolution"
     }
   ],
+  "keywords": [
+    "slider",
+    "bootstrap",
+    "twitter",
+    "slide"
+  ],
   "license": "MIT",
   "readmeFilename": "README.md",
   "gitHead": "67eb8fe3c26205efc94ae95b3ef37a469eef0b81",
+  "dependencies": {},
+  "engine": {},
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-uglify": "~0.2.4",
