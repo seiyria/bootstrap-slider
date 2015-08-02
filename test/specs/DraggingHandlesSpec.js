@@ -39,27 +39,27 @@ describe("Dragging handles tests", function() {
 			mouseRight.initMouseEvent.apply(mouseRight, mouseEventArguments);
 			// Simulate drag without swapping
 			testSlider.mousedown(mouseLeft);
-			expect(testSlider.dragged).toBe(0);
+			expect(testSlider._state.dragged).toBe(0);
 			expect(testSlider.getValue()).toEqual([4, 5]);
 			// Simulate handle overlap
 			testSlider.mousemove(mouseOverlap);
-			expect(testSlider.dragged).toBe(0);
+			expect(testSlider._state.dragged).toBe(0);
 			expect(testSlider.getValue()).toEqual([5, 5]);
 			// Simulate left over right drag with imprecision in reported percentage
 			testSlider.mousemove(mouseRight);
-			expect(testSlider.dragged).toBe(1);
+			expect(testSlider._state.dragged).toBe(1);
 			expect(testSlider.getValue()).toEqual([5, 6]);
 			// Simulate handle overlap
 			testSlider.mousemove(mouseOverlap);
-			expect(testSlider.dragged).toBe(1);
+			expect(testSlider._state.dragged).toBe(1);
 			expect(testSlider.getValue()).toEqual([5, 5]);
 			// Simulate right over left drag with imprecision in reported percentage
 			testSlider.mousemove(mouseLeft);
-			expect(testSlider.dragged).toBe(0);
+			expect(testSlider._state.dragged).toBe(0);
 			expect(testSlider.getValue()).toEqual([4, 5]);
 			// End with mouse up
 			testSlider.mouseup();
-			expect(testSlider.dragged).toBe(0);
+			expect(testSlider._state.dragged).toBe(0);
 			expect(testSlider.getValue()).toEqual([4, 5]);
 		});
 	});
