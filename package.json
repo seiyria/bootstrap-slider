@@ -49,7 +49,7 @@
     "grunt-contrib-jasmine": "~0.5.2",
     "grunt-template": "~0.2.0",
     "grunt-open": "~0.2.2",
-    "bower": ">1.4.1",
+    "bower": "1.4.1",
     "grunt-contrib-less": "~0.7.0",
     "grunt-header": "^1.0.0",
     "grunt-contrib-clean": "^0.6.0",
