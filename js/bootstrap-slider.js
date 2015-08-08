@@ -1396,8 +1396,7 @@
 				}
 			},
 			_setDataVal: function(val) {
-				var value = "value: '" + val + "'";
-				this.element.setAttribute('data', value);
+				this.element.setAttribute('data-value', val);
 				this.element.setAttribute('value', val);
         this.element.value = val;
 			},
