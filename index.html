@@ -166,7 +166,7 @@
 
       <div class="jumbotron">
         <h1>Slider for Bootstrap <small>bootstrap-slider.js</small></h1>
-        <p class="lead">Examples for the bootstrap-slider component.<p>
+        <p class="lead">Examples for the <a target="_blank" href="https://github.com/seiyria/bootstrap-slider">bootstrap-slider</a> component.<p>
       </div>
 
       <div class="examples">
