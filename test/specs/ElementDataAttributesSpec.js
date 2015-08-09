@@ -27,14 +27,14 @@ describe("Element Data Attributes Tests", function() {
   it("reads the 'data-slider-precision' property (which is set to 2) and sets it on slider", function() {
     slider = $("#precisionSlider").slider();
     slider.slider('setValue', 8.115);
-    
+
     var sliderValue = slider.slider('getValue');
     expect(sliderValue).toBe(8.12);
   });
 
   it("reads the 'data-slider-orientation' property and sets it on slider", function() {
     slider = $("#orientationSlider").slider();
-      
+
     var orientationIsVertical = $("#orientationSlider").data('slider').options.orientation === 'vertical';
     expect(orientationIsVertical).toBeTruthy();
   });
@@ -45,13 +45,13 @@ describe("Element Data Attributes Tests", function() {
     var sliderValue = slider.slider('getValue');
     expect(sliderValue).toBe(5);
   });
-  
+
   it("reads the 'data-slider-ticks-labels' property and sets it on slider", function() {
     slider = $("#sliderWithTickMarksAndLabels").slider();
-      
+
     var ticksLabelsAreCorrect = arraysEqual($("#sliderWithTickMarksAndLabels").data('slider').options.ticks_labels, ['$0', '$100', '$200', '$300', '$400']);
     expect(ticksLabelsAreCorrect).toBeTruthy();
-	
+
 	function arraysEqual(a, b) {
 	  if (a === b) {return true;}
 	  if (a == null || b == null){return false;}
@@ -102,10 +102,10 @@ describe("Element Data Attributes Tests", function() {
 
   it("reads the 'data-slider-reversed' property and sets it on slider", function() {
     slider = $("#reversedSlider").slider({
-      id: "reversedSliderElem"  
+      id: "reversedSliderElem"
     });
     slider.slider('setValue', 10);
-      
+
     var sliderSelectionHeightAtMaxValue = $("#reversedSliderElem div.slider-track").children("div.slider-selection").width();
     expect(sliderSelectionHeightAtMaxValue).toBe(0);
   });
@@ -127,6 +127,23 @@ describe("Element Data Attributes Tests", function() {
     var valAsString = val.toString();
 
     expect(sliderValueAttrib).toBe(valAsString);
+  });
+
+  it("always sets the 'data-value' attribute of the original <input> element to be the current slider value", function() {
+    // Setup
+    var sliderInputElem = document.getElementById("testSliderGeneric");
+    var val = 7;
+
+    slider = new Slider(sliderInputElem, {
+      value: val
+    });
+
+    // Assert
+    expect(sliderInputElem.dataset.value).toBe( val.toString() );
+
+    // Cleanup
+    slider.destroy();
+    slider = null;
   });
 
   afterEach(function() {
