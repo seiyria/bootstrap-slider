@@ -18,7 +18,7 @@ then
 	git push origin master:master && git push --tags
 
 	# Push new source code to gh-pages branch
-	git checkout -B gh-pages
+	git checkout -B gh-pages origin/gh-pages
 	git pull -r origin gh-pages
 	git checkout master -- js/bootstrap-slider.js index.html css/bootstrap-slider.css
 	git commit -m "updates"
