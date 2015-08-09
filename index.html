@@ -9,8 +9,8 @@
     <title>Slider for Bootstrap Examples Page</title>
 
     <!-- core CSS -->
-    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
-    <link href="stylesheets/bootstrap-slider.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-slider.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <style type='text/css'>
@@ -104,7 +104,7 @@
 		#ex6SliderVal {
 			color: green;
 		}
-		
+
 		#slider12a .slider-track-high, #slider12c .slider-track-high {
 			background: green;
 		}
@@ -116,6 +116,7 @@
 		#slider12c .slider-selection {
 			background: yellow;
 		}
+
     </style>
 
     <style type='text/css'>
@@ -340,7 +341,7 @@ var b = $('#B').slider()
 
 
 ###################
-   JavaScript
+    JavaScript
 ###################
 
 // With JQuery
@@ -547,14 +548,14 @@ var slider = new Slider("#ex9", {
     </div>
     <pre><code>
 ###################
-       HTML
+ HTML
 ###################
 
 &ltinput id="ex10" type="text" data-slider-handle="custom"/&gt
 
 
 ###################
-    JavaScript
+JavaScript
 ###################
 
 // With JQuery
@@ -564,7 +565,7 @@ $("#ex10").slider({});
 var slider = new Slider("#ex10", {});
 
 ###################
-       CSS
+ CSS
 ###################
 .slider-handle.custom {
 background: transparent none;
@@ -589,14 +590,14 @@ color: #726204;
       </div>
       <pre><code>
 ###################
-       HTML
+HTML
 ###################
 
 &ltinput id="ex11" type="text" data-slider-handle="custom"/&gt
 
 
 ###################
-    JavaScript
+JavaScript
 ###################
 
 // With JQuery
@@ -629,7 +630,7 @@ var slider = new Slider("#ex11", {
     </div>
     <pre><code>
 ###################
-       HTML
+HTML
 ###################
 &lt;!-- Single-value slider, high track: --&gt;
 &ltinput id="ex12a" type="text"/&gt&ltbr/&gt
@@ -642,7 +643,7 @@ Note that there is no low track on the single-value slider. The area to lesser t
 &ltinput id="ex12c" type="text"/&gt&ltbr/&gt
 
 ###################
-    JavaScript
+JavaScript
 ###################
 
 // With JQuery
@@ -656,7 +657,7 @@ new Slider("#ex12b", { id: "slider12b", min: 0, max: 10, range: true, value: [3,
 new Slider("#ex12c", { id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
 
 ###################
-       CSS
+CSS
 ###################
 
 #slider12a .slider-track-high, #slider12c .slider-track-high {
@@ -683,14 +684,14 @@ new Slider("#ex12c", { id: "slider12c", min: 0, max: 10, range: true, value: [3,
       </div>
       <pre><code>
 ###################
-       HTML
+HTML
 ###################
 
-&ltinput id="ex13" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']"/&gt
+&lt;input id="ex13" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]'/&gt;
 
 
 ###################
-    JavaScript
+JavaScript
 ###################
 
 // With JQuery
@@ -710,8 +711,7 @@ var slider = new Slider("#ex13", {
       </code></pre>
   </div>
 
-
-  	<div class='slider-example'>
+	<div class='slider-example'>
       <h3>Example 14:</h3>
       <p>Using tick marks at specific positions..</p>
       <div class="well">
@@ -719,13 +719,13 @@ var slider = new Slider("#ex13", {
       </div>
       <pre><code>
 ###################
-       HTML
+HTML
 ###################
 
 &ltinput id="ex14" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels="['$0', '$100', '$200', '$300', '$400']" ticks_positions="[0, 30, 60, 70, 90, 100]" /&gt
 
 ###################
-    JavaScript
+JavaScript
 ###################
 
 // With JQuery
@@ -747,13 +747,13 @@ var slider = new Slider("#ex14", {
 	</code></pre>
 	</div>
 
-  	<div class='slider-example'>
-  		<h3>Example 15:</h3>
-  		<p>With a logarithmic scale.</p>
-  		<div class="well">
-		<input id="ex15" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" />
-	    </div>
-	    <pre><code>
+      	<div class='slider-example'>
+      		<h3>Example 15:</h3>
+      		<p>With a logarithmic scale.</p>
+      		<div class="well">
+				<input id="ex15" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" />
+      		</div>
+      		<pre><code>
 ###################
        HTML
 ###################
@@ -779,24 +779,25 @@ var slider = new Slider('#ex15', {
 	scale: 'logarithmic',
 	step: 10
 });
-	      </code></pre>
-	      </div>
 
-	      <div class="slider-example">
-	        <h3>Example 16:</h3>
-	        <p>Focus the slider handle after a value change.</p>
-	        <div class="well">
-	          Single-value slider:<br/>
-	          <input id="ex16a" type="text"/><br/>
-	          <br/><br/>
-	          Range slider:<br/>
-	          <input id="ex16b" type="text"/>
-	        </div>
-	        <pre>
-	          <code>
+            </code></pre>
+      </div>
+
+      <div class="slider-example">
+        <h3>Example 16:</h3>
+        <p>Focus the slider handle after a value change.</p>
+        <div class="well">
+          Single-value slider:<br/>
+          <input id="ex16a" type="text"/><br/>
+          <br/><br/>
+          Range slider:<br/>
+          <input id="ex16b" type="text"/>
+        </div>
+        <pre>
+          <code>
 
 ###################
-       HTML
+HTML
 ###################
 &lt;!-- Single-value slider: --&gt;
 &ltinput id="ex16a" type="text"/&gt&ltbr/&gt
@@ -806,7 +807,7 @@ var slider = new Slider('#ex15', {
 Note that the slider handle that caused the value change is focused.
 
 ###################
-    JavaScript
+JavaScript
 ###################
 
 // With JQuery
@@ -817,11 +818,11 @@ $("#ex16b").slider({ min: 0, max: 10, value: [0, 10], focus: true });
 new Slider("#ex16a", { min: 0, max: 10, value: 0, focus: true });
 new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 
-	          </code>
-	        </pre>
-	      </div>
+          </code>
+        </pre>
+      </div>
 
-	      <div class="slider-example">
+      <div class="slider-example">
       		<h3>Example 17:</h3>
       		<p>Unusual tooltip positions</p>
 
@@ -856,14 +857,15 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
               </pre>
       </div>
 
-      </div> <!-- /examples -->
+
+	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
 
     <!-- core JavaScript
     ================================================== -->
-    <script type='text/javascript' src="javascripts/jquery.min.js"></script>
-    <script type='text/javascript' src="javascripts/bootstrap-slider.js"></script>
+    <script type='text/javascript' src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type='text/javascript' src="js/bootstrap-slider.js"></script>
     <script type='text/javascript'>
     	$(document).ready(function() {
     		/* Example 1 */
@@ -940,7 +942,7 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 		        max: 200000
 	      	});
 
-	      		/* Example 12 */
+			/* Example 12 */
 			$("#ex12a").slider({
 				id: "slider12a",
 				min: 0,
@@ -962,13 +964,13 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 				value: [ 3, 7 ]
 			});
 
-      /* Example 13 */
-      $("#ex13").slider({
-	        ticks: [0, 100, 200, 300, 400],
-	        ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
-	        ticks_snap_bounds: 30,
-	        value: 200
-	    });
+			/* Example 13 */
+			$("#ex13").slider({
+				ticks: [0, 100, 200, 300, 400],
+				ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
+				ticks_snap_bounds: 30,
+				value: 200
+			});
 
 			/* Example 14 */
 			$("#ex14").slider({
@@ -978,7 +980,6 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 				ticks_snap_bounds: 20,
 				value: 200
 			});
-
 
 			/* Example 15 */
 			$("#ex15").slider({
@@ -1002,7 +1003,6 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 				focus: true
 			});
 
-			
 			/* Example 17 */
 			$("#ex17a").slider({
 				min  : 0,
@@ -1017,8 +1017,7 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 				orientation: 'vertical',
 				tooltip_position:'left'
 			});
-
-    });
+		});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
