@@ -9,3 +9,5 @@ grunt bump-commit
 
 # Push commits/tags to master branch on remote 'origin'
 git push origin master && git push --tags origin master
+
+# Push new source code to gh-pages branch
