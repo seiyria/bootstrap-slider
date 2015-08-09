@@ -1,11 +1,32 @@
 #!/bin/bash
 
-# Version bump (patch)
-grunt bump-only:patch
-# Generate new dist
-grunt prod
-# Commit new release tag
-grunt bump-commit
+currentBranch=$(git rev-parse --abbrev-ref HEAD)
 
-# Push commits/tags to master branch on remote 'origin'
-git push origin master && git push --tags origin master
+if [ currentBranch = "master" ]
+then
+	echo "Running postpublish script"
+
+	# Version bump (patch)
+	grunt bump-only:patch
+	# Generate new dist
+	grunt prod
+	# Generate new index.html page
+	grunt template
+	# Commit new release tag
+	grunt bump-commit
+
+	# Push commits/tags to master branch on remote 'origin'
+	git push origin master:master && git push --tags
+
+	# Push new source code to gh-pages branch
+	git checkout -B gh-pages
+	git pull -r origin gh-pages
+	git checkout master -- js/bootstrap-slider.js index.html css/bootstrap-slider.css
+	git commit -m "updates"
+	git push origin gh-pages:gh-pages -f
+
+	# Switch back to master branch
+	git checkout master
+else
+	echo "Cannot run postpublish script on non-'master' branch"
+fi
