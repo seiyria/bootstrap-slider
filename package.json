@@ -58,8 +58,8 @@
   "gruntConfig": {
     "devPort": 9000,
     "js": {
-      "modernizr": "bower_components/modernizr/modernizr.js",
-      "jquery": "bower_components/jquery/dist/jquery.min.js",
+      "modernizr": "dependencies/js/modernizr.js",
+      "jquery": "dependencies/js/jquery.min.js",
       "bindPolyfill": "test/phantom_bind_polyfill.js"
     },
     "less": {
@@ -68,7 +68,7 @@
       "variables": "less/variables.less"
     },
     "css": {
-      "bootstrap": "bower_components/bootstrap/dist/css/bootstrap.min.css",
+      "bootstrap": "dependencies/css/bootstrap.min.css",
       "slider": "css/bootstrap-slider.css"
     },
     "tpl": {

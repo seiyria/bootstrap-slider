@@ -1,7 +1,7 @@
 .idea/*
 node_modules
 bower_components
-css/
+./css/
 .grunt/*
 _SpecRunner.html
 npm-debug.log
