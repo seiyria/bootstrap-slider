@@ -894,6 +894,12 @@
 				return this;
 			},
 
+			moveSlider : function(inc){
+				var val = this._calculateValue(true);
+				this._setDataVal(val);
+				this.setValue(val + inc, false, true);
+			},			
+
 			/******************************+
 
 						HELPERS
