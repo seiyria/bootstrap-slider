@@ -191,6 +191,7 @@ Other Platforms & Libraries
 - [AngularJS](https://github.com/seiyria/angular-bootstrap-slider)
 - [NuGet](https://www.nuget.org/packages/bootstrap.slider)
 - [MeteorJS](https://github.com/kidovate/meteor-bootstrap-slider)
+- [Maven](http://mvnrepository.com/artifact/org.webjars.bower/seiyria-bootstrap-slider)
 
 Maintainers
 ============
