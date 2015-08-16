@@ -55,6 +55,11 @@ describe("'tooltip_split' Option tests", function() {
       expect($tooltipMain.css("display")).toBe("none");
       expect($tooltipMain.hasClass("in")).toBeFalsy();
     });
+
+    it("should be aligned above the handle on init if set to 'top'", function() {
+      expect($tooltipMin.hasClass("top")).toBeTruthy();
+      expect($tooltipMax.hasClass("top")).toBeTruthy();
+    });
   });
 
   afterEach(function() {
