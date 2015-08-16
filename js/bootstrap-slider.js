@@ -1035,40 +1035,6 @@
 					}
 				}
 
-				if (this.options.orientation === 'vertical') {
-					this.trackLow.style.top = '0';
-					this.trackLow.style.height = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-
-					this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-					this.trackSelection.style.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
-
-					this.trackHigh.style.bottom = '0';
-					this.trackHigh.style.height = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
-				}
-				else {
-					this.trackLow.style.left = '0';
-					this.trackLow.style.width = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-
-					this.trackSelection.style.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
-					this.trackSelection.style.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
-
-					this.trackHigh.style.right = '0';
-					this.trackHigh.style.width = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
-
-			        var offset_min = this.tooltip_min.getBoundingClientRect();
-			        var offset_max = this.tooltip_max.getBoundingClientRect();
-
-			        if (offset_min.right > offset_max.left) {
-			            this._removeClass(this.tooltip_max, 'top');
-			            this._addClass(this.tooltip_max, 'bottom');
-			            this.tooltip_max.style.top = 18 + 'px';
-			        } else {
-			            this._removeClass(this.tooltip_max, 'bottom');
-			            this._addClass(this.tooltip_max, 'top');
-			            this.tooltip_max.style.top = this.tooltip_min.style.top;
-			        }
-				}
-
 				var formattedTooltipVal;
 
 				if (this.options.range) {
@@ -1119,6 +1085,40 @@
 					} else {
 						this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
 					}
+				}
+
+				if (this.options.orientation === 'vertical') {
+					this.trackLow.style.top = '0';
+					this.trackLow.style.height = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+
+					this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+					this.trackSelection.style.height = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+
+					this.trackHigh.style.bottom = '0';
+					this.trackHigh.style.height = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
+				}
+				else {
+					this.trackLow.style.left = '0';
+					this.trackLow.style.width = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+
+					this.trackSelection.style.left = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+					this.trackSelection.style.width = Math.abs(positionPercentages[0] - positionPercentages[1]) +'%';
+
+					this.trackHigh.style.right = '0';
+					this.trackHigh.style.width = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
+
+			        var offset_min = this.tooltip_min.getBoundingClientRect();
+			        var offset_max = this.tooltip_max.getBoundingClientRect();
+
+			        if (offset_min.right > offset_max.left) {
+			            this._removeClass(this.tooltip_max, 'top');
+			            this._addClass(this.tooltip_max, 'bottom');
+			            this.tooltip_max.style.top = 18 + 'px';
+			        } else {
+			            this._removeClass(this.tooltip_max, 'bottom');
+			            this._addClass(this.tooltip_max, 'top');
+			            this.tooltip_max.style.top = this.tooltip_min.style.top;
+			        }
 				}
 			},
 			_removeProperty: function(element, prop) {
