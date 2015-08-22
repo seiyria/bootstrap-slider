@@ -186,7 +186,7 @@ After bumping, type `npm publish` to update on NPM.
 
 Other Platforms & Libraries
 ===========================
-- [Ruby on Rails](https://github.com/stationkeeping/bootstrap-slider-rails)
+- [Ruby on Rails](https://github.com/YourCursus/bootstrap-slider-rails)
 - [knockout.js](https://github.com/cosminstefanxp/bootstrap-slider-knockout-binding) ([@cosminstefanxp](https://github.com/cosminstefanxp), [#81](https://github.com/seiyria/bootstrap-slider/issues/81))
 - [AngularJS](https://github.com/seiyria/angular-bootstrap-slider)
 - [EmberJS](https://github.com/lifegadget/ui-slider) ([@ksnyde](https://github.com/ksnyde))
