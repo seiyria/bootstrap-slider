@@ -1150,10 +1150,13 @@
 				this._layout();
 
 				if (this.touchCapable) {
-					document.removeEventListener("touchmove", this.mousemove, false);
-					document.removeEventListener("touchend", this.mouseup, false);
-					document.removeEventListener("MSPointerUp", this.mouseup, false);
-					document.removeEventListener("MSPointerMove", this.mousemove, false);
+				    if (window.navigator.msPointerEnabled) {
+				        document.removeEventListener("MSPointerUp", this.mouseup, false);
+				        document.removeEventListener("MSPointerMove", this.mousemove, false);
+				    } else {
+				        document.removeEventListener("touchmove", this.mousemove, false);
+				        document.removeEventListener("touchend", this.mouseup, false);
+				    }
 				}
 
 				if(this.mousemove){
@@ -1167,11 +1170,14 @@
 				this.mouseup = this._mouseup.bind(this);
 
 				if (this.touchCapable) {
-					// Touch: Bind touch events:
-					document.addEventListener("touchmove", this.mousemove, false);
-					document.addEventListener("touchend", this.mouseup, false);
-					document.addEventListener("MSPointerUp", this.mouseup, false);
-					document.addEventListener("MSPointerMove", this.mousemove, false);
+				    // Touch: Bind touch events:
+				    if (window.navigator.msPointerEnabled) {
+				        document.addEventListener("MSPointerUp", this.mouseup, false);
+				        document.addEventListener("MSPointerMove", this.mousemove, false);
+				    } else {
+				        document.addEventListener("touchmove", this.mousemove, false);
+				        document.addEventListener("touchend", this.mouseup, false);
+				    }
 				}
 				// Bind mouse events:
 				document.addEventListener("mousemove", this.mousemove, false);
@@ -1293,11 +1299,14 @@
 					return false;
 				}
 				if (this.touchCapable) {
-					// Touch: Unbind touch event handlers:
-					document.removeEventListener("touchmove", this.mousemove, false);
-					document.removeEventListener("touchend", this.mouseup, false);
-					document.removeEventListener("MSPointerUp", this.mouseup, false);
-					document.removeEventListener("MSPointerMove", this.mousemove, false);
+				    // Touch: Unbind touch event handlers:
+				    if (window.navigator.msPointerEnabled) {
+				        document.removeEventListener("MSPointerUp", this.mouseup, false);
+				        document.removeEventListener("MSPointerMove", this.mousemove, false);
+				    } else {
+				        document.removeEventListener("touchmove", this.mousemove, false);
+				        document.removeEventListener("touchend", this.mouseup, false);
+				    }
 				}
                 // Unbind mouse event handlers:
                 document.removeEventListener("mousemove", this.mousemove, false);
