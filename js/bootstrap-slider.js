@@ -513,7 +513,7 @@
 			this.eventToCallbackMap = {};
 			this.sliderElem.id = this.options.id;
 
-			this.touchCapable = 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch);
+			this.touchCapable = 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
 
 			this.tooltip = this.sliderElem.querySelector('.tooltip-main');
 			this.tooltipInner = this.tooltip.querySelector('.tooltip-inner');
@@ -1152,6 +1152,8 @@
 				if (this.touchCapable) {
 					document.removeEventListener("touchmove", this.mousemove, false);
 					document.removeEventListener("touchend", this.mouseup, false);
+					document.removeEventListener("MSPointerUp", this.mouseup, false);
+					document.removeEventListener("MSPointerMove", this.mousemove, false);
 				}
 
 				if(this.mousemove){
@@ -1168,6 +1170,8 @@
 					// Touch: Bind touch events:
 					document.addEventListener("touchmove", this.mousemove, false);
 					document.addEventListener("touchend", this.mouseup, false);
+					document.addEventListener("MSPointerUp", this.mouseup, false);
+					document.addEventListener("MSPointerMove", this.mousemove, false);
 				}
 				// Bind mouse events:
 				document.addEventListener("mousemove", this.mousemove, false);
@@ -1292,6 +1296,8 @@
 					// Touch: Unbind touch event handlers:
 					document.removeEventListener("touchmove", this.mousemove, false);
 					document.removeEventListener("touchend", this.mouseup, false);
+					document.removeEventListener("MSPointerUp", this.mouseup, false);
+					document.removeEventListener("MSPointerMove", this.mousemove, false);
 				}
                 // Unbind mouse event handlers:
                 document.removeEventListener("mousemove", this.mousemove, false);

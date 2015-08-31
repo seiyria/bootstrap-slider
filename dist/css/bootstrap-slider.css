@@ -30,6 +30,7 @@
   display: inline-block;
   vertical-align: middle;
   position: relative;
+  -ms-touch-action: none;
 }
 .slider.slider-horizontal {
   width: 210px;
