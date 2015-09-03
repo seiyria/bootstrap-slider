@@ -1396,7 +1396,7 @@
 				console.log(["return val", val]);
 				*/
 				
-				// fixed code 
+				// fixed code  (not sure why i have added this code ... or what issue should be fixed by it.)
 				if (snapToClosestTick) {
 					// console.log("snapToClosestTick == true");
 					// console.log(["return val", val]);
