@@ -172,6 +172,14 @@ describe("Public Method Tests", function() {
 
         var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
         expect(tooltipIsShownAfterSlide).toBeTruthy();
+
+        // Trigger leave
+        var mouseleaveEvent = document.createEvent("Events");
+        mouseleaveEvent.initEvent("mouseleave", true, true);
+        testSlider.data('slider').sliderElem.dispatchEvent(mouseleaveEvent);
+        
+        var tooltipIsAgainHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in"));
+        expect(tooltipIsAgainHidden).toBeTruthy();
       });
 
       it("tooltip is always shown if set to 'always'", function() {
