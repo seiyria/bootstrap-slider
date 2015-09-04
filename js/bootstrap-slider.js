@@ -315,8 +315,8 @@
 				offset: null,
 				size: null,
 				percentage: null,
-				inDrag: null,
-				over: null
+				inDrag: false,
+				over: false
 			};
 
 
