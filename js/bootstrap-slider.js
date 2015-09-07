@@ -993,11 +993,9 @@
 					//var labelSize = this._state.size / (this.options.ticks.length - 1);
 					var labelSize = 100 / (this.options.ticks.length); // label size now in % instead of px
 
-					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
-					var labelSize = this._state.size / (this.options.ticks.length - 1);
-
-
 					/* // original code
+					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
+					
 					if (this.tickLabelContainer) {
 						var extraMargin = 0;
 						/*
