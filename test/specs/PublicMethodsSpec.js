@@ -174,33 +174,7 @@ describe("Public Method Tests", function() {
         expect(tooltipIsShownAfterSlide).toBeTruthy();
 
       });
-        
-      it("tooltip is again hidden after mouse leave", function() {
-        testSlider = $("#testSlider1").slider({
-          tooltip : "show"
-        });
-
-        var tooltipIsHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in"));
-        expect(tooltipIsHidden).toBeTruthy();
-
-        // Trigger hover
-        var mouseenterEvent = document.createEvent("Events");
-        mouseenterEvent.initEvent("mouseenter", true, true);
-        testSlider.data('slider').sliderElem.dispatchEvent(mouseenterEvent);
-
-        var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
-        expect(tooltipIsShownAfterSlide).toBeTruthy();
-
-        
-        // Trigger leave
-        var mouseleaveEvent = document.createEvent("Events");
-        mouseleaveEvent.initEvent("mouseleave", true, true);
-        testSlider.data('slider').sliderElem.dispatchEvent(mouseleaveEvent);
-        
-        var tooltipIsAgainHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in"));
-        expect(tooltipIsAgainHidden).toBeTruthy();
-      });
-      
+           
       it("tooltip is shown on mouse over and hides correclty after mouse leave", function() {
         testSlider = $("#testSlider1").slider({
           tooltip : "show"
