@@ -2,12 +2,12 @@
  * bootstrap-slider.js
  *
  * Maintainers:
- *		Kyle Kemp
- *			- Twitter: @seiyria
- *			- Github:  seiyria
- *		Rohit Kalkur
- *			- Twitter: @Rovolutionary
- *			- Github:  rovolution
+ *    Kyle Kemp
+ *      - Twitter: @seiyria
+ *      - Github:  seiyria
+ *    Rohit Kalkur
+ *      - Twitter: @Rovolutionary
+ *      - Github:  rovolution
  *
  * =========================================================
  *
@@ -207,6 +207,7 @@
   position: absolute;
   width: 20px;
   height: 20px;
+  background-color: #f9f9f9;
   background-image: -webkit-linear-gradient(top, #f9f9f9 0%, #f5f5f5 100%);
   background-image: -o-linear-gradient(top, #f9f9f9 0%, #f5f5f5 100%);
   background-image: linear-gradient(to bottom, #f9f9f9 0%, #f5f5f5 100%);
@@ -243,4 +244,75 @@
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff89cdef', endColorstr='#ff81bfde', GradientType=0);
   opacity: 1;
+  background-color:#89cdef;
+}
+
+.slider.slider-success .in-selection,
+.slider.slider-success .slider-selection.tick-slider-selection,
+.slider.slider-success .slider-handle.min-slider-handle,
+.slider.slider-success .slider-handle.max-slider-handle {
+  background-image: unset;
+  background-color: #62c462;
+  /*background-color: #95d06e;*/
+}
+
+
+.slider.slider-info .in-selection,
+.slider.slider-info .slider-selection.tick-slider-selection,
+.slider.slider-info .slider-handle.min-slider-handle,
+.slider.slider-info .slider-handle.max-slider-handle {
+  background-image: unset;
+  background-color: #428bca;
+  /*background-color: #95d5f4;*/
+}
+
+
+.slider.slider-warning .in-selection,
+.slider.slider-warning .slider-selection.tick-slider-selection,
+.slider.slider-warning .slider-handle.min-slider-handle,
+.slider.slider-warning .slider-handle.max-slider-handle {
+  background-image: unset;
+  background-color: #fbb450;
+  /*background-color: #fbcc6f;*/
+}
+
+
+.slider.slider-danger .in-selection,
+.slider.slider-danger .slider-selection.tick-slider-selection,
+.slider.slider-danger .slider-handle.min-slider-handle,
+.slider.slider-danger .slider-handle.max-slider-handle {
+  background-image: unset;
+  background-color: #dd514c;
+  /*background-color: #ff8787;*/
+}
+
+
+/* position of tick labels */
+/* method from here http://stackoverflow.com/questions/19461521/how-to-center-an-element-horizontally-and-vertically */
+/* method with flexbox used */
+.slider-tick-label {
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.slider.slider-vertical .slider-tick-label {
+    padding-left: 4px;
+    -moz-transform: translateX(50%) translateY(-50%);
+    -webkit-transform: translateX(50%) translateY(-50%);
+    transform: translateX(50%) translateY(-50%);
+}
+
+.slider.slider-horizontal .slider-tick-label {
+    -moz-transform: translateX(-50%) translateY(0%);
+    -webkit-transform: translateX(-50%) translateY(0%);
+    transform: translateX(-50%) translateY(0%);
 }

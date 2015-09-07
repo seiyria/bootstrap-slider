@@ -401,6 +401,9 @@
 				this.sliderElem = document.createElement("div");
 				this.sliderElem.className = "slider";
 
+				// get classes from the this.element and add them to the slider
+				this._addClass(this.sliderElem,this.element.className);
+
 				/* Create slider track elements */
 				var sliderTrack = document.createElement("div");
 				sliderTrack.className = "slider-track";
@@ -725,6 +728,8 @@
 				ticks: [],
 				ticks_positions: [],
 				ticks_labels: [],
+				ticks_classes: [],
+				set_tick_classes: 'greatest',
 				ticks_snap_bounds: 0,
 				scale: 'linear',
 				focus: false,
@@ -984,32 +989,57 @@
 					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
+
+					//var labelSize = this._state.size / (this.options.ticks.length - 1);
+					var labelSize = 100 / (this.options.ticks.length); // label size now in % instead of px
+
+					/* // original code
 					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
-					var labelSize = this._state.size / (this.options.ticks.length - 1);
 
 					if (this.tickLabelContainer) {
 						var extraMargin = 0;
+						/*
 						if (this.options.ticks_positions.length === 0) {
 							this.tickLabelContainer.style[styleMargin] = -labelSize/2 + 'px';
 							extraMargin = this.tickLabelContainer.offsetHeight;
 						} else {
-							/* Chidren are position absolute, calculate height by finding the max offsetHeight of a child */
+							// Chidren are position absolute, calculate height by finding the max offsetHeight of a child 
 							for (i = 0 ; i < this.tickLabelContainer.childNodes.length; i++) {
 								if (this.tickLabelContainer.childNodes[i].offsetHeight > extraMargin) {
 									extraMargin = this.tickLabelContainer.childNodes[i].offsetHeight;
 								}
 							}
 						}
+						
 						if (this.options.orientation === 'horizontal') {
 							this.sliderElem.style.marginBottom = extraMargin + 'px';
 						}
 					}
+					*/
+
+					// <my code>
+					if (this.tickLabelContainer) {
+						var extraMargin = 0;
+							
+						// All Chidren are now position absolute, calculate height by finding the max offsetHeight of a child 
+						for (i = 0 ; i < this.tickLabelContainer.childNodes.length; i++) {
+							if (this.tickLabelContainer.childNodes[i].offsetHeight > extraMargin) {
+								extraMargin = this.tickLabelContainer.childNodes[i].offsetHeight;
+							}
+						}
+						if (this.options.orientation === 'horizontal') {
+							this.sliderElem.style.marginBottom = extraMargin + 'px';
+						}
+					}
+					//  </my code>
+
 					for (var i = 0; i < this.options.ticks.length; i++) {
 
 						var percentage = this.options.ticks_positions[i] ||
 							100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
 
 						this.ticks[i].style[this.stylePos] = percentage + '%';
+
 
 						/* Set class labels to denote whether ticks are in the selection */
 						this._removeClass(this.ticks[i], 'in-selection');
@@ -1024,12 +1054,31 @@
 						}
 
 						if (this.tickLabels[i]) {
-							this.tickLabels[i].style[styleSize] = labelSize + 'px';
+							//this.tickLabels[i].style[styleSize] = labelSize + 'px';
+							this.tickLabels[i].style[styleSize] = labelSize + '%';
 
+							/*
 							if (this.options.ticks_positions[i] !== undefined) {
 								this.tickLabels[i].style.position = 'absolute';
 								this.tickLabels[i].style[this.stylePos] = this.options.ticks_positions[i] + '%';
 								this.tickLabels[i].style[styleMargin] = -labelSize/2 + 'px';
+							}
+
+							*/
+							/* // moved to css but could also be done here if there is need to. e.g. browser switch of not supported browsers.
+							if (this.options.orientation === 'horizontal') {
+								//this.tickLabels[i].style['textIndent'] = '-'+labelSize + '%'; // textIndent would only work on horizontal sliders
+								this.tickLabels[i].style['transform'] = 'translate(-50%, 0%)';
+							} else {
+								this.tickLabels[i].style['transform'] = 'translate(50%, -50%)';
+							}
+							*/
+						
+							this.tickLabels[i].style.position = 'absolute';
+							if (this.options.ticks_positions[i] !== undefined) {
+								this.tickLabels[i].style[this.stylePos] = this.options.ticks_positions[i] + '%';
+							} else {
+								this.tickLabels[i].style[this.stylePos] = (100 / (this.options.ticks.length-1)) *  i  + '%';
 							}
 						}
 					}
@@ -1120,6 +1169,8 @@
 			            this.tooltip_max.style.top = this.tooltip_min.style.top;
 			        }
 				}
+
+				this._setTicksClass();
 			},
 			_removeProperty: function(element, prop) {
 				if (element.style.removeProperty) {
@@ -1327,7 +1378,10 @@
 					val = this._applyPrecision(val);
 				}
 
+				/* 
+				// orig code
 				if (snapToClosestTick) {
+					console.log("snapToClosestTick == true");
 					var min = [val, Infinity];
 					for (var i = 0; i < this.options.ticks.length; i++) {
 						var diff = Math.abs(this.options.ticks[i] - val);
@@ -1336,10 +1390,44 @@
 						}
 					}
 					if (min[1] <= this.options.ticks_snap_bounds) {
+						console.log(["min[0]", min[0]]);
 						return min[0];
 					}
 				}
+				console.log("snapToClosestTick == false");
+				console.log(["return val", val]);
+				*/
+				
+				// fixed code  (not sure why i have added this code ... or what issue should be fixed by it.)
+				if (snapToClosestTick) {
+					// console.log("snapToClosestTick == true");
+					// console.log(["return val", val]);
+					//console.log(["this.options.ticks.length",this.options.ticks.length]);
+					for (var i = 0; i < this.options.ticks.length; i++) {
+						var tick = this.options.ticks[i], draggedVal, snappedVal;
 
+						if (this.options.range) {
+							// console.log(["this.options.range = true", this.options.range]);
+							draggedVal = val[this.dragged];
+							snappedVal = this.dragged > 0 ? [val[0], tick] : [tick, val[1]];
+						} else {
+							// console.log(["this.options.range = false", this.options.range]);
+							draggedVal = val;
+							snappedVal = tick;
+						}
+						// console.log(["tick", tick]);
+						// console.log(["draggedVal", draggedVal]);
+						// console.log(["this.options.ticks_snap_bounds", this.options.ticks_snap_bounds]);
+
+						if (Math.abs(tick - draggedVal) < this.options.ticks_snap_bounds) {
+							//console.log(["snappedVal", snappedVal]);
+							return snappedVal;
+						}
+					}
+				} else {
+					// console.log("snapToClosestTick == false");
+				}
+				//console.log(["return val", val]);
 				return val;
 			},
 			_applyPrecision: function(val) {
@@ -1494,6 +1582,59 @@
 			},
 			_toPercentage: function(value) {
 				return this.options.scale.toPercentage.apply(this, [value]);
+			},
+			_setTicksCSSClass: function(index) {
+				if(typeof this.options.ticks_classes[index] !== 'undefined') {
+					// remove all the classes
+					this._removeClass(this.sliderElem, this.options.ticks_classes.join(" "));
+					// set new classname
+					this._addClass(this.sliderElem,this.options.ticks_classes[index]);
+				}	
+			},
+			_setTicksClass: function() {
+				if (this.options.ticks_classes.length) {
+					var val = this._calculateValue();
+					var greatestTick;
+					var smallestTick = Infinity;
+					var diff;
+					
+					// create a values array just to be sure to have an array
+					var values = [];
+					if (this.options.range===false) {
+						values[0]=val;
+					} else {
+						values = val;
+					}
+
+					for (var j=0; j < values.length; j++) {
+						//var min = [values[j], Infinity];  // not used was for test with closest checking see commentet text below
+						for (var i = 0; i < this.options.ticks.length; i++) {
+							diff = this.options.ticks[i] - values[j];
+							if (diff <= 0 ) {
+								greatestTick = i;
+							}
+							if (diff >= 0) {
+								if (i < smallestTick) {
+									smallestTick= i;	
+								}
+							}
+							
+							//this would be the closest test but  i think this is wrong if the value is closer to the next tick that it should get his css class.
+							// var diff = Math.abs(this.options.ticks[i] - values[j]);
+							// if (diff <= min[1]) {
+							// 	closestTick= i;
+							// 	min = [this.options.ticks[i], diff];
+							// }
+						}
+					}
+					// smallestTick is now the index of the smallest tick which has both values in it
+					// greatestTick is now the index of the greatest tick which has both values in it
+					if(this.options.set_tick_classes==='greatest') {
+						this._setTicksCSSClass(greatestTick);
+					} else {
+						this._setTicksCSSClass(smallestTick);
+					}
+				}
 			},
 			_setTooltipPosition: function(){
 				var tooltips = [this.tooltip, this.tooltip_min, this.tooltip_max];

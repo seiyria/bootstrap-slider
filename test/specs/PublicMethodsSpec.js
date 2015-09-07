@@ -172,8 +172,9 @@ describe("Public Method Tests", function() {
 
         var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
         expect(tooltipIsShownAfterSlide).toBeTruthy();
+
       });
-      
+           
       it("tooltip is shown on mouse over and hides correclty after mouse leave", function() {
         testSlider = $("#testSlider1").slider({
           tooltip : "show"
@@ -200,6 +201,7 @@ describe("Public Method Tests", function() {
         expect(tooltipIsAgainHidden).toBeTruthy();
       });
       
+
       it("tooltip is always shown if set to 'always'", function() {
         testSlider = $("#testSlider1").slider({
           tooltip : "always"
