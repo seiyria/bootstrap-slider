@@ -995,7 +995,7 @@
 
 					/* // original code
 					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
-					
+
 					if (this.tickLabelContainer) {
 						var extraMargin = 0;
 						/*
@@ -1080,10 +1080,6 @@
 							} else {
 								this.tickLabels[i].style[this.stylePos] = (100 / (this.options.ticks.length-1)) *  i  + '%';
 							}
-
-
-=======
->>>>>>> upstream/master
 						}
 					}
 				}
