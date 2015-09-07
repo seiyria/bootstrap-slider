@@ -13,6 +13,6 @@ Please accompany all pull requests with the following (where appropriate):
 * documentation updates
 * examples (for new options being added)
 
-Additionally, when you are ready to submit your PR, please rebase your commits so they're easier to examine!
+Additionally, when you are ready to submit your PR, please rebase your commits against the latest master branch so they are easier to examine!
 
 Also, please note, your code will not be merged if it does not pass our CI test. Thanks for your contribution!

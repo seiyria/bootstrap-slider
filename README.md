@@ -128,13 +128,14 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | selection |	string |	'before' |	selection placement. Accepts: 'before', 'after' or 'none'. In case of a range slider, the selection will be placed between the handles |
 | tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', or 'always' |
 | tooltip_split |	bool |	false |	if false show one tootip if true show two tooltips one for each handler |
+| tooltip_position |	string |	null |	Position of tooltip, relative to slider. Accepts 'top'/'bottom' for horizontal sliders and 'left'/'right' for vertically orientated sliders. Default positions are 'top' for horizontal and 'right' for vertical slider. |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square', 'triangle' or 'custom' |
 | reversed | bool | false | whether or not the slider should be reversed |
 | enabled | bool | true | whether or not the slider is initially enabled |
 | formatter |	function |	returns the plain value |	formatter callback. Return the value wanted to be displayed in the tooltip |
 | natural_arrow_keys | bool | false | The natural order is used for the arrow keys. Arrow up select the upper slider value for vertical sliders, arrow right the righter slider value for a horizontal slider - no matter if the slider was reversed or not. By default the arrow keys are oriented by arrow up/right to the higher slider value, arrow down/left to the lower slider value. |
 | ticks | array | [ ] | Used to define the values of ticks. Tick marks are indicators to denote special values in the range. This option overwrites min and max options. |
-| ticks_positions | array | [ ] | Defines the positions of the tick values in percentages. The first value should alwasy be 0, the last value should always be 100 percent. |
+| ticks_positions | array | [ ] | Defines the positions of the tick values in percentages. The first value should always be 0, the last value should always be 100 percent. |
 | ticks_labels | array | [ ] | Defines the labels below the tick marks. Accepts HTML input. |
 | ticks_snap_bounds | float | 0 | Used to define the snap bounds of a tick. Snaps to the tick if value is within these bounds. |
 | scale | string | 'linear' | Set to 'logarithmic' to use a logarithmic scale. |
@@ -148,6 +149,7 @@ __NOTE:__ Optional parameters are italicized.
 | -------- | ----------- | ----------- |
 | getValue | --- | Get the current value from the slider |
 | setValue | newValue, _triggerSlideEvent_, _triggerChangeEvent_ | Set a new value for the slider. If optional triggerSlideEvent parameter is _true_, 'slide' events will be triggered. If optional triggerChangeEvent parameter is _true_, 'change' events will be triggered. This function takes `newValue` as either a `Number` or `Array`.|
+| getElement | --- | Get the div slider element |
 | destroy | --- | Properly clean up and remove the slider instance |
 | disable | ---| Disables the slider and prevents the user from changing the value |
 | enable | --- | Enables the slider |
@@ -184,11 +186,13 @@ After bumping, type `npm publish` to update on NPM.
 
 Other Platforms & Libraries
 ===========================
-- [Ruby on Rails](https://github.com/stationkeeping/bootstrap-slider-rails)
+- [Ruby on Rails](https://github.com/YourCursus/bootstrap-slider-rails)
 - [knockout.js](https://github.com/cosminstefanxp/bootstrap-slider-knockout-binding) ([@cosminstefanxp](https://github.com/cosminstefanxp), [#81](https://github.com/seiyria/bootstrap-slider/issues/81))
 - [AngularJS](https://github.com/seiyria/angular-bootstrap-slider)
-- [NuGet](https://www.nuget.org/packages/bootstrap.slider)
+- [EmberJS](https://github.com/lifegadget/ui-slider) ([@ksnyde](https://github.com/ksnyde))
+- [NuGet](https://www.nuget.org/packages/bootstrap-slider/) ([@ChrisMissal](https://github.com/ChrisMissal))
 - [MeteorJS](https://github.com/kidovate/meteor-bootstrap-slider)
+- [Maven](http://mvnrepository.com/artifact/org.webjars.bower/seiyria-bootstrap-slider)
 
 Maintainers
 ============

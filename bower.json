@@ -1,12 +1,6 @@
 {
   "name": "seiyria-bootstrap-slider",
-  "version": "4.8.4",
-  "dependencies": {
-    "jquery": "*",
-    "bootstrap": "*",
-    "modernizr": "*",
-    "jquery-bridget": "*"
-  },
+  "version": "5.0.13",
   "homepage": "https://github.com/seiyria/bootstrap-slider",
   "authors": [
     "Kyle Kemp <kyle@seiyria.com>",

@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-slider",
-  "version": "4.10.1",
+  "version": "5.1.1",
   "description": "Slider view component for Twitter Bootstrap.",
   "main": "js/bootstrap-slider.js",
   "scripts": {
@@ -8,14 +8,38 @@
     "postpublish": "sh ./scripts/postpublish.sh",
     "test": "grunt test"
   },
+  "homepage": "http://github.com/seiyria/bootstrap-slider",
   "repository": {
     "type": "git",
     "url": "git://github.com/seiyria/bootstrap-slider.git"
   },
-  "author": "",
-  "license": "BSD",
+  "bugs": {
+    "url": "http://github.com/seiyria/bootstrap-slider/issues"
+  },
+  "author": "bootstrap-slider ",
+  "contributors": [
+    {
+      "name": "Kyle Kemp",
+      "twitter": "@seiyria",
+      "github": "seiyria"
+    },
+    {
+      "name": "Rohit Kalkur",
+      "twitter": "@Rovolutionary",
+      "github": "rovolution"
+    }
+  ],
+  "keywords": [
+    "slider",
+    "bootstrap",
+    "twitter",
+    "slide"
+  ],
+  "license": "MIT",
   "readmeFilename": "README.md",
   "gitHead": "67eb8fe3c26205efc94ae95b3ef37a469eef0b81",
+  "dependencies": {},
+  "engine": {},
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-uglify": "~0.2.4",
@@ -25,7 +49,7 @@
     "grunt-contrib-jasmine": "~0.5.2",
     "grunt-template": "~0.2.0",
     "grunt-open": "~0.2.2",
-    "bower": "latest",
+    "bower": "1.4.1",
     "grunt-contrib-less": "~0.7.0",
     "grunt-header": "^1.0.0",
     "grunt-contrib-clean": "^0.6.0",
@@ -34,8 +58,8 @@
   "gruntConfig": {
     "devPort": 9000,
     "js": {
-      "modernizr": "bower_components/modernizr/modernizr.js",
-      "jquery": "bower_components/jquery/dist/jquery.min.js",
+      "modernizr": "dependencies/js/modernizr.js",
+      "jquery": "dependencies/js/jquery.min.js",
       "bindPolyfill": "test/phantom_bind_polyfill.js"
     },
     "less": {
@@ -44,7 +68,7 @@
       "variables": "less/variables.less"
     },
     "css": {
-      "bootstrap": "bower_components/bootstrap/dist/css/bootstrap.min.css",
+      "bootstrap": "dependencies/css/bootstrap.min.css",
       "slider": "css/bootstrap-slider.css"
     },
     "tpl": {

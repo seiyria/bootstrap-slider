@@ -989,8 +989,13 @@
 					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
+
 					//var labelSize = this._state.size / (this.options.ticks.length - 1);
 					var labelSize = 100 / (this.options.ticks.length); // label size now in % instead of px
+
+					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
+					var labelSize = this._state.size / (this.options.ticks.length - 1);
+
 
 					/* // original code
 					if (this.tickLabelContainer) {
@@ -1060,6 +1065,7 @@
 								this.tickLabels[i].style[this.stylePos] = this.options.ticks_positions[i] + '%';
 								this.tickLabels[i].style[styleMargin] = -labelSize/2 + 'px';
 							}
+
 							*/
 							/* // moved to css but could also be done here if there is need to. e.g. browser switch of not supported browsers.
 							if (this.options.orientation === 'horizontal') {
@@ -1078,6 +1084,8 @@
 							}
 
 
+=======
+>>>>>>> upstream/master
 						}
 					}
 				}
@@ -1167,6 +1175,7 @@
 			            this.tooltip_max.style.top = this.tooltip_min.style.top;
 			        }
 				}
+
 				this._setTicksClass();
 			},
 			_removeProperty: function(element, prop) {
