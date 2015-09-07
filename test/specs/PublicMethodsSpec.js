@@ -174,7 +174,7 @@ describe("Public Method Tests", function() {
         expect(tooltipIsShownAfterSlide).toBeTruthy();
       });
       
-      it("tooltip is shown on mouse over and hides correclty after mouse leave", function() {
+      it("tooltip is shown on mouse over and hides correctly after mouse leave", function() {
         testSlider = $("#testSlider1").slider({
           tooltip : "show"
         });
