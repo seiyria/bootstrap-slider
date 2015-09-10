@@ -3,6 +3,7 @@
   "version": "5.1.1",
   "description": "Slider view component for Twitter Bootstrap.",
   "main": "js/bootstrap-slider.js",
+  "style": "dist/css/bootstrap-slider.css",
   "scripts": {
     "prepublish": "bower install",
     "postpublish": "sh ./scripts/postpublish.sh",
