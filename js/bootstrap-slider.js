@@ -907,8 +907,12 @@
 			_removeSliderEventHandlers: function() {
 				// Remove event listeners from handle1
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
-				this.handle1.removeEventListener("focus", this.showTooltip, false);
-				this.handle1.removeEventListener("blur", this.hideTooltip, false);
+				if (this.showTooltip) {
+					this.handle1.removeEventListener("focus", this.showTooltip, false);
+				}
+				if (this.hideTooltip) {
+					this.handle1.removeEventListener("blur", this.hideTooltip, false);
+				}
 
 				// Remove event listeners from handle2
 				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
@@ -916,8 +920,12 @@
 				this.handle2.removeEventListener("blur", this.handle2Keydown, false);
 
 				// Remove event listeners from sliderElem
-				this.sliderElem.removeEventListener("mouseenter", this.showTooltip, false);
-				this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
+				if (this.showTooltip) {
+					this.sliderElem.removeEventListener("mouseenter", this.showTooltip, false);
+				}
+				if (this.hideTooltip) {
+					this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
+				}
 				this.sliderElem.removeEventListener("touchstart", this.mousedown, false);
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
 			},
