@@ -1429,7 +1429,9 @@
 				this.$sliderElem.off();
 			},
 			_setText: function(element, text) {
-				if(typeof element.innerText !== "undefined") {
+				if(typeof element.innerHTML !== "undefined") {
+			 		element.innerHTML = text;
+			 	}else if(typeof element.innerText !== "undefined") {
 			 		element.innerText = text;
 			 	} else if(typeof element.textContent !== "undefined") {
 			 		element.textContent = text;
