@@ -1017,23 +1017,15 @@
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
-					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
-					var labelSize = this._state.size / (this.options.ticks.length - 1);
+					var labelSize = 1 / (this.options.ticks.length);
+					labelSize = labelSize * 100;
 
 					if (this.tickLabelContainer) {
 						var extraMargin = 0;
-						if (this.options.ticks_positions.length === 0) {
-							if (this.options.orientation !== 'vertical') {
-								this.tickLabelContainer.style[styleMargin] = -labelSize/2 + 'px';
-							}
-
-							extraMargin = this.tickLabelContainer.offsetHeight;
-						} else {
-							/* Chidren are position absolute, calculate height by finding the max offsetHeight of a child */
-							for (i = 0 ; i < this.tickLabelContainer.childNodes.length; i++) {
-								if (this.tickLabelContainer.childNodes[i].offsetHeight > extraMargin) {
-									extraMargin = this.tickLabelContainer.childNodes[i].offsetHeight;
-								}
+						/* Chidren are position absolute, calculate height by finding the max offsetHeight of a child */
+						for (i = 0 ; i < this.tickLabelContainer.childNodes.length; i++) {
+							if (this.tickLabelContainer.childNodes[i].offsetHeight > extraMargin) {
+								extraMargin = this.tickLabelContainer.childNodes[i].offsetHeight;
 							}
 						}
 						if (this.options.orientation === 'horizontal') {
@@ -1063,16 +1055,18 @@
 						}
 
 						if (this.tickLabels[i]) {
-							this.tickLabels[i].style[styleSize] = labelSize + 'px';
-
-							if (this.options.orientation !== 'vertical' && this.options.ticks_positions[i] !== undefined) {
-								this.tickLabels[i].style.position = 'absolute';
-								this.tickLabels[i].style[this.stylePos] = percentage + '%';
-								this.tickLabels[i].style[styleMargin] = -labelSize/2 + 'px';
-							} else if (this.options.orientation === 'vertical') {
-								this.tickLabels[i].style['marginLeft'] =  this.sliderElem.offsetWidth + 'px';
-								this.tickLabelContainer.style['marginTop'] = this.sliderElem.offsetWidth / 2 * -1 + 'px';
-							}
+							this.tickLabels[i].style[styleSize] = labelSize + '%';
+							this.tickLabels[i].style.position = 'absolute';
+							if (this.options.orientation === 'horizontal') {
+				                this.tickLabels[i].style['transform'] = 'translate(-50%, 0%)';
+				            } else {
+				                this.tickLabels[i].style['transform'] = 'translate(0%, -' + labelSize + '%)';
+				            }
+							if (this.options.ticks_positions[i] !== undefined) {
+				                this.tickLabels[i].style[this.stylePos] = this.options.ticks_positions[i] + '%';
+				            } else {
+				                this.tickLabels[i].style[this.stylePos] = (labelSize + labelSize/ (this.options.ticks.length -1) ) *  i  + '%';
+				            }
 						}
 					}
 				}
