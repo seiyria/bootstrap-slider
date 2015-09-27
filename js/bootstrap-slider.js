@@ -1006,6 +1006,10 @@
 
 						var percentage = this.options.ticks_positions[i] || this._toPercentage(this.options.ticks[i]);
 
+						if (this.options.reversed) {
+							percentage = 100 - percentage;
+						}
+
 						this.ticks[i].style[this.stylePos] = percentage + '%';
 
 						/* Set class labels to denote whether ticks are in the selection */
@@ -1025,7 +1029,7 @@
 
 							if (this.options.ticks_positions[i] !== undefined) {
 								this.tickLabels[i].style.position = 'absolute';
-								this.tickLabels[i].style[this.stylePos] = this.options.ticks_positions[i] + '%';
+								this.tickLabels[i].style[this.stylePos] = percentage + '%';
 								this.tickLabels[i].style[styleMargin] = -labelSize/2 + 'px';
 							}
 						}
