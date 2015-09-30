@@ -980,8 +980,6 @@
 
 				/* Position ticks and labels */
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
-					var maxTickValue = Math.max.apply(Math, this.options.ticks);
-					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
 					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
@@ -1006,8 +1004,7 @@
 					}
 					for (var i = 0; i < this.options.ticks.length; i++) {
 
-						var percentage = this.options.ticks_positions[i] ||
-							100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
+						var percentage = this.options.ticks_positions[i] || this._toPercentage(this.options.ticks[i]);
 
 						this.ticks[i].style[this.stylePos] = percentage + '%';
 
