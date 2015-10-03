@@ -113,12 +113,35 @@ describe("Slider with ticks tests", function() {
 		options.selection = 'before';
 		testSlider = $el.slider(options);
 		expect($el.siblings('div.slider').find('.in-selection').length).toBe(2);
-});
+	});
+
+	it("Should reverse the tick labels if `reversed` option is set to true", function() {
+		var ticks = [100, 200, 300, 400, 500];
+		var ticksLabels = ["$100", "$200", "$300", "$400", "$500"];
+
+		// Create reversed slider
+		testSlider = $("#testSlider1").slider({
+			id: "testSlider1Ref",
+			ticks: ticks,
+			ticks_labels: ticksLabels,
+			ticks_snap_bounds: 30,
+			reversed: true
+		});
+
+		// Assert that tick marks are reversed
+		var tickLabelsFromDOM = $("#testSlider1Ref .slider-tick-label-container")
+			.children(".slider-tick-label")
+				.map(function() { return $(this).text(); })
+				.toArray();
+
+		var reversedTickLabels = ticksLabels.reverse();
+		expect(tickLabelsFromDOM).toEqual(reversedTickLabels);
+	});
 
 	afterEach(function() {
-	    if(testSlider) {
-	      testSlider.slider('destroy');
-	      testSlider = null;
-	    }
-  	});
+    if(testSlider) {
+      testSlider.slider('destroy');
+      testSlider = null;
+    }
+	});
 });
