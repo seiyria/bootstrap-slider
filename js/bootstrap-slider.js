@@ -448,8 +448,10 @@
 
 					for (i = 0; i < this.options.ticks_labels.length; i++) {
 						var label = document.createElement('div');
+						var noTickPositionsSpecified = this.options.ticks_positions.length === 0;
+						var tickLabelsIndex = (this.options.reversed && noTickPositionsSpecified) ? (this.options.ticks_labels.length - (i + 1)) : i;
 						label.className = 'slider-tick-label';
-						label.innerHTML = this.options.ticks_labels[i];
+						label.innerHTML = this.options.ticks_labels[tickLabelsIndex];
 
 						this.tickLabels.push(label);
 						this.tickLabelContainer.appendChild(label);
@@ -857,14 +859,14 @@
 				return this;
 			},
 
-            off: function(evt, callback) {
-                if($) {
-                    this.$element.off(evt, callback);
-                    this.$sliderElem.off(evt, callback);
-                } else {
-                    this._unbindNonQueryEventHandler(evt, callback);
-                }
-            },
+      off: function(evt, callback) {
+          if($) {
+              this.$element.off(evt, callback);
+              this.$sliderElem.off(evt, callback);
+          } else {
+              this._unbindNonQueryEventHandler(evt, callback);
+          }
+      },
 
 			getAttribute: function(attribute) {
 				if(attribute) {
