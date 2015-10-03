@@ -161,6 +161,7 @@ __NOTE:__ Optional parameters are italicized.
 | on | eventType, callback | When the slider event _eventType_ is triggered, the callback function will be invoked |
 | off | eventType, callback | Removes the callback function from the slider event _eventType_ |
 | relayout | --- | Renders the tooltip again, after initialization. Useful in situations when the slider and tooltip are initially hidden. |
+| moveSlider | inc | Moves slider forward by number of units equal to 'inc' without direct user input.
 
 Events
 ======
