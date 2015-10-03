@@ -1331,15 +1331,19 @@
 				}
 
 				if (snapToClosestTick) {
-					var min = [val, Infinity];
 					for (var i = 0; i < this.options.ticks.length; i++) {
-						var diff = Math.abs(this.options.ticks[i] - val);
-						if (diff <= min[1]) {
-							min = [this.options.ticks[i], diff];
+						var tick = this.options.ticks[i], draggedVal, snappedVal;
+						if (this.options.range) {
+							draggedVal = val[this.dragged];
+							snappedVal = this.dragged > 0 ? [val[0], tick] : [tick, val[1]];
+						} else {
+							draggedVal = val;
+							snappedVal = tick;
 						}
-					}
-					if (min[1] <= this.options.ticks_snap_bounds) {
-						return min[0];
+
+						if (Math.abs(tick - draggedVal) <= this.options.ticks_snap_bounds) {
+							return snappedVal;
+						}
 					}
 				}
 
