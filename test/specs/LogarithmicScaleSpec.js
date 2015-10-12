@@ -11,7 +11,7 @@ describe("Slider with logarithmic scale tests", function() {
 
 	var testSlider;
 
-	it("Should have the number of tick marks you specify", function() {
+	it("Should properly position the slider", function() {
 		testSlider = $("#testSlider1").slider({
 			min: 0,
 			max: 10000,
@@ -23,6 +23,21 @@ describe("Slider with logarithmic scale tests", function() {
 
 		var handle = $("#testSlider1").siblings('div.slider').find('.min-slider-handle');
 		expect(handle.css('left')).toBe(expectedPostition);
+	});
+
+	it("Should properly position the tick marks", function() {
+		testSlider = $("#testSlider1").slider({
+			min: 0,
+			max: 100,
+			scale: 'logarithmic',
+			ticks: [0,10,20,50,100]
+		});
+
+		// Position expected for the '10' tick
+		var expectedTickOnePosition = 210 / 2 + 'px'; //should be at 50%
+		
+		var handle = $("#testSlider1").siblings('div.slider').find(".slider-tick").eq(1);
+		expect(handle.css('left')).toBe(expectedTickOnePosition);
 	});
 
 	it("Should use step size when navigating the keyboard", function() {

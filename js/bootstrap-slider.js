@@ -448,8 +448,10 @@
 
 					for (i = 0; i < this.options.ticks_labels.length; i++) {
 						var label = document.createElement('div');
+						var noTickPositionsSpecified = this.options.ticks_positions.length === 0;
+						var tickLabelsIndex = (this.options.reversed && noTickPositionsSpecified) ? (this.options.ticks_labels.length - (i + 1)) : i;
 						label.className = 'slider-tick-label';
-						label.innerHTML = this.options.ticks_labels[i];
+						label.innerHTML = this.options.ticks_labels[tickLabelsIndex];
 
 						this.tickLabels.push(label);
 						this.tickLabelContainer.appendChild(label);
@@ -857,14 +859,14 @@
 				return this;
 			},
 
-            off: function(evt, callback) {
-                if($) {
-                    this.$element.off(evt, callback);
-                    this.$sliderElem.off(evt, callback);
-                } else {
-                    this._unbindNonQueryEventHandler(evt, callback);
-                }
-            },
+      off: function(evt, callback) {
+          if($) {
+              this.$element.off(evt, callback);
+              this.$sliderElem.off(evt, callback);
+          } else {
+              this._unbindNonQueryEventHandler(evt, callback);
+          }
+      },
 
 			getAttribute: function(attribute) {
 				if(attribute) {
@@ -980,8 +982,6 @@
 
 				/* Position ticks and labels */
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
-					var maxTickValue = Math.max.apply(Math, this.options.ticks);
-					var minTickValue = Math.min.apply(Math, this.options.ticks);
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
 					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
@@ -1006,8 +1006,11 @@
 					}
 					for (var i = 0; i < this.options.ticks.length; i++) {
 
-						var percentage = this.options.ticks_positions[i] ||
-							100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
+						var percentage = this.options.ticks_positions[i] || this._toPercentage(this.options.ticks[i]);
+
+						if (this.options.reversed) {
+							percentage = 100 - percentage;
+						}
 
 						this.ticks[i].style[this.stylePos] = percentage + '%';
 
@@ -1028,7 +1031,7 @@
 
 							if (this.options.ticks_positions[i] !== undefined) {
 								this.tickLabels[i].style.position = 'absolute';
-								this.tickLabels[i].style[this.stylePos] = this.options.ticks_positions[i] + '%';
+								this.tickLabels[i].style[this.stylePos] = percentage + '%';
 								this.tickLabels[i].style[styleMargin] = -labelSize/2 + 'px';
 							}
 						}
