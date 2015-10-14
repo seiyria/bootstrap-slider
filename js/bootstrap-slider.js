@@ -907,19 +907,26 @@
 
 			********************************/
 			_removeSliderEventHandlers: function() {
-				// Remove event listeners from handle1
+				// Remove keydown event listeners
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
-				this.handle1.removeEventListener("focus", this.showTooltip, false);
-				this.handle1.removeEventListener("blur", this.hideTooltip, false);
-
-				// Remove event listeners from handle2
 				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
-				this.handle2.removeEventListener("focus", this.handle2Keydown, false);
-				this.handle2.removeEventListener("blur", this.handle2Keydown, false);
+
+				if (this.showTooltip) {
+					this.handle1.removeEventListener("focus", this.showTooltip, false);
+					this.handle2.removeEventListener("focus", this.showTooltip, false);
+				}
+				if (this.hideTooltip) {
+					this.handle1.removeEventListener("blur", this.hideTooltip, false);
+					this.handle2.removeEventListener("blur", this.hideTooltip, false);
+				}
 
 				// Remove event listeners from sliderElem
-				this.sliderElem.removeEventListener("mouseenter", this.showTooltip, false);
-				this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
+				if (this.showTooltip) {
+					this.sliderElem.removeEventListener("mouseenter", this.showTooltip, false);
+				}
+				if (this.hideTooltip) {
+					this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
+				}
 				this.sliderElem.removeEventListener("touchstart", this.mousedown, false);
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
 			},
@@ -929,17 +936,17 @@
 				}
 				this.eventToCallbackMap[evt].push(callback);
 			},
-            _unbindNonQueryEventHandler: function(evt, callback) {
-                var callbacks = this.eventToCallbackMap[evt];
-                if(callbacks !== undefined) {
-                    for (var i = 0; i < callbacks.length; i++) {
-                        if (callbacks[i] === callback) {
-                            callbacks.splice(i, 1);
-                            break;
-                        }
-                    }
-                }
-            },
+      _unbindNonQueryEventHandler: function(evt, callback) {
+          var callbacks = this.eventToCallbackMap[evt];
+          if(callbacks !== undefined) {
+              for (var i = 0; i < callbacks.length; i++) {
+                  if (callbacks[i] === callback) {
+                      callbacks.splice(i, 1);
+                      break;
+                  }
+              }
+          }
+      },
 			_cleanUpEventCallbacksMap: function() {
 				var eventNames = Object.keys(this.eventToCallbackMap);
 				for(var i = 0; i < eventNames.length; i++) {

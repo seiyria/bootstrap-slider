@@ -978,7 +978,8 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 				ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
 				ticks_positions: [0, 30, 70, 90, 100],
 				ticks_snap_bounds: 20,
-				value: 200
+				value: 200,
+				reversed: true
 			});
 
 			/* Example 15 */
