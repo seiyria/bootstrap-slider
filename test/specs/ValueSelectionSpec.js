@@ -16,7 +16,7 @@ describe("Value Selection Tests", function() {
     testSlider = $("#testSlider1").slider({
       min:0,
       max: 4200,
-      value:1000,
+      value:4200,
       step:1000
     });
     var flag = false;
