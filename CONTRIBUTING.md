@@ -8,8 +8,8 @@ Pull Requests
 
 Please accompany all pull requests with the following (where appropriate):
 
-* unit tests
-* jsfiddle
+* unit tests (we use [Jasmine 1.3](http://jasmine.github.io/1.3/introduction.html))
+* jsfiddle (or an equivalent such as codepen, plunker, etc)
 * documentation updates
 * examples (for new options being added)
 
