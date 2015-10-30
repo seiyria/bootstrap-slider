@@ -104,6 +104,12 @@
   border-left-color: #0480be;
   margin-left: 0;
 }
+.slider.slider-vertical .slider-tick-label-container {
+  white-space: nowrap;
+}
+.slider.slider-vertical .slider-tick-label-container .slider-tick-label {
+  padding-left: 4px;
+}
 .slider.slider-disabled .slider-handle {
   background-image: -webkit-linear-gradient(top, #dfdfdf 0%, #bebebe 100%);
   background-image: -o-linear-gradient(top, #dfdfdf 0%, #bebebe 100%);
