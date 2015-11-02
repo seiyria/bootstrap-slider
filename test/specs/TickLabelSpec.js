@@ -48,7 +48,7 @@ describe("Tick Label Render Tests", function() {
 		});	
 		
 		//check elements exist within the bounds of the slider
-		it("Tick labels render inside the slider" + orientation, function() {
+		it("Tick labels render inside the slider's bounds" + orientation, function() {
 			expect($(sliderId).length).toBe(1);
 			
 			var sliderRect = $(sliderId)[0].getBoundingClientRect();
@@ -62,13 +62,9 @@ describe("Tick Label Render Tests", function() {
 					expect(labelRect.top + 10 >= sliderRect.top).toBeTruthy();
 				} else {
 					expect(labelRect.top + 10 >= sliderRect.top).toBeTruthy();
+					expect(labelRect.width / 2 + labelRect.left >= sliderRect.left).toBeTruthy();
 				}
 			}
-		});
-		
-				
-		it("Tick labels render next to the tick positions" + orientation, function() {
-			expect(false).toBe(false);
 		});
 	}
 	
