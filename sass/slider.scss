@@ -100,6 +100,13 @@ $baseBorderRadius: 4px;
       border-left-color: #0480be;
       margin-left: 0;
     }
+    .slider-tick-label-container {
+      white-space: nowrap;
+
+      .slider-tick-label {
+        padding-left: $baseLineHeight * .2;
+      }
+    }
   }
 }
 &.slider-disabled {
