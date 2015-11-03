@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  5.2.4              
+                      VERSION  5.2.6              
 ========================================================= */
 /*! =========================================================
  * bootstrap-slider.js
@@ -106,6 +106,12 @@
   height: 1px;
   border-left-color: #0480be;
   margin-left: 0;
+}
+.slider.slider-vertical .slider-tick-label-container {
+  white-space: nowrap;
+}
+.slider.slider-vertical .slider-tick-label-container .slider-tick-label {
+  padding-left: 4px;
 }
 .slider.slider-disabled .slider-handle {
   background-image: -webkit-linear-gradient(top, #dfdfdf 0%, #bebebe 100%);
