@@ -5,10 +5,16 @@ describe("Accessibility Tests", function() {
   it("Should have the slider role", function() {
     sliderA = $('#accessibilitySliderA').slider();
     sliderB = $('#accessibilitySliderB').slider();
+    var $sliderElementA = $(sliderA.slider('getElement'));
+    var $sliderElementB = $(sliderB.slider('getElement'));
 
-    expect($(sliderA.slider('getElement')).find('.min-slider-handle').attr('role')).toBe('slider');
-    expect($(sliderB.slider('getElement')).find('.min-slider-handle').attr('role')).toBe('slider');
-    expect($(sliderB.slider('getElement')).find('.max-slider-handle').attr('role')).toBe('slider');
+    expect($sliderElementA.find('.min-slider-handle').attr('role')).toBe('slider');
+    expect($sliderElementB.find('.min-slider-handle').attr('role')).toBe('slider');
+    expect($sliderElementB.find('.max-slider-handle').attr('role')).toBe('slider');
+
+    expect($sliderElementA.find('.tooltip-main').attr('role')).toBe('presentation');
+    expect($sliderElementA.find('.tooltip-min').attr('role')).toBe('presentation');
+    expect($sliderElementA.find('.tooltip-max').attr('role')).toBe('presentation');
   });
 
   it('Should have an aria-labelledby attribute', function() {
@@ -23,30 +29,34 @@ describe("Accessibility Tests", function() {
   it('Should have an aria-valuemax and aria-valuemin value', function() {
     sliderA = $('#accessibilitySliderA').slider({ min: 5, max: 10 });
     sliderB = $('#accessibilitySliderB').slider({ min: 5, max: 10 });
+    var $sliderElementA = $(sliderA.slider('getElement'));
+    var $sliderElementB = $(sliderB.slider('getElement'));
 
-    expect($(sliderA.slider('getElement')).find('.min-slider-handle').attr('aria-valuemin')).toBe('5');
-    expect($(sliderA.slider('getElement')).find('.min-slider-handle').attr('aria-valuemax')).toBe('10');
-    expect($(sliderB.slider('getElement')).find('.min-slider-handle').attr('aria-valuemin')).toBe('5');
-    expect($(sliderB.slider('getElement')).find('.min-slider-handle').attr('aria-valuemax')).toBe('10');
-    expect($(sliderB.slider('getElement')).find('.max-slider-handle').attr('aria-valuemin')).toBe('5');
-    expect($(sliderB.slider('getElement')).find('.max-slider-handle').attr('aria-valuemax')).toBe('10');
+    expect($sliderElementA.find('.min-slider-handle').attr('aria-valuemin')).toBe('5');
+    expect($sliderElementA.find('.min-slider-handle').attr('aria-valuemax')).toBe('10');
+    expect($sliderElementB.find('.min-slider-handle').attr('aria-valuemin')).toBe('5');
+    expect($sliderElementB.find('.min-slider-handle').attr('aria-valuemax')).toBe('10');
+    expect($sliderElementB.find('.max-slider-handle').attr('aria-valuemin')).toBe('5');
+    expect($sliderElementB.find('.max-slider-handle').attr('aria-valuemax')).toBe('10');
   });
 
   it('Should have an aria-valuenow with the current value', function() {
     sliderA = $('#accessibilitySliderA').slider({ min: 5, value: 7 });
     sliderB = $('#accessibilitySliderB').slider({ min: 5, value: [2, 8] });
+    var $sliderElementA = $(sliderA.slider('getElement'));
+    var $sliderElementB = $(sliderB.slider('getElement'));
 
-    expect($(sliderA.slider('getElement')).find('.min-slider-handle').attr('aria-valuenow')).toBe('7');
-    expect($(sliderB.slider('getElement')).find('.min-slider-handle').attr('aria-valuenow')).toBe('5');
-    expect($(sliderB.slider('getElement')).find('.max-slider-handle').attr('aria-valuenow')).toBe('8');
+    expect($sliderElementA.find('.min-slider-handle').attr('aria-valuenow')).toBe('7');
+    expect($sliderElementB.find('.min-slider-handle').attr('aria-valuenow')).toBe('5');
+    expect($sliderElementB.find('.max-slider-handle').attr('aria-valuenow')).toBe('8');
 
     // Change the value and check if aria-valuenow is still the same
     sliderA.slider('setValue', 1);
     sliderB.slider('setValue', [4, 9]);
 
-    expect($(sliderA.slider('getElement')).find('.min-slider-handle').attr('aria-valuenow')).toBe('5');
-    expect($(sliderB.slider('getElement')).find('.min-slider-handle').attr('aria-valuenow')).toBe('5');
-    expect($(sliderB.slider('getElement')).find('.max-slider-handle').attr('aria-valuenow')).toBe('9');
+    expect($sliderElementA.find('.min-slider-handle').attr('aria-valuenow')).toBe('5');
+    expect($sliderElementB.find('.min-slider-handle').attr('aria-valuenow')).toBe('5');
+    expect($sliderElementB.find('.max-slider-handle').attr('aria-valuenow')).toBe('9');
   });
 
   afterEach(function() {
