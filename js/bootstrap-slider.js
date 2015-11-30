@@ -416,9 +416,15 @@
 
 				sliderMinHandle = document.createElement("div");
 				sliderMinHandle.className = "slider-handle min-slider-handle";
+				sliderMinHandle.setAttribute('role', 'slider');
+				sliderMinHandle.setAttribute('aria-valuemin', this.options.min);
+				sliderMinHandle.setAttribute('aria-valuemax', this.options.max);
 
 				sliderMaxHandle = document.createElement("div");
 				sliderMaxHandle.className = "slider-handle max-slider-handle";
+				sliderMaxHandle.setAttribute('role', 'slider');
+				sliderMaxHandle.setAttribute('aria-valuemin', this.options.min);
+				sliderMaxHandle.setAttribute('aria-valuemax', this.options.max);
 
 				sliderTrack.appendChild(sliderTrackLow);
 				sliderTrack.appendChild(sliderTrackSelection);
@@ -474,14 +480,17 @@
 				/* Create tooltip elements */
 				var sliderTooltip = document.createElement("div");
 				sliderTooltip.className = "tooltip tooltip-main";
+				sliderTooltip.setAttribute('role', 'presentation');
 				createAndAppendTooltipSubElements(sliderTooltip);
 
 				var sliderTooltipMin = document.createElement("div");
 				sliderTooltipMin.className = "tooltip tooltip-min";
+				sliderTooltipMin.setAttribute('role', 'presentation');
 				createAndAppendTooltipSubElements(sliderTooltipMin);
 
 				var sliderTooltipMax = document.createElement("div");
 				sliderTooltipMax.className = "tooltip tooltip-max";
+				sliderTooltipMax.setAttribute('role', 'presentation');
 				createAndAppendTooltipSubElements(sliderTooltipMax);
 
 
@@ -985,7 +994,10 @@
 				}
 
 				this.handle1.style[this.stylePos] = positionPercentages[0]+'%';
+				this.handle1.setAttribute('aria-valuenow', this._state.value[0]);
+
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
+				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
 
 				/* Position ticks and labels */
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
@@ -1000,7 +1012,7 @@
 							if (this.options.orientation !== 'vertical') {
 								this.tickLabelContainer.style[styleMargin] = -labelSize/2 + 'px';
 							}
-							
+
 							extraMargin = this.tickLabelContainer.offsetHeight;
 						} else {
 							/* Chidren are position absolute, calculate height by finding the max offsetHeight of a child */
