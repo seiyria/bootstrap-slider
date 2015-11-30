@@ -65,6 +65,13 @@
 		<input id="relayoutSliderInput" type="text"/>
 	</div>
 
+  <!-- Sliders used for AccessibilitySpec -->
+	<div>
+		<span id="accessibilitySliderLabelA">Label A</span>
+		<span id="accessibilitySliderLabelB">Label B</span>
+		<input id="accessibilitySliderA" type="text" data-slider-labelledby="accessibilitySliderLabelA" />
+		<input id="accessibilitySliderB" type="text" data-slider-labelledby='["accessibilitySliderLabelA", "accessibilitySliderLabelB"]' />
+	</div>
 	<% with (scripts) { %>
 	  <% [].concat(jasmine, vendor, src, specs, reporters, start).forEach(function(script){ %>
 	  <script src="<%= script %>"></script>
