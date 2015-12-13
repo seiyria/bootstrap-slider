@@ -1411,8 +1411,14 @@
 				var sliderOffset = this._state.offset[this.stylePos];
 				var distanceToSlide = eventPosition - sliderOffset;
 				// Calculate what percent of the length the slider handle has slid
-				var percentage = (distanceToSlide / this._state.size) * 100;
-				percentage = Math.round(percentage / this._state.percentage[2]) * this._state.percentage[2];
+				var selectedPercentage = (distanceToSlide / this._state.size) * 100;
+				
+				var nearestPercentage = Math.round(selectedPercentage / this._state.percentage[2]) * this._state.percentage[2];
+
+				// if the maximum is not equal to a step value, select max when user selects the max value.
+				var isSelectionNearMaxValue = (100 - selectedPercentage) < Math.abs(nearestPercentage - selectedPercentage);
+				var percentage =  isSelectionNearMaxValue === true ? 100 : nearestPercentage;
+
 				if (this.options.reversed) {
 					percentage = 100 - percentage;
 				}
@@ -1533,6 +1539,11 @@
                 }
 			},
 			_toValue: function(percentage) {
+				if (percentage === 100) {
+		                    return this.options.max;
+		                } else if (percentage === 0) {
+		                    return this.options.min;
+		                }
 				return this.options.scale.toValue.apply(this, [percentage]);
 			},
 			_toPercentage: function(value) {
