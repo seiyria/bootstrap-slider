@@ -100,11 +100,11 @@
     
     &.slider-disabled {
         .slider-handle {
-            #gradient > .vertical(#dfdfdf, #bebebe);
+            #gradient > .vertical(@slider-disabled-handle-gradient-start, @slider-disabled-handle-gradient-start);
         }
 
         .slider-track {
-            #gradient > .vertical(#e5e5e5, #e9e9e9);
+            #gradient > .vertical(@slider-disabled-track-gradient-start, @slider-disabled-track-gradient-end);
             cursor: not-allowed;
         }
     }
