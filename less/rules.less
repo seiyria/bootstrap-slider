@@ -32,7 +32,7 @@
                 border-width: 0 (@slider-line-height / 2) (@slider-line-height / 2) (@slider-line-height / 2);
                 width: 0;
                 height: 0;
-                border-bottom-color: #0480be;
+                border-bottom-color: @triangle-border-color;
                 margin-top: 0;
             }
         }
@@ -84,7 +84,7 @@
                 border-width: (@slider-line-height / 2) 0 (@slider-line-height / 2) (@slider-line-height / 2);
                 width: 1px;
                 height: 1px;
-                border-left-color: #0480be;
+                border-left-color: @triangle-border-color;
                 margin-left: 0;
             }
         }
@@ -161,7 +161,7 @@
     background-color: #337ab7;
     #gradient > .vertical(#149bdf, #0480be);
     filter: none;
-    .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
+    .box-shadow(~"inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,.05)");
     border: 0px solid transparent;
     
     &.round {
@@ -175,7 +175,7 @@
     &.custom {
         background: transparent none;
         
-        &::before{
+        &::before {
             line-height: @slider-line-height;
             font-size: 20px;
             content: '\2605'; //unicode star character
