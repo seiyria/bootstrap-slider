@@ -677,6 +677,9 @@
 			}
 			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
+			this.resize = this._resize.bind(this);
+			window.addEventListener("resize", this.resize, false);
+
 
 			// Bind tooltip-related handlers
 			if(this.options.tooltip === 'hide') {
@@ -1164,6 +1167,12 @@
 			        }
 				}
 			},
+			_resize: function (ev) {
+				/*jshint unused:false*/
+				this._state.offset = this._offset(this.sliderElem);
+				this._state.size = this.sliderElem[this.sizePos];
+        this._layout();
+      },
 			_removeProperty: function(element, prop) {
 				if (element.style.removeProperty) {
 				    element.style.removeProperty(prop);
