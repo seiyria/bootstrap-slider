@@ -224,6 +224,16 @@ describe("Event Tests", function() {
 
     });
 
+    describe("Window Events", function() {
+      it("'resize' event is triggered properly and can be binded to", function() {
+        testSlider.on('resize', function() {
+          flag = true;
+        });
+        testSlider.data('slider')._resize();
+        expect(flag).toBeTruthy();
+      });
+    });
+
     describe("Enabled/Disabled tests", function() {
       it("'slideDisabled' event is triggered properly and can be binded to", function() {
         testSlider.on('slideDisabled', function() {

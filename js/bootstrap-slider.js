@@ -677,6 +677,7 @@
 			}
 			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
+			// Bind window handlers
 			this.resize = this._resize.bind(this);
 			window.addEventListener("resize", this.resize, false);
 
@@ -1172,6 +1173,7 @@
 				this._state.offset = this._offset(this.sliderElem);
 				this._state.size = this.sliderElem[this.sizePos];
         this._layout();
+				this._trigger('resize');
       },
 			_removeProperty: function(element, prop) {
 				if (element.style.removeProperty) {
