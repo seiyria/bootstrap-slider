@@ -7,8 +7,9 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    // Metadata.
+    // Metadata
     pkg: packageJSON,
+    // Task configuration.
     header: {
       dist: {
         options: {
@@ -16,18 +17,27 @@ module.exports = function(grunt) {
         },
         files: {
           '<%= pkg.gruntConfig.dist.js %>': '<%= pkg.gruntConfig.temp.js %>',
+          '<%= pkg.gruntConfig.dist.jsMin %>': '<%= pkg.gruntConfig.temp.jsMin %>',
           '<%= pkg.gruntConfig.dist.css %>': '<%= pkg.gruntConfig.temp.css %>',
           '<%= pkg.gruntConfig.dist.cssMin %>': '<%= pkg.gruntConfig.temp.cssMin %>'
         }
       }
     },
-    // Task configuration.
     uglify: {
       options: {
         preserveComments: 'some'
       },
       dist: {
-        src: '<%= pkg.main %>',
+        src: '<%= pkg.gruntConfig.temp.js %>',
+        dest: '<%= pkg.gruntConfig.temp.jsMin %>'
+      }
+    },
+    babel: {
+      options: {
+        presets: ['es2015']
+      },
+      dist: {
+        src: '<%= pkg.gruntConfig.js.slider %>',
         dest: '<%= pkg.gruntConfig.temp.js %>'
       }
     },
@@ -36,9 +46,10 @@ module.exports = function(grunt) {
         options: {
           '-W099': true
         },
-        src: '<%= pkg.main %>'
+        src: '<%= pkg.gruntConfig.js.slider %>'
       },
       options: {
+        esnext: true,
         curly: true,
         eqeqeq: true,
         immed: true,
@@ -59,13 +70,13 @@ module.exports = function(grunt) {
           module: true,
           require: true
         },
-        "-W099": true,
+        "-W099": true
       },
       gruntfile: {
         src: 'Gruntfile.js'
       },
       js: {
-        src: '<%= pkg.main %>'
+        src: '<%= pkg.gruntConfig.js.slider %>'
       },
       spec : {
         src: '<%= pkg.gruntConfig.spec %>',
@@ -99,11 +110,11 @@ module.exports = function(grunt) {
       }
     },
     jasmine : {
-      src : '<%= pkg.main %>',
+      src : '<%= pkg.gruntConfig.temp.js %>',
       options : {
         specs : '<%= pkg.gruntConfig.spec %>',
         vendor : ['<%= pkg.gruntConfig.js.jquery %>', '<%= pkg.gruntConfig.js.bindPolyfill %>'],
-        styles : ['<%= pkg.gruntConfig.css.bootstrap %>', '<%= pkg.gruntConfig.css.slider %>'],
+        styles : ['<%= pkg.gruntConfig.css.bootstrap %>', '<%= pkg.gruntConfig.temp.css %>'],
         template : '<%= pkg.gruntConfig.tpl.SpecRunner %>'
       }
     },
@@ -114,11 +125,29 @@ module.exports = function(grunt) {
             js : {
               modernizr : '<%= pkg.gruntConfig.js.modernizr %>',
               jquery : '<%= pkg.gruntConfig.js.jquery %>',
-              slider : '<%= pkg.main %>'
+              slider : '<%= pkg.gruntConfig.temp.js %>'
             },
             css : {
               bootstrap : '<%= pkg.gruntConfig.css.bootstrap %>',
-              slider : '<%= pkg.gruntConfig.css.slider %>'
+              slider : '<%= pkg.gruntConfig.temp.css %>'
+            }
+          }
+        },
+        files : {
+          'index.html' : ['<%= pkg.gruntConfig.tpl.index %>']
+        }
+      },
+      'generate-gh-pages' : {
+        options : {
+          data : {
+            js : {
+              modernizr : '<%= pkg.gruntConfig.js.modernizr %>',
+              jquery : '<%= pkg.gruntConfig.js.jquery %>',
+              slider : 'js/bootstrap-slider.js'
+            },
+            css : {
+              bootstrap : '<%= pkg.gruntConfig.css.bootstrap %>',
+              slider : 'css/bootstrap-slider.css'
             }
           }
         },
@@ -128,26 +157,30 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      options : {
+      options: {
         livereload: true
       },
-      js : {
-        files: '<%= pkg.main %>',
-        tasks: ['jshint:js', 'jasmine']
+      js: {
+        files: '<%= pkg.gruntConfig.js.slider %>',
+        tasks: ['jshint:js', 'babel', 'jasmine']
       },
-      gruntfile : {
+      gruntfile: {
         files: '<%= jshint.gruntfile %>',
         tasks: ['jshint:gruntfile']
       },
-      spec : {
+      spec: {
         files: '<%= pkg.gruntConfig.spec %>',
         tasks: ['jshint:spec', 'jasmine:src']
       },
-      css : {
-        files: ['<%= pkg.gruntConfig.less.slider %>', '<%= pkg.gruntConfig.less.rules %>', '<%= pkg.gruntConfig.less.variables %>'],
+      css: {
+        files: [
+          '<%= pkg.gruntConfig.less.slider %>',
+          '<%= pkg.gruntConfig.less.rules %>',
+          '<%= pkg.gruntConfig.less.variables %>'
+        ],
         tasks: ['less:development']
       },
-      index : {
+      index: {
         files: '<%= pkg.gruntConfig.tpl.index %>',
         tasks: ['template:generate-index-page']
       }
@@ -170,7 +203,7 @@ module.exports = function(grunt) {
       },
       development: {
         files: {
-          '<%= pkg.gruntConfig.css.slider %>': '<%= pkg.gruntConfig.less.slider %>'
+          '<%= pkg.gruntConfig.temp.css %>': '<%= pkg.gruntConfig.less.slider %>'
         }
       },
       production: {
@@ -207,7 +240,6 @@ module.exports = function(grunt) {
     }
   });
 
-
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -220,16 +252,46 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-template');
   grunt.loadNpmTasks('grunt-header');
   grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-babel');
 
   // Create custom tasks
-  grunt.registerTask('test', ['jshint', 'jasmine']);
-  grunt.registerTask('build', ['less:development', 'test', 'template']);
-  grunt.registerTask('development', ['template', 'connect', 'open:development', 'watch']);
   grunt.registerTask('append-header', ['header', 'clean:temp']);
-  grunt.registerTask('production', ['less:production', 'less:production-min', 'test', 'uglify', "clean:dist", 'append-header']);
+  grunt.registerTask('test', [
+    'jshint',
+    'babel',
+    'less:development',
+    'jasmine',
+    'clean:temp'
+  ]);
+  grunt.registerTask('build', [
+    'less:development',
+    'test',
+    'template:generate-index-page'
+  ]);
+  grunt.registerTask('build-gh-pages', [
+    'less:development',
+    'babel',
+    'template:generate-gh-pages'
+  ]);
+  grunt.registerTask('dist', [
+    'clean:dist',
+    'less:production',
+    'less:production-min',
+    'babel',
+    'uglify',
+    'append-header'
+  ]);
+  grunt.registerTask('development', [
+    'less:development',
+    'babel',
+    'template:generate-index-page',
+    'connect',
+    'open:development',
+    'watch'
+  ]);
+  grunt.registerTask('production', ['test', 'dist']);
   grunt.registerTask('dev', 'development');
   grunt.registerTask('prod', 'production');
-  grunt.registerTask('dist', 'production');
-  grunt.registerTask('dist-no-tests', ['less:production', 'less:production-min', 'uglify', 'append-header']);
-  grunt.registerTask('default', 'build');
-};
+  grunt.registerTask('default', ['build']);
+
+}; // End of module

@@ -31,7 +31,7 @@
  * MIT license
  */
 
-(function(root, factory) {
+(function(factory) {
 	if(typeof define === "function" && define.amd) {
 		define(["jquery"], factory);
 	}
@@ -45,10 +45,10 @@
 		}
 		module.exports = factory(jQuery);
 	}
-	else {
-		root.Slider = factory(root.jQuery);
+	else if(window) {
+		window.Slider = factory(window.jQuery);
 	}
-}(this, function($) {
+}(function($) {
 	// Reference to Slider constructor
 	var Slider;
 
@@ -711,6 +711,7 @@
 			} else {
 				this.disable();
 			}
+
 		}
 
 

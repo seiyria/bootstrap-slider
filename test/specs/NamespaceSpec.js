@@ -1,4 +1,6 @@
 describe("Namespace Tests", function() {
+  var sourceJS = "temp/bootstrap-slider.js";
+
   beforeEach(function() {
     runs(function() {
       $.fn.slider = function() {};
@@ -9,7 +11,7 @@ describe("Namespace Tests", function() {
     var scriptLoaded;
 
     runs(function() {
-      $.getScript("js/bootstrap-slider.js", function() {
+      $.getScript(sourceJS, function() {
         scriptLoaded = true;
       });
     });
@@ -34,7 +36,7 @@ describe("Namespace Tests", function() {
       $.fn.bootstrapSlider = undefined;
       $.fn.slider = undefined;
 
-      $.getScript("js/bootstrap-slider.js", function() {
+      $.getScript(sourceJS, function() {
         scriptLoaded = true;
       });
     });
