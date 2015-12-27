@@ -1176,7 +1176,7 @@
 				this._state.offset = this._offset(this.sliderElem);
 				this._state.size = this.sliderElem[this.sizePos];
 				this._layout();
-      },
+			},
 			_removeProperty: function(element, prop) {
 				if (element.style.removeProperty) {
 				    element.style.removeProperty(prop);
