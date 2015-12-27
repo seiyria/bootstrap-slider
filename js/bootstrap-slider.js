@@ -957,6 +957,9 @@
 				}
 				this.sliderElem.removeEventListener("touchstart", this.mousedown, false);
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
+
+				// Remove window event listener
+				window.removeEventListener("resize", this.resize, false);
 			},
 			_bindNonQueryEventHandler: function(evt, callback) {
 				if(this.eventToCallbackMap[evt] === undefined) {
@@ -1172,8 +1175,7 @@
 				/*jshint unused:false*/
 				this._state.offset = this._offset(this.sliderElem);
 				this._state.size = this.sliderElem[this.sizePos];
-        this._layout();
-				this._trigger('resize');
+				this._layout();
       },
 			_removeProperty: function(element, prop) {
 				if (element.style.removeProperty) {
