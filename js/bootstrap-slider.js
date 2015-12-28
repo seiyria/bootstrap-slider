@@ -677,6 +677,10 @@
 			}
 			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
+			// Bind window handlers
+			this.resize = this._resize.bind(this);
+			window.addEventListener("resize", this.resize, false);
+
 
 			// Bind tooltip-related handlers
 			if(this.options.tooltip === 'hide') {
@@ -953,6 +957,9 @@
 				}
 				this.sliderElem.removeEventListener("touchstart", this.mousedown, false);
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
+
+				// Remove window event listener
+				window.removeEventListener("resize", this.resize, false);
 			},
 			_bindNonQueryEventHandler: function(evt, callback) {
 				if(this.eventToCallbackMap[evt] === undefined) {
@@ -1163,6 +1170,12 @@
 			            this.tooltip_max.style.top = this.tooltip_min.style.top;
 			        }
 				}
+			},
+			_resize: function (ev) {
+				/*jshint unused:false*/
+				this._state.offset = this._offset(this.sliderElem);
+				this._state.size = this.sliderElem[this.sizePos];
+				this._layout();
 			},
 			_removeProperty: function(element, prop) {
 				if (element.style.removeProperty) {
