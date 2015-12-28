@@ -11,6 +11,9 @@
     "js/bootstrap-slider.js",
     "dist/css/bootstrap-slider.css"
   ],
+  "dependencies": {
+    "bootstrap": "*"
+  },
   "keywords": [
     "slider",
     "bootstrap2",
