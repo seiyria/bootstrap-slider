@@ -65,6 +65,10 @@
 		<input id="relayoutSliderInput" type="text"/>
 	</div>
 
+  <!-- Sliders used by resize -->
+  <input id="resizeSlider" type="text"/>
+  <input id="resizeSliderVertical" data-slider-orientation="vertical" type="text"/>
+
   <!-- Sliders used for AccessibilitySpec -->
 	<div>
 		<span id="accessibilitySliderLabelA">Label A</span>
