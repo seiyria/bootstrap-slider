@@ -1,6 +1,5 @@
 .idea/*
 temp
-dist
 node_modules
 bower_components
 .grunt/*
