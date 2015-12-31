@@ -1,3 +1,7 @@
+v6.0.2
+==================
+* package.json: changing "main" to point at proper file path
+
 6.0.0 / 2015-12-30
 ==================
 * Moving all source code to `/src` directory
