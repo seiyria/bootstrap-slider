@@ -1,7 +1,7 @@
 6.0.0 / 2015-12-30
 ==================
 * Moving all source code to `/src` directory
-* Transpiling JS with [Babel](babeljs.io)
+* Transpiling JS with [Babel](https://babeljs.io/)
 * Adding `Other Guidelines` section to CONTRIBUTING.MD
 * Updating README with Grunt CLI tasks
 * Update postpublish script to reference transpiled code
