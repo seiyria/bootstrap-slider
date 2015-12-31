@@ -94,7 +94,7 @@ Using as CommonJS module
 =======
 bootstrap-slider can be loaded as a CommonJS module via [Browserify](https://github.com/substack/node-browserify), [Webpack](https://github.com/webpack/webpack), or some other build tool.
 
-```
+```js
 var Slider = require("bootstrap-slider");
 
 var mySlider = new Slider();
