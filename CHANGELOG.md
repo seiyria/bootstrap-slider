@@ -1,4 +1,4 @@
-v6.0.2
+6.0.2 / 2015-12-31
 ==================
 * package.json: changing "main" to point at proper file path
 
