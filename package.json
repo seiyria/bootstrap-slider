@@ -2,10 +2,9 @@
   "name": "bootstrap-slider",
   "version": "5.3.7",
   "description": "Slider view component for Twitter Bootstrap.",
-  "main": "js/bootstrap-slider.js",
+  "main": "dist/js/bootstrap-slider.js",
   "style": "dist/css/bootstrap-slider.css",
   "scripts": {
-    "prepublish": "bower install",
     "postpublish": "sh ./scripts/postpublish.sh",
     "test": "grunt test"
   },
@@ -42,47 +41,51 @@
   "dependencies": {},
   "engine": {},
   "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-contrib-uglify": "~0.2.4",
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-connect": "~0.5.0",
-    "grunt-contrib-jasmine": "~0.5.2",
-    "grunt-template": "~0.2.0",
-    "grunt-open": "~0.2.2",
-    "bower": "1.4.1",
-    "grunt-contrib-less": "~0.7.0",
-    "grunt-header": "^1.0.0",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-bump": "0.0.16"
+    "babel-preset-es2015": "6.3.13",
+    "bootstrap": "^3.3.6",
+    "grunt": "0.4.4",
+    "grunt-babel": "6.0.0",
+    "grunt-bump": "0.0.16",
+    "grunt-contrib-clean": "0.6.0",
+    "grunt-contrib-connect": "0.5.0",
+    "grunt-contrib-jasmine": "0.5.2",
+    "grunt-contrib-jshint": "0.11.3",
+    "grunt-contrib-less": "0.7.0",
+    "grunt-contrib-uglify": "0.2.4",
+    "grunt-contrib-watch": "0.5.3",
+    "grunt-header": "1.0.0",
+    "grunt-open": "0.2.2",
+    "grunt-template": "0.2.0"
   },
   "gruntConfig": {
     "devPort": 9000,
     "js": {
       "modernizr": "dependencies/js/modernizr.js",
       "jquery": "dependencies/js/jquery.min.js",
-      "bindPolyfill": "test/phantom_bind_polyfill.js"
+      "bindPolyfill": "test/phantom_bind_polyfill.js",
+      "slider": "src/js/bootstrap-slider.js"
     },
     "less": {
-      "slider": "less/bootstrap-slider.less",
-      "rules": "less/rules.less",
-      "variables": "less/variables.less"
+      "slider": "src/less/bootstrap-slider.less",
+      "rules": "src/less/rules.less",
+      "variables": "src/less/variables.less"
     },
     "css": {
-      "bootstrap": "dependencies/css/bootstrap.min.css",
-      "slider": "css/bootstrap-slider.css"
+      "bootstrap": "dependencies/css/bootstrap.min.css"
     },
     "tpl": {
       "SpecRunner": "tpl/SpecRunner.tpl",
       "index": "tpl/index.tpl"
     },
     "temp": {
-      "js": "temp/bootstrap-slider.min.js",
+      "js": "temp/bootstrap-slider.js",
+      "jsMin": "temp/bootstrap-slider.min.js",
       "css": "temp/bootstrap-slider.css",
       "cssMin": "temp/bootstrap-slider.min.css"
     },
     "dist": {
-      "js": "dist/bootstrap-slider.min.js",
+      "js": "dist/bootstrap-slider.js",
+      "jsMin": "dist/bootstrap-slider.min.js",
       "css": "dist/css/bootstrap-slider.css",
       "cssMin": "dist/css/bootstrap-slider.min.css"
     },

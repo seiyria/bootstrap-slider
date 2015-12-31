@@ -16,3 +16,8 @@ Please accompany all pull requests with the following (where appropriate):
 Additionally, when you are ready to submit your PR, please rebase your commits against the latest master branch so they are easier to examine!
 
 Also, please note, your code will not be merged if it does not pass our CI test. Thanks for your contribution!
+
+Other Guidelines
+=============
+* Please do not include anything from the `dist` directory in your pull request. The contents of this directory are automatically generated when the project maintainers merge pull requests/bump the version/publish to NPM
+* The application JavaScript source code is transpiled using [Babel](https://babeljs.io/)

@@ -8,8 +8,6 @@ __Please ensure that you are using this library instead of the Petre version bef
 
 Installation
 ============
-Clone the repository, then run `npm install`
-
 Want to use bower? `bower install seiyria-bootstrap-slider`
 
 Want to use npm? `npm install bootstrap-slider`
@@ -59,7 +57,7 @@ What if there is already a _slider_ plugin bound to the JQuery namespace?
 
 If there is already a JQuery plugin named _slider_ bound to the JQuery namespace, then this plugin will take on the alternate namespace _bootstrapSlider_.
 
-```
+```js
 // Instantiate a slider
 var mySlider = $("input.slider").bootstrapSlider();
 
@@ -173,6 +171,35 @@ Events
 | change | This event fires when the slider value has changed | An object with 2 properties: "oldValue" and "newValue" |
 | slideEnabled | This event fires when the slider is enabled | N/A |
 | slideDisabled | This event fires when the slider is disabled | N/A |
+
+
+How Do I Run This Locally?
+======
+- Clone the repository
+- Run `nvm use` in your Terminal to switch to the proper Node/NPM version
+- Once you are on specified Node version, run `npm install`
+- Install the Grunt CLI: `npm install grunt-cli -g`
+- Type `grunt dev` to launch browser window with Examples page
+
+Grunt Tasks
+======
+This plugin uses Grunt as its command-line task runner.
+
+To install the Grunt CLI, type `npm install grunt-cli -g`.
+
+To execute any of the commands, type `grunt <task-name>` in your terminal instance.
+
+The following is a list of the commonly-used command line tasks:
+
+* `grunt development`: Generates the `index.html`, compiles the LESS/JS to the `/temp` directory, and launches the index.html in your system's default browser. As changes are made to source code, the
+	browser window will auto-refresh.
+* `grunt production`: Generates the `/dist` directory with minified and unminified assetts.
+* `grunt dev`: Alias for `grunt development`
+* `grunt prod`: Alias for `grunt production`
+* `grunt build`: Transpiles JavaScript source via Babel and compiles LESS source to CSS to `temp` directory.
+* `grunt lint`: Runs JSLint on the JavaScript source code.
+* `grunt test`: Runs unit tests contained in `/test` directory via Jasmine.
+
 
 Version Bumping and Publishing (Maintainers Only)
 =======
