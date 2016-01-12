@@ -8,7 +8,7 @@
   ],
   "description": "a slider element for bootstrap 2/3",
   "main": [
-    "dist/js/bootstrap-slider.js",
+    "dist/bootstrap-slider.js",
     "dist/css/bootstrap-slider.css"
   ],
   "keywords": [
