@@ -12,6 +12,8 @@ Want to use bower? `bower install seiyria-bootstrap-slider`
 
 Want to use npm? `npm install bootstrap-slider`
 
+Want to get it from a CDN? https://cdnjs.com/libraries/bootstrap-slider
+
 __NOTE for NPM users__: In order to keep the version numbers in our dist/ file consistent with our Github tags, we do a patch version bump, generate a new dist, and create a commit/tag on postpublish.
 
 This does mean the Github repo will always be one patch commit off of what is published to NPM. Note that this will not affect functionality, and is only used to keep package management system files and the dist file version numbers in sync.
