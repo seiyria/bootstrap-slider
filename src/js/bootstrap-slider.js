@@ -1165,11 +1165,13 @@
 			        	if (offset_min.right > offset_max.left) {
 			        		this._removeClass(this.tooltip_max, 'bottom');
 			        		this._addClass(this.tooltip_max, 'top');
-			        		this.tooltip_max.style.top = -14 + 'px';
-			        	} else {
-			        		this._removeClass(this.tooltip_max, 'top');
-			        		this._addClass(this.tooltip_max, 'bottom');
-			        		this.tooltip_max.style.top = this.tooltip_min.style.top;
+			        		this.tooltip_max.style.top = '';
+                            this.tooltip_max.style.bottom = 22 + 'px';
+                        } else {
+                            this._removeClass(this.tooltip_max, 'top');
+                            this._addClass(this.tooltip_max, 'bottom');
+                            this.tooltip_max.style.top = this.tooltip_min.style.top;
+                            this.tooltip_max.style.bottom = '';
 			        	}
 			        } else {
 				        if (offset_min.right > offset_max.left) {
