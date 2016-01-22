@@ -131,6 +131,28 @@ describe("'tooltip_position' Option tests", function() {
       expect(testSlider.tooltip.style.top).toBe("22px");
     });
 
+    it("should be aligned below the handle if set to 'bottom' for range", function() {
+      // Create slider
+      testSlider = new Slider("#testSlider1", {
+        min: 0,
+        max: 20,
+        value: [0, 10],
+        range: true,
+        tooltip_position: "bottom",
+        orientation: "horizontal"
+      });
+
+      // Extract needed references/values
+      var mainTooltipHasClassTopMin = testSlider.tooltip_min.classList.contains("bottom");
+      var mainTooltipHasClassTopMax = testSlider.tooltip_max.classList.contains("bottom");
+
+      // Assert
+      expect(mainTooltipHasClassTopMin).toBeTruthy();
+      expect(mainTooltipHasClassTopMax).toBeTruthy();
+      expect(testSlider.tooltip_min.style.top).toBe("22px");
+      expect(testSlider.tooltip_max.style.top).toBe("22px");
+    });
+
     it("should default to 'top' if tooltip_position set to 'left'", function() {
       // Create slider
       testSlider = new Slider("#testSlider1", {
