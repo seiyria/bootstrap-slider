@@ -1,4 +1,4 @@
-6.0.6 / 2016-01-22
+6.0.7 / 2016-01-22
 ==================
 * Bug fix: When `tooltip_position` option is set to `"bottom"` on a slider with multiple split handles, position both tooltips below the slider
 
