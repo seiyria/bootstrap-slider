@@ -1,3 +1,11 @@
+6.0.6 / 2016-01-22
+==================
+* Bug fix: When `tooltip_position` option is set to `"bottom"` on a slider with multiple split handles, position both tooltips below the slider
+
+6.0.5 / 2016-01-20
+==================
+* bower.json: changing "main" to reference /dist/bootstrap-slider.js
+
 6.0.2 / 2015-12-31
 ==================
 * package.json: changing "main" to point at proper file path
