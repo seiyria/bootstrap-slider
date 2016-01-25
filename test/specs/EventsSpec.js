@@ -47,6 +47,26 @@ describe("Event Tests", function() {
         expect(flag).toBeTruthy();
       });
 
+      it("'slide' event value and input value properties are synchronous", function() {
+        testSlider.on('slide', function(e) {
+          flag = true;
+          expect(e.value.toString()).toEqual(this.value);
+        });
+        testSlider.slider("setValue", 3, true, false);
+
+        expect(flag).toBeTruthy();
+      });
+
+      it("'change' event value and input value properties are synchronous", function() {
+        testSlider.on('change', function(e) {
+          flag = true;
+          expect(e.value.newValue.toString()).toEqual(testSlider.val());
+        });
+        testSlider.slider("setValue", 3, false, true);
+
+        expect(flag).toBeTruthy();
+      });
+
       it("'slideStop' event is triggered properly and can be binded to", function() {
         testSlider.on('slideStop', function() {
           flag = true;
@@ -141,6 +161,30 @@ describe("Event Tests", function() {
           expect(isNaN(testSlider.val())).not.toBeTruthy();
         });
         testSlider.data('slider')._mousemove(touch);
+
+        expect(flag).toBeTruthy();
+      });
+
+      it("'slide' event value and input value properties are synchronous", function() {
+        touch.initEvent("touchmove");
+
+        testSlider.on('slide', function(e) {
+          flag = true;
+          expect(e.value.toString()).toEqual(testSlider.val());
+        });
+        testSlider.slider("setValue", 3, true, false);
+
+        expect(flag).toBeTruthy();
+      });
+
+      it("'change' event value and input value properties are synchronous", function() {
+        touch.initEvent("touchmove");
+
+        testSlider.on('change', function(e) {
+          flag = true;
+          expect(e.value.newValue.toString()).toEqual(testSlider.val());
+        });
+        testSlider.slider("setValue", 3, false, true);
 
         expect(flag).toBeTruthy();
       });
