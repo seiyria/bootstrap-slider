@@ -3,7 +3,7 @@
 ========================================================= */
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
 /*! =========================================================
  * bootstrap-slider.js
@@ -294,7 +294,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		/*************************************************
   						CONSTRUCTOR
   	**************************************************/
-		Slider = function Slider(element, options) {
+		Slider = function (element, options) {
 			createNewSlider.call(this, element, options);
 			return this;
 		};
@@ -1500,7 +1500,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			_offsetTop: function _offsetTop(obj) {
 				var offsetTop = obj.offsetTop;
 				while ((obj = obj.offsetParent) && !isNaN(obj.offsetTop)) {
-					offsetTop += obj.offsetTop - obj.scrollTop;
+					offsetTop += obj.offsetTop;
 				}
 				return offsetTop;
 			},
@@ -1531,20 +1531,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 				if (this.options.orientation === 'vertical') {
 					var tooltipPos = this.options.tooltip_position || 'right';
 					var oppositeSide = tooltipPos === 'left' ? 'right' : 'left';
-					tooltips.forEach(function (tooltip) {
+					tooltips.forEach((function (tooltip) {
 						this._addClass(tooltip, tooltipPos);
 						tooltip.style[oppositeSide] = '100%';
-					}.bind(this));
+					}).bind(this));
 				} else if (this.options.tooltip_position === 'bottom') {
-					tooltips.forEach(function (tooltip) {
+					tooltips.forEach((function (tooltip) {
 						this._addClass(tooltip, 'bottom');
 						tooltip.style.top = 22 + 'px';
-					}.bind(this));
+					}).bind(this));
 				} else {
-					tooltips.forEach(function (tooltip) {
+					tooltips.forEach((function (tooltip) {
 						this._addClass(tooltip, 'top');
 						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
-					}.bind(this));
+					}).bind(this));
 				}
 			}
 		};
