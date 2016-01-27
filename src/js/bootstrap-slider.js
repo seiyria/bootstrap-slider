@@ -814,6 +814,7 @@
 				this._layout();
 				var newValue = this.options.range ? this._state.value : this._state.value[0];
 
+				this._setDataVal(newValue);
 				if(triggerSlideEvent === true) {
 					this._trigger('slide', newValue);
 				}
@@ -823,7 +824,6 @@
 						newValue: newValue
 					});
 				}
-				this._setDataVal(newValue);
 
 				return this;
 			},
