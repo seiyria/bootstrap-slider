@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  6.0.8              
+                      VERSION  6.0.10              
 ========================================================= */
 "use strict";
 
@@ -775,6 +775,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				this._layout();
 				var newValue = this.options.range ? this._state.value : this._state.value[0];
 
+				this._setDataVal(newValue);
 				if (triggerSlideEvent === true) {
 					this._trigger('slide', newValue);
 				}
@@ -784,7 +785,6 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 						newValue: newValue
 					});
 				}
-				this._setDataVal(newValue);
 
 				return this;
 			},
