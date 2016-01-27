@@ -1,3 +1,7 @@
+6.0.9 / 2016-01-26
+==================
+* Bug fix: Race condition in `setValue()` where slider value was being set after `change` and `slide` events were being triggered. Thanks to [glaszig](https://github.com/glaszig)
+
 6.0.7 / 2016-01-22
 ==================
 * Bug fix: When `tooltip_position` option is set to `"bottom"` on a slider with multiple split handles, position both tooltips below the slider. Thanks to [Martin Hesslund](https://github.com/kesse)
