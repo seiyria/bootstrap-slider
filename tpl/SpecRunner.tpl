@@ -16,6 +16,16 @@
 		{
 			background: rgb(255, 0, 0);
 		}
+		#scrollable-div {
+			overflow-y: scroll;
+			width: 300px;
+			height: 150px;
+			position: relative;
+		}
+		#low-div {
+			padding: 2000px 0 500px 0;
+		}
+
 	</style>
 </head>
 <body>
@@ -63,6 +73,16 @@
 
 	<div id="relayoutSliderContainer" style="display: none">
 		<input id="relayoutSliderInput" type="text"/>
+	</div>
+
+	<div id="scrollable-div">
+		<p>just a row</p>
+		<p>just a row</p>
+		<input id="ex1" data-slider-id='ex1Slider' type="text"/>
+	</div>
+
+	<div id="low-div">
+		<input id="veryLowPositionedSlider" type="text"/>
 	</div>
 
   <!-- Sliders used by resize -->
