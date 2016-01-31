@@ -13,6 +13,8 @@ Please accompany all pull requests with the following (where appropriate):
 * documentation updates
 * examples (for new options being added)
 
+We support both Sass and LESS. If you modify one in your PR, please modify both and make sure they both work.
+
 Additionally, when you are ready to submit your PR, please rebase your commits against the latest master branch so they are easier to examine! Please make sure you're not committing your re-built `dist` files, either. We'll do that!
 
 Also, please note, your code will not be merged if it does not pass our CI test. Thanks for your contribution!
