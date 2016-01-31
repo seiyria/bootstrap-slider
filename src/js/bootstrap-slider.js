@@ -1540,7 +1540,7 @@
 			_offsetTop: function(obj){
 				var offsetTop = obj.offsetTop;
 				while((obj = obj.offsetParent) && !isNaN(obj.offsetTop)){
-					offsetTop += (obj.offsetTop - obj.scrollTop);
+					offsetTop += obj.offsetTop;
 				}
 				return offsetTop;
 			},
