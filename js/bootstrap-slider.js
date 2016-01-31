@@ -1497,7 +1497,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 			_offsetTop: function _offsetTop(obj) {
 				var offsetTop = obj.offsetTop;
 				while ((obj = obj.offsetParent) && !isNaN(obj.offsetTop)) {
-					offsetTop += obj.offsetTop;
+					offsetTop += obj.offsetTop - obj.scrollTop;
 				}
 				return offsetTop;
 			},
