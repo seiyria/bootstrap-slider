@@ -1,3 +1,7 @@
+6.0.10 / 2016-01-31
+* Bug fix: Slider was not scrolling properly when nested inside of scrollable container. Thanks to [serbiant]((https://github.com/serbiant)
+
+
 6.0.9 / 2016-01-26
 ==================
 * Bug fix: Race condition in `setValue()` where slider value was being set after `change` and `slide` events were being triggered. Thanks to [glaszig](https://github.com/glaszig)
