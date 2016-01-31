@@ -1,4 +1,5 @@
-6.0.10 / 2016-01-31
+6.0.11 / 2016-01-31
+==================
 * Bug fix: Slider was not scrolling properly when nested inside of scrollable container. Thanks to [serbiant]((https://github.com/serbiant)
 
 
