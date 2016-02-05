@@ -1,6 +1,10 @@
+6.0.16 / 2016-02-04
+==================
+* Bug Fix: Attempted Bug fix from 6.0.11 was refined to ensure so side effects.
+
 6.0.15 / 2016-02-04
 ==================
-* Bug Fix: _setText() defaults to `.textContent` vs `.innerHTML`
+* Bug Fix: _setText() defaults to `.textContent` vs `.innerHTML`. Thanks to [gio-js](https://github.com/gio-js)
 
 6.0.13 / 2016-01-31
 ==================
