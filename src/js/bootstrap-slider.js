@@ -1500,11 +1500,11 @@
 				this.$sliderElem.off();
 			},
 			_setText: function(element, text) {
-				if(typeof element.innerText !== "undefined") {
-			 		element.innerText = text;
-			 	} else if(typeof element.textContent !== "undefined") {
-			 		element.textContent = text;
-			 	}
+                if(typeof element.textContent !== "undefined") {
+                    element.textContent = text;
+                } else if(typeof element.innerText !== "undefined") {
+                	element.innerText = text;
+                }
 			},
 			_removeClass: function(element, classString) {
 				var classes = classString.split(" ");
