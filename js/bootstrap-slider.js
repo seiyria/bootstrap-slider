@@ -1457,10 +1457,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				this.$sliderElem.off();
 			},
 			_setText: function _setText(element, text) {
-				if (typeof element.innerText !== "undefined") {
-					element.innerText = text;
-				} else if (typeof element.textContent !== "undefined") {
+				if (typeof element.textContent !== "undefined") {
 					element.textContent = text;
+				} else if (typeof element.innerText !== "undefined") {
+					element.innerText = text;
 				}
 			},
 			_removeClass: function _removeClass(element, classString) {
@@ -1498,6 +1498,9 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				var offsetTop = obj.offsetTop;
 				while ((obj = obj.offsetParent) && !isNaN(obj.offsetTop)) {
 					offsetTop += obj.offsetTop;
+					if (obj.tagName !== 'BODY') {
+						offsetTop -= obj.scrollTop;
+					}
 				}
 				return offsetTop;
 			},
