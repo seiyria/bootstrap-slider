@@ -1,3 +1,7 @@
+6.0.15 / 2016-02-04
+==================
+* Bug Fix: _setText() defaults to `.textContent` vs `.innerHTML`
+
 6.0.13 / 2016-01-31
 ==================
 * Reverted Bug fix from prior release
