@@ -1541,6 +1541,9 @@
 				var offsetTop = obj.offsetTop;
 				while((obj = obj.offsetParent) && !isNaN(obj.offsetTop)){
 					offsetTop += obj.offsetTop;
+					if( obj.tagName !== 'BODY') {
+						offsetTop -= obj.scrollTop;
+					}
 				}
 				return offsetTop;
 			},
