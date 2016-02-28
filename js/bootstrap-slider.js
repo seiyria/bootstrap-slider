@@ -1555,6 +1555,11 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 		if ($) {
 			var namespace = $.fn.slider ? 'bootstrapSlider' : 'slider';
 			$.bridget(namespace, Slider);
+
+			// Auto-Register data-provide="slider" Elements
+			$(function () {
+				$("input[data-provide=slider]")[namespace]();
+			});
 		}
 	})($);
 
