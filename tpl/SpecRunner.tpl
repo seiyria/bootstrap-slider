@@ -71,6 +71,10 @@
 
 	<input id="makeRangeSlider" type="text"/>
 
+	<div id="autoregisterSliderContainer">
+		<input id="autoregisterSlider" data-provide="slider" data-slider-value="1"/>
+	</div>
+
 	<div id="relayoutSliderContainer" style="display: none">
 		<input id="relayoutSliderInput" type="text"/>
 	</div>

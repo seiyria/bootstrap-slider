@@ -906,6 +906,52 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 
       </div>
 
+      <div class="slider-example">
+        <h3>Example 19:</h3>
+        <p>Auto-Register data-provide="slider" Elements</p>
+
+        <div class="well">
+          Slider-Element not accompanied by any custom Javascript:<br/><br/>
+          <span id="ex18-label-1" class="hidden">
+            Example slider label
+          </span>
+          <input id="ex19" type="text"
+                data-provide="slider"
+                data-slider-ticks="[1, 2, 3]"
+                data-slider-ticks-labels='["short", "medium", "long"]'
+                data-slider-min="1"
+                data-slider-max="3"
+                data-slider-step="1"
+                data-slider-value="3"
+                data-slider-tooltip="hide" />
+        </div>
+
+        <pre>
+          <code>
+        ###################
+        HTML
+        ###################
+        &lt;span id="ex18-label-1" class="hidden">Example slider label&lt;/span&gt;
+        &lt;input id="ex19" type="text"
+              data-provide="slider"
+              data-slider-ticks="[1, 2, 3]"
+              data-slider-ticks-labels='["short", "medium", "long"]'
+              data-slider-min="1"
+              data-slider-max="3"
+              data-slider-step="1"
+              data-slider-value="3"
+              data-slider-tooltip="hide" /&gt;
+
+        ###################
+        JavaScript
+        ###################
+
+        // None
+          </code>
+        </pre>
+
+      </div>
+
 
 	  </div> <!-- /examples -->
     </div> <!-- /container -->

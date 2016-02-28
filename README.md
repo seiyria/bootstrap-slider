@@ -54,6 +54,27 @@ var value = mySlider.slider('getValue');
 		.slider('setValue', 7);
 ```
 
+Using bootstrap-slider (via `data-provide`-API)
+======================
+
+Create an input element with the `data-provide="slider"` attribute automatically
+turns it into a slider. Options can be supplied via `data-slider-` attributes.
+
+```html
+<input
+	type="text"
+	name="somename"
+	data-provide="slider"
+	data-slider-ticks="[1, 2, 3]"
+	data-slider-ticks-labels='["short", "medium", "long"]'
+	data-slider-min="1"
+	data-slider-max="3"
+	data-slider-step="1"
+	data-slider-value="3"
+	data-slider-tooltip="hide"
+>
+```
+
 What if there is already a _slider_ plugin bound to the JQuery namespace?
 ======================
 
