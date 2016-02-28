@@ -1,10 +1,15 @@
+6.1.0 / 2016-02-28
+==================
+* **New Feature:** Auto-registering/intializing slider via `data-provide="slider"` attribute. Thanks to [MaZderMind](https://github.com/MaZderMind)
+* Adding Github Templates for Issues, Pull Requeusts, and Contributions
+
 6.0.16 / 2016-02-04
 ==================
-* Bug Fix: Attempted Bug fix from 6.0.11 was refined to ensure so side effects.
+* **Bug Fix:** Attempted Bug fix from 6.0.11 was refined to ensure so side effects.
 
 6.0.15 / 2016-02-04
 ==================
-* Bug Fix: _setText() defaults to `.textContent` vs `.innerHTML`. Thanks to [gio-js](https://github.com/gio-js)
+* **Bug Fix:** _setText() defaults to `.textContent` vs `.innerHTML`. Thanks to [gio-js](https://github.com/gio-js)
 
 6.0.13 / 2016-01-31
 ==================
@@ -12,16 +17,16 @@
 
 6.0.11 / 2016-01-31
 ==================
-* Bug fix: Slider was not scrolling properly when nested inside of scrollable container. Thanks to [serbiant](https://github.com/serbiant)
+* **Bug fix:** Slider was not scrolling properly when nested inside of scrollable container. Thanks to [serbiant](https://github.com/serbiant)
 
 
 6.0.9 / 2016-01-26
 ==================
-* Bug fix: Race condition in `setValue()` where slider value was being set after `change` and `slide` events were being triggered. Thanks to [glaszig](https://github.com/glaszig)
+* **Bug fix:** Race condition in `setValue()` where slider value was being set after `change` and `slide` events were being triggered. Thanks to [glaszig](https://github.com/glaszig)
 
 6.0.7 / 2016-01-22
 ==================
-* Bug fix: When `tooltip_position` option is set to `"bottom"` on a slider with multiple split handles, position both tooltips below the slider. Thanks to [Martin Hesslund](https://github.com/kesse)
+* **Bug fix:** When `tooltip_position` option is set to `"bottom"` on a slider with multiple split handles, position both tooltips below the slider. Thanks to [Martin Hesslund](https://github.com/kesse)
 
 6.0.5 / 2016-01-20
 ==================
@@ -47,4 +52,4 @@
 
 5.3.4 / 2015-12-27
 ==================
-* Bug fix: Ticks now reposition themselves during window resize - Thanks to [Zachary Siswick](https://github.com/zsiswick)
+* **Bug fix:** Ticks now reposition themselves during window resize - Thanks to [Zachary Siswick](https://github.com/zsiswick)
