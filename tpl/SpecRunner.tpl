@@ -79,6 +79,10 @@
 		<input id="relayoutSliderInput" type="text"/>
 	</div>
 
+	<div id="relayoutSliderContainerTickLabels" style="display: none">
+		<input id="relayoutSliderInputTickLabels" type="text"/>
+	</div>
+
 	<div id="scrollable-div">
 		<p>just a row</p>
 		<p>just a row</p>
