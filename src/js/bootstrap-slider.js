@@ -921,6 +921,7 @@
 			},
 
 			relayout: function() {
+				this._resize();
 				this._layout();
 				return this;
 			},
