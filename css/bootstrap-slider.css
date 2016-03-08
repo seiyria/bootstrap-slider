@@ -133,6 +133,7 @@
 }
 .slider .tooltip-inner {
   white-space: nowrap;
+  max-width: none;
 }
 .slider .hide {
   display: none;
