@@ -1,3 +1,7 @@
+6.1.3 / 2016-03-07
+==================
+* **Bug Fix:** Fixed horizontal centering issue with labels. Thanks to [Josh Guffey](https://github.com/jguffey)
+
 6.1.0 / 2016-02-28
 ==================
 * **New Feature:** Auto-registering/intializing slider via `data-provide="slider"` attribute. Thanks to [MaZderMind](https://github.com/MaZderMind)
