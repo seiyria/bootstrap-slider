@@ -123,6 +123,7 @@ input {
 }
 .tooltip-inner {
   white-space: nowrap;
+  max-width: none;
 }
 .tooltip {
   &.top {
