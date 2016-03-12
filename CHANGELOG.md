@@ -1,3 +1,7 @@
+6.1.5 / 2016-03-12
+==================
+* **Bug Fix:** Call resize() before layout() within relayout() method, which enables intially hidden sliders to be revealed and behave appropriately. Thanks to [Peter (MaZderMind)](https://github.com/MaZderMind)
+
 6.1.3 / 2016-03-07
 ==================
 * **Bug Fix:** Fixed horizontal centering issue with labels. Thanks to [Josh Guffey](https://github.com/jguffey)
