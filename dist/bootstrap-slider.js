@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  6.1.4              
+                      VERSION  6.1.6              
 ========================================================= */
 "use strict";
 
@@ -882,6 +882,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 			},
 
 			relayout: function relayout() {
+				this._resize();
 				this._layout();
 				return this;
 			},
