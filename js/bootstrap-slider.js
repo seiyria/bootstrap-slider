@@ -879,6 +879,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 			},
 
 			relayout: function relayout() {
+				this._resize();
 				this._layout();
 				return this;
 			},

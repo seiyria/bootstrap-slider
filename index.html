@@ -952,6 +952,65 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 
       </div>
 
+      <div class="slider-example">
+        <h3>Example 20:</h3>
+        <p>Slider-Elements initially hidden</p>
+
+        <a class="btn btn-primary" href="" id="ex20a">Show</a>
+        <br><br>
+        <div class="well" style="display: none">
+          Slider-Element initially hidden, revealed by Javascript:<br/><br/>
+          <span id="ex18-label-1" class="hidden">
+            Example slider label
+          </span>
+          <input id="ex20" type="text"
+                data-provide="slider"
+                data-slider-ticks="[1, 2, 3]"
+                data-slider-ticks-labels='["short", "medium", "long"]'
+                data-slider-min="1"
+                data-slider-max="3"
+                data-slider-step="1"
+                data-slider-value="3"
+                data-slider-tooltip="hide" />
+        </div>
+
+        <pre>
+          <code>
+        ###################
+        HTML
+        ###################
+        &lt;a class="btn btn-primary" href="" id="ex20a">Show&lt;/a&gt;
+        &lt;div class="well" style="display: none"&gt;
+            &lt;span id="ex18-label-1" class="hidden"&gt;Example slider label&lt;/span&gt;
+            &lt;input id="ex19" type="text"
+                  data-provide="slider"
+                  data-slider-ticks="[1, 2, 3]"
+                  data-slider-ticks-labels='["short", "medium", "long"]'
+                  data-slider-min="1"
+                  data-slider-max="3"
+                  data-slider-step="1"
+                  data-slider-value="3"
+                  data-slider-tooltip="hide" /&gt;
+        &lt;/div&gt;
+
+        ###################
+        JavaScript
+        ###################
+
+        $('#ex20a').on('click', function(e) {
+            $('#ex20a')
+                .parent()
+                .find(' >.well')
+                .toggle()
+                .find('input')
+                .slider('relayout');
+            e.preventDefault();
+        });
+          </code>
+        </pre>
+
+      </div>
+
 
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
@@ -1127,6 +1186,16 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 				max  : 10,
 				value: [3, 6],
 				labelledby: ['ex18-label-2a', 'ex18-label-2b']
+			});
+
+			$('#ex20a').on('click', function(e) {
+				$('#ex20a')
+					.parent()
+					.find(' >.well')
+					.toggle()
+					.find('input')
+					.slider('relayout');
+				e.preventDefault();
 			});
 		});
     </script>
