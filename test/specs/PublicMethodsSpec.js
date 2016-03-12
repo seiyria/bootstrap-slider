@@ -573,6 +573,38 @@ describe("Public Method Tests", function() {
     expect(tooltipMarginLeft).toBeGreaterThan(0);
   });
 
+  it("relayout: if slider is not displayed on initialization and then displayed later on, relayout() will re-adjust the tick label width", function() {
+    // Setup
+    testSlider = new Slider("#relayoutSliderInputTickLabels", {
+      id: "relayoutSliderTickLabels",
+      min: 0,
+      max: 10,
+      ticks: [0, 5, 10],
+      ticks_labels: ['low', 'mid', 'high'],
+      value: 5
+    });
+
+    var $ticks = $('#relayoutSliderTickLabels').find('.slider-tick-label');
+
+    // Tick-Width should be 0 on slider intialization
+    var i, $tick;
+    for (i = 0; i < $ticks.length; i++) {
+      $tick = $($ticks[i]);
+      expect( parseInt($tick.css('width')) ).toBe(0);
+    }
+
+    // Show slider and call relayout()
+    $('#relayoutSliderContainerTickLabels').css('display', 'block');
+    testSlider.relayout();
+    $('#relayoutSliderContainerTickLabels').css('display', 'none');
+
+    // Tick-Width should re-adjust to be > 0
+    for (i = 0; i < $ticks.length; i++) {
+      $tick = $($ticks[i]);
+      expect( parseInt($tick.css('width')) ).toBeGreaterThan(0);
+    }
+  });
+
   afterEach(function() {
     if(testSlider) {
       if(testSlider instanceof jQuery) { testSlider.slider('destroy'); }
