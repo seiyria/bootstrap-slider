@@ -570,7 +570,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 			if (this.options.orientation === 'vertical') {
 				this._addClass(this.sliderElem, 'slider-vertical');
 				this.stylePos = 'top';
-				this.mousePos = 'clientY';
+				this.mousePos = 'pageY';
 				this.sizePos = 'offsetHeight';
 			} else {
 				this._addClass(this.sliderElem, 'slider-horizontal');
