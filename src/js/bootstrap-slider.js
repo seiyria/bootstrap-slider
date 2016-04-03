@@ -1271,7 +1271,7 @@
 			},
 			_touchstart: function(ev) {
 				if (ev.changedTouches === undefined) {
-					this._trigger('slideStart');
+					this._mousedown(ev);
 					return;
 				}
 
