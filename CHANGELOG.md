@@ -1,3 +1,7 @@
+6.1.7 / 2016-04-03
+==================
+* **Bug Fix:** Fixes issue where slider accidently scrolls when user taps on mobile device. Thanks to [Jerry (jerrylow)](https://github.com/jerrylow)
+
 6.1.5 / 2016-03-12
 ==================
 * **Bug Fix:** Call resize() before layout() within relayout() method, which enables intially hidden sliders to be revealed and behave appropriately. Thanks to [Peter (MaZderMind)](https://github.com/MaZderMind)
