@@ -317,7 +317,7 @@ describe("Event Tests", function() {
         testSlider._mousemove(mouse);
         expect(numTimesFired).toEqual(1);
       });
-      
+
       it("'slideStart' event is triggered only once per slide action", function() {
         testSlider.on('slideStart', function() {
           numTimesFired++;

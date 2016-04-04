@@ -540,6 +540,9 @@
 
 			this.touchCapable = 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch);
 
+			this.touchX = 0;
+			this.touchY = 0;
+
 			this.tooltip = this.sliderElem.querySelector('.tooltip-main');
 			this.tooltipInner = this.tooltip.querySelector('.tooltip-inner');
 
@@ -671,9 +674,13 @@
 			this.handle2.addEventListener("keydown", this.handle2Keydown, false);
 
 			this.mousedown = this._mousedown.bind(this);
+			this.touchstart = this._touchstart.bind(this);
+			this.touchmove = this._touchmove.bind(this);
+
 			if (this.touchCapable) {
 				// Bind touch handlers
-				this.sliderElem.addEventListener("touchstart", this.mousedown, false);
+				this.sliderElem.addEventListener("touchstart", this.touchstart, false);
+				this.sliderElem.addEventListener("touchmove", this.touchmove, false);
 			}
 			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
@@ -957,7 +964,8 @@
 				if (this.hideTooltip) {
 					this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
 				}
-				this.sliderElem.removeEventListener("touchstart", this.mousedown, false);
+				this.sliderElem.removeEventListener("touchstart", this.touchstart, false);
+				this.sliderElem.removeEventListener("touchmove", this.touchmove, false);
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
 
 				// Remove window event listener
@@ -1261,6 +1269,16 @@
 
 				return true;
 			},
+			_touchstart: function(ev) {
+				if (ev.changedTouches === undefined) {
+					this._mousedown(ev);
+					return;
+				}
+
+				var touch = ev.changedTouches[0];
+				this.touchX = touch.pageX;
+				this.touchY = touch.pageY;
+			},
 			_triggerFocusOnHandle: function(handleIdx) {
 				if(handleIdx === 0) {
 					this.handle1.focus();
@@ -1341,6 +1359,27 @@
 				this.setValue(val, true, true);
 
 				return false;
+			},
+			_touchmove: function(ev) {
+				if (ev.changedTouches === undefined) {
+					return;
+				}
+
+				var touch = ev.changedTouches[0];
+
+				var xDiff = touch.pageX - this.touchX;
+				var yDiff = touch.pageY - this.touchY;
+
+				if (!this._state.inDrag) {
+					// Vertical Slider
+					if (this.options.orientation === 'vertical' && (xDiff <= 5 && xDiff >= -5) && (yDiff >=15 || yDiff <= -15)) {
+						this._mousedown(ev);
+					}
+					// Horizontal slider.
+					else if ((yDiff <= 5 && yDiff >= -5) && (xDiff >= 15 || xDiff <= -15)) {
+						this._mousedown(ev);
+					}
+				}
 			},
 			_adjustPercentageForRangeSliders: function(percentage) {
 				if (this.options.range) {
