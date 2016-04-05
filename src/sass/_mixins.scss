@@ -13,7 +13,7 @@
      -moz-box-sizing: $value;
           box-sizing: $value;
 }
-@mixin slider_box-shadow ($value) {
+@mixin slider_box-shadow ($value...) {
   -webkit-box-shadow: $value;
      -moz-box-shadow: $value;
           box-shadow: $value;
