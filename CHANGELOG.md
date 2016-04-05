@@ -1,3 +1,8 @@
+7.0.0 / 2016-04-03
+==================
+* **Breaking Change:** Restructured and refactored SASS source files to eliminate compass dependency and be more organized. Thanks to [Jacob van Mourik
+ (jcbvm)](https://github.com/jcbvm)
+
 6.1.7 / 2016-04-03
 ==================
 * **Bug Fix:** Fixes issue where slider accidently scrolls when user taps on mobile device. Thanks to [Jerry (jerrylow)](https://github.com/jerrylow)
