@@ -1,4 +1,4 @@
-7.0.0 / 2016-04-03
+7.0.0 / 2016-04-05
 ==================
 * **Breaking Change:** Restructured and refactored SASS source files to eliminate compass dependency and be more organized. Thanks to [Jacob van Mourik
  (jcbvm)](https://github.com/jcbvm)
