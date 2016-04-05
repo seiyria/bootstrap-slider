@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  6.1.8              
+                      VERSION  7.0.1              
 ========================================================= */
 "use strict";function _typeof(a){return a&&"undefined"!=typeof Symbol&&a.constructor===Symbol?"symbol":typeof a}/*! =========================================================
  * bootstrap-slider.js
