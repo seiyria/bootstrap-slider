@@ -53,6 +53,11 @@ describe("Dragging handles tests", function() {
 			testSlider.mousemove(mouseOverlap);
 			expect(testSlider._state.dragged).toBe(1);
 			expect(testSlider.getValue()).toEqual([5, 5]);
+			// Simulator handle overlap with click
+			testSlider.mousemove(mouseOverlap);
+			testSlider.mousedown(mouseLeft);
+			expect(testSlider._state.dragged).toBe(0);
+			expect(testSlider.getValue()).toEqual([4, 5]);
 			// Simulate right over left drag with imprecision in reported percentage
 			testSlider.mousemove(mouseLeft);
 			expect(testSlider._state.dragged).toBe(0);
