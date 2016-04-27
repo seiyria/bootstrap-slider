@@ -1,3 +1,7 @@
+7.0.2 / 2016-04-05
+==================
+* **Bug Fix:** Fixes overlap issue with range slider. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/435). Thanks to [Jerry (jerrylow)](https://github.com/jerrylow)
+
 7.0.0 / 2016-04-05
 ==================
 * **Breaking Change:** Restructured and refactored SASS source files to eliminate compass dependency and be more organized. Thanks to [Jacob van Mourik
