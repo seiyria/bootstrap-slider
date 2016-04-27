@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  7.0.1              
+                      VERSION  7.0.3              
 ========================================================= */
 "use strict";
 
@@ -1177,6 +1177,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 					var diff1 = Math.abs(this._state.percentage[0] - percentage);
 					var diff2 = Math.abs(this._state.percentage[1] - percentage);
 					this._state.dragged = diff1 < diff2 ? 0 : 1;
+					this._adjustPercentageForRangeSliders(percentage);
 				} else {
 					this._state.dragged = 0;
 				}
