@@ -1,3 +1,8 @@
+7.1.0 - 7.1.1 / 2016-05-26
+==================
+* **New Feature:** Allow LESS/SASS variables to be overridden, but fall back to defaults if needed. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/579). Thanks to [Jonathan Rehm
+ (jkrehm)](https://github.com/jkrehm)
+
 7.0.4 - 7.0.5 / 2016-05-26
 ==================
 * **Bug Fix:** Changes webpack AMD build error on define() for optional jQuery dependency to be a warning, which allows webpack builds to be completed. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/578). Thanks to [Tomi Saarinen (TomiS)](https://github.com/TomiS)
