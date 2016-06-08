@@ -1376,8 +1376,8 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				var val = this._calculateValue(true);
 
 				this._layout();
-				this._setDataVal(val);
-				this._trigger('slideStop', val);
+				this._setDataVal(this._snapToValue(val));
+				this._trigger('slideStop', this._snapToValue(val));
 
 				return false;
 			},
