@@ -807,7 +807,7 @@ HTML
 Note that the slider handle that caused the value change is focused.
 
 ###################
-JavaScript
+		JavaScript
 ###################
 
 // With JQuery
@@ -941,12 +941,6 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
               data-slider-step="1"
               data-slider-value="3"
               data-slider-tooltip="hide" /&gt;
-
-        ###################
-        JavaScript
-        ###################
-
-        // None
           </code>
         </pre>
 
@@ -977,7 +971,7 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
         <pre>
           <code>
         ###################
-        HTML
+        			HTML
         ###################
         &lt;a class="btn btn-primary" href="" id="ex20a">Show&lt;/a&gt;
         &lt;div class="well" style="display: none"&gt;
@@ -994,7 +988,7 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
         &lt;/div&gt;
 
         ###################
-        JavaScript
+        		JavaScript
         ###################
 
         $('#ex20a').on('click', function(e) {
@@ -1008,7 +1002,40 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
         });
           </code>
         </pre>
+      </div>
 
+      <div class="slider-example">
+        <h3>Example 21:</h3>
+        <p>Create an input element with the <strong>data-provide="slider"</strong> attribute automatically turns it into a slider. Options can be supplied via <strong>data-slider-</strong> attributes.</p>
+
+        <div class="well">
+	      	<input id="ex21" type="text"
+	           data-provide="slider"
+	           data-slider-ticks="[1, 2, 3]"
+	           data-slider-ticks-labels='["short", "medium", "long"]'
+	           data-slider-min="1"
+	           data-slider-max="3"
+	           data-slider-step="1"
+	           data-slider-value="3"
+	           data-slider-tooltip="hide" />
+        </div>
+
+        <pre>
+          <code>
+        ###################
+        				HTML
+        ###################
+        &lt;input id="ex21" type="text"
+          data-provide="slider"
+          data-slider-ticks="[1, 2, 3]"
+          data-slider-ticks-labels='["short", "medium", "long"]'
+          data-slider-min="1"
+          data-slider-max="3"
+          data-slider-step="1"
+          data-slider-value="3"
+          data-slider-tooltip="hide" /&gt;
+          </code>
+        </pre>
       </div>
 
 
