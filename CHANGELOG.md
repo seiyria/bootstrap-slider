@@ -4,7 +4,7 @@
 
 8.0.0 / 2016-07-13
 ==================
-* **Revert:** Reverting bug fix made in `7.0.4 - 7.0.5` because it breaks UMD module and r.js build tool [as reported in this issue](https://github.com/seiyria/bootstrap-slider/issues/589#issuecomment-232429818). Updated README to address how to stub out optional JQuery dependency for Webpack builds.
+* **Revert:** Reverting bug fix made in `7.0.4 - 7.0.5` because it breaks UMD module definition and r.js build tool [as reported in this issue](https://github.com/seiyria/bootstrap-slider/issues/589#issuecomment-232429818). Updated README to address how to stub out optional JQuery dependency for Webpack builds.
 
 7.1.0 - 7.1.1 / 2016-05-26
 ==================
