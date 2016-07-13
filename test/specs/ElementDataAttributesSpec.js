@@ -87,7 +87,7 @@ describe("Element Data Attributes Tests", function() {
       slider = $("#handleSlider").slider({
         id: "handleSliderElem"
       });
-      var handleIsSetToTriangle = $("#handleSliderElem div.slider-track").children("div.slider-handle").hasClass("triangle");
+      var handleIsSetToTriangle = $("#handleSliderElem div.slider-handle").hasClass("triangle");
       expect(handleIsSetToTriangle).toBeTruthy();
     });
 
@@ -95,7 +95,7 @@ describe("Element Data Attributes Tests", function() {
       slider = $("#customHandleSlider").slider({
         id: "customHandleSliderElem"
       });
-      var handleIsSetToCustom = $("#customHandleSliderElem div.slider-track").children("div.slider-handle").hasClass("custom");
+      var handleIsSetToCustom = $("#customHandleSliderElem div.slider-handle").hasClass("custom");
       expect(handleIsSetToCustom).toBeTruthy();
     });
   });
