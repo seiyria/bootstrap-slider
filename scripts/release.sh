@@ -1,13 +1,23 @@
 #!/bin/bash
 
-echo "Running postpublish script..."
+# Validate arguments
+versionBumpType=${1:-patch};
+
+if [ "$versionBumpType" != "major" ] && [ "$versionBumpType" != "minor" ] && [ "$versionBumpType" != "patch" ]; then
+  echo "Invalid version bump argument: ${versionBumpType}. Option must be one of the following: major, minor, patch"
+  exit 1
+else
+  echo "Publishing and bumping with ${versionBumpType} version bump"
+fi
+
+echo "Running version bump + publish script..."
 echo "."
 echo "."
-echo "Generating /dist and push to origin"
+echo "Generating /dist and push changes + tags to Github remote 'origin'"
 # Checkout master branch
 git checkout master
-# Version bump (patch)
-grunt bump-only:patch
+# Version bump
+grunt bump-only:"$versionBumpType"
 # Generate new dist
 grunt prod
 # Generate new index.html page
@@ -47,8 +57,16 @@ git push origin gh-pages:gh-pages -f
 # Switch back to master branch
 git checkout master
 
-# Notify that postpublish is complete
+## Publish to NPM
 echo "."
 echo "."
-echo "Postpublish script complete"
+echo "Publishing to NPM"
+echo "."
+echo "."
+npm publish
+
+# Notify script is complete
+echo "."
+echo "."
+echo "Script complete"
 echo ""

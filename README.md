@@ -14,10 +14,6 @@ Want to use npm? `npm install bootstrap-slider`
 
 Want to get it from a CDN? https://cdnjs.com/libraries/bootstrap-slider
 
-__NOTE for NPM users__: In order to keep the version numbers in our dist/ file consistent with our Github tags, we do a patch version bump, generate a new dist, and create a commit/tag on postpublish.
-
-This does mean the Github repo will always be one patch commit off of what is published to NPM. Note that this will not affect functionality, and is only used to keep package management system files and the dist file version numbers in sync.
-
 Basic Setup
 ============
 Load the plugin CSS and JavaScript into your web page, and everything should work!
@@ -226,13 +222,18 @@ The following is a list of the commonly-used command line tasks:
 
 Version Bumping and Publishing (Maintainers Only)
 =======
-To bump the version number across all the various packagement systems the plugin is registered with, please use the [grunt bump](https://github.com/vojtajina/grunt-bump) plugin.
+To do the following release tasks:
+* bump the version
+* publish a new version to NPM
+* update the `gh-pages` branch
+* push a new `dist` bundle to the `master` branch on the remote `origin`
+* push new tags to the remote `origin`
 
-* _grunt bump:patch_ - patch version bump, __0.0.0 -> 0.0.1__
-* _grunt bump:minor_ - minor version bump, __0.0.0 -> 0.1.0__
-* _grunt bump:major_ - major version bump, __0.0.0 -> 1.0.0__
+Type the following command:
 
-After bumping, type `npm publish` to update on NPM.
+`npm run release <patch|minor|major>`
+
+If you do not specify a version bump type, the script will automatically defer to a patch bump.
 
 
 Other Platforms & Libraries
