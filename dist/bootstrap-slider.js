@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  7.1.2              
+                      VERSION  8.0.0              
 ========================================================= */
 "use strict";
 
@@ -39,11 +39,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
 (function (factory) {
 	if (typeof define === "function" && define.amd) {
-		try {
-			define(["jquery"], factory);
-		} catch (err) {
-			define([], factory);
-		}
+		define(["jquery"], factory);
 	} else if ((typeof module === "undefined" ? "undefined" : _typeof(module)) === "object" && module.exports) {
 		var jQuery;
 		try {
