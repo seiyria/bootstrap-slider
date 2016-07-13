@@ -35,7 +35,7 @@ describe("Keyboard Support Tests", function() {
         id: 'testSlider',
         tooltip: 'show'
       });
-      handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+      handle1 = $("#testSlider").find(".slider-handle:first");
 
       // Check for no tooltip before focus
       var tooltipIsShown = $("#testSlider").find("div.tooltip").hasClass("in");
@@ -171,7 +171,7 @@ describe("Keyboard Support Tests", function() {
         value: initialSliderVal
       });
       // Focus on handle1
-      handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+      handle1 = $("#testSlider").find(".slider-handle:first");
       handle1.focus();
     });
 
@@ -238,7 +238,7 @@ describe("Keyboard Support Tests", function() {
         value: initialSliderVal
       });
       // Focus on handle1
-      handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+      handle1 = $("#testSlider").find(".slider-handle:first");
       handle1.focus();
     });
 
@@ -307,7 +307,7 @@ describe("Keyboard Support Tests", function() {
 
     describe("when handle1 tries to overtake handle2 from the left", function() {
       beforeEach(function() {
-        handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+        handle1 = $("#testSlider").find(".slider-handle:first");
         handle1.focus();
       });
 
@@ -430,7 +430,7 @@ describe("Keyboard Support Tests", function() {
             reversed: testCase.reversed,
             orientation: testCase.orientation
           });
-          handle1 = $("#testSlider").find(".slider-track > .slider-handle:first");
+          handle1 = $("#testSlider").find(".slider-handle:first");
           handle1.focus();
         });
 

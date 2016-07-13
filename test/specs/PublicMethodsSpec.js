@@ -106,7 +106,7 @@ describe("Public Method Tests", function() {
         handle : handleVal
       });
 
-      var handleIsSetToTriangle = $("#testSlider1").siblings(".slider").children("div.slider-track").children("div.slider-handle").hasClass("triangle");
+      var handleIsSetToTriangle = $("#testSlider1").siblings(".slider").children("div.slider-handle").hasClass("triangle");
       expect(handleIsSetToTriangle).toBeTruthy();
     });
 

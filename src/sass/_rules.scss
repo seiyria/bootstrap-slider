@@ -20,14 +20,23 @@
     .slider-tick,
     .slider-handle {
       margin-left: -$slider-line-height/2;
-      margin-top: -$slider-line-height/4;
       &.triangle {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
         border-width: 0 $slider-line-height/2 $slider-line-height/2 $slider-line-height/2;
         width: 0;
         height: 0;
         border-bottom-color: #0480be;
         margin-top: 0;
       }
+    }
+    .slider-tick-container {
+      white-space: nowrap;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
     }
     .slider-tick-label-container {
       white-space: nowrap;
@@ -46,7 +55,7 @@
       width: $slider-line-height/2;
       height: 100%;
       margin-left: -$slider-line-height/4;
-      left: 50%;
+      left: 25%;
       top: 0;
     }
     .slider-selection {
@@ -62,7 +71,6 @@
    }
    .slider-tick,
    .slider-handle {
-    margin-left: -$slider-line-height/4;
     margin-top: -$slider-line-height/2;
     &.triangle {
       border-width: $slider-line-height/2 0 $slider-line-height/2 $slider-line-height/2;
@@ -135,6 +143,7 @@ input {
 
 .slider-handle {
 	position: absolute;
+  top: 0;
 	width:  $slider-line-height;
 	height: $slider-line-height;
   background-color: #337ab7;

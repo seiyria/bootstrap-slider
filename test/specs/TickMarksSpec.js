@@ -168,6 +168,23 @@ describe("Slider with ticks tests", function() {
 		expect(tickLabelsFromDOM).toEqual(reversedTickLabels);
 	});
 
+	it("should wrap all of the ticks within a div with classname '.slider-tick-container'", function() {
+		// Create the slider with ticks
+		var ticks = [0, 100, 200, 300, 400, 600];
+		var $sliderDOMRef = $("#testSlider1");
+
+		// Create reversed slider
+		testSlider = $sliderDOMRef.slider({
+			id: "testSlider1Ref",
+			ticks: ticks,
+			ticks_positions: [0, 30, 70, 90, 100, 130]
+		});
+		
+		// Assert that the ticks are children of the container element
+		var numTicks = $sliderDOMRef.siblings('div.slider').find('.slider-tick-container > .slider-tick').length;
+		expect(numTicks).toBe(ticks.length);
+	});
+
 	afterEach(function() {
     if(testSlider) {
       testSlider.slider('destroy');
