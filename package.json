@@ -5,7 +5,6 @@
   "main": "dist/bootstrap-slider.js",
   "style": "dist/css/bootstrap-slider.css",
   "scripts": {
-    "postpublish": "sh ./scripts/postpublish.sh",
     "test": "grunt test",
     "release": "sh ./scripts/release.sh"
   },
