@@ -33,11 +33,7 @@
 
 (function(factory) {
 	if(typeof define === "function" && define.amd) {
-		try {
-			define(["jquery"], factory);
-		} catch (err) {
-			define([], factory);
-		}
+		define(["jquery"], factory);
 	}
 	else if(typeof module === "object" && module.exports) {
 		var jQuery;

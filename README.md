@@ -119,13 +119,34 @@ var Slider = require("bootstrap-slider");
 var mySlider = new Slider();
 ```
 
-Note that the JQuery dependency is considered to be optional. For example, to exclude JQuery from being part of your Browserify build, you would call something like the following (assuming main.js is requiring bootstrap-slider as a dependency):
+How do I exclude the optional JQuery dependency from my build?
+=======
+### Browserify
+__Note that the JQuery dependency is considered to be optional.__ For example, to exclude JQuery from being part of your Browserify build, you would call something like the following (assuming `main.js` is requiring bootstrap-slider as a dependency):
 
-```
+```BASH
 browserify -u jquery main.js > bundle.js
 ```
+### Webpack
+To exclude JQuery from your Webpack build, you will have to go into the Webpack config file for your specific project and add something like the following to your `resolve.alias` section:
 
-Please see the documentation for the specific CommonJS loader you are using to find out how to exclude dependencies.
+```js
+resolve: {
+    alias: {
+         "jquery": path.join(__dirname, "./jquery-stub.js");
+    }
+}
+```
+
+Then in your project, you will have to create a stub module for jquery that exports a `null` value. Whenever `require("jquery")` is mentioned in your project, it will load this stubbed module.
+
+```js
+// Path: ./jquery-stub.js
+module.exports = null;
+```
+
+### Other
+Please see the documentation for the specific module loader you are using to find out how to exclude dependencies.
 
 Options
 =======
