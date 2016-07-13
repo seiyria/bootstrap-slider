@@ -1,3 +1,7 @@
+9.0.0 / 2016-07-13
+==================
+* **New Feature:** Wraps all of the ticks within a single container element with the class `.slider-tick-container` as opposed to being within the `.slider-track` element. This enables individual ticks to be more easily targeted with CSS selectors such as `nth-of-type(n)`. Idea came from discussion [in this issue](https://github.com/seiyria/bootstrap-slider/issues/500)
+
 8.0.0 / 2016-07-13
 ==================
 * **Revert:** Reverting bug fix made in `7.0.4 - 7.0.5` because it breaks UMD module and r.js build tool [as reported in this issue](https://github.com/seiyria/bootstrap-slider/issues/589#issuecomment-232429818). Updated README to address how to stub out optional JQuery dependency for Webpack builds.
