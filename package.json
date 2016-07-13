@@ -6,7 +6,8 @@
   "style": "dist/css/bootstrap-slider.css",
   "scripts": {
     "postpublish": "sh ./scripts/postpublish.sh",
-    "test": "grunt test"
+    "test": "grunt test",
+    "release": "sh ./scripts/release.sh"
   },
   "homepage": "http://github.com/seiyria/bootstrap-slider",
   "repository": {
