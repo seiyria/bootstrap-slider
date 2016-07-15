@@ -1,3 +1,7 @@
+9.1.1 / 2016-07-15
+==================
+* **Bug Fix:** Adds `.npmignore` file to repository. [Resolves this issue](https://github.com/seiyria/bootstrap-slider/issues/601)
+
 9.1.0 / 2016-07-14
 ==================
 * **New Feature:** Always binding to the `$.fn.bootstrapSlider` namespace and printing a console warning when the `$.fn.slider` namespace is already bound. Idea came from discussion [in this issue](https://github.com/seiyria/bootstrap-slider/issues/575)
