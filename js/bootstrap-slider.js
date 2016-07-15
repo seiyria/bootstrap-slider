@@ -49,6 +49,21 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 		window.Slider = factory(window.jQuery);
 	}
 })(function ($) {
+	// Constants
+	var NAMESPACE_MAIN = 'slider';
+	var NAMESPACE_ALTERNATE = 'bootstrapSlider';
+
+	// Polyfill console methods
+	if (!window.console) {
+		window.console = {};
+	}
+	if (!window.console.log) {
+		window.console.log = function () {};
+	}
+	if (!window.console.warn) {
+		window.console.warn = function () {};
+	}
+
 	// Reference to Slider constructor
 	var Slider;
 
@@ -1599,13 +1614,23 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
   		Attach to global namespace
   	*********************************/
 		if ($) {
-			var namespace = $.fn.slider ? 'bootstrapSlider' : 'slider';
-			$.bridget(namespace, Slider);
+			(function () {
+				var autoRegisterNamespace = undefined;
 
-			// Auto-Register data-provide="slider" Elements
-			$(function () {
-				$("input[data-provide=slider]")[namespace]();
-			});
+				if (!$.fn.slider) {
+					$.bridget(NAMESPACE_MAIN, Slider);
+					autoRegisterNamespace = NAMESPACE_MAIN;
+				} else {
+					window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
+					autoRegisterNamespace = NAMESPACE_ALTERNATE;
+				}
+				$.bridget(NAMESPACE_ALTERNATE, Slider);
+
+				// Auto-Register data-provide="slider" Elements
+				$(function () {
+					$("input[data-provide=slider]")[autoRegisterNamespace]();
+				});
+			})();
 		}
 	})($);
 
