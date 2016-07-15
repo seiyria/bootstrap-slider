@@ -49,6 +49,21 @@
 		window.Slider = factory(window.jQuery);
 	}
 }(function($) {
+	// Constants
+	const NAMESPACE_MAIN = 'slider';
+	const NAMESPACE_ALTERNATE = 'bootstrapSlider';
+
+	// Polyfill console methods
+	if (!window.console) {
+		window.console = {};
+	}
+	if (!window.console.log) {
+		window.console.log = function () { };
+	}
+	if (!window.console.warn) {
+		window.console.warn = function () { };
+	}
+
 	// Reference to Slider constructor
 	var Slider;
 
@@ -1641,12 +1656,21 @@
 
 		*********************************/
 		if($) {
-			var namespace = $.fn.slider ? 'bootstrapSlider' : 'slider';
-			$.bridget(namespace, Slider);
+			let autoRegisterNamespace;
+
+			if (!$.fn.slider) {
+				$.bridget(NAMESPACE_MAIN, Slider);
+				autoRegisterNamespace = NAMESPACE_MAIN;
+			}
+			else {
+				window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
+				autoRegisterNamespace = NAMESPACE_ALTERNATE;
+			}
+			$.bridget(NAMESPACE_ALTERNATE, Slider);
 
 			// Auto-Register data-provide="slider" Elements
 			$(function() {
-				$("input[data-provide=slider]")[namespace]();
+				$("input[data-provide=slider]")[autoRegisterNamespace]();
 			});
 		}
 

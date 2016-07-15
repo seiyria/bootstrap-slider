@@ -35,6 +35,7 @@ You can see all of our API examples [here](http://seiyria.github.io/bootstrap-sl
 Using bootstrap-slider (with JQuery)
 ======================
 
+### Using `.slider` namespace
 Create an input element and call .slider() on it:
 
 ```js
@@ -48,6 +49,22 @@ var value = mySlider.slider('getValue');
 	mySlider
 		.slider('setValue', 5)
 		.slider('setValue', 7);
+```
+
+### Using `.bootstrapSlider` namespace
+Create an input element and call .bootstrapSlider() on it:
+
+```js
+// Instantiate a slider
+var mySlider = $("input.slider").bootstrapSlider();
+
+// Call a method on the slider
+var value = mySlider.bootstrapSlider('getValue');
+
+// For non-getter methods, you can chain together commands
+	mySlider
+		.bootstrapSlider('setValue', 5)
+		.bootstrapSlider('setValue', 7);
 ```
 
 Using bootstrap-slider (via `data-provide`-API)
@@ -74,7 +91,7 @@ turns it into a slider. Options can be supplied via `data-slider-` attributes.
 What if there is already a _slider_ plugin bound to the JQuery namespace?
 ======================
 
-If there is already a JQuery plugin named _slider_ bound to the JQuery namespace, then this plugin will take on the alternate namespace _bootstrapSlider_.
+If there is already a JQuery plugin named _slider_ bound to the JQuery namespace, then this plugin will emit a console warning telling you this namespace has already been taken and will encourage you to use the alternate namespace _bootstrapSlider_ instead.
 
 ```js
 // Instantiate a slider
