@@ -1,3 +1,7 @@
+9.1.0 / 2016-07-14
+==================
+* **New Feature:** Always binding to the `$.fn.bootstrapSlider` namespace and printing a console warning when the `$.fn.slider` namespace is already bound. Idea came from discussion [in this issue](https://github.com/seiyria/bootstrap-slider/issues/575)
+
 9.0.0 / 2016-07-13
 ==================
 * **New Feature:** Wraps all of the ticks within a single container element with the class `.slider-tick-container` as opposed to being within the `.slider-track` element. This enables individual ticks to be more easily targeted with CSS selectors such as `nth-of-type(n)`. Idea came from discussion [in this issue](https://github.com/seiyria/bootstrap-slider/issues/500)
