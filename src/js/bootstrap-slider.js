@@ -1656,7 +1656,7 @@
 
 		*********************************/
 		if($) {
-			let autoRegisterNamespace;
+			var autoRegisterNamespace;
 
 			if (!$.fn.slider) {
 				$.bridget(NAMESPACE_MAIN, Slider);
