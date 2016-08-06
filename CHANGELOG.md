@@ -1,3 +1,11 @@
+9.1.3 / 2016-08-06
+==================
+* **Bug Fix:** Checks for `window` object before attempting to attach `console` polyfills. [Resolves this issue](https://github.com/seiyria/bootstrap-slider/issues/607)
+
+9.1.2 / 2016-08-06
+==================
+* Accidental publish
+
 9.1.1 / 2016-07-15
 ==================
 * **Bug Fix:** Adds `.npmignore` file to repository. [Resolves this issue](https://github.com/seiyria/bootstrap-slider/issues/601)
