@@ -30,6 +30,8 @@
  * v1.0.1
  * MIT license
  */
+const windowIsDefined = (typeof window === "object");
+
 
 (function(factory) {
 	if(typeof define === "function" && define.amd) {
@@ -54,13 +56,13 @@
 	const NAMESPACE_ALTERNATE = 'bootstrapSlider';
 
 	// Polyfill console methods
-	if (!window.console) {
+	if (windowIsDefined && !window.console) {
 		window.console = {};
 	}
-	if (!window.console.log) {
+	if (windowIsDefined && !window.console.log) {
 		window.console.log = function () { };
 	}
-	if (!window.console.warn) {
+	if (windowIsDefined && !window.console.warn) {
 		window.console.warn = function () { };
 	}
 
@@ -1663,7 +1665,9 @@
 				autoRegisterNamespace = NAMESPACE_MAIN;
 			}
 			else {
-				window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
+				if (windowIsDefined) {
+					window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
+				}
 				autoRegisterNamespace = NAMESPACE_ALTERNATE;
 			}
 			$.bridget(NAMESPACE_ALTERNATE, Slider);
