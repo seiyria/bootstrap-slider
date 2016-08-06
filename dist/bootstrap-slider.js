@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.1.2              
+                      VERSION  9.1.3              
 ========================================================= */
 "use strict";
 
@@ -36,6 +36,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * v1.0.1
  * MIT license
  */
+var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(window)) === "object";
 
 (function (factory) {
 	if (typeof define === "function" && define.amd) {
@@ -57,13 +58,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 	var NAMESPACE_ALTERNATE = 'bootstrapSlider';
 
 	// Polyfill console methods
-	if (!window.console) {
+	if (windowIsDefined && !window.console) {
 		window.console = {};
 	}
-	if (!window.console.log) {
+	if (windowIsDefined && !window.console.log) {
 		window.console.log = function () {};
 	}
-	if (!window.console.warn) {
+	if (windowIsDefined && !window.console.warn) {
 		window.console.warn = function () {};
 	}
 
@@ -1624,7 +1625,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 					$.bridget(NAMESPACE_MAIN, Slider);
 					autoRegisterNamespace = NAMESPACE_MAIN;
 				} else {
-					window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
+					if (windowIsDefined) {
+						window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
+					}
 					autoRegisterNamespace = NAMESPACE_ALTERNATE;
 				}
 				$.bridget(NAMESPACE_ALTERNATE, Slider);
