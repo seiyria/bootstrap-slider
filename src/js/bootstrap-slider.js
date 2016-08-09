@@ -762,7 +762,7 @@ const windowIsDefined = (typeof window === "object");
 				step: 1,
 				precision: 0,
 				orientation: 'horizontal',
-				value: 5,
+				value: null,
 				range: false,
 				selection: 'before',
 				tooltip: 'show',
@@ -793,7 +793,7 @@ const windowIsDefined = (typeof window === "object");
 			},
 
 			getValue: function() {
-				if (this.options.range) {
+				if (this.options.range || this._state.value===null) {
 					return this._state.value;
 				}
 				else {
@@ -803,7 +803,7 @@ const windowIsDefined = (typeof window === "object");
 
 			setValue: function(val, triggerSlideEvent, triggerChangeEvent) {
 				if (!val) {
-					val = 0;
+					val = null;
 				}
 				var oldValue = this.getValue();
 				this._state.value = this._validateInputValue(val);
@@ -1336,7 +1336,10 @@ const windowIsDefined = (typeof window === "object");
 						dir = -dir;
 					}
 				}
-
+				if(this._state.value === null){
+					this._state.value[0] = this._state.min;
+					this._state.value[1] = this._state.max;
+				}
 				var val = this._state.value[handleIdx] + dir * this.options.step;
 				if (this.options.range) {
 					val = [ (!handleIdx) ? val : this._state.value[0],
@@ -1483,6 +1486,7 @@ const windowIsDefined = (typeof window === "object");
 				return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
 			},
 			_applyToFixedAndParseFloat: function(num, toFixedInput) {
+				if(num === null){ return null; }
 				var truncatedNum = num.toFixed(toFixedInput);
 				return parseFloat(truncatedNum);
 			},
@@ -1516,6 +1520,8 @@ const windowIsDefined = (typeof window === "object");
 				} else if (Array.isArray(val)) {
 					this._validateArray(val);
 					return val;
+				} else if (val===null){
+					return null;
 				} else {
 					throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(val) );
 				}
@@ -1523,7 +1529,7 @@ const windowIsDefined = (typeof window === "object");
 			_validateArray: function(val) {
 				for(var i = 0; i < val.length; i++) {
 					var input =  val[i];
-					if (typeof input !== 'number') { throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(input) ); }
+					if (typeof input !== 'number' && input !== null) { throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(input) ); }
 				}
 			},
 			_setDataVal: function(val) {
@@ -1659,8 +1665,8 @@ const windowIsDefined = (typeof window === "object");
 		*********************************/
 		if($) {
 			let autoRegisterNamespace;
-
-			if (!$.fn.slider) {
+			
+				if (!$.fn.slider) {
 				$.bridget(NAMESPACE_MAIN, Slider);
 				autoRegisterNamespace = NAMESPACE_MAIN;
 			}
