@@ -2,9 +2,9 @@ bootstrap-slider [![Build Status](https://travis-ci.org/seiyria/bootstrap-slider
 ================
 Originally began as a loose "fork" of bootstrap-slider found on http://www.eyecon.ro/ by Stefan Petre.
 
-Over time, this project has diverged sigfinicantly from Stefan Petre's version and is now almost completly different.
+Over time, this project has diverged sigfinicantly from Stefan Petre's version and is now almost completely different.
 
-__Please ensure that you are using this library instead of the Petre version before creating issues in the repository Issue tracker!!__
+__Please ensure that you are using this library instead of the Petre version before creating issues in the repository issue tracker!!__
 
 Installation
 ============
