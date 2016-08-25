@@ -200,10 +200,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 	})($);
 
 	/*************************************************
- 
- 		BOOTSTRAP-SLIDER SOURCE CODE
- 
- **************************************************/
+ 			BOOTSTRAP-SLIDER SOURCE CODE
+ 	**************************************************/
 
 	(function ($) {
 
@@ -310,8 +308,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		};
 
 		/*************************************************
-  							CONSTRUCTOR
-  		**************************************************/
+  						CONSTRUCTOR
+  	**************************************************/
 		Slider = function Slider(element, options) {
 			createNewSlider.call(this, element, options);
 			return this;
@@ -321,7 +319,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 			/*
    	The internal state object is used to store data about the current 'state' of slider.
-   			This includes values such as the `value`, `enabled`, etc...
+   		This includes values such as the `value`, `enabled`, etc...
    */
 			this._state = {
 				value: null,
@@ -340,8 +338,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			}
 
 			/*************************************************
-   						Process Options
-   		**************************************************/
+   					Process Options
+   	**************************************************/
 			options = options ? options : {};
 			var optionTypes = Object.keys(this.defaultOptions);
 
@@ -388,8 +386,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			}
 
 			/*************************************************
-   						Create Markup
-   		**************************************************/
+   					Create Markup
+   	**************************************************/
 
 			var origWidth = this.element.style.width;
 			var updateSlider = false;
@@ -434,19 +432,6 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				sliderTrack.appendChild(sliderTrackLow);
 				sliderTrack.appendChild(sliderTrackSelection);
 				sliderTrack.appendChild(sliderTrackHigh);
-
-				/* Create highlight range elements */
-				this.rangeHighlightElements = [];
-				if (Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
-					for (i = 0; i < this.options.rangeHighlights.length; i++) {
-
-						var rangeHighlightElement = document.createElement("div");
-						rangeHighlightElement.className = "slider-rangeHighlight slider-selection";
-
-						this.rangeHighlightElements.push(rangeHighlightElement);
-						sliderTrack.appendChild(rangeHighlightElement);
-					}
-				}
 
 				/* Add aria-labelledby to handle's */
 				var isLabelledbyArray = Array.isArray(this.options.labelledby);
@@ -550,8 +535,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			}
 
 			/*************************************************
-   							Setup
-   		**************************************************/
+   						Setup
+   	**************************************************/
 			this.eventToCallbackMap = {};
 			this.sliderElem.id = this.options.id;
 
@@ -675,8 +660,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			this.setValue(this._state.value);
 
 			/******************************************
-   					Bind Event Listeners
-   		******************************************/
+   				Bind Event Listeners
+   	******************************************/
 
 			// Bind keyboard handlers
 			this.handle1Keydown = this._keydown.bind(this, 0);
@@ -730,10 +715,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		}
 
 		/*************************************************
-  					INSTANCE PROPERTIES/METHODS
-  		- Any methods bound to the prototype are considered
+  				INSTANCE PROPERTIES/METHODS
+  	- Any methods bound to the prototype are considered
   part of the plugin's `public` interface
-  		**************************************************/
+  	**************************************************/
 		Slider.prototype = {
 			_init: function _init() {}, // NOTE: Must exist to support bridget
 
@@ -769,8 +754,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				scale: 'linear',
 				focus: false,
 				tooltip_position: null,
-				labelledby: null,
-				rangeHighlights: []
+				labelledby: null
 			},
 
 			getElement: function getElement() {
@@ -932,11 +916,11 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			},
 
 			/******************************+
-   					HELPERS
-   		- Any method that is not part of the public interface.
+   				HELPERS
+   	- Any method that is not part of the public interface.
    - Place it underneath this comment block and write its signature like so:
-   		  					_fnName : function() {...}
-   		********************************/
+   	  					_fnName : function() {...}
+   	********************************/
 			_removeSliderEventHandlers: function _removeSliderEventHandlers() {
 				// Remove keydown event listeners
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
@@ -1023,28 +1007,6 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 				this.handle2.style[this.stylePos] = positionPercentages[1] + '%';
 				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
-
-				/* Position highlight range elements */
-				if (this.rangeHighlightElements.length > 0 && Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
-					for (i = 0; i < this.options.rangeHighlights.length; i++) {
-						var startPercent = this._toPercentage(this.options.rangeHighlights[i].start);
-						var endPercent = this._toPercentage(this.options.rangeHighlights[i].end);
-
-						var currentRange = this._createHighlightRange(startPercent, endPercent);
-
-						if (currentRange) {
-							if (this.options.orientation === 'vertical') {
-								this.rangeHighlightElements[i].style.top = currentRange.start + '%';
-								this.rangeHighlightElements[i].style.height = currentRange.size + '%';
-							} else {
-								this.rangeHighlightElements[i].style.left = currentRange.start + '%';
-								this.rangeHighlightElements[i].style.width = currentRange.size + '%';
-							}
-						} else {
-							this.rangeHighlightElements[i].style.display = "none";
-						}
-					}
-				}
 
 				/* Position ticks and labels */
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
@@ -1208,23 +1170,6 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 						}
 					}
 				}
-			},
-			_createHighlightRange: function _createHighlightRange(start, end) {
-				if (this._isHighlightRange(start, end)) {
-					if (start > end) {
-						return { 'start': end, 'size': start - end };
-					}
-					return { 'start': start, 'size': end - start };
-				}
-				return null;
-			},
-			_isHighlightRange: function _isHighlightRange(start, end) {
-				if (0 <= start && start <= 100) {
-					if (0 <= end && end <= 100) {
-						return true;
-					}
-				}
-				return false;
 			},
 			_resize: function _resize(ev) {
 				/*jshint unused:false*/
@@ -1670,8 +1615,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		};
 
 		/*********************************
-  			Attach to global namespace
-  		*********************************/
+  		Attach to global namespace
+  	*********************************/
 		if ($) {
 			(function () {
 				var autoRegisterNamespace = void 0;
