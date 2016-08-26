@@ -448,6 +448,19 @@ const windowIsDefined = (typeof window === "object");
 				sliderTrack.appendChild(sliderTrackSelection);
 				sliderTrack.appendChild(sliderTrackHigh);
 
+				/* Create highlight range elements */
+				this.rangeHighlightElements = [];
+				if (Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
+					for (let j = 0; j < this.options.rangeHighlights.length; j++) {
+
+						var rangeHighlightElement = document.createElement("div");
+						rangeHighlightElement.className = "slider-rangeHighlight slider-selection";
+
+						this.rangeHighlightElements.push(rangeHighlightElement);
+						sliderTrack.appendChild(rangeHighlightElement);
+					}
+				}
+
 				/* Add aria-labelledby to handle's */
 				var isLabelledbyArray = Array.isArray(this.options.labelledby);
 				if (isLabelledbyArray && this.options.labelledby[0]) {
@@ -785,7 +798,8 @@ const windowIsDefined = (typeof window === "object");
 				scale: 'linear',
 				focus: false,
 				tooltip_position: null,
-				labelledby: null
+				labelledby: null,
+				rangeHighlights: []
 			},
 
 			getElement: function() {
@@ -1050,6 +1064,28 @@ const windowIsDefined = (typeof window === "object");
 				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
 				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
 
+				/* Position highlight range elements */
+				if (this.rangeHighlightElements.length > 0 && Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
+					for (let i = 0; i < this.options.rangeHighlights.length; i++) {
+						var startPercent = this._toPercentage(this.options.rangeHighlights[i].start);
+						var endPercent = this._toPercentage(this.options.rangeHighlights[i].end);
+
+						var currentRange = this._createHighlightRange(startPercent, endPercent);
+
+						if (currentRange) {
+							if (this.options.orientation === 'vertical') {
+								this.rangeHighlightElements[i].style.top = `${currentRange.start}%`;
+								this.rangeHighlightElements[i].style.height = `${currentRange.size}%`;
+							} else {
+								this.rangeHighlightElements[i].style.left = `${currentRange.start}%`;
+								this.rangeHighlightElements[i].style.width = `${currentRange.size}%`;
+							}
+						} else {
+							this.rangeHighlightElements[i].style.display = "none";
+						}
+					}
+				}
+
 				/* Position ticks and labels */
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 
@@ -1212,6 +1248,23 @@ const windowIsDefined = (typeof window === "object");
 				            this.tooltip_max.style.top = this.tooltip_min.style.top;
 				        }
 			        }
+				}
+			},
+			_createHighlightRange: function (start, end) {
+				if (this._isHighlightRange(start, end)) {
+					if (start > end) {
+						return {'start': end, 'size': start - end};
+					}
+					return {'start': start, 'size': end - start};
+				}
+				return null;
+			},
+			_isHighlightRange: function (start, end) {
+				if (0 <= start && start <= 100 && 0 <= end && end <= 100) {
+					return true;
+				}
+				else {
+					return false;
 				}
 			},
 			_resize: function (ev) {
