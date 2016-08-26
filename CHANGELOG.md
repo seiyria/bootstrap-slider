@@ -1,3 +1,7 @@
+9.2.0 / 2016-09-26
+==================
+* **New Feature:** Adding the ability to target certain ranges of the slider track via CSS in order to highlight them. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/619). Thanks to [lipoczkit](https://github.com/lipoczkit)
+
 9.1.3 / 2016-08-06
 ==================
 * **Bug Fix:** Checks for `window` object before attempting to attach `console` polyfills. [Resolves this issue](https://github.com/seiyria/bootstrap-slider/issues/607)
