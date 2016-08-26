@@ -117,6 +117,14 @@
 			background: yellow;
 		}
 
+		#slider22 .slider-selection {
+			background: #2196f3;
+		}
+
+		#slider22 .slider-rangeHighlight {
+        	background: #f70616;
+        }
+
     </style>
 
     <style type='text/css'>
@@ -1038,6 +1046,85 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
         </pre>
       </div>
 
+    <div class="slider-example">
+		  <h3>Example 22:</h3>
+		  <p>Highlight ranges on slider with <strong>rangeHighlights</strong> attribute</p>
+
+		  <div class="well">
+			  <input id="ex22" type="text"
+					 data-slider-id="slider22"
+					 data-slider-min="0"
+					 data-slider-max="20"
+					 data-slider-step="1"
+					 data-slider-value="14"
+					 data-slider-rangeHighlights='[{ "start": 2, "end": 5 },
+					                               { "start": 7, "end": 8 },
+					                               { "start": 17, "end": 19 },
+					                               { "start": 17, "end": 24 },
+					                               { "start": -3, "end": 19 }]'/>
+		  </div>
+
+		  <pre>
+			  <code>
+###################
+       HTML
+###################
+&ltinput id="ex22" type="text"
+     data-slider-id="slider22"
+     data-slider-min="0"
+     data-slider-max="20"
+     data-slider-step="1"
+     data-slider-value="14"
+     data-slider-rangeHighlights='[{ "start": 2, "end": 5 },
+                                   { "start": 7, "end": 8 },
+                                   { "start": 17, "end": 19 },
+                                   { "start": 17, "end": 24 }, //not visible -  out of slider range
+                                   { "start": -3, "end": 19 }]' /&gt;
+
+###################
+    JavaScript
+###################
+
+    // With JQuery
+    $('#ex22').slider({
+        id: 'slider22',
+        min: 0,
+        max: 20,
+        step: 1,
+        value: 14,
+        rangeHighlights: [{ "start": 2, "end": 5 },
+                          { "start": 7, "end": 8 },
+                          { "start": 17, "end": 19 },
+                          { "start": 17, "end": 24 },
+                          { "start": -3, "end": 19 }]});
+
+    // Without JQuery
+    new Slider("#ex22", {
+        id: 'slider22',
+        min: 0,
+        max: 20,
+        step: 1,
+        value: 14,
+        rangeHighlights: [{ "start": 2, "end": 5 },
+                          { "start": 7, "end": 8 },
+                          { "start": 17, "end": 19 },
+                          { "start": 17, "end": 24 },
+                          { "start": -3, "end": 19 }]});
+
+###################
+        CSS
+###################
+
+    #slider22 .slider-selection {
+        background: #81bfde;
+    }
+
+    #slider22 .slider-rangeHighlight {
+        background: #f70616;
+    }
+			  </code>
+		  </pre>
+	  </div>
 
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
@@ -1224,6 +1311,9 @@ new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: true });
 					.slider('relayout');
 				e.preventDefault();
 			});
+
+			/* Example 22 */
+            $('#ex22').slider({});
 		});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->

@@ -1,6 +1,6 @@
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
 /*! =========================================================
  * bootstrap-slider.js
@@ -307,7 +307,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		/*************************************************
   						CONSTRUCTOR
   	**************************************************/
-		Slider = function Slider(element, options) {
+		Slider = function (element, options) {
 			createNewSlider.call(this, element, options);
 			return this;
 		};
@@ -429,6 +429,19 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				sliderTrack.appendChild(sliderTrackLow);
 				sliderTrack.appendChild(sliderTrackSelection);
 				sliderTrack.appendChild(sliderTrackHigh);
+
+				/* Create highlight range elements */
+				this.rangeHighlightElements = [];
+				if (Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
+					for (var j = 0; j < this.options.rangeHighlights.length; j++) {
+
+						var rangeHighlightElement = document.createElement("div");
+						rangeHighlightElement.className = "slider-rangeHighlight slider-selection";
+
+						this.rangeHighlightElements.push(rangeHighlightElement);
+						sliderTrack.appendChild(rangeHighlightElement);
+					}
+				}
 
 				/* Add aria-labelledby to handle's */
 				var isLabelledbyArray = Array.isArray(this.options.labelledby);
@@ -751,7 +764,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				scale: 'linear',
 				focus: false,
 				tooltip_position: null,
-				labelledby: null
+				labelledby: null,
+				rangeHighlights: []
 			},
 
 			getElement: function getElement() {
@@ -1005,6 +1019,28 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this.handle2.style[this.stylePos] = positionPercentages[1] + '%';
 				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
 
+				/* Position highlight range elements */
+				if (this.rangeHighlightElements.length > 0 && Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
+					for (var _i = 0; _i < this.options.rangeHighlights.length; _i++) {
+						var startPercent = this._toPercentage(this.options.rangeHighlights[_i].start);
+						var endPercent = this._toPercentage(this.options.rangeHighlights[_i].end);
+
+						var currentRange = this._createHighlightRange(startPercent, endPercent);
+
+						if (currentRange) {
+							if (this.options.orientation === 'vertical') {
+								this.rangeHighlightElements[_i].style.top = currentRange.start + "%";
+								this.rangeHighlightElements[_i].style.height = currentRange.size + "%";
+							} else {
+								this.rangeHighlightElements[_i].style.left = currentRange.start + "%";
+								this.rangeHighlightElements[_i].style.width = currentRange.size + "%";
+							}
+						} else {
+							this.rangeHighlightElements[_i].style.display = "none";
+						}
+					}
+				}
+
 				/* Position ticks and labels */
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 
@@ -1166,6 +1202,22 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 							this.tooltip_max.style.top = this.tooltip_min.style.top;
 						}
 					}
+				}
+			},
+			_createHighlightRange: function _createHighlightRange(start, end) {
+				if (this._isHighlightRange(start, end)) {
+					if (start > end) {
+						return { 'start': end, 'size': start - end };
+					}
+					return { 'start': start, 'size': end - start };
+				}
+				return null;
+			},
+			_isHighlightRange: function _isHighlightRange(start, end) {
+				if (0 <= start && start <= 100 && 0 <= end && end <= 100) {
+					return true;
+				} else {
+					return false;
 				}
 			},
 			_resize: function _resize(ev) {
@@ -1593,20 +1645,20 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				if (this.options.orientation === 'vertical') {
 					var tooltipPos = this.options.tooltip_position || 'right';
 					var oppositeSide = tooltipPos === 'left' ? 'right' : 'left';
-					tooltips.forEach(function (tooltip) {
+					tooltips.forEach((function (tooltip) {
 						this._addClass(tooltip, tooltipPos);
 						tooltip.style[oppositeSide] = '100%';
-					}.bind(this));
+					}).bind(this));
 				} else if (this.options.tooltip_position === 'bottom') {
-					tooltips.forEach(function (tooltip) {
+					tooltips.forEach((function (tooltip) {
 						this._addClass(tooltip, 'bottom');
 						tooltip.style.top = 22 + 'px';
-					}.bind(this));
+					}).bind(this));
 				} else {
-					tooltips.forEach(function (tooltip) {
+					tooltips.forEach((function (tooltip) {
 						this._addClass(tooltip, 'top');
 						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
-					}.bind(this));
+					}).bind(this));
 				}
 			}
 		};
@@ -1616,7 +1668,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
   	*********************************/
 		if ($) {
 			(function () {
-				var autoRegisterNamespace = void 0;
+				var autoRegisterNamespace = undefined;
 
 				if (!$.fn.slider) {
 					$.bridget(NAMESPACE_MAIN, Slider);
