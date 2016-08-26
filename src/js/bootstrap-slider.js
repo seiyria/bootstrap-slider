@@ -451,7 +451,7 @@ const windowIsDefined = (typeof window === "object");
 				/* Create highlight range elements */
 				this.rangeHighlightElements = [];
 				if (Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
-					for (i = 0; i < this.options.rangeHighlights.length; i++) {
+					for (let j = 0; j < this.options.rangeHighlights.length; j++) {
 
 						var rangeHighlightElement = document.createElement("div");
 						rangeHighlightElement.className = "slider-rangeHighlight slider-selection";
@@ -1066,7 +1066,7 @@ const windowIsDefined = (typeof window === "object");
 
 				/* Position highlight range elements */
 				if (this.rangeHighlightElements.length > 0 && Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
-					for (i = 0; i < this.options.rangeHighlights.length; i++) {
+					for (let i = 0; i < this.options.rangeHighlights.length; i++) {
 						var startPercent = this._toPercentage(this.options.rangeHighlights[i].start);
 						var endPercent = this._toPercentage(this.options.rangeHighlights[i].end);
 
@@ -1074,11 +1074,11 @@ const windowIsDefined = (typeof window === "object");
 
 						if (currentRange) {
 							if (this.options.orientation === 'vertical') {
-								this.rangeHighlightElements[i].style.top = currentRange.start + '%';
-								this.rangeHighlightElements[i].style.height = currentRange.size + '%';
+								this.rangeHighlightElements[i].style.top = `${currentRange.start}%`;
+								this.rangeHighlightElements[i].style.height = `${currentRange.size}%`;
 							} else {
-								this.rangeHighlightElements[i].style.left = currentRange.start + '%';
-								this.rangeHighlightElements[i].style.width = currentRange.size + '%';
+								this.rangeHighlightElements[i].style.left = `${currentRange.start}%`;
+								this.rangeHighlightElements[i].style.width = `${currentRange.size}%`;
 							}
 						} else {
 							this.rangeHighlightElements[i].style.display = "none";
@@ -1260,12 +1260,12 @@ const windowIsDefined = (typeof window === "object");
 				return null;
 			},
 			_isHighlightRange: function (start, end) {
-				if (0 <= start && start <= 100) {
-					if (0 <= end && end <= 100) {
-						return true;
-					}
+				if (0 <= start && start <= 100 && 0 <= end && end <= 100) {
+					return true;
 				}
-				return false;
+				else {
+					return false;
+				}
 			},
 			_resize: function (ev) {
 				/*jshint unused:false*/
