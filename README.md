@@ -281,7 +281,7 @@ Other Platforms & Libraries
 - [knockout.js](https://github.com/cosminstefanxp/bootstrap-slider-knockout-binding) ([@cosminstefanxp](https://github.com/cosminstefanxp), [#81](https://github.com/seiyria/bootstrap-slider/issues/81))
 - [AngularJS](https://github.com/seiyria/angular-bootstrap-slider)
 - [EmberJS](https://github.com/lifegadget/ui-slider) ([@ksnyde](https://github.com/ksnyde))
-- [ReactJS](https://github.com/brownieboy/react.bootstrap.slidertest)
+- [ReactJS](https://github.com/brownieboy/react-bootstrap-slider)
 - [NuGet](https://www.nuget.org/packages/bootstrap-slider/) ([@ChrisMissal](https://github.com/ChrisMissal))
 - [MeteorJS](https://github.com/kidovate/meteor-bootstrap-slider)
 - [Maven](http://mvnrepository.com/artifact/org.webjars.bower/seiyria-bootstrap-slider)
