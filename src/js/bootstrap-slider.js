@@ -451,7 +451,8 @@ var windowIsDefined = (typeof window === "object");
 				/* Create highlight range elements */
 				this.rangeHighlightElements = [];
 				if (Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
-					for (let j = 0; j < this.options.rangeHighlights.length; j++) {
+					var j;
+					for (j = 0; j < this.options.rangeHighlights.length; j++) {
 
 						var rangeHighlightElement = document.createElement("div");
 						rangeHighlightElement.className = "slider-rangeHighlight slider-selection";
