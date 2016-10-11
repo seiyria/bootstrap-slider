@@ -1074,11 +1074,11 @@ const windowIsDefined = (typeof window === "object");
 
 						if (currentRange) {
 							if (this.options.orientation === 'vertical') {
-								this.rangeHighlightElements[i].style.top = `${currentRange.start}%`;
-								this.rangeHighlightElements[i].style.height = `${currentRange.size}%`;
+								this.rangeHighlightElements[i].style.top = '${currentRange.start}%';
+								this.rangeHighlightElements[i].style.height = '${currentRange.size}%';
 							} else {
-								this.rangeHighlightElements[i].style.left = `${currentRange.start}%`;
-								this.rangeHighlightElements[i].style.width = `${currentRange.size}%`;
+								this.rangeHighlightElements[i].style.left = '${currentRange.start}%';
+								this.rangeHighlightElements[i].style.width = '${currentRange.size}%';
 							}
 						} else {
 							this.rangeHighlightElements[i].style.display = "none";
