@@ -30,7 +30,7 @@
  * v1.0.1
  * MIT license
  */
-const windowIsDefined = (typeof window === "object");
+var windowIsDefined = (typeof window === "object");
 
 
 (function(factory) {
@@ -52,8 +52,8 @@ const windowIsDefined = (typeof window === "object");
 	}
 }(function($) {
 	// Constants
-	const NAMESPACE_MAIN = 'slider';
-	const NAMESPACE_ALTERNATE = 'bootstrapSlider';
+	var NAMESPACE_MAIN = 'slider';
+	var NAMESPACE_ALTERNATE = 'bootstrapSlider';
 
 	// Polyfill console methods
 	if (windowIsDefined && !window.console) {
