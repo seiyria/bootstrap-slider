@@ -33,8 +33,9 @@
 
 	<!-- Slider used for PublicMethodsSpec and EventsSpec -->
 	<input id="testSlider1" type="text"/>
-
 	<input id="testSlider2" type="text"/>
+	<input id="testSlider3" type="text"/>
+	<input id="testSlider4" type="text"/>
 
 	<!-- Note: Two input elements with class 'makeSlider' are required for tests to run properly -->
   <input class="makeSlider" type="text"/>
