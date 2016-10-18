@@ -740,8 +740,8 @@ const windowIsDefined = (typeof window === "object");
 				this.hideTooltip = this._hideTooltip.bind(this);
 
 				if (this.options.ticks_tooltip) {
-					createTickMouseOverListener(this, this.handle1);
-					createTickMouseOverListener(this, this.handle2);
+					this.createTickMouseOverListener(this, this.handle1);
+					this.createTickMouseOverListener(this, this.handle2);
 				} else {
 					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
 					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
