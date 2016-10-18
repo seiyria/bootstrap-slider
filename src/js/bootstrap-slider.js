@@ -1070,6 +1070,12 @@ const windowIsDefined = (typeof window === "object");
 						var startPercent = this._toPercentage(this.options.rangeHighlights[i].start);
 						var endPercent = this._toPercentage(this.options.rangeHighlights[i].end);
 
+						if (this.options.reversed) {
+							var sp = 100-endPercent;
+							endPercent = 100-startPercent;
+							startPercent = sp;
+						}
+
 						var currentRange = this._createHighlightRange(startPercent, endPercent);
 
 						if (currentRange) {

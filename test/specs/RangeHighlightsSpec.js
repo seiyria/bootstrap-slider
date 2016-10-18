@@ -5,6 +5,8 @@
 describe("RangeHighlights Render Tests", function() {
     var testSlider1;
     var testSlider2;
+    var testSlider3;
+    var testSlider4;
 
     //setup
     beforeEach(function() {
@@ -38,6 +40,39 @@ describe("RangeHighlights Render Tests", function() {
                 { "start": 23, "end": 15 }  //out of range - not visible
             ]
         });
+
+        testSlider3 = $('#testSlider3').slider({
+            id: 'slider3',
+            min: 0,
+            max: 20,
+            step: 1,
+            value: 14,
+            reversed: true,
+            rangeHighlights: [
+                { "start": 2, "end": 5 },    // left: 75%; width: 15%
+                { "start": 7, "end": 8 },    // left: 60%; width: 5%
+                { "start": 17, "end": 19 },  // left: 5%; width: 10%
+                { "start": 17, "end": 24 },  //out of range - not visible
+                { "start": -3, "end": 19 }   //out of range - not visible
+            ]
+        });
+
+        testSlider4 = $('#testSlider4').slider({
+            id: 'slider4',
+            min: 0,
+            max: 20,
+            step: 1,
+            value: 14,
+            reversed: true,
+            orientation: 'vertical',
+            rangeHighlights: [
+                { "start": 2, "end": 5 },   // top: 75%; height: 15%
+                { "start": 7, "end": 8 },   // top: 60%; height: 5%
+                { "start": 17, "end": 19 }, // top: 5%; height: 10%
+                { "start": 7, "end": -4 },  //out of range - not visible
+                { "start": 23, "end": 15 }  //out of range - not visible
+            ]
+        });
     });
 
     //cleanup
@@ -47,6 +82,12 @@ describe("RangeHighlights Render Tests", function() {
 
         testSlider2.slider('destroy');
         testSlider2 = null;
+
+        testSlider3.slider('destroy');
+        testSlider3 = null;
+
+        testSlider4.slider('destroy');
+        testSlider4 = null;
     });
 
     //test the visibility of ranges e.g. : { "start": 23, "end": 15 } - out of range - not visible
@@ -141,6 +182,48 @@ describe("RangeHighlights Render Tests", function() {
     }, {
         isVisible: false,
         start: '85%',
+        size: '10%'
+    }]);
+    testHighlightedElements('#slider3', true, [{
+        isVisible: true,
+        start: '75%',
+        size: '15%'
+    }, {
+        isVisible: true,
+        start: '60%',
+        size: '5%'
+    }, {
+        isVisible: true,
+        start: '5%',
+        size: '10%'
+    }, {
+        isVisible: false,
+        start: '5%',
+        size: '10%'
+    }, {
+        isVisible: false,
+        start: '5%',
+        size: '10%'
+    }]);
+    testHighlightedElements('#slider4', false, [{
+        isVisible: true,
+        start: '75%',
+        size: '15%'
+    }, {
+        isVisible: true,
+        start: '60%',
+        size: '5%'
+    }, {
+        isVisible: true,
+        start: '5%',
+        size: '10%'
+    }, {
+        isVisible: false,
+        start: '5%',
+        size: '10%'
+    }, {
+        isVisible: false,
+        start: '5%',
         size: '10%'
     }]);
 });
