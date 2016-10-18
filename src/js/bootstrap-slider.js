@@ -991,6 +991,7 @@ const windowIsDefined = (typeof window === "object");
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
 				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
 
+				//rmove the listeners from the ticks if they had their own listeners
 				if(this.options.ticks_tooltip){
 					var ticks = document.getElementsByClassName('slider-tick-container')[0].children;
 					for(var i = 0; i < ticks.length; i++ ){
