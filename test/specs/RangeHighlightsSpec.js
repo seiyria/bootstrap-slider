@@ -82,6 +82,12 @@ describe("RangeHighlights Render Tests", function() {
 
         testSlider2.slider('destroy');
         testSlider2 = null;
+
+        testSlider3.slider('destroy');
+        testSlider3 = null;
+
+        testSlider4.slider('destroy');
+        testSlider4 = null;
     });
 
     //test the visibility of ranges e.g. : { "start": 23, "end": 15 } - out of range - not visible
