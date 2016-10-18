@@ -398,21 +398,6 @@ const windowIsDefined = (typeof window === "object");
 				}
 			}
 
-			function createTickMouseOverListener(reference, tick, index){
-				tick.addEventListener("mouseenter", function(){
-					var tempState = $.extend(true, reference._state, {});
-					var idString = index >= 0 ? index : $(this).attr('aria-valuenow');
-					var hoverIndex = parseInt(idString, 10);
-					tempState.value[0] = hoverIndex;
-					tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
-					reference._setToolTipOnMouseOver(tempState);
-					reference._showTooltip();
-				}, false);
-				tick.addEventListener("mouseleave", function(){
-					reference._hideTooltip();
-				}, false);
-			}
-
 			/*************************************************
 
 							Create Markup
@@ -491,6 +476,7 @@ const windowIsDefined = (typeof window === "object");
 
 				/* Create ticks */
 				this.ticks = [];
+				this.createTickMouseOverListener = this._createTickMouseOverListener.bind(this);
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 					this.ticksContainer = document.createElement('div');
 					this.ticksContainer.className = 'slider-tick-container';
@@ -499,7 +485,7 @@ const windowIsDefined = (typeof window === "object");
 						var tick = document.createElement('div');
 						tick.className = 'slider-tick';
 						if (this.options.ticks_tooltip) {
-							createTickMouseOverListener(this, tick, i);
+							this.createTickMouseOverListener(this, tick, i);
 						}
 						this.ticks.push(tick);
 						this.ticksContainer.appendChild(tick);
@@ -1006,9 +992,11 @@ const windowIsDefined = (typeof window === "object");
 				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
 
 				if(this.options.ticks_tooltip){
-					$('.slider-tick-container div').each(function(){
-						$(this).off();
-					});
+					var ticks = document.getElementsByClassName('slider-tick-container')[0].children;
+					for(var i = 0; i < ticks.length; i++ ){
+						ticks[i].removeEventListener('mouseenter', this.createTickMouseOverListener, false);
+						ticks[i].removeEventListener('mouseleave', this.createTickMouseOverListener, false);
+					}
                 }
 
 				if (this.showTooltip) {
@@ -1096,6 +1084,20 @@ const windowIsDefined = (typeof window === "object");
 					}
 					return [state.percentage[0], state.percentage[1]];
 				}
+			},
+			_createTickMouseOverListener: function _createTickMouseOverListener(reference, tick, index) {
+				tick.addEventListener("mouseenter", function () {
+					var tempState = reference._state;
+					var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
+					var hoverIndex = parseInt(idString, 10);
+					tempState.value[0] = hoverIndex;
+					tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
+					reference._setToolTipOnMouseOver(tempState);
+					reference._showTooltip();
+				}, false);
+				tick.addEventListener("mouseleave", function () {
+					reference._hideTooltip();
+				}, false);
 			},
 			_layout: function() {
 				var positionPercentages;
