@@ -1025,6 +1025,12 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 						var startPercent = this._toPercentage(this.options.rangeHighlights[_i].start);
 						var endPercent = this._toPercentage(this.options.rangeHighlights[_i].end);
 
+						if (this.options.reversed) {
+							var sp = 100 - endPercent;
+							endPercent = 100 - startPercent;
+							startPercent = sp;
+						}
+
 						var currentRange = this._createHighlightRange(startPercent, endPercent);
 
 						if (currentRange) {
