@@ -1,3 +1,7 @@
+9.2.1 / 2016-10-18
+==================
+* **Bug Fix:** Resolves issue where range highlights were not being applied properly for reversed sliders. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/637). Thanks to [Bernard Gorman](https://github.com/gormanb)
+
 9.2.0 / 2016-09-26
 ==================
 * **New Feature:** Adding the ability to target certain ranges of the slider track via CSS in order to highlight them. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/619). Thanks to [lipoczkit](https://github.com/lipoczkit)
