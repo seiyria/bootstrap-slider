@@ -193,6 +193,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | ticks_positions | array | [ ] | Defines the positions of the tick values in percentages. The first value should always be 0, the last value should always be 100 percent. |
 | ticks_labels | array | [ ] | Defines the labels below the tick marks. Accepts HTML input. |
 | ticks_snap_bounds | float | 0 | Used to define the snap bounds of a tick. Snaps to the tick if value is within these bounds. |
+| ticks_tooltip | bool | false | Used to allow for a user to hover over a given tick to see it's value. Useful if custom formatter passed in |
 | scale | string | 'linear' | Set to 'logarithmic' to use a logarithmic scale. |
 | focus | bool | false | Focus the appropriate slider handle after a value change. |
 | labelledby | string,array | null | ARIA labels for the slider handle's, Use array for multiple values in a range slider. |

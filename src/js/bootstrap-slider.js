@@ -398,6 +398,21 @@ const windowIsDefined = (typeof window === "object");
 				}
 			}
 
+			function createTickMouseOverListener(reference, tick, index){
+                tick.addEventListener("mouseenter", function(){
+                    var tempState = $.extend(true, reference._state, {});
+                    var idString = index >= 0 ? index : $(this).attr('aria-valuenow');
+                    var hoverIndex = parseInt(idString, 10);
+                    tempState.value[0] = hoverIndex;
+                    tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
+                    reference._setToolTipOnMouseOver(tempState);
+                    reference._showTooltip();
+                }, false);
+                tick.addEventListener("mouseleave", function(){
+                    reference._hideTooltip();
+                }, false);
+            }
+
 			/*************************************************
 
 							Create Markup
@@ -483,6 +498,9 @@ const windowIsDefined = (typeof window === "object");
 					for (i = 0; i < this.options.ticks.length; i++) {
 						var tick = document.createElement('div');
 						tick.className = 'slider-tick';
+						if (this.options.ticks_tooltip) {
+							createTickMouseOverListener(this, tick, i);
+						}
 						this.ticks.push(tick);
 						this.ticksContainer.appendChild(tick);
 					}
@@ -735,8 +753,13 @@ const windowIsDefined = (typeof window === "object");
 				this.showTooltip = this._showTooltip.bind(this);
 				this.hideTooltip = this._hideTooltip.bind(this);
 
-				this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
-				this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+				if (this.options.ticks_tooltip) {
+                    createTickMouseOverListener(this, this.handle1);
+                    createTickMouseOverListener(this, this.handle2);
+                } else {
+                    this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
+                    this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+                }
 
 				this.handle1.addEventListener("focus", this.showTooltip, false);
 				this.handle1.addEventListener("blur", this.hideTooltip, false);
@@ -770,7 +793,7 @@ const windowIsDefined = (typeof window === "object");
 
 			defaultOptions: {
 				id: "",
-			  min: 0,
+			  	min: 0,
 				max: 10,
 				step: 1,
 				precision: 0,
@@ -795,6 +818,7 @@ const windowIsDefined = (typeof window === "object");
 				ticks_positions: [],
 				ticks_labels: [],
 				ticks_snap_bounds: 0,
+				ticks_tooltip: false,
 				scale: 'linear',
 				focus: false,
 				tooltip_position: null,
@@ -973,13 +997,19 @@ const windowIsDefined = (typeof window === "object");
 			- Any method that is not part of the public interface.
 			- Place it underneath this comment block and write its signature like so:
 
-			  					_fnName : function() {...}
+				_fnName : function() {...}
 
 			********************************/
 			_removeSliderEventHandlers: function() {
 				// Remove keydown event listeners
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
 				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
+
+				if(this.options.ticks_tooltip){
+					$('.slider-tick-container div').each(function(){
+						$(this).off();
+					});
+                }
 
 				if (this.showTooltip) {
 					this.handle1.removeEventListener("focus", this.showTooltip, false);
@@ -1010,17 +1040,17 @@ const windowIsDefined = (typeof window === "object");
 				}
 				this.eventToCallbackMap[evt].push(callback);
 			},
-      _unbindNonQueryEventHandler: function(evt, callback) {
-          var callbacks = this.eventToCallbackMap[evt];
-          if(callbacks !== undefined) {
-              for (var i = 0; i < callbacks.length; i++) {
-                  if (callbacks[i] === callback) {
-                      callbacks.splice(i, 1);
-                      break;
-                  }
-              }
-          }
-      },
+			_unbindNonQueryEventHandler: function(evt, callback) {
+				var callbacks = this.eventToCallbackMap[evt];
+				if(callbacks !== undefined) {
+					for (var i = 0; i < callbacks.length; i++) {
+						if (callbacks[i] === callback) {
+							callbacks.splice(i, 1);
+							break;
+						}
+					}
+				}
+			},
 			_cleanUpEventCallbacksMap: function() {
 				var eventNames = Object.keys(this.eventToCallbackMap);
 				for(var i = 0; i < eventNames.length; i++) {
@@ -1030,14 +1060,14 @@ const windowIsDefined = (typeof window === "object");
 			},
 			_showTooltip: function() {
 				if (this.options.tooltip_split === false ){
-        	this._addClass(this.tooltip, 'in');
-        	this.tooltip_min.style.display = 'none';
-        	this.tooltip_max.style.display = 'none';
-		    } else {
-          this._addClass(this.tooltip_min, 'in');
-          this._addClass(this.tooltip_max, 'in');
-          this.tooltip.style.display = 'none';
-		    }
+					this._addClass(this.tooltip, 'in');
+					this.tooltip_min.style.display = 'none';
+					this.tooltip_max.style.display = 'none';
+			    } else {
+					this._addClass(this.tooltip_min, 'in');
+					this._addClass(this.tooltip_max, 'in');
+					this.tooltip.style.display = 'none';
+				}
 				this._state.over = true;
 			},
 			_hideTooltip: function() {
@@ -1047,6 +1077,25 @@ const windowIsDefined = (typeof window === "object");
 					this._removeClass(this.tooltip_max, 'in');
 				}
 				this._state.over = false;
+			},
+			_setToolTipOnMouseOver: function _setToolTipOnMouseOver(tempState){
+				var formattedTooltipVal = this.options.formatter(!tempState ? this._state.value[0]: tempState.value[0]);
+				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
+				this._setText(this.tooltipInner, formattedTooltipVal);
+
+				this.tooltip.style[this.stylePos] = positionPercentages[0] + '%';
+				if (this.options.orientation === 'vertical') {
+					this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+				} else {
+					this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
+				}
+
+				function getPositionPercentages(state, reversed){
+					if (reversed) {
+						return [100 - state.percentage[0], this.options.range ? 100 - state.percentage[1] : state.percentage[1]];
+					}
+					return [state.percentage[0], state.percentage[1]];
+				}
 			},
 			_layout: function() {
 				var positionPercentages;
