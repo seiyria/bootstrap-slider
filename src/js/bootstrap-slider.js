@@ -740,12 +740,12 @@ const windowIsDefined = (typeof window === "object");
 				this.hideTooltip = this._hideTooltip.bind(this);
 
 				if (this.options.ticks_tooltip) {
-                    createTickMouseOverListener(this, this.handle1);
-                    createTickMouseOverListener(this, this.handle2);
-                } else {
-                    this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
-                    this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
-                }
+					createTickMouseOverListener(this, this.handle1);
+					createTickMouseOverListener(this, this.handle2);
+				} else {
+					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
+					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+				}
 
 				this.handle1.addEventListener("focus", this.showTooltip, false);
 				this.handle1.addEventListener("blur", this.hideTooltip, false);
