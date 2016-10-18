@@ -289,7 +289,7 @@ module.exports = function(grunt) {
     'open:development',
     'watch'
   ]);
-  grunt.registerTask('production', ['test', 'dist']);
+  grunt.registerTask('production', ['dist']);
   grunt.registerTask('dev', 'development');
   grunt.registerTask('prod', 'production');
   grunt.registerTask('default', ['build']);
