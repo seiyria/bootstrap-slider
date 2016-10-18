@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.2.0              
+                      VERSION  9.2.2              
 ========================================================= */
 "use strict";
 
@@ -1027,6 +1027,12 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					for (var _i = 0; _i < this.options.rangeHighlights.length; _i++) {
 						var startPercent = this._toPercentage(this.options.rangeHighlights[_i].start);
 						var endPercent = this._toPercentage(this.options.rangeHighlights[_i].end);
+
+						if (this.options.reversed) {
+							var sp = 100 - endPercent;
+							endPercent = 100 - startPercent;
+							startPercent = sp;
+						}
 
 						var currentRange = this._createHighlightRange(startPercent, endPercent);
 
