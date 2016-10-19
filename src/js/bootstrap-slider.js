@@ -324,7 +324,6 @@ const windowIsDefined = (typeof window === "object");
 
 			/*
 				The internal state object is used to store data about the current 'state' of slider.
-
 				This includes values such as the `value`, `enabled`, etc...
 			*/
 			this._state = {
@@ -337,6 +336,9 @@ const windowIsDefined = (typeof window === "object");
 				over: false
 			};
 
+			// The objects used to store the reference to the tick methods if ticks_tooltip is on
+			this.ticksCallbackMap = {};
+			this.handleCallbackMap = {};
 
 			if(typeof element === "string") {
 				this.element = document.querySelector(element);
@@ -476,7 +478,6 @@ const windowIsDefined = (typeof window === "object");
 
 				/* Create ticks */
 				this.ticks = [];
-				this.createTickMouseOverListener = this._createTickMouseOverListener.bind(this);
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 					this.ticksContainer = document.createElement('div');
 					this.ticksContainer.className = 'slider-tick-container';
@@ -485,7 +486,15 @@ const windowIsDefined = (typeof window === "object");
 						var tick = document.createElement('div');
 						tick.className = 'slider-tick';
 						if (this.options.ticks_tooltip) {
-							this.createTickMouseOverListener(this, tick, i);
+							var tickListenerReference = this._addTickListener();
+                            var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
+                            var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
+                            if(i === 0){
+                                this.ticksCallbackMap = {
+                                    mouseEnter: enterCallback,
+                                    mouseLeave: leaveCallback,
+                                };
+                            }
 						}
 						this.ticks.push(tick);
 						this.ticksContainer.appendChild(tick);
@@ -740,8 +749,15 @@ const windowIsDefined = (typeof window === "object");
 				this.hideTooltip = this._hideTooltip.bind(this);
 
 				if (this.options.ticks_tooltip) {
-					this.createTickMouseOverListener(this, this.handle1);
-					this.createTickMouseOverListener(this, this.handle2);
+					var callbackHandle = this._addTickListener();
+                    var mouseEnter = callbackHandle.addMouseEnter(this, this.handle1);
+                    var mouseLeave = callbackHandle.addMouseLeave(this, this.handle1);
+                    callbackHandle.addMouseEnter(this, this.handle2);
+                    callbackHandle.addMouseLeave(this, this.handle2);
+                    this.handleCallbackMap = {
+                        mouseEnter: mouseEnter,
+                        mouseLeave: mouseLeave
+                    };
 				} else {
 					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
 					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
@@ -991,14 +1007,18 @@ const windowIsDefined = (typeof window === "object");
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
 				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
 
-				//rmove the listeners from the ticks if they had their own listeners
-				if(this.options.ticks_tooltip){
-					var ticks = document.getElementsByClassName('slider-tick-container')[0].children;
+				//remove the listeners from the ticks and handles if they had their own listeners
+				if (this.options.ticks_tooltip) {
+					var ticks = this.ticksContainer.getElementsByClassName('slider-tick');
 					for(var i = 0; i < ticks.length; i++ ){
-						ticks[i].removeEventListener('mouseenter', this.createTickMouseOverListener, false);
-						ticks[i].removeEventListener('mouseleave', this.createTickMouseOverListener, false);
+						ticks[i].removeEventListener('mouseenter', this.ticksCallbackMap.mouseEnter, false);
+						ticks[i].removeEventListener('mouseleave', this.ticksCallbackMap.mouseLeave, false);
 					}
-                }
+					this.handle1.removeEventListener('mouseenter', this.handleCallbackMap.mouseEnter, false);
+					this.handle2.removeEventListener('mouseenter', this.handleCallbackMap.mouseEnter, false);
+					this.handle1.removeEventListener('mouseleave', this.handleCallbackMap.mouseLeave, false);
+					this.handle2.removeEventListener('mouseleave', this.handleCallbackMap.mouseLeave, false);
+				}
 
 				if (this.showTooltip) {
 					this.handle1.removeEventListener("focus", this.showTooltip, false);
@@ -1086,19 +1106,29 @@ const windowIsDefined = (typeof window === "object");
 					return [state.percentage[0], state.percentage[1]];
 				}
 			},
-			_createTickMouseOverListener: function _createTickMouseOverListener(reference, tick, index) {
-				tick.addEventListener("mouseenter", function () {
-					var tempState = reference._state;
-					var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
-					var hoverIndex = parseInt(idString, 10);
-					tempState.value[0] = hoverIndex;
-					tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
-					reference._setToolTipOnMouseOver(tempState);
-					reference._showTooltip();
-				}, false);
-				tick.addEventListener("mouseleave", function () {
-					reference._hideTooltip();
-				}, false);
+			_addTickListener: function _addTickListener() {
+				return {
+					addMouseEnter: function(reference, tick, index){
+						var enter = function(){
+							var tempState = reference._state;
+							var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
+							var hoverIndex = parseInt(idString, 10);
+							tempState.value[0] = hoverIndex;
+							tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
+							reference._setToolTipOnMouseOver(tempState);
+							reference._showTooltip();
+						};
+						tick.addEventListener("mouseenter", enter, false);
+						return enter;
+					},
+					addMouseLeave: function(reference, tick){
+						var leave = function(){
+							reference._hideTooltip();
+						};
+						tick.addEventListener("mouseleave", leave, false);
+						return leave;
+					}
+				};
 			},
 			_layout: function() {
 				var positionPercentages;
