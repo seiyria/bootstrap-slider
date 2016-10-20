@@ -489,12 +489,10 @@ const windowIsDefined = (typeof window === "object");
 							var tickListenerReference = this._addTickListener();
 							var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
 							var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
-							if(i === 0){
-								this.ticksCallbackMap = {
-									mouseEnter: enterCallback,
-									mouseLeave: leaveCallback,
-								};
-							}
+							this.ticksCallbackMap[i] = {
+								mouseEnter: enterCallback,
+								mouseLeave: leaveCallback,
+							};
 						}
 						this.ticks.push(tick);
 						this.ticksContainer.appendChild(tick);
@@ -1015,8 +1013,8 @@ const windowIsDefined = (typeof window === "object");
 				if (this.options.ticks_tooltip) {
 					var ticks = this.ticksContainer.getElementsByClassName('slider-tick');
 					for(var i = 0; i < ticks.length; i++ ){
-						ticks[i].removeEventListener('mouseenter', this.ticksCallbackMap.mouseEnter, false);
-						ticks[i].removeEventListener('mouseleave', this.ticksCallbackMap.mouseLeave, false);
+						ticks[i].removeEventListener('mouseenter', this.ticksCallbackMap[i].mouseEnter, false);
+						ticks[i].removeEventListener('mouseleave', this.ticksCallbackMap[i].mouseLeave, false);
 					}
 					this.handle1.removeEventListener('mouseenter', this.handleCallbackMap.handle1.mouseEnter, false);
 					this.handle2.removeEventListener('mouseenter', this.handleCallbackMap.handle2.mouseEnter, false);
