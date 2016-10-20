@@ -487,14 +487,14 @@ const windowIsDefined = (typeof window === "object");
 						tick.className = 'slider-tick';
 						if (this.options.ticks_tooltip) {
 							var tickListenerReference = this._addTickListener();
-                            var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
-                            var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
-                            if(i === 0){
-                                this.ticksCallbackMap = {
-                                    mouseEnter: enterCallback,
-                                    mouseLeave: leaveCallback,
-                                };
-                            }
+							var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
+							var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
+							if(i === 0){
+								this.ticksCallbackMap = {
+									mouseEnter: enterCallback,
+									mouseLeave: leaveCallback,
+								};
+							}
 						}
 						this.ticks.push(tick);
 						this.ticksContainer.appendChild(tick);
@@ -750,14 +750,20 @@ const windowIsDefined = (typeof window === "object");
 
 				if (this.options.ticks_tooltip) {
 					var callbackHandle = this._addTickListener();
-                    var mouseEnter = callbackHandle.addMouseEnter(this, this.handle1);
-                    var mouseLeave = callbackHandle.addMouseLeave(this, this.handle1);
-                    callbackHandle.addMouseEnter(this, this.handle2);
-                    callbackHandle.addMouseLeave(this, this.handle2);
-                    this.handleCallbackMap = {
-                        mouseEnter: mouseEnter,
-                        mouseLeave: mouseLeave
-                    };
+					//create handle1 listeners and store references in map
+					var mouseEnter = callbackHandle.addMouseEnter(this, this.handle1);
+					var mouseLeave = callbackHandle.addMouseLeave(this, this.handle1);
+					this.handleCallbackMap.handle1 = {
+						mouseEnter: mouseEnter,
+						mouseLeave: mouseLeave
+					};
+					//create handle2 listeners and store references in map
+					mouseEnter = callbackHandle.addMouseEnter(this, this.handle2);
+					mouseLeave = callbackHandle.addMouseLeave(this, this.handle2);
+					this.handleCallbackMap.handle2 = {
+						mouseEnter: mouseEnter,
+						mouseLeave: mouseLeave
+					};
 				} else {
 					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
 					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
@@ -778,8 +784,6 @@ const windowIsDefined = (typeof window === "object");
 
 		}
 
-
-
 		/*************************************************
 
 					INSTANCE PROPERTIES/METHODS
@@ -795,7 +799,7 @@ const windowIsDefined = (typeof window === "object");
 
 			defaultOptions: {
 				id: "",
-			  	min: 0,
+				min: 0,
 				max: 10,
 				step: 1,
 				precision: 0,
@@ -954,14 +958,14 @@ const windowIsDefined = (typeof window === "object");
 				return this;
 			},
 
-      off: function(evt, callback) {
-          if($) {
-              this.$element.off(evt, callback);
-              this.$sliderElem.off(evt, callback);
-          } else {
-              this._unbindNonQueryEventHandler(evt, callback);
-          }
-      },
+			off: function(evt, callback) {
+				if($) {
+					this.$element.off(evt, callback);
+					this.$sliderElem.off(evt, callback);
+				} else {
+					this._unbindNonQueryEventHandler(evt, callback);
+				}
+			},
 
 			getAttribute: function(attribute) {
 				if(attribute) {
@@ -1014,11 +1018,14 @@ const windowIsDefined = (typeof window === "object");
 						ticks[i].removeEventListener('mouseenter', this.ticksCallbackMap.mouseEnter, false);
 						ticks[i].removeEventListener('mouseleave', this.ticksCallbackMap.mouseLeave, false);
 					}
-					this.handle1.removeEventListener('mouseenter', this.handleCallbackMap.mouseEnter, false);
-					this.handle2.removeEventListener('mouseenter', this.handleCallbackMap.mouseEnter, false);
-					this.handle1.removeEventListener('mouseleave', this.handleCallbackMap.mouseLeave, false);
-					this.handle2.removeEventListener('mouseleave', this.handleCallbackMap.mouseLeave, false);
+					this.handle1.removeEventListener('mouseenter', this.handleCallbackMap.handle1.mouseEnter, false);
+					this.handle2.removeEventListener('mouseenter', this.handleCallbackMap.handle2.mouseEnter, false);
+					this.handle1.removeEventListener('mouseleave', this.handleCallbackMap.handle1.mouseLeave, false);
+					this.handle2.removeEventListener('mouseleave', this.handleCallbackMap.handle2.mouseLeave, false);
 				}
+
+				this.handleCallbackMap = null;
+				this.ticksCallbackMap = null;
 
 				if (this.showTooltip) {
 					this.handle1.removeEventListener("focus", this.showTooltip, false);
@@ -1304,32 +1311,32 @@ const windowIsDefined = (typeof window === "object");
 					this.trackHigh.style.right = '0';
 					this.trackHigh.style.width = (100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1])) +'%';
 
-			        var offset_min = this.tooltip_min.getBoundingClientRect();
-			        var offset_max = this.tooltip_max.getBoundingClientRect();
+					var offset_min = this.tooltip_min.getBoundingClientRect();
+					var offset_max = this.tooltip_max.getBoundingClientRect();
 
-			        if (this.options.tooltip_position === 'bottom') {
-			        	if (offset_min.right > offset_max.left) {
-			        		this._removeClass(this.tooltip_max, 'bottom');
-			        		this._addClass(this.tooltip_max, 'top');
-			        		this.tooltip_max.style.top = '';
-                            this.tooltip_max.style.bottom = 22 + 'px';
-                        } else {
-                            this._removeClass(this.tooltip_max, 'top');
-                            this._addClass(this.tooltip_max, 'bottom');
-                            this.tooltip_max.style.top = this.tooltip_min.style.top;
-                            this.tooltip_max.style.bottom = '';
-			        	}
-			        } else {
-				        if (offset_min.right > offset_max.left) {
-				            this._removeClass(this.tooltip_max, 'top');
-				            this._addClass(this.tooltip_max, 'bottom');
-				            this.tooltip_max.style.top = 18 + 'px';
-				        } else {
-				            this._removeClass(this.tooltip_max, 'bottom');
-				            this._addClass(this.tooltip_max, 'top');
-				            this.tooltip_max.style.top = this.tooltip_min.style.top;
-				        }
-			        }
+					if (this.options.tooltip_position === 'bottom') {
+						if (offset_min.right > offset_max.left) {
+							this._removeClass(this.tooltip_max, 'bottom');
+							this._addClass(this.tooltip_max, 'top');
+							this.tooltip_max.style.top = '';
+							this.tooltip_max.style.bottom = 22 + 'px';
+						} else {
+							this._removeClass(this.tooltip_max, 'top');
+							this._addClass(this.tooltip_max, 'bottom');
+							this.tooltip_max.style.top = this.tooltip_min.style.top;
+							this.tooltip_max.style.bottom = '';
+						}
+					} else {
+						if (offset_min.right > offset_max.left) {
+							this._removeClass(this.tooltip_max, 'top');
+							this._addClass(this.tooltip_max, 'bottom');
+							this.tooltip_max.style.top = 18 + 'px';
+						} else {
+							this._removeClass(this.tooltip_max, 'bottom');
+							this._addClass(this.tooltip_max, 'top');
+							this.tooltip_max.style.top = this.tooltip_min.style.top;
+						}
+					}
 				}
 			},
 			_createHighlightRange: function (start, end) {
@@ -1494,11 +1501,11 @@ const windowIsDefined = (typeof window === "object");
 				if(ev.stopPropagation) {
 					ev.stopPropagation();
 				}
-			    if(ev.preventDefault) {
-			    	ev.preventDefault();
-			    }
-			    ev.cancelBubble=true;
-			    ev.returnValue=false;
+				if(ev.preventDefault) {
+					ev.preventDefault();
+				}
+				ev.cancelBubble=true;
+				ev.returnValue=false;
 			},
 			_mousemove: function(ev) {
 				if(!this._state.enabled) {
@@ -1559,9 +1566,9 @@ const windowIsDefined = (typeof window === "object");
 					document.removeEventListener("touchmove", this.mousemove, false);
 					document.removeEventListener("touchend", this.mouseup, false);
 				}
-                // Unbind mouse event handlers:
-                document.removeEventListener("mousemove", this.mousemove, false);
-                document.removeEventListener("mouseup", this.mouseup, false);
+				// Unbind mouse event handlers:
+				document.removeEventListener("mousemove", this.mousemove, false);
+				document.removeEventListener("mouseup", this.mouseup, false);
 
 				this._state.inDrag = false;
 				if (this._state.over === false) {
@@ -1579,16 +1586,16 @@ const windowIsDefined = (typeof window === "object");
 				var val;
 				if (this.options.range) {
 					val = [this.options.min,this.options.max];
-			        if (this._state.percentage[0] !== 0){
-			            val[0] = this._toValue(this._state.percentage[0]);
-			            val[0] = this._applyPrecision(val[0]);
-			        }
-			        if (this._state.percentage[1] !== 100){
-			            val[1] = this._toValue(this._state.percentage[1]);
-			            val[1] = this._applyPrecision(val[1]);
-			        }
+					if (this._state.percentage[0] !== 0){
+						val[0] = this._toValue(this._state.percentage[0]);
+						val[0] = this._applyPrecision(val[0]);
+					}
+					if (this._state.percentage[1] !== 100){
+						val[1] = this._toValue(this._state.percentage[1]);
+						val[1] = this._applyPrecision(val[1]);
+					}
 				} else {
-		            val = this._toValue(this._state.percentage[0]);
+					val = this._toValue(this._state.percentage[0]);
 					val = parseFloat(val);
 					val = this._applyPrecision(val);
 				}
@@ -1664,7 +1671,7 @@ const windowIsDefined = (typeof window === "object");
 			_setDataVal: function(val) {
 				this.element.setAttribute('data-value', val);
 				this.element.setAttribute('value', val);
-        this.element.value = val;
+				this.element.value = val;
 			},
 			_trigger: function(evt, val) {
 				val = (val || val === 0) ? val : undefined;
@@ -1695,11 +1702,11 @@ const windowIsDefined = (typeof window === "object");
 				this.$sliderElem.off();
 			},
 			_setText: function(element, text) {
-                if(typeof element.textContent !== "undefined") {
-                    element.textContent = text;
-                } else if(typeof element.innerText !== "undefined") {
-                	element.innerText = text;
-                }
+				if(typeof element.textContent !== "undefined") {
+					element.textContent = text;
+				} else if(typeof element.innerText !== "undefined") {
+					element.innerText = text;
+				}
 			},
 			_removeClass: function(element, classString) {
 				var classes = classString.split(" ");
@@ -1742,21 +1749,21 @@ const windowIsDefined = (typeof window === "object");
 				}
 				return offsetTop;
 			},
-		    _offset: function (obj) {
+			_offset: function (obj) {
 				return {
 					left: this._offsetLeft(obj),
 					top: this._offsetTop(obj)
 				};
 		    },
 			_css: function(elementRef, styleName, value) {
-                if ($) {
-                    $.style(elementRef, styleName, value);
-                } else {
-                    var style = styleName.replace(/^-ms-/, "ms-").replace(/-([\da-z])/gi, function (all, letter) {
-                        return letter.toUpperCase();
-                    });
-                    elementRef.style[style] = value;
-                }
+				if ($) {
+					$.style(elementRef, styleName, value);
+				} else {
+					var style = styleName.replace(/^-ms-/, "ms-").replace(/-([\da-z])/gi, function (all, letter) {
+						return letter.toUpperCase();
+					});
+					elementRef.style[style] = value;
+				}
 			},
 			_toValue: function(percentage) {
 				return this.options.scale.toValue.apply(this, [percentage]);
