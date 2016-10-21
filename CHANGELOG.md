@@ -1,3 +1,7 @@
+9.3.0 / 2016-10-20
+==================
+* **New Feature:** Adds the ability to enable/disable tooltips when hovering over ticks via the `ticks_tooltip` option. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/638). Thanks to [Ryan Bruns](https://github.com/snurby7)
+
 9.2.2 / 2016-10-18
 ==================
 * **Bug Fix:** Resolves issue where range highlights were not being applied properly for reversed sliders. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/637). Thanks to [Bernard Gorman](https://github.com/gormanb)
