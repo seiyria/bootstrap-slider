@@ -1,9 +1,9 @@
 /*! =======================================================
-                      VERSION  9.2.2              
+                      VERSION  9.3.0              
 ========================================================= */
 "use strict";
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 /*! =========================================================
  * bootstrap-slider.js
@@ -310,7 +310,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		/*************************************************
   						CONSTRUCTOR
   	**************************************************/
-		Slider = function (element, options) {
+		Slider = function Slider(element, options) {
 			createNewSlider.call(this, element, options);
 			return this;
 		};
@@ -319,7 +319,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 			/*
    	The internal state object is used to store data about the current 'state' of slider.
-   		This includes values such as the `value`, `enabled`, etc...
+   	This includes values such as the `value`, `enabled`, etc...
    */
 			this._state = {
 				value: null,
@@ -330,6 +330,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				inDrag: false,
 				over: false
 			};
+
+			// The objects used to store the reference to the tick methods if ticks_tooltip is on
+			this.ticksCallbackMap = {};
+			this.handleCallbackMap = {};
 
 			if (typeof element === "string") {
 				this.element = document.querySelector(element);
@@ -468,6 +472,16 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					for (i = 0; i < this.options.ticks.length; i++) {
 						var tick = document.createElement('div');
 						tick.className = 'slider-tick';
+						if (this.options.ticks_tooltip) {
+							var tickListenerReference = this._addTickListener();
+							var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
+							var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
+
+							this.ticksCallbackMap[i] = {
+								mouseEnter: enterCallback,
+								mouseLeave: leaveCallback
+							};
+						}
 						this.ticks.push(tick);
 						this.ticksContainer.appendChild(tick);
 					}
@@ -710,8 +724,26 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this.showTooltip = this._showTooltip.bind(this);
 				this.hideTooltip = this._hideTooltip.bind(this);
 
-				this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
-				this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+				if (this.options.ticks_tooltip) {
+					var callbackHandle = this._addTickListener();
+					//create handle1 listeners and store references in map
+					var mouseEnter = callbackHandle.addMouseEnter(this, this.handle1);
+					var mouseLeave = callbackHandle.addMouseLeave(this, this.handle1);
+					this.handleCallbackMap.handle1 = {
+						mouseEnter: mouseEnter,
+						mouseLeave: mouseLeave
+					};
+					//create handle2 listeners and store references in map
+					mouseEnter = callbackHandle.addMouseEnter(this, this.handle2);
+					mouseLeave = callbackHandle.addMouseLeave(this, this.handle2);
+					this.handleCallbackMap.handle2 = {
+						mouseEnter: mouseEnter,
+						mouseLeave: mouseLeave
+					};
+				} else {
+					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
+					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+				}
 
 				this.handle1.addEventListener("focus", this.showTooltip, false);
 				this.handle1.addEventListener("blur", this.hideTooltip, false);
@@ -764,6 +796,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				ticks_positions: [],
 				ticks_labels: [],
 				ticks_snap_bounds: 0,
+				ticks_tooltip: false,
 				scale: 'linear',
 				focus: false,
 				tooltip_position: null,
@@ -933,12 +966,28 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
    				HELPERS
    	- Any method that is not part of the public interface.
    - Place it underneath this comment block and write its signature like so:
-   	  					_fnName : function() {...}
+   		_fnName : function() {...}
    	********************************/
 			_removeSliderEventHandlers: function _removeSliderEventHandlers() {
 				// Remove keydown event listeners
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
 				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
+
+				//remove the listeners from the ticks and handles if they had their own listeners
+				if (this.options.ticks_tooltip) {
+					var ticks = this.ticksContainer.getElementsByClassName('slider-tick');
+					for (var i = 0; i < ticks.length; i++) {
+						ticks[i].removeEventListener('mouseenter', this.ticksCallbackMap[i].mouseEnter, false);
+						ticks[i].removeEventListener('mouseleave', this.ticksCallbackMap[i].mouseLeave, false);
+					}
+					this.handle1.removeEventListener('mouseenter', this.handleCallbackMap.handle1.mouseEnter, false);
+					this.handle2.removeEventListener('mouseenter', this.handleCallbackMap.handle2.mouseEnter, false);
+					this.handle1.removeEventListener('mouseleave', this.handleCallbackMap.handle1.mouseLeave, false);
+					this.handle2.removeEventListener('mouseleave', this.handleCallbackMap.handle2.mouseLeave, false);
+				}
+
+				this.handleCallbackMap = null;
+				this.ticksCallbackMap = null;
 
 				if (this.showTooltip) {
 					this.handle1.removeEventListener("focus", this.showTooltip, false);
@@ -1006,6 +1055,49 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					this._removeClass(this.tooltip_max, 'in');
 				}
 				this._state.over = false;
+			},
+			_setToolTipOnMouseOver: function _setToolTipOnMouseOver(tempState) {
+				var formattedTooltipVal = this.options.formatter(!tempState ? this._state.value[0] : tempState.value[0]);
+				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
+				this._setText(this.tooltipInner, formattedTooltipVal);
+
+				this.tooltip.style[this.stylePos] = positionPercentages[0] + '%';
+				if (this.options.orientation === 'vertical') {
+					this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+				} else {
+					this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
+				}
+
+				function getPositionPercentages(state, reversed) {
+					if (reversed) {
+						return [100 - state.percentage[0], this.options.range ? 100 - state.percentage[1] : state.percentage[1]];
+					}
+					return [state.percentage[0], state.percentage[1]];
+				}
+			},
+			_addTickListener: function _addTickListener() {
+				return {
+					addMouseEnter: function addMouseEnter(reference, tick, index) {
+						var enter = function enter() {
+							var tempState = reference._state;
+							var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
+							var hoverIndex = parseInt(idString, 10);
+							tempState.value[0] = hoverIndex;
+							tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
+							reference._setToolTipOnMouseOver(tempState);
+							reference._showTooltip();
+						};
+						tick.addEventListener("mouseenter", enter, false);
+						return enter;
+					},
+					addMouseLeave: function addMouseLeave(reference, tick) {
+						var leave = function leave() {
+							reference._hideTooltip();
+						};
+						tick.addEventListener("mouseleave", leave, false);
+						return leave;
+					}
+				};
 			},
 			_layout: function _layout() {
 				var positionPercentages;
@@ -1654,20 +1746,20 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				if (this.options.orientation === 'vertical') {
 					var tooltipPos = this.options.tooltip_position || 'right';
 					var oppositeSide = tooltipPos === 'left' ? 'right' : 'left';
-					tooltips.forEach((function (tooltip) {
+					tooltips.forEach(function (tooltip) {
 						this._addClass(tooltip, tooltipPos);
 						tooltip.style[oppositeSide] = '100%';
-					}).bind(this));
+					}.bind(this));
 				} else if (this.options.tooltip_position === 'bottom') {
-					tooltips.forEach((function (tooltip) {
+					tooltips.forEach(function (tooltip) {
 						this._addClass(tooltip, 'bottom');
 						tooltip.style.top = 22 + 'px';
-					}).bind(this));
+					}.bind(this));
 				} else {
-					tooltips.forEach((function (tooltip) {
+					tooltips.forEach(function (tooltip) {
 						this._addClass(tooltip, 'top');
 						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
-					}).bind(this));
+					}.bind(this));
 				}
 			}
 		};
@@ -1677,7 +1769,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
   	*********************************/
 		if ($) {
 			(function () {
-				var autoRegisterNamespace = undefined;
+				var autoRegisterNamespace = void 0;
 
 				if (!$.fn.slider) {
 					$.bridget(NAMESPACE_MAIN, Slider);
