@@ -489,9 +489,10 @@ const windowIsDefined = (typeof window === "object");
 							var tickListenerReference = this._addTickListener();
 							var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
 							var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
+							
 							this.ticksCallbackMap[i] = {
 								mouseEnter: enterCallback,
-								mouseLeave: leaveCallback,
+								mouseLeave: leaveCallback
 							};
 						}
 						this.ticks.push(tick);
