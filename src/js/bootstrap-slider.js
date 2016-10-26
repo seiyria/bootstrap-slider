@@ -1651,13 +1651,13 @@ const windowIsDefined = (typeof window === "object");
 				return Math.max(0, Math.min(100, percentage));
 			},
 			_validateInputValue: function(val) {
-				if (typeof val === 'number') {
-					return val;
+				if (!isNaN(+val)) {
+					return +val;
 				} else if (Array.isArray(val)) {
 					this._validateArray(val);
 					return val;
 				} else {
-					throw new Error( ErrorMsgs.formatInvalidInputErrorMsg(val) );
+					throw new Error(ErrorMsgs.formatInvalidInputErrorMsg(val));
 				}
 			},
 			_validateArray: function(val) {
