@@ -1,11 +1,15 @@
 describe("'destroy()' Method tests", function() {
   var testSlider;
-
-  it("removes the extra DOM elements associated with a slider", function() {
-
+  
+  function createSliderFn() {
     testSlider = new Slider("#testSlider1", {
       id: "destroyMethodTestSlider"
     });
+  }
+
+  it("removes the extra DOM elements associated with a slider", function() {
+
+    createSliderFn();
 
     testSlider.destroy();
 
@@ -20,9 +24,7 @@ describe("'destroy()' Method tests", function() {
     var flag, evtName;
 
     beforeEach(function() {
-      testSlider = new Slider("#testSlider1", {
-        id: "destroyMethodTestSlider"
-      });
+      createSliderFn();
       flag = false;
     });
 
@@ -64,6 +66,40 @@ describe("'destroy()' Method tests", function() {
       testSlider.destroy();
       $("#destroyMethodTestSlider").trigger(evtName);
       expect(flag).toBeFalsy();
+    });
+
+    it("unbinds all slider events and allows you to re-create the slider without runtime error", function() {
+      // Setup
+      var createSliderAndBindEvent = function () {
+        $("#testSlider1").bootstrapSlider({
+          min: 0,
+          max: 1000 * 1000,
+          step: 1000
+        });
+        testSlider = $("#testSlider1").data("bootstrapSlider");
+        testSlider.on("slideStop", function() {});
+      };
+      // Destroy existing slider from default bootstrap step
+      testSlider.destroy();
+
+      // Create new Slider
+      createSliderAndBindEvent();
+
+      // Destroy slider
+      testSlider.destroy();
+
+      // Re-create Slider and try to re-bind event
+      var throwsRuntimeError = false;
+      
+      try {
+        createSliderAndBindEvent();
+      }
+      catch (e) {
+        throwsRuntimeError = true;
+      }
+
+      // reCreateSliderAndBindEvent(): Assert error is not thrown
+      expect(throwsRuntimeError).toBeFalsy();
     });
   });
 

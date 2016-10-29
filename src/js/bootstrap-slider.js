@@ -1070,7 +1070,7 @@ const windowIsDefined = (typeof window === "object");
 				var eventNames = Object.keys(this.eventToCallbackMap);
 				for(var i = 0; i < eventNames.length; i++) {
 					var eventName = eventNames[i];
-					this.eventToCallbackMap[eventName] = null;
+					delete this.eventToCallbackMap[eventName];
 				}
 			},
 			_showTooltip: function() {
