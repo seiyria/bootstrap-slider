@@ -1,3 +1,7 @@
+9.3.1 / 2016-10-30
+==================
+* **Bug Fix:** Fixes reported bug where a slider was unable to be destroyed and re-created if there were event listeners bound to it. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/640).
+
 9.3.0 / 2016-10-20
 ==================
 * **New Feature:** Adds the ability to enable/disable tooltips when hovering over ticks via the `ticks_tooltip` option. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/638). Thanks to [Ryan Bruns](https://github.com/snurby7)
