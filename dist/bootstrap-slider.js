@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.3.0              
+                      VERSION  9.3.2              
 ========================================================= */
 "use strict";
 
@@ -1033,7 +1033,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				var eventNames = Object.keys(this.eventToCallbackMap);
 				for (var i = 0; i < eventNames.length; i++) {
 					var eventName = eventNames[i];
-					this.eventToCallbackMap[eventName] = null;
+					delete this.eventToCallbackMap[eventName];
 				}
 			},
 			_showTooltip: function _showTooltip() {
