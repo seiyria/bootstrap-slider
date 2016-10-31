@@ -254,19 +254,6 @@ describe("Public Method Tests", function() {
         expect(sliderValue).toBe(5);
       });
 
-      it('should throw an error if the slider is given a value it cannot convert to an int', function(){
-        var valueToSet = "fail";
-        var originalSliderValue = testSlider.slider('getValue');
-
-        var settingValue = function() {
-          testSlider.slider('setValue', valueToSet);
-        };
-        expect(settingValue).toThrow(new Error( formatInvalidInputMsg(valueToSet) ));
-
-        var sliderValue = testSlider.slider('getValue');
-        expect(sliderValue).toBe(originalSliderValue);
-      });
-
       it("if a value passed in is greater than the max (10), the slider only goes to the max", function() {
         var maxValue = 10,
             higherThanSliderMaxVal = maxValue + 5;
