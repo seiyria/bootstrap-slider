@@ -1,3 +1,7 @@
+9.4.0 / 2016-10-31
+==================
+* **New Feature:** Adds the ability to set the slider value using stringified numbers. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/642). Thanks to [Ryan Bruns](https://github.com/snurby7)
+
 9.3.2 / 2016-10-30
 ==================
 * **Bug Fix:** Fixes reported bug where a slider was unable to be destroyed and re-created if there were event listeners bound to it. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/640).
