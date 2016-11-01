@@ -173,7 +173,7 @@ describe("Public Method Tests", function() {
         var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
         expect(tooltipIsShownAfterSlide).toBeTruthy();
       });
-      
+
       it("tooltip is shown on mouse over and hides correctly after mouse leave", function() {
         testSlider = $("#testSlider1").slider({
           tooltip : "show"
@@ -190,16 +190,16 @@ describe("Public Method Tests", function() {
         var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
         expect(tooltipIsShownAfterSlide).toBeTruthy();
 
-        
+
         // Trigger leave
         var mouseleaveEvent = document.createEvent("Events");
         mouseleaveEvent.initEvent("mouseleave", true, true);
         testSlider.data('slider').sliderElem.dispatchEvent(mouseleaveEvent);
-        
+
         var tooltipIsAgainHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in"));
         expect(tooltipIsAgainHidden).toBeTruthy();
       });
-      
+
       it("tooltip is always shown if set to 'always'", function() {
         testSlider = $("#testSlider1").slider({
           tooltip : "always"
@@ -244,6 +244,14 @@ describe("Public Method Tests", function() {
 
         var sliderValue = testSlider.slider('getValue');
         expect(sliderValue).toBe(valueToSet);
+      });
+
+      it("properly sets the value of the slider when given a string value", function(){
+        var valueToSet = "5";
+        testSlider.slider('setValue', valueToSet);
+
+        var sliderValue = testSlider.slider('getValue');
+        expect(sliderValue).toBe(5);
       });
 
       it("if a value passed in is greater than the max (10), the slider only goes to the max", function() {
@@ -385,23 +393,23 @@ describe("Public Method Tests", function() {
         var testSlider = $("#testSlider1").slider({
           value : 3
         });
-  
+
           var newSliderVal = 5;
-  
+
           testSlider.on('slide', function(evt) {
             expect(newSliderVal).toEqual(evt.value);
           });
-  
+
         testSlider.slider('setValue', newSliderVal, true);
       });
 
       it("if triggerSlideEvent argument is false, the 'slide' event is not triggered", function() {
         var newSliderVal = 5;
-        var slideEventTriggered = false; 
+        var slideEventTriggered = false;
         var testSlider = $("#testSlider1").slider({
           value : 3
         });
-  
+
         testSlider.on('slide', function() {
           slideEventTriggered = true;
         });
@@ -416,22 +424,22 @@ describe("Public Method Tests", function() {
         var testSlider = $("#testSlider1").slider({
           value : 3
         });
-  
+
         var newSliderVal = 5;
 
         testSlider.on('change', function(evt) {
           expect(newSliderVal).toEqual(evt.value.newValue);
         });
-  
+
         testSlider.slider('setValue', newSliderVal, true);
       });
 
       it("if triggerChangeEvent argument is false, the 'change' event is not triggered", function() {
-        var changeEventTriggered = false; 
+        var changeEventTriggered = false;
         var testSlider = $("#testSlider1").slider({
           value : 3
         });
-  
+
         testSlider.on('change', function() {
           changeEventTriggered = true;
         });
