@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.3.2              
+                      VERSION  9.4.0              
 ========================================================= */
 "use strict";
 
@@ -1621,8 +1621,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				return Math.max(0, Math.min(100, percentage));
 			},
 			_validateInputValue: function _validateInputValue(val) {
-				if (typeof val === 'number') {
-					return val;
+				if (!isNaN(+val)) {
+					return +val;
 				} else if (Array.isArray(val)) {
 					this._validateArray(val);
 					return val;
