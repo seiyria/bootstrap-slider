@@ -6,7 +6,7 @@
     "keywords": ["slider", "css", "bootstrap", "javascript"],
     "homepage": "https://github.com/seiyria/bootstrap-slider",
     "require": {},
-    "license": "Apache 2.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Kyle Kemp",
