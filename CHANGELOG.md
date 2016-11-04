@@ -1,3 +1,7 @@
+9.4.1 / 2016-11-04
+==================
+* **Documentation Fix:** Fixing an inconsistency with the licensing information in our source files. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/652). Thanks to [Tom Yue](https://github.com/yuethomas) for identifying this issue.
+
 9.4.0 / 2016-10-31
 ==================
 * **New Feature:** Adds the ability to set the slider value using stringified numbers. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/642). Thanks to [Ryan Bruns](https://github.com/snurby7)
