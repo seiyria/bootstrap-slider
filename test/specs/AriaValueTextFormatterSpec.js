@@ -1,12 +1,12 @@
 it("Sets the aria-valuetext to 'formatter' value", function() {
   var textValArray = new Array('Monday','Wednesday','Friday');
   var tooltipFormatter = function(value) {
-    arrActiveValue = value;
+    var arrActiveValue = value;
     return 'Current value: ' + textValArray[arrActiveValue-1];
   };
   
   //Formatter is used
-  testSlider = $("#accessibilitySliderA").slider({
+  var testSlider = $("#accessibilitySliderA").slider({
     formatter : tooltipFormatter
   });
   testSlider.slider('setValue', 2);
@@ -19,7 +19,7 @@ it("Sets the aria-valuetext to 'formatter' value", function() {
 it("Does not use aria-valuetext if 'formatter' is not used", function() {
 	  
   //Formatter is not used  
-  testSliderB = $("#accessibilitySliderB").slider({});
+  var testSliderB = $("#accessibilitySliderB").slider({});
   testSliderB.slider('setValue', 2);
 
   var ariaValueText = $("#accessibilitySliderB").siblings(".slider").children(".min-slider-handle").attr("aria-valuetext");
