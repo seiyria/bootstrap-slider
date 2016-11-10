@@ -7,8 +7,7 @@ describe("Aria-valuetext Tests", function() {
       };
       
       //Formatter is used
-      var testSlider = new Slider("#accessibilitySliderA", {
-      	id: "accessibilitySliderA",
+      var testSlider = $("#accessibilitySliderA").slider({
         formatter : tooltipFormatter
       });
       testSlider.slider('setValue', 2);
