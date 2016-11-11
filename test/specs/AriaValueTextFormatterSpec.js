@@ -1,4 +1,3 @@
-describe("Aria-valuetext Tests", function() {
     it("Sets the aria-valuetext to 'formatter' value", function() {
       var textValArray = new Array('Monday','Wednesday','Friday');
       var tooltipFormatter = function(value) {
@@ -26,4 +25,4 @@ describe("Aria-valuetext Tests", function() {
       var ariaValueText = $("#accessibilitySliderB").siblings(".slider").children(".min-slider-handle").attr("aria-valuetext");
       expect(ariaValueText).not.toBeDefined();
     });
-});
+
