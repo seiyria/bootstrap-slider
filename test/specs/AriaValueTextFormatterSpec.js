@@ -26,3 +26,24 @@
       expect(ariaValueText).not.toBeDefined();
     });
 
+    it("aria-valuetext if 'formatter' is used and has min & max value", function() {
+      var textValArray = new Array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
+      var tooltipFormatter = function(value) {
+        var arrActiveValue0 = value[0];
+        var arrActiveValue1 = value[1];  
+        return [textValArray[arrActiveValue0-1], textValArray[arrActiveValue1-1]];
+      };
+      
+      //Formatter is used
+      var testSliderC = $("#accessibilitySliderC").slider({
+        formatter : tooltipFormatter
+      });
+      testSliderC.slider('setValue', [2,4]);
+      
+      var ttminMessage = $("#accessibilitySliderC").siblings(".slider").children(".min-slider-handle").attr("aria-valuetext");
+      var ttmaxMessage = $("#accessibilitySliderC").siblings(".slider").children(".max-slider-handle").attr("aria-valuetext");
+      var bothMessages = ttminMessage+ ',' + ttmaxMessage;
+      var expectedMessage = tooltipFormatter(2,4);
+      expect(bothMessages).toBe(expectedMessage);
+     
+    });
