@@ -1,8 +1,9 @@
+describe("Aria-valuetext Tests", function() {
     it("Sets the aria-valuetext to 'formatter' value", function() {
       var textValArray = new Array('Monday','Wednesday','Friday');
       var tooltipFormatter = function(value) {
         var arrActiveValue = value;
-        return 'Current value: ' + textValArray[arrActiveValue-1];
+        return textValArray[arrActiveValue-1];
       };
       
       //Formatter is used
@@ -47,3 +48,4 @@
       expect(bothMessages).toBe(expectedMessage);
      
     });
+});
