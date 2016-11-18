@@ -30,21 +30,27 @@ describe("Aria-valuetext Tests", function() {
     it("aria-valuetext if 'formatter' is used and has min & max value", function() {
       var textValArray = new Array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
       var tooltipFormatter = function(value) {
-        var arrActiveValue0 = value[0];
-        var arrActiveValue1 = value[1];  
-        return [textValArray[arrActiveValue0-1], textValArray[arrActiveValue1-1]];
+          if(value[1]){
+            var arrActiveValue0 = value[0];
+            var arrActiveValue1 = value[1];  
+            return [ textValArray[arrActiveValue0-1], textValArray[arrActiveValue1-1] ];
+          } else {
+          	var arrActiveValue = value;
+  			return textValArray[arrActiveValue-1];
+          }
       };
       
-      //Formatter is used
+      //Formatter is used for ranges
       var testSliderC = $("#accessibilitySliderC").slider({
+        range: true,
+        value: [2,4],
         formatter : tooltipFormatter
       });
-      testSliderC.slider('setValue', [2,4]);
-      
+//      testSliderC.slider('setValue', [2,4]); //setValue does not work for ranges
+      var expectedMessage = tooltipFormatter([2,4]);
       var ttminMessage = $("#accessibilitySliderC").siblings(".slider").children(".min-slider-handle").attr("aria-valuetext");
       var ttmaxMessage = $("#accessibilitySliderC").siblings(".slider").children(".max-slider-handle").attr("aria-valuetext");
-      var bothMessages = ttminMessage+ ',' + ttmaxMessage;
-      var expectedMessage = tooltipFormatter(2,4);
+      var bothMessages = [ ttminMessage, ttmaxMessage ];
       expect(bothMessages).toBe(expectedMessage);
      
     });
