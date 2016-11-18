@@ -46,7 +46,7 @@ describe("Aria-valuetext Tests", function() {
         value: [2,4],
         formatter : tooltipFormatter
       });
-//      testSliderC.slider('setValue', [2,4]); //setValue does not work for ranges
+      testSliderC.slider('setValue', [2,4]);
       var expectedMessage = tooltipFormatter([2,4]);
       var ttminMessage = $("#accessibilitySliderC").siblings(".slider").children(".min-slider-handle").attr("aria-valuetext");
       var ttmaxMessage = $("#accessibilitySliderC").siblings(".slider").children(".max-slider-handle").attr("aria-valuetext");
