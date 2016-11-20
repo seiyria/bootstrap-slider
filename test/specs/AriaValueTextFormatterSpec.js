@@ -42,11 +42,9 @@ describe("Aria-valuetext Tests", function() {
       };
       
       //Formatter is used for ranges
-      var testSliderC = $("#accessibilitySliderC").slider({
-        value: [2,4],
+      $("#accessibilitySliderC").slider({
         formatter : tooltipFormatterC
       });
-//      testSliderC.slider('range', true);
       var expectedMessageC = tooltipFormatterC([2,4]);
       var ttminMessage = $("#accessibilitySliderC").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
       var ttmaxMessage = $("#accessibilitySliderC").prev(".slider").children(".max-slider-handle").attr("aria-valuetext");
