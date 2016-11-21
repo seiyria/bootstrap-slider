@@ -42,15 +42,15 @@ describe("Aria-valuetext Tests", function() {
       };
       
       //Formatter is used for ranges
-      var testSliderC = $("#accessibilitySliderC").slider({
+      var testSliderC = $("#testSlider3").slider({
         range: true,
         formatter : tooltipFormatterC
       });
       var valuesToSet = [2,4];
       testSliderC.slider('setValue', valuesToSet);
       var expectedMessageC = tooltipFormatterC([2,4]);
-      var ttminMessage = $("#accessibilitySliderC").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
-      var ttmaxMessage = $("#accessibilitySliderC").prev(".slider").children(".max-slider-handle").attr("aria-valuetext");
+      var ttminMessage = $("#testSlider3").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
+      var ttmaxMessage = $("#testSlider3").prev(".slider").children(".max-slider-handle").attr("aria-valuetext");
       expect(ttminMessage).toBe(expectedMessageC[0]);
       expect(ttmaxMessage).toBe(expectedMessageC[1]);
     });
