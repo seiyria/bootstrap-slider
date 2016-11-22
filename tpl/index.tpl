@@ -1454,7 +1454,7 @@ sliderTest.on('slide', function(slideEvt){
 		});
 		
 	   		/* Example 24 */
-		var myArray = new Array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday", "Sunday")
+		var myArray = new Array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday", "Sunday", "Whatday?")
 		var weekSize = myArray.length;
 		var tooltipFormatter = function(value) {
         		var arrActiveValue = value;
