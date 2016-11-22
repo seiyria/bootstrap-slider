@@ -104,6 +104,8 @@
 		<span id="accessibilitySliderLabelB">Label B</span>
 		<input id="accessibilitySliderA" type="text" data-slider-labelledby="accessibilitySliderLabelA" />
 		<input id="accessibilitySliderB" type="text" data-slider-labelledby='["accessibilitySliderLabelA", "accessibilitySliderLabelB"]' />
+		
+		<input id="accessibilitySliderC" type="text" />
 	</div>
 	<% with (scripts) { %>
 	  <% [].concat(jasmine, vendor, src, specs, reporters, start).forEach(function(script){ %>
