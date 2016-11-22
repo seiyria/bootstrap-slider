@@ -1442,7 +1442,7 @@ sliderTest.on('slide', function(slideEvt){
             $('#ex22').slider({});
 
 			/* Example 23 */
-            .slider({
+            $('#ex23').slider({
 				ticks: [0, 1, 2, 3, 4],
 				ticks_positions: [0, 30, 70, 90, 100],
 				formatter: function(value) {
