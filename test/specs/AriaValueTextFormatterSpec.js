@@ -7,12 +7,12 @@ describe("Aria-valuetext Tests", function() {
       };
       
       //Formatter is used
-      var testSliderA = $("#testSlider1").slider({
+      var testSliderA = $("#accessibilitySliderA").slider({
         formatter : tooltipFormatterA
       });
       testSliderA.slider('setValue', 2);
       
-      var tooltipMessageA = $("#testSlider1").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
+      var tooltipMessageA = $("#accessibilitySliderA").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
       var expectedMessageA = tooltipFormatterA(2);
       expect(tooltipMessageA).toBe(expectedMessageA);
      
@@ -21,10 +21,10 @@ describe("Aria-valuetext Tests", function() {
     it("Does not use aria-valuetext if 'formatter' is not used", function() {
     	  
       //Formatter is not used  
-      var testSliderB = $("#testSlider2").slider({});
+      var testSliderB = $("#accessibilitySliderB").slider({});
       testSliderB.slider('setValue', 1);
     
-      var ariaValueTextB = $("#testSlider2").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
+      var ariaValueTextB = $("#accessibilitySliderB").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
       expect(ariaValueTextB).not.toBeDefined();
     });
     
@@ -42,15 +42,15 @@ describe("Aria-valuetext Tests", function() {
       };
       
       //Formatter is used for ranges
-      var testSlider3 = $("#testSlider3").slider({
+      var testSliderC = $("#accessibilitySliderC").slider({
         range: true,
         formatter : tooltipFormatterC
       });
       var valuesToSet = [2,4];
-      testSlider3.slider('setValue', valuesToSet);
+      testSliderC.slider('setValue', valuesToSet);
       var expectedMessageC = tooltipFormatterC([2,4]);
-      var ttminMessage = $("#testSlider3").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
-      var ttmaxMessage = $("#testSlider3").prev(".slider").children(".max-slider-handle").attr("aria-valuetext");
+      var ttminMessage = $("#accessibilitySliderC").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
+      var ttmaxMessage = $("#accessibilitySliderC").prev(".slider").children(".max-slider-handle").attr("aria-valuetext");
       expect(ttminMessage).toBe(expectedMessageC[0]);
       expect(ttmaxMessage).toBe(expectedMessageC[1]);
     });
