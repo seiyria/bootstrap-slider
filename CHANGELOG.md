@@ -1,3 +1,7 @@
+9.5.1 / 2016-11-23
+==================
+* **Bug Fix:** Removes `'none'` classes after selection change. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/659). Thanks to [John Clarke](https://github.com/john-clarke).
+
 9.5.0 / 2016-11-21
 ==================
 * **New Feature:** Adds `aria-valuetext` attribute to each slider handle element, which is set to be the current formatted value of the slider (based on the `formatter` option). [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/646). Thanks to [mediaformat](https://github.com/mediaformat).
