@@ -689,11 +689,11 @@ const windowIsDefined = (typeof window === "object");
 				this._addClass(this.trackHigh, 'hide');
 			}
 
-      else if (this.options.selection === 'after' || this.options.selection === 'before') {
-        this._removeClass(this.trackLow, 'hide');
-        this._removeClass(this.trackSelection, 'hide');
-        this._removeClass(this.trackHigh, 'hide');
-      }
+			else if (this.options.selection === 'after' || this.options.selection === 'before') {
+				this._removeClass(this.trackLow, 'hide');
+				this._removeClass(this.trackSelection, 'hide');
+				this._removeClass(this.trackHigh, 'hide');
+			}
 
 			this.handle1 = sliderMinHandle || this.handle1;
 			this.handle2 = sliderMaxHandle || this.handle2;
