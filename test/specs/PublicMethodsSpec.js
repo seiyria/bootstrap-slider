@@ -99,6 +99,34 @@ describe("Public Method Tests", function() {
       expect(sliderSelectionWidthAtMaxValue).toBe(0);
     });
 
+    it("updates the 'selection' option properly", function() {
+      var selectionVal = "none",
+          maxSliderVal = 10;
+
+      testSlider = $("#testSlider1").slider({
+        selection : selectionVal
+      });
+      testSlider.slider('setValue', maxSliderVal);
+      testSlider.slider('refresh');
+
+      var sliderSelectionHasHideClass_A = $("#testSlider1").siblings(".slider").children("div.slider-track").children("div.slider-track-low").hasClass('hide');
+      expect(sliderSelectionHasHideClass_A).toBe(true);
+      var sliderSelectionHasHideClass_B = $("#testSlider1").siblings(".slider").children("div.slider-track").children("div.slider-selection").hasClass('hide');
+      expect(sliderSelectionHasHideClass_B).toBe(true);
+      var sliderSelectionHasHideClass_C = $("#testSlider1").siblings(".slider").children("div.slider-track").children("div.slider-track-high").hasClass('hide');
+      expect(sliderSelectionHasHideClass_C).toBe(true);
+
+      var newSelectionVal = 'after';
+      testSlider.slider('setAttribute', 'selection', newSelectionVal);
+      testSlider.slider('refresh');
+
+      var sliderSelectionHasHideClass_D = $("#testSlider1").siblings(".slider").children("div.slider-track").children("div.slider-track-low").hasClass('hide');
+      expect(sliderSelectionHasHideClass_D).toBe(false);
+      var sliderSelectionHasHideClass_E = $("#testSlider1").siblings(".slider").children("div.slider-track").children("div.slider-selection").hasClass('hide');
+      expect(sliderSelectionHasHideClass_E).toBe(false);
+      var sliderSelectionHasHideClass_F = $("#testSlider1").siblings(".slider").children("div.slider-track").children("div.slider-track-high").hasClass('hide');
+      expect(sliderSelectionHasHideClass_F).toBe(false);
+    });
     it("reads and sets the 'handle' option properly", function() {
       var handleVal = "triangle";
 
