@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.5.0              
+                      VERSION  9.5.1              
 ========================================================= */
 "use strict";
 
@@ -669,6 +669,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._addClass(this.trackLow, 'hide');
 				this._addClass(this.trackSelection, 'hide');
 				this._addClass(this.trackHigh, 'hide');
+			} else if (this.options.selection === 'after' || this.options.selection === 'before') {
+				this._removeClass(this.trackLow, 'hide');
+				this._removeClass(this.trackSelection, 'hide');
+				this._removeClass(this.trackHigh, 'hide');
 			}
 
 			this.handle1 = sliderMinHandle || this.handle1;
