@@ -1,3 +1,7 @@
+9.5.3 / 2016-12-01
+==================
+* **Bug Fix:** Fixes typo from previous update to SCSS rules. Thanks to [Julien Bachmann](https://github.com/julienbachmann).
+
 9.5.2 / 2016-11-30
 ==================
 * **Bug Fix:** Fixes SCSS rules. [See original issue for further details](https://github.com/seiyria/bootstrap-slider/issues/662). Thanks to [Julien Bachmann](https://github.com/julienbachmann).
