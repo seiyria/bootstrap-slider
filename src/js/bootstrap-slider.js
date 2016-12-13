@@ -1453,7 +1453,7 @@ const windowIsDefined = (typeof window === "object");
 				this._setDataVal(newValue);
 				this.setValue(newValue, false, true);
 
-				this._pauseEvent(ev);
+				ev.returnValue = false;
 
 				if (this.options.focus) {
 					this._triggerFocusOnHandle(this._state.dragged);
