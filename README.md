@@ -16,7 +16,7 @@ Want to get it from a CDN? https://cdnjs.com/libraries/bootstrap-slider
 
 Basic Setup
 ============
-Load the plugin CSS and JavaScript into your web page, and everything should work!
+Grab the compiled JS/CSS (minified or non-minified versions) from the [/dist](https://github.com/seiyria/bootstrap-slider/tree/master/dist) directory, load them into your web page, and everything should work!
 
 Remember to load the plugin code after loading the Bootstrap CSS and JQuery.
 
