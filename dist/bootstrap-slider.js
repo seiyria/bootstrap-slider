@@ -1411,7 +1411,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._setDataVal(newValue);
 				this.setValue(newValue, false, true);
 
-				ev.returnValue = false;
+				this._pauseEvent(ev);
 
 				if (this.options.focus) {
 					this._triggerFocusOnHandle(this._state.dragged);
