@@ -1169,6 +1169,88 @@ var slider = new Slider("#ex23", {
 
 	</code></pre>
 	</div>
+	
+	  	<div class='slider-example'>
+		<h3>Example 24:</h3>
+		<p>Using a custom formatter for a range slider</p>
+		<div class="well">
+		<input id="ex24" type="text"/>
+		</div>
+		<pre><code>
+###################
+HTML
+###################
+
+&ltinput id="ex24" type="text" /&gt
+
+###################
+JavaScript
+###################
+//Setup
+var myArray = new Array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday", "Sunday", "Whatday?")
+var weekSize = myArray.length;
+var tooltipFormatter = function(value) {
+        var arrActiveValue = value;
+        return textValArray[arrActiveValue-1];
+      };
+// With JQuery
+
+      
+$("#ex24").slider({
+	id: 'a11y',
+	tooltip: 'always',			
+	min: 1,
+	max: weekSize,
+	value: [5,8],
+	formatter: function(value) {
+	  if(value[1]){
+	    var arrActiveValue0 = value[0];
+	    var arrActiveValue1 = value[1];  
+	    return [myArray[arrActiveValue0-1], myArray[arrActiveValue1-1]];
+	  } else {
+		var arrActiveValue = value;
+					return myArray[arrActiveValue-1];
+	  }
+	}
+})
+$("#ex24").slider('setValue', [5,8]);
+var arrayval = $("#ex24").slider('getValue');
+    
+$("#ex24").on('slide', function(slideEvt){
+	arrActiveValue0 = slideEvt.value[0];
+	arrActiveValue1 = slideEvt.value[1];
+});
+
+
+// Without JQuery
+var sliderTest = new Slider("#ex24", {
+	id: 'a11y',
+	tooltip: 'always',			
+	min: 1,
+	max: weekSize,
+	value: [5,8],
+	formatter: function(value) {
+          if(value[1]){
+            var arrActiveValue0 = value[0];
+            var arrActiveValue1 = value[1];  
+            return [myArray[arrActiveValue0-1], myArray[arrActiveValue1-1]];
+          } else {
+          	var arrActiveValue = value;
+		return myArray[arrActiveValue-1];
+          }
+	}
+});
+sliderTest.slider('setValue', [5,8]);
+var arrayval = sliderTest.slider('getValue');
+    
+sliderTest.on('slide', function(slideEvt){
+	arrActiveValue0 = slideEvt.value[0];
+	arrActiveValue1 = slideEvt.value[1];
+});
+
+	</code></pre>
+	</div>
+	
 
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
@@ -1370,6 +1452,40 @@ var slider = new Slider("#ex23", {
 				ticks_tooltip: true
 			});
 		});
+		
+	   		/* Example 24 */
+		var myArray = new Array("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday", "Sunday", "Whatday?")
+		var weekSize = myArray.length;
+		var tooltipFormatter = function(value) {
+        		var arrActiveValue = value;
+        		return textValArray[arrActiveValue-1];
+      		};
+      
+		var a11ySliderTest = $("#ex24").slider({
+			id: 'a11y',
+			tooltip: 'always',			
+			min: 1,
+			max: weekSize,
+			value: [5,8],
+			formatter: function(value) {
+        			if(value[1]){
+            				var arrActiveValue0 = value[0];
+            				var arrActiveValue1 = value[1];  
+            				return [myArray[arrActiveValue0-1], myArray[arrActiveValue1-1]];
+          			} else {
+          				var arrActiveValue = value;
+  					return myArray[arrActiveValue-1];
+          			}
+			}
+		})
+    		a11ySliderTest.slider('setValue', [5,8]);
+    		var arrayval = a11ySliderTest.slider('getValue');
+    
+		a11ySliderTest.on('slide', function(slideEvt){
+			arrActiveValue0 = slideEvt.value[0];
+      			arrActiveValue1 = slideEvt.value[1];
+		});
+
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
