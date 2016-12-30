@@ -397,9 +397,9 @@ const windowIsDefined = (typeof window === "object");
 			*/
 			if(this.options.orientation === "vertical" && (this.options.tooltip_position === "top" || this.options.tooltip_position === "bottom")) {
 				if(this.options.rtl) {
-					this.options.tooltip_position = "right";
-				}else{
 					this.options.tooltip_position = "left";
+				}else{
+					this.options.tooltip_position = "right";
 				}
 			}
 			else if(this.options.orientation === "horizontal" && (this.options.tooltip_position === "left" || this.options.tooltip_position === "right")) {
@@ -1847,7 +1847,7 @@ const windowIsDefined = (typeof window === "object");
 			_setTooltipPosition: function(){
 				var tooltips = [this.tooltip, this.tooltip_min, this.tooltip_max];
 				if (this.options.orientation === 'vertical'){
-					var tooltipPos = this.options.tooltip_position || this.options.rtl ? 'left' : 'right';
+					var tooltipPos = this.options.tooltip_position || (this.options.rtl ? 'left' : 'right');
 					var oppositeSide = (tooltipPos === 'left') ? 'right' : 'left';
 					tooltips.forEach(function(tooltip){
 						this._addClass(tooltip, tooltipPos);
