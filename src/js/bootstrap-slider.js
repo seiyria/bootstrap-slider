@@ -386,7 +386,7 @@ const windowIsDefined = (typeof window === "object");
 
 			// Check options.rtl
 			if(this.options.rtl==='auto'){
-				this.options.rtl = window.getComputedStyle(element,null).direction==='rtl';
+				this.options.rtl = window.getComputedStyle(this.element).direction==='rtl';
 			}
 
 			/*
