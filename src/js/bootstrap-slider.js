@@ -1233,7 +1233,7 @@ const windowIsDefined = (typeof window === "object");
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
-					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : this.options.rtl ? 'marginRight' : 'marginLeft';
+					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : (this.options.rtl ? 'marginRight' : 'marginLeft');
 					var labelSize = this._state.size / (this.options.ticks.length - 1);
 
 					if (this.tickLabelContainer) {
@@ -1286,8 +1286,12 @@ const windowIsDefined = (typeof window === "object");
 								this.tickLabels[i].style[this.stylePos] = percentage + '%';
 								this.tickLabels[i].style[styleMargin] = -labelSize/2 + 'px';
 							} else if (this.options.orientation === 'vertical') {
-								this.tickLabels[i].style[styleMargin] =  this.sliderElem.offsetWidth + 'px';
-								this.tickLabelContainer.style['marginTop'] = this.sliderElem.offsetWidth / 2 * -1 + 'px';
+								if(this.options.rtl){
+									this.tickLabels[i].style['marginRight'] = this.sliderElem.offsetWidth + 'px';
+								}else{
+									this.tickLabels[i].style['marginLeft'] = this.sliderElem.offsetWidth + 'px';
+								}
+								this.tickLabelContainer.style[styleMargin] = this.sliderElem.offsetWidth / 2 * -1 + 'px';
 							}
 						}
 					}
