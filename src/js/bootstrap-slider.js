@@ -13,7 +13,7 @@
  *
  * bootstrap-slider is released under the MIT License
  * Copyright (c) 2016 Kyle Kemp, Rohit Kalkur, and contributors
- * 
+ *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
  * files (the "Software"), to deal in the Software without
@@ -22,10 +22,10 @@
  * copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following
  * conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -502,7 +502,7 @@ const windowIsDefined = (typeof window === "object");
 							var tickListenerReference = this._addTickListener();
 							var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
 							var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
-							
+
 							this.ticksCallbackMap[i] = {
 								mouseEnter: enterCallback,
 								mouseLeave: leaveCallback
@@ -741,9 +741,21 @@ const windowIsDefined = (typeof window === "object");
 			this.touchmove = this._touchmove.bind(this);
 
 			if (this.touchCapable) {
+				// Test for passive event support
+				var supportsPassive = false;
+				try {
+					var opts = Object.defineProperty({}, 'passive', {
+						get: function() {
+							supportsPassive = true;
+						}
+					});
+					window.addEventListener("test", null, opts);
+				} catch (e) {}
+				// Use our detect's results. passive applied if supported, capture will be false either way.
+				var eventOptions = supportsPassive ? { passive: true } : false;
 				// Bind touch handlers
-				this.sliderElem.addEventListener("touchstart", this.touchstart, false);
-				this.sliderElem.addEventListener("touchmove", this.touchmove, false);
+				this.sliderElem.addEventListener("touchstart", this.touchstart, eventOptions);
+				this.sliderElem.addEventListener("touchmove", this.touchmove, eventOptions);
 			}
 			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
