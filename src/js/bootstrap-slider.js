@@ -1137,11 +1137,11 @@ const windowIsDefined = (typeof window === "object");
 				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
 				this._setText(this.tooltipInner, formattedTooltipVal);
 
-				this.tooltip.style[this.stylePos] = positionPercentages[0] + '%';
+				this.tooltip.style[this.stylePos] = `${positionPercentages[0]}%`;
 				if (this.options.orientation === 'vertical') {
-					this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+					this._css(this.tooltip, `margin-${this.stylePos}`, `${-this.tooltip.offsetHeight / 2}px`);
 				} else {
-					this._css(this.tooltip, 'margin-'+this.stylePos, -this.tooltip.offsetWidth / 2 + 'px');
+					this._css(this.tooltip, `margin-${this.stylePos}`, `${-this.tooltip.offsetWidth / 2}px`);
 				}
 
 				function getPositionPercentages(state, reversed){
@@ -1185,13 +1185,13 @@ const windowIsDefined = (typeof window === "object");
 					positionPercentages = [ this._state.percentage[0], this._state.percentage[1] ];
 				}
 
-				this.handle1.style[this.stylePos] = positionPercentages[0]+'%';
+				this.handle1.style[this.stylePos] = `${positionPercentages[0]}%`;
 				this.handle1.setAttribute('aria-valuenow', this._state.value[0]);
 				if (isNaN(this.options.formatter(this._state.value[0])) ) {
 					this.handle1.setAttribute('aria-valuetext', this.options.formatter(this._state.value[0]));
 				}
 
-				this.handle2.style[this.stylePos] = positionPercentages[1]+'%';
+				this.handle2.style[this.stylePos] =`${positionPercentages[1]}%`;
 				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
 				if (isNaN(this.options.formatter(this._state.value[1])) ) {
 					this.handle2.setAttribute('aria-valuetext', this.options.formatter(this._state.value[1]));
@@ -1217,9 +1217,9 @@ const windowIsDefined = (typeof window === "object");
 								this.rangeHighlightElements[i].style.height = `${currentRange.size}%`;
 							} else {
 								if(this.options.rtl){
-									this.rangeHighlightElements[i].style.right = currentRange.start + "%";
+									this.rangeHighlightElements[i].style.right = `${currentRange.start}%`;
 								} else {
-									this.rangeHighlightElements[i].style.left = currentRange.start + "%";
+									this.rangeHighlightElements[i].style.left = `${currentRange.start}%`;
 								}
 								this.rangeHighlightElements[i].style.width = `${currentRange.size}%`;
 							}
@@ -1233,14 +1233,23 @@ const windowIsDefined = (typeof window === "object");
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
 
 					var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
-					var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : (this.options.rtl ? 'marginRight' : 'marginLeft');
+					var styleMargin;
+					if( this.options.orientation === 'vertical' ){
+						styleMargin='marginTop';
+					}else {
+						if( this.options.rtl ){
+							styleMargin='marginRight';
+						} else {
+							styleMargin='marginLeft';
+						}
+					}
 					var labelSize = this._state.size / (this.options.ticks.length - 1);
 
 					if (this.tickLabelContainer) {
 						var extraMargin = 0;
 						if (this.options.ticks_positions.length === 0) {
 							if (this.options.orientation !== 'vertical') {
-								this.tickLabelContainer.style[styleMargin] = -labelSize/2 + 'px';
+								this.tickLabelContainer.style[styleMargin] = `${ -labelSize/2 }px`;
 							}
 
 							extraMargin = this.tickLabelContainer.offsetHeight;
@@ -1253,7 +1262,7 @@ const windowIsDefined = (typeof window === "object");
 							}
 						}
 						if (this.options.orientation === 'horizontal') {
-							this.sliderElem.style.marginBottom = extraMargin + 'px';
+							this.sliderElem.style.marginBottom = `${ extraMargin }px`;
 						}
 					}
 					for (var i = 0; i < this.options.ticks.length; i++) {
@@ -1264,7 +1273,7 @@ const windowIsDefined = (typeof window === "object");
 							percentage = 100 - percentage;
 						}
 
-						this.ticks[i].style[this.stylePos] = percentage + '%';
+						this.ticks[i].style[this.stylePos] = `${ percentage }%`;
 
 						/* Set class labels to denote whether ticks are in the selection */
 						this._removeClass(this.ticks[i], 'in-selection');
@@ -1279,17 +1288,17 @@ const windowIsDefined = (typeof window === "object");
 						}
 
 						if (this.tickLabels[i]) {
-							this.tickLabels[i].style[styleSize] = labelSize + 'px';
+							this.tickLabels[i].style[styleSize] = `${labelSize}px`;
 
 							if (this.options.orientation !== 'vertical' && this.options.ticks_positions[i] !== undefined) {
 								this.tickLabels[i].style.position = 'absolute';
-								this.tickLabels[i].style[this.stylePos] = percentage + '%';
+								this.tickLabels[i].style[this.stylePos] = `${percentage}%`;
 								this.tickLabels[i].style[styleMargin] = -labelSize/2 + 'px';
 							} else if (this.options.orientation === 'vertical') {
 								if(this.options.rtl){
-									this.tickLabels[i].style['marginRight'] = this.sliderElem.offsetWidth + 'px';
+									this.tickLabels[i].style['marginRight'] = `${this.sliderElem.offsetWidth }px`;
 								}else{
-									this.tickLabels[i].style['marginLeft'] = this.sliderElem.offsetWidth + 'px';
+									this.tickLabels[i].style['marginLeft'] = `${this.sliderElem.offsetWidth }px`;
 								}
 								this.tickLabelContainer.style[styleMargin] = this.sliderElem.offsetWidth / 2 * -1 + 'px';
 							}
@@ -1302,18 +1311,12 @@ const windowIsDefined = (typeof window === "object");
 				if (this.options.range) {
 					formattedTooltipVal = this.options.formatter(this._state.value);
 					this._setText(this.tooltipInner, formattedTooltipVal);
-					this.tooltip.style[this.stylePos] = (positionPercentages[1] + positionPercentages[0])/2 + '%';
+					this.tooltip.style[this.stylePos] = `${ (positionPercentages[1] + positionPercentages[0])/2 }%`;
 
 					if (this.options.orientation === 'vertical') {
-						this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+						this._css(this.tooltip, `margin-${this.stylePos}`, `${ -this.tooltip.offsetHeight / 2 }px`);
 					} else {
-						this._css(this.tooltip, 'margin-'+this.stylePos, -this.tooltip.offsetWidth / 2 + 'px');
-					}
-
-					if (this.options.orientation === 'vertical') {
-						this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
-					} else {
-						this._css(this.tooltip, 'margin-'+this.stylePos, -this.tooltip.offsetWidth / 2 + 'px');
+						this._css(this.tooltip, `margin-${this.stylePos}`, `${ -this.tooltip.offsetWidth / 2 }px`);
 					}
 
 					var innerTooltipMinText = this.options.formatter(this._state.value[0]);
@@ -1322,30 +1325,30 @@ const windowIsDefined = (typeof window === "object");
 					var innerTooltipMaxText = this.options.formatter(this._state.value[1]);
 					this._setText(this.tooltipInner_max, innerTooltipMaxText);
 
-					this.tooltip_min.style[this.stylePos] = positionPercentages[0] + '%';
+					this.tooltip_min.style[this.stylePos] = `${ positionPercentages[0] }%`;
 
 					if (this.options.orientation === 'vertical') {
-						this._css(this.tooltip_min, 'margin-top', -this.tooltip_min.offsetHeight / 2 + 'px');
+						this._css(this.tooltip_min, `margin-${this.stylePos}`, `${ -this.tooltip_min.offsetHeight / 2  }px`);
 					} else {
-						this._css(this.tooltip_min, 'margin-'+this.stylePos, -this.tooltip_min.offsetWidth / 2 + 'px');
+						this._css(this.tooltip_min, `margin-${this.stylePos}`, `${ -this.tooltip_min.offsetWidth / 2  }px`);
 					}
 
-					this.tooltip_max.style[this.stylePos] = positionPercentages[1] + '%';
+					this.tooltip_max.style[this.stylePos] = `${ positionPercentages[1] }%`;
 
 					if (this.options.orientation === 'vertical') {
-						this._css(this.tooltip_max, 'margin-top', -this.tooltip_max.offsetHeight / 2 + 'px');
+						this._css(this.tooltip_max, `margin-${this.stylePos}`, `${ -this.tooltip_max.offsetHeight / 2 }px`);
 					} else {
-						this._css(this.tooltip_max, 'margin-'+this.stylePos, -this.tooltip_max.offsetWidth / 2 + 'px');
+						this._css(this.tooltip_max, `margin-${this.stylePos}`, `${ -this.tooltip_max.offsetWidth / 2 }px`);
 					}
 				} else {
 					formattedTooltipVal = this.options.formatter(this._state.value[0]);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 
-					this.tooltip.style[this.stylePos] = positionPercentages[0] + '%';
+					this.tooltip.style[this.stylePos] = `${ positionPercentages[0] }%`;
 					if (this.options.orientation === 'vertical') {
-						this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+						this._css(this.tooltip, `margin-${this.stylePos}`, `${ -this.tooltip.offsetHeight / 2 }px`);
 					} else {
-						this._css(this.tooltip, 'margin-'+this.stylePos, -this.tooltip.offsetWidth / 2 + 'px');
+						this._css(this.tooltip, `margin-${this.stylePos}`, `${ -this.tooltip.offsetWidth / 2 }px`);
 					}
 				}
 
@@ -1851,7 +1854,16 @@ const windowIsDefined = (typeof window === "object");
 			_setTooltipPosition: function(){
 				var tooltips = [this.tooltip, this.tooltip_min, this.tooltip_max];
 				if (this.options.orientation === 'vertical'){
-					var tooltipPos = this.options.tooltip_position || (this.options.rtl ? 'left' : 'right');
+					var tooltipPos;
+					if(this.options.tooltip_position) {
+						tooltipPos = this.options.tooltip_position;
+					} else {
+						if(this.options.rtl) {
+							tooltipPos = 'left';
+						} else {
+							tooltipPos = 'right';
+						}
+					}
 					var oppositeSide = (tooltipPos === 'left') ? 'right' : 'left';
 					tooltips.forEach(function(tooltip){
 						this._addClass(tooltip, tooltipPos);
