@@ -1,3 +1,7 @@
+9.6.0 / 2017-01-03
+==================
+* **New Feature:** Adds ability to set direction (using HTML5 `dir` attribute). [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/679). Thanks to [Denis Chenu](https://github.com/Shnoulle).
+
 9.5.4 / 2016-12-18
 ==================
 * **Bug Fix:** Fixes issue where dragging slider handle outside of modal and releasing cursor would close the modal. [See original issue for further details](https://github.com/seiyria/bootstrap-slider/issues/339). Thanks to [ZeVS777](https://github.com/ZeVS777).
@@ -99,7 +103,7 @@
 6.1.0 / 2016-02-28
 ==================
 * **New Feature:** Auto-registering/intializing slider via `data-provide="slider"` attribute. Thanks to [MaZderMind](https://github.com/MaZderMind)
-* Adding Github Templates for Issues, Pull Requeusts, and Contributions
+* Adding Github Templates for Issues, Pull Requests, and Contributions
 
 6.0.16 / 2016-02-04
 ==================
