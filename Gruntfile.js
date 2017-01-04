@@ -109,6 +109,12 @@ module.exports = function(grunt) {
         }
       }
     },
+    sasslint: {
+      options: {
+        configFile: './.sass-lint.yml',
+      },
+      target: ['src/sass/**/*.scss']
+    },
     jasmine : {
       src : '<%= pkg.gruntConfig.temp.js %>',
       options : {
@@ -253,11 +259,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-header');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks('grunt-sass-lint');
 
   // Create custom tasks
   grunt.registerTask('append-header', ['header', 'clean:temp']);
   grunt.registerTask('test', [
     'jshint',
+    'sasslint',
     'babel',
     'less:development',
     'jasmine',
