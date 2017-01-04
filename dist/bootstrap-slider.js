@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.6.1              
+                      VERSION  9.6.2              
 ========================================================= */
 "use strict";
 
@@ -19,7 +19,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * =========================================================
  *
  * bootstrap-slider is released under the MIT License
- * Copyright (c) 2016 Kyle Kemp, Rohit Kalkur, and contributors
+ * Copyright (c) 2017 Kyle Kemp, Rohit Kalkur, and contributors
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
