@@ -1,3 +1,7 @@
+9.6.2 / 2017-01-04
+==================
+* Updating current year references in license from 2016 -> 2017.
+
 Tooling Update / 2017-01-04
 ==================
 * Adds in linting for SASS and LESS files in order to catch common syntax errors at CI step versus compile time.
