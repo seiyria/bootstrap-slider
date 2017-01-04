@@ -761,9 +761,9 @@ const windowIsDefined = (typeof window === "object");
 
 			if (this.touchCapable) {
 				// Test for passive event support
-				var supportsPassive = false;
+				let supportsPassive = false;
 				try {
-					var opts = Object.defineProperty({}, 'passive', {
+					let opts = Object.defineProperty({}, 'passive', {
 						get: function() {
 							supportsPassive = true;
 						}
@@ -771,7 +771,7 @@ const windowIsDefined = (typeof window === "object");
 					window.addEventListener("test", null, opts);
 				} catch (e) {}
 				// Use our detect's results. passive applied if supported, capture will be false either way.
-				var eventOptions = supportsPassive ? { passive: true } : false;
+				let eventOptions = supportsPassive ? { passive: true } : false;
 				// Bind touch handlers
 				this.sliderElem.addEventListener("touchstart", this.touchstart, eventOptions);
 				this.sliderElem.addEventListener("touchmove", this.touchmove, eventOptions);
