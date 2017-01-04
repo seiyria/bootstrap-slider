@@ -1,3 +1,7 @@
+Tooling Update / 2017-01-04
+==================
+* Adds in linting for SASS and LESS files in order to catch common syntax errors at CI step versus compile time.
+
 9.6.1 / 2017-01-04
 ==================
 * **Bug Fix:** Resolve issue with SASS file compilation. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/683). Thanks to [Schepotin](https://github.com/Schepotin) for reporting.
