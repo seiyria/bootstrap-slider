@@ -142,7 +142,7 @@ How do I exclude the optional JQuery dependency from my build?
 __Note that the JQuery dependency is considered to be optional.__ For example, to exclude JQuery from being part of your Browserify build, you would call something like the following (assuming `main.js` is requiring bootstrap-slider as a dependency):
 
 ```BASH
-browserify -u jquery main.js > bundle.js
+browserify --im -u jquery main.js > bundle.js
 ```
 ### Webpack
 To exclude JQuery from your Webpack build, you will have to go into the Webpack config file for your specific project and add something like the following to your `resolve.alias` section:
