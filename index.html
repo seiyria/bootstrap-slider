@@ -1170,6 +1170,32 @@ var slider = new Slider("#ex23", {
 	</code></pre>
 	</div>
 
+			<div class='slider-example'>
+				<h3>Example 24:</h3>
+				<p>rtl mode (auto)</p>
+				<div class='well' dir ="rtl">
+					<span>-5</span>
+						<input id="ex24" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+					<span>20</span>
+				</div>
+		<pre><code>
+###################
+HTML
+###################
+&lt;div class='well' dir ="rtl"&gt;
+  &lt;span&gt;-5&lt;/span&gt;
+    &lt;input id="ex24" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/&gt;
+  &lt;span&gt;20&lt;/span&gt;
+&lt;/div&gt;
+
+###################
+    JavaScript
+###################
+// With JQuery
+$("#ex24").slider({});
+			</pre></code>
+			</div>
+
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -1370,6 +1396,8 @@ var slider = new Slider("#ex23", {
 				ticks_tooltip: true
 			});
 		});
+			/* example 24 */
+			$('#ex24').slider({});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
