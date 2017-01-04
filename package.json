@@ -54,6 +54,7 @@
     "grunt-contrib-uglify": "0.2.4",
     "grunt-contrib-watch": "0.5.3",
     "grunt-header": "1.0.0",
+    "grunt-lesslint": "^3.2.0",
     "grunt-open": "0.2.2",
     "grunt-sass-lint": "^0.2.2",
     "grunt-template": "0.2.0"

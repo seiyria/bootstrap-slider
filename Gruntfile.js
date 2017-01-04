@@ -113,7 +113,10 @@ module.exports = function(grunt) {
       options: {
         configFile: './.sass-lint.yml',
       },
-      target: ['src/sass/**/*.scss']
+      target: ['./src/sass/**/*.scss']
+    },
+    lesslint: {
+      src: ['./src/less/bootstrap-slider.less']
     },
     jasmine : {
       src : '<%= pkg.gruntConfig.temp.js %>',
@@ -260,11 +263,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-sass-lint');
+  grunt.loadNpmTasks('grunt-lesslint');
 
   // Create custom tasks
   grunt.registerTask('append-header', ['header', 'clean:temp']);
   grunt.registerTask('test', [
     'jshint',
+    'lesslint',
     'sasslint',
     'babel',
     'less:development',
