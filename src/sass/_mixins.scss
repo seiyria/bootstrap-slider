@@ -1,4 +1,4 @@
-@mixin slider_background-image ($colorstart:#f5f5f5, $colorend:#f9f9f9, $backcolor: #f7f7f7) {
+@mixin slider_background-image ($colorstart:#F5F5F5, $colorend:#F9F9F9, $backcolor: #F7F7F7) {
   background-color: $backcolor;
   background-image: -moz-linear-gradient(top, $colorstart, $colorend);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from($colorstart), to($colorend));
@@ -10,16 +10,16 @@
 }
 @mixin slider_box-sizing ($value) {
   -webkit-box-sizing: $value;
-     -moz-box-sizing: $value;
-          box-sizing: $value;
+  -moz-box-sizing: $value;
+  box-sizing: $value;
 }
 @mixin slider_box-shadow ($value...) {
   -webkit-box-shadow: $value;
-     -moz-box-shadow: $value;
-          box-shadow: $value;
+  -moz-box-shadow: $value;
+  box-shadow: $value;
 }
 @mixin slider_border-radius ($value) {
   -webkit-border-radius: $value;
-     -moz-border-radius: $value;
-          border-radius: $value;
+  -moz-border-radius: $value;
+  border-radius: $value;
 }

@@ -142,7 +142,7 @@ How do I exclude the optional JQuery dependency from my build?
 __Note that the JQuery dependency is considered to be optional.__ For example, to exclude JQuery from being part of your Browserify build, you would call something like the following (assuming `main.js` is requiring bootstrap-slider as a dependency):
 
 ```BASH
-browserify -u jquery main.js > bundle.js
+browserify --im -u jquery main.js > bundle.js
 ```
 ### Webpack
 To exclude JQuery from your Webpack build, you will have to go into the Webpack config file for your specific project and add something like the following to your `resolve.alias` section:
@@ -186,6 +186,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | tooltip_position |	string |	null |	Position of tooltip, relative to slider. Accepts 'top'/'bottom' for horizontal sliders and 'left'/'right' for vertically orientated sliders. Default positions are 'top' for horizontal and 'right' for vertical slider. |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square', 'triangle' or 'custom' |
 | reversed | bool | false | whether or not the slider should be reversed |
+| rtl | bool|string | 'auto' | whether or not the slider should be shown in rtl mode. Accepts true, false, 'auto'. Default 'auto' : use actual direction of HTML (`dir='rtl'`) |
 | enabled | bool | true | whether or not the slider is initially enabled |
 | formatter |	function |	returns the plain value |	formatter callback. Return the value wanted to be displayed in the tooltip, useful for string values. If a string is returned it will be indicated in an `aria-valuetext` attribute.  |
 | natural_arrow_keys | bool | false | The natural order is used for the arrow keys. Arrow up select the upper slider value for vertical sliders, arrow right the righter slider value for a horizontal slider - no matter if the slider was reversed or not. By default the arrow keys are oriented by arrow up/right to the higher slider value, arrow down/left to the lower slider value. |

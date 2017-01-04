@@ -27,7 +27,7 @@
         border-width: 0 $slider-line-height/2 $slider-line-height/2 $slider-line-height/2;
         width: 0;
         height: 0;
-        border-bottom-color: #0480be;
+        border-bottom-color: #0480BE;
         margin-top: 0;
       }
     }
@@ -42,9 +42,24 @@
       white-space: nowrap;
       margin-top: $slider-line-height;
       .slider-tick-label {
-        padding-top: $slider-line-height * 1.2;
         display: inline-block;
+        padding-top: $slider-line-height * 1.2;
         text-align: center;
+      }
+    }
+    &.slider-rtl {
+      .slider-track {
+        left: initial;
+        right: 0;
+      }
+      .slider-tick,
+      .slider-handle {
+        margin-left: initial;
+        margin-right: -$slider-line-height/2;
+      }
+      .slider-tick-container {
+        left: initial;
+        right: 0;
       }
     }
   }
@@ -64,96 +79,122 @@
       bottom: 0;
     }
     .slider-track-low, .slider-track-high {
-     width: 100%;
-     left: 0;
-     right: 0;
-   }
-   .slider-tick,
-   .slider-handle {
-    margin-top: -$slider-line-height/2;
-    &.triangle {
-      border-width: $slider-line-height/2 0 $slider-line-height/2 $slider-line-height/2;
-      width:  1px;
-      height: 1px;
-      border-left-color: #0480be;
-      margin-left: 0;
+      width: 100%;
+      left: 0;
+      right: 0;
+    }
+    .slider-tick,
+    .slider-handle {
+      margin-top: -$slider-line-height/2;
+      &.triangle {
+        border-width: $slider-line-height/2 0 $slider-line-height/2 $slider-line-height/2;
+        width:  1px;
+        height: 1px;
+        border-left-color: #0480BE;
+        margin-left: 0;
+      }
     }
     .slider-tick-label-container {
       white-space: nowrap;
-
       .slider-tick-label {
         padding-left: $slider-line-height * .2;
       }
     }
+    &.slider-rtl {
+      .slider-track {
+        left: initial;
+        right: 25%;
+      }
+      .slider-selection {
+        left: initial;
+        right: 0;
+      }
+      .slider-tick,
+      .slider-handle {
+        &.triangle {
+          border-width: $slider-line-height/2 $slider-line-height/2 $slider-line-height/2 0;
+        }
+      }
+      .slider-tick-label-container {
+        .slider-tick-label {
+          padding-left: initial;
+          padding-right: $slider-line-height * .2;
+        }
+      }
+    }
   }
-}
-&.slider-disabled {
-  .slider-handle {
-    @include slider_background-image(#dfdfdf, #bebebe, #f7f7f7);
+  &.slider-disabled {
+    .slider-handle {
+      @include slider_background-image(#DFDFDF, #BEBEBE, #F7F7F7);
+    }
+    .slider-track {
+      @include slider_background-image(#E5E5E5, #E9E9E9, #F7F7F7);
+      cursor: not-allowed;
+    }
   }
-  .slider-track {
-    @include slider_background-image(#e5e5e5, #e9e9e9, #f7f7f7);
-    cursor: not-allowed;
+  input {
+    display: none;
   }
-}
-input {
-  display: none;
-}
-.tooltip-inner {
-  white-space: nowrap;
-  max-width: none;
-}
-.tooltip {
-  &.top {
-    margin-top: -36px;
+  .tooltip-inner {
+    white-space: nowrap;
+    max-width: none;
   }
-}
+  .tooltip {
+    &.top {
+      margin-top: -36px;
+    }
+  }
 
-.tooltip-inner {
+  .tooltip-inner {
     white-space: nowrap;
     max-width: none;
   }
 
-.hide {
-  display: none;
-}
+  .hide {
+    display: none;
+  }
 }
 
 .slider-track {
-	position: absolute;
-	cursor: pointer;
-	@include slider_background-image(#f5f5f5, #f9f9f9, #f7f7f7);
-	@include slider_box-shadow(inset 0 1px 2px rgba(0,0,0,0.1));
-	@include slider_border-radius($slider-border-radius);
+  @include slider_background-image(#F5F5F5, #F9F9F9, #F7F7F7);
+  @include slider_box-shadow(inset 0 1px 2px rgba(0,0,0,0.1));
+  @include slider_border-radius($slider-border-radius);
+
+  position: absolute;
+  cursor: pointer;
 }
 
 .slider-selection {
-	position: absolute;
-	@include slider_background-image(#f9f9f9, #f5f5f5, #f7f7f7);
- @include slider_box-shadow(inset 0 -1px 0 rgba(0,0,0,0.15));
- @include slider_box-sizing(border-box);
- @include slider_border-radius($slider-border-radius);
+  @include slider_background-image(#F9F9F9, #F5F5F5, #F7F7F7);
+  @include slider_box-shadow(inset 0 -1px 0 rgba(0,0,0,0.15));
+  @include slider_box-sizing(border-box);
+  @include slider_border-radius($slider-border-radius);
+
+  position: absolute;
 }
 .slider-selection.tick-slider-selection {
-  @include slider_background-image(#89cdef, #81bfde, #f7f7f7);
+  @include slider_background-image(#89CDEF, #81BFDE, #F7F7F7);
 }
 
 .slider-track-low, .slider-track-high {
+  @include slider_box-sizing(border-box);
+
   position: absolute;
   background: transparent;
-  @include slider_box-sizing(border-box);
   border-radius: slider_border-radius($slider-border-radius);
 }
 
 .slider-handle {
-	position: absolute;
-  top: 0;
-	width:  $slider-line-height;
-	height: $slider-line-height;
-  background-color: #337ab7;
-  @include slider_background-image(#149bdf, #0480be, #0e90d2);
+  @include slider_background-image(#149BDF, #0480BE, #0E90D2);
   @include slider_box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05));
+
+  position: absolute;
+  top: 0;
+  width:  $slider-line-height;
+  height: $slider-line-height;
+  background-color: #337AB7;
   border: 0px solid transparent;
+
   &.round {
     @include slider_border-radius($slider-line-height);
   }
@@ -172,15 +213,17 @@ input {
 }
 
 .slider-tick {
+  @include slider_background-image(#F9F9F9, #F5F5F5, #F7F7F7);
+  @include slider_box-shadow(inset 0 -1px 0 rgba(0,0,0,0.15));
+  @include slider_box-sizing(border-box);
+
   position: absolute;
   width: $slider-line-height;
   height: $slider-line-height;
-  @include slider_background-image(#f9f9f9, #f5f5f5, #f7f7f7);
-  @include slider_box-shadow(inset 0 -1px 0 rgba(0,0,0,0.15));
-  @include slider_box-sizing(border-box);
   filter: none;
   opacity: 0.8;
   border: 0px solid transparent;
+
   &.round {
     border-radius: 50%;
   }
@@ -189,15 +232,15 @@ input {
   }
   &.custom {
     background: transparent none;
-    &::before{
+    &::before {
       line-height: $slider-line-height;
       font-size: 20px;
-          content: '\2605'; //unicode star character
-          color: #726204;
-        }
-      }
-      &.in-selection {
-        @include slider_background-image(#89cdef, #81bfde, #f7f7f7);
-        opacity: 1;
-      }
+      content: '\2605'; //unicode star character
+      color: #726204;
     }
+  }
+  &.in-selection {
+    @include slider_background-image(#89CDEF, #81BFDE, #F7F7F7);
+    opacity: 1;
+  }
+}
