@@ -1,3 +1,7 @@
+Tooling Update / 2017-01-05
+==================
+* Add an explicit `grunt lint` command to run Lint check on all source files and execute it in the NPM `pretest` script.
+
 9.6.2 / 2017-01-04
 ==================
 * Updating current year references in license from 2016 -> 2017.

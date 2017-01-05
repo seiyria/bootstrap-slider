@@ -267,10 +267,12 @@ module.exports = function(grunt) {
 
   // Create custom tasks
   grunt.registerTask('append-header', ['header', 'clean:temp']);
-  grunt.registerTask('test', [
+  grunt.registerTask('lint', [
     'jshint',
     'lesslint',
-    'sasslint',
+    'sasslint'
+  ]);
+  grunt.registerTask('test', [
     'babel',
     'less:development',
     'jasmine',

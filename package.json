@@ -5,6 +5,7 @@
   "main": "dist/bootstrap-slider.js",
   "style": "dist/css/bootstrap-slider.css",
   "scripts": {
+    "pretest": "grunt lint",
     "test": "grunt test",
     "release": "sh ./scripts/release.sh"
   },
