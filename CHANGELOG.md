@@ -1,3 +1,7 @@
+9.7.0 / 2017-01-05
+==================
+* **Performance Enhancement** Use passive event listeners for touch-enabled devices. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/680). Thanks to [Chris Hallberg](https://github.com/crhallberg).
+
 Tooling Update / 2017-01-05
 ==================
 * Add an explicit `grunt lint` command to run Lint check on all source files and execute it in the NPM `pretest` script.
