@@ -63,6 +63,7 @@
   "gruntConfig": {
     "devPort": 9000,
     "js": {
+      "highlightjs": "dependencies/js/highlight.min.js",
       "modernizr": "dependencies/js/modernizr.js",
       "jquery": "dependencies/js/jquery.min.js",
       "bindPolyfill": "test/phantom_bind_polyfill.js",
@@ -74,7 +75,8 @@
       "variables": "src/less/variables.less"
     },
     "css": {
-      "bootstrap": "dependencies/css/bootstrap.min.css"
+      "bootstrap": "dependencies/css/bootstrap.min.css",
+      "highlightjs": "dependencies/css/highlightjs-github-theme.css"
     },
     "tpl": {
       "SpecRunner": "tpl/SpecRunner.tpl",
