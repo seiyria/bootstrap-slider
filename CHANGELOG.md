@@ -1,3 +1,9 @@
+Tooling Update / 2017-01-0
+==================
+* Examples Page: Adds syntax highlighting to code snippets on Examples page
+* Examples Page: Adds anchor tags to each example. For example, navigating to http://seiyria.com/bootstrap-slider/#example-10 will now load the page at Example #10.
+* Examples Page: Fixed code snippet in Example #14 based on feedback from [this comment](https://github.com/seiyria/bootstrap-slider/issues/645#issuecomment-270751793).
+
 9.7.0 / 2017-01-05
 ==================
 * **Performance Enhancement** Use passive event listeners for touch-enabled devices. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/680). Thanks to [Chris Hallberg](https://github.com/crhallberg).
