@@ -7,7 +7,8 @@
   "scripts": {
     "pretest": "grunt lint",
     "test": "grunt test",
-    "release": "sh ./scripts/release.sh"
+    "release": "sh ./scripts/release.sh",
+    "update-gh-pages": "sh ./scripts/update-gh-pages.sh"
   },
   "homepage": "http://github.com/seiyria/bootstrap-slider",
   "repository": {

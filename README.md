@@ -257,7 +257,7 @@ The following is a list of the commonly-used command line tasks:
 * `grunt dev`: Alias for `grunt development`
 * `grunt prod`: Alias for `grunt production`
 * `grunt build`: Transpiles JavaScript source via Babel and compiles LESS source to CSS to `temp` directory.
-* `grunt lint`: Runs JSLint on the JavaScript source code files, SASS-Lint on the SASS source code files, and LESSLint on the LESS source code files. 
+* `grunt lint`: Runs JSLint on the JavaScript source code files, SASS-Lint on the SASS source code files, and LESSLint on the LESS source code files.
 * `grunt test`: Runs unit tests contained in `/test` directory via Jasmine.
 
 
@@ -276,6 +276,13 @@ Type the following command:
 
 If you do not specify a version bump type, the script will automatically defer to a patch bump.
 
+Updating Github.io Page
+===========================
+The Github.io page can be automatically updated by running the following command:
+
+`npm run update-gh-pages`
+
+This command will handle generating the latest versions of the JS/CSS and index.html page, and push them to the `gh-pages` branch.
 
 Other Platforms & Libraries
 ===========================
