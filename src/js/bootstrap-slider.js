@@ -1565,12 +1565,13 @@ const windowIsDefined = (typeof window === "object");
 				}
 
 				var val = this._state.value[handleIdx] + dir * this.options.step;
-				var percentage = (val / this.options.max) * 100;
+				const percentage = (val / this.options.max) * 100;
 				this._state.keyCtrl = handleIdx;
 				if (this.options.range) {
 					this._adjustPercentageForRangeSliders(percentage);
-					val = [ (!this._state.keyCtrl) ? val : this._state.value[0],
-						    ( this._state.keyCtrl) ? val : this._state.value[1]];
+          const val1 = (!this._state.keyCtrl) ? val : this._state.value[0];
+          const val2 = (this._state.keyCtrl) ? val : this._state.value[1];
+					val = [ val1, val2];
 				}
 
 				this._trigger('slideStart', val);
