@@ -1569,8 +1569,8 @@ const windowIsDefined = (typeof window === "object");
 				this._state.keyCtrl = handleIdx;
 				if (this.options.range) {
 					this._adjustPercentageForRangeSliders(percentage);
-          const val1 = (!this._state.keyCtrl) ? val : this._state.value[0];
-          const val2 = (this._state.keyCtrl) ? val : this._state.value[1];
+					const val1 = (!this._state.keyCtrl) ? val : this._state.value[0];
+					const val2 = (this._state.keyCtrl) ? val : this._state.value[1];
 					val = [ val1, val2];
 				}
 
