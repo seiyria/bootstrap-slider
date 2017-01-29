@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.7.0              
+                      VERSION  9.7.1              
 ========================================================= */
 "use strict";
 
@@ -1863,7 +1863,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		/*********************************
   		Attach to global namespace
   	*********************************/
-		if ($) {
+		if ($ && $.fn) {
 			(function () {
 				var autoRegisterNamespace = void 0;
 
