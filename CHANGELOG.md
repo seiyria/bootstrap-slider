@@ -1,3 +1,7 @@
+9.7.1 / 2017-01-29
+==================
+* **Bug Fix** Resolves "'slider' of undefined" error. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/587). Thanks to [Guto Sanches](https://github.com/gutosanches).
+
 Tooling Update / 2017-01-0
 ==================
 * Examples Page: Adds syntax highlighting to code snippets on Examples page
