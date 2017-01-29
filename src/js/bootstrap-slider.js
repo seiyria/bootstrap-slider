@@ -1900,7 +1900,7 @@ const windowIsDefined = (typeof window === "object");
 			Attach to global namespace
 
 		*********************************/
-		if($) {
+		if($ && $.fn) {
 			let autoRegisterNamespace;
 
 			if (!$.fn.slider) {
