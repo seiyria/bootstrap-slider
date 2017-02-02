@@ -1,7 +1,10 @@
+Tooling Update / 2017-02-02
+==================
+* Adds in [CodeClimate](https://codeclimate.com/) integration. Thanks to [Scott Larkin](https://github.com/larkinscott).
+
 Tooling Update / 2017-02-01
 ==================
 * Examples Page: Fixes code snippet for Example 6. Thanks to [Sergey Mezentsev](https://github.com/TheBits).
-
 
 9.7.1 / 2017-01-29
 ==================
