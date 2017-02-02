@@ -1,8 +1,13 @@
+Tooling Update / 2017-02-01
+==================
+* Examples Page: Fixes code snippet for Example 6. Thanks to [Sergey Mezentsev](https://github.com/TheBits).
+
+
 9.7.1 / 2017-01-29
 ==================
 * **Bug Fix** Resolves "'slider' of undefined" error. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/587). Thanks to [Guto Sanches](https://github.com/gutosanches).
 
-Tooling Update / 2017-01-0
+Tooling Update / 2017-01-06
 ==================
 * Examples Page: Adds syntax highlighting to code snippets on Examples page
 * Examples Page: Adds anchor tags to each example. For example, navigating to http://seiyria.com/bootstrap-slider/#example-10 will now load the page at Example #10.
