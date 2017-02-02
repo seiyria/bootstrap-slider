@@ -1860,7 +1860,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		/*********************************
   		Attach to global namespace
   	*********************************/
-		if ($) {
+		if ($ && $.fn) {
 			(function () {
 				var autoRegisterNamespace = void 0;
 
