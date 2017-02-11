@@ -1,3 +1,7 @@
+9.7.2 / 2017-02-10
+==================
+* **Bug Fix** Resolves accesibility issue in range sliders. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/687). Thanks to [Jerry (jerrylow)](https://github.com/jerrylow).
+
 Tooling Update / 2017-02-02
 ==================
 * Adds in [CodeClimate](https://codeclimate.com/) integration. Thanks to [Scott Larkin](https://github.com/larkinscott).
