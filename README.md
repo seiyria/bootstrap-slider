@@ -180,10 +180,12 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | orientation |	string | 'horizontal' |	set the orientation. Accepts 'vertical' or 'horizontal' |
 | value |	float,array |	5	| initial value. Use array to have a range slider. |
 | range |	bool |	false	| make range slider. Optional if initial value is an array. If initial value is scalar, max will be used for second value. |
-| selection |	string |	'before' |	selection placement. Accepts: 'before', 'after' or 'none'. In case of a range slider, the selection will be placed between the handles |
+| selection |	string |	'before' |	selection placement. Accepts: 'before', 'after', 'middle', 'zero' or 'none'. In case of a range slider, the selection will be placed between the handles |
 | tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', or 'always' |
 | tooltip_split |	bool |	false |	if false show one tootip if true show two tooltips one for each handler |
 | tooltip_position |	string |	null |	Position of tooltip, relative to slider. Accepts 'top'/'bottom' for horizontal sliders and 'left'/'right' for vertically orientated sliders. Default positions are 'top' for horizontal and 'right' for vertical slider. |
+| tooltip_prefix |	string |	null |	Prefix to the Tooltip value. |
+| tooltip_suffix |	string |	null |	Suffix to the Tooltip value. |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square', 'triangle' or 'custom' |
 | reversed | bool | false | whether or not the slider should be reversed |
 | rtl | bool|string | 'auto' | whether or not the slider should be shown in rtl mode. Accepts true, false, 'auto'. Default 'auto' : use actual direction of HTML (`dir='rtl'`) |

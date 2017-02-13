@@ -857,6 +857,8 @@ const windowIsDefined = (typeof window === "object");
 				range: false,
 				selection: 'before',
 				tooltip: 'show',
+				tooltip_prefix: '',
+				tooltip_suffix: '',
 				tooltip_split: false,
 				handle: 'round',
 				reversed: false,
@@ -916,6 +918,10 @@ const windowIsDefined = (typeof window === "object");
 					this._addClass(this.handle2, 'hide');
 					if (this.options.selection === 'after') {
 						this._state.value[1] = this.options.max;
+					} else if (this.options.selection === 'middle') {
+						this._state.value[1] = (this.options.max + this.options.min) / 2;
+					} else if (this.options.selection === 'zero') {
+						this._state.value[1] = 0;
 					} else {
 						this._state.value[1] = this.options.min;
 					}
@@ -1145,7 +1151,7 @@ const windowIsDefined = (typeof window === "object");
 				this._state.over = false;
 			},
 			_setToolTipOnMouseOver: function _setToolTipOnMouseOver(tempState){
-				var formattedTooltipVal = this.options.formatter(!tempState ? this._state.value[0]: tempState.value[0]);
+				var formattedTooltipVal = this.options.tooltip_prefix + this.options.formatter(!tempState ? this._state.value[0]: tempState.value[0]) + this.options.tooltip_suffix;
 				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
 				this._setText(this.tooltipInner, formattedTooltipVal);
 
@@ -1321,7 +1327,7 @@ const windowIsDefined = (typeof window === "object");
 				var formattedTooltipVal;
 
 				if (this.options.range) {
-					formattedTooltipVal = this.options.formatter(this._state.value);
+					formattedTooltipVal = this.options.tooltip_prefix + this.options.formatter(this._state.value) + this.options.tooltip_suffix;
 					this._setText(this.tooltipInner, formattedTooltipVal);
 					this.tooltip.style[this.stylePos] = `${ (positionPercentages[1] + positionPercentages[0])/2 }%`;
 
@@ -1353,7 +1359,7 @@ const windowIsDefined = (typeof window === "object");
 						this._css(this.tooltip_max, `margin-${this.stylePos}`, `${ -this.tooltip_max.offsetWidth / 2 }px`);
 					}
 				} else {
-					formattedTooltipVal = this.options.formatter(this._state.value[0]);
+					formattedTooltipVal = this.options.tooltip_prefix + this.options.formatter(this._state.value[0]) + this.options.tooltip_suffix;
 					this._setText(this.tooltipInner, formattedTooltipVal);
 
 					this.tooltip.style[this.stylePos] = `${ positionPercentages[0] }%`;
