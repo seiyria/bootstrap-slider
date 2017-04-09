@@ -1,3 +1,7 @@
+Tooling Update / 2017-04-09
+==================
+* Updates [grunt](https://github.com/gruntjs/grunt) dependency from version `0.4.4` to `^0.4.5`.
+
 9.7.3 / 2017-04-09
 ==================
 * **Bug Fix** Resolves PhantomJS error that was occurring while running the unit test suite. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/696).
