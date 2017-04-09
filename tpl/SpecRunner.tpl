@@ -113,9 +113,9 @@
 	</div>
 
 	<% with (scripts) { %>
-	  <% [].concat(jasmine, vendor, src, specs, reporters, start).forEach(function(script){ %>
-	  <script src="<%= script %>"></script>
-	  <% }) %>
+		<% [].concat(polyfills, jasmine, boot, vendor, helpers, src, specs,reporters).forEach(function(script){ %>
+		  <script src="<%= script %>"></script>
+		<% }) %>
 	<% }; %>
 </body>
 </html>
