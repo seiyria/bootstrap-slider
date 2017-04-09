@@ -48,11 +48,6 @@ describe("Public Method Tests", function() {
       expect(sliderValue).toBe(maxVal);
     });
 
-    describe("reads and sets the 'step' option properly", function() {
-      // TODO: Don't really know how to properly test this
-      expect(true).toBeTruthy();
-    });
-
     it("reads and sets the 'precision' option properly", function() {
       testSlider = $("#testSlider1").slider({
         precision: 2

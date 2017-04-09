@@ -1,3 +1,8 @@
+9.7.3 / 2017-04-09
+==================
+* **Bug Fix** Resolves PhantomJS error that was occurring while running the unit test suite. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/696).
+* **Tooling Update** Updates unit test suite to [Jasmine 2.x.x](https://jasmine.github.io/2.2/introduction) by updating the [grunt-contrib-jasmine](https://github.com/gruntjs/grunt-contrib-jasmine) dependency from version `0.5.2` to `1.0.3`.
+
 9.7.2 / 2017-02-10
 ==================
 * **Bug Fix** Resolves accesibility issue in range sliders. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/687). Thanks to [Jerry (jerrylow)](https://github.com/jerrylow).

@@ -258,7 +258,7 @@ The following is a list of the commonly-used command line tasks:
 * `grunt prod`: Alias for `grunt production`
 * `grunt build`: Transpiles JavaScript source via Babel and compiles LESS source to CSS to `temp` directory.
 * `grunt lint`: Runs JSLint on the JavaScript source code files, SASS-Lint on the SASS source code files, and LESSLint on the LESS source code files.
-* `grunt test`: Runs unit tests contained in `/test` directory via Jasmine.
+* `grunt test`: Runs unit tests contained in `/test` directory via Jasmine 2.x.x
 
 
 Version Bumping and Publishing (Maintainers Only)
