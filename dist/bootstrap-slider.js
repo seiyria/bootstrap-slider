@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.7.2              
+                      VERSION  9.7.3              
 ========================================================= */
 "use strict";
 
@@ -1878,25 +1878,23 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
   		Attach to global namespace
   	*********************************/
 		if ($ && $.fn) {
-			(function () {
-				var autoRegisterNamespace = void 0;
+			var autoRegisterNamespace = void 0;
 
-				if (!$.fn.slider) {
-					$.bridget(NAMESPACE_MAIN, Slider);
-					autoRegisterNamespace = NAMESPACE_MAIN;
-				} else {
-					if (windowIsDefined) {
-						window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
-					}
-					autoRegisterNamespace = NAMESPACE_ALTERNATE;
+			if (!$.fn.slider) {
+				$.bridget(NAMESPACE_MAIN, Slider);
+				autoRegisterNamespace = NAMESPACE_MAIN;
+			} else {
+				if (windowIsDefined) {
+					window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
 				}
-				$.bridget(NAMESPACE_ALTERNATE, Slider);
+				autoRegisterNamespace = NAMESPACE_ALTERNATE;
+			}
+			$.bridget(NAMESPACE_ALTERNATE, Slider);
 
-				// Auto-Register data-provide="slider" Elements
-				$(function () {
-					$("input[data-provide=slider]")[autoRegisterNamespace]();
-				});
-			})();
+			// Auto-Register data-provide="slider" Elements
+			$(function () {
+				$("input[data-provide=slider]")[autoRegisterNamespace]();
+			});
 		}
 	})($);
 
