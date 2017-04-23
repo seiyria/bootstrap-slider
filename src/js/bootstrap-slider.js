@@ -472,7 +472,7 @@ const windowIsDefined = (typeof window === "object");
 
 				/* Create highlight range elements */
 				this.rangeHighlightElements = [];
-                var rangeHighlightsOpts = this.options.rangeHighlights;
+				const rangeHighlightsOpts = this.options.rangeHighlights;
 				if (Array.isArray(rangeHighlightsOpts) && rangeHighlightsOpts.length > 0) {
 					for (let j = 0; j < rangeHighlightsOpts.length; j++) {
 						var rangeHighlightElement = document.createElement("div");
