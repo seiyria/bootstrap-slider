@@ -125,16 +125,16 @@
 			}
 
 			#slider22 .slider-rangeHighlight {
-      	        background: #f70616;
-            }
+				background: #f70616;
+			}
         
-            #slider22 .slider-rangeHighlight.category1 {
-                background: #FF9900;
-            }
+			#slider22 .slider-rangeHighlight.category1 {
+				background: #FF9900;
+			}
         
-            #slider22 .slider-rangeHighlight.category2 {
-                background: #99CC00;
-            }
+			#slider22 .slider-rangeHighlight.category2 {
+				background: #99CC00;
+			}
 
     </style>
 
