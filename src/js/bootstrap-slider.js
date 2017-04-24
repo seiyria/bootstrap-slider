@@ -476,7 +476,8 @@ const windowIsDefined = (typeof window === "object");
 				if (Array.isArray(rangeHighlightsOpts) && rangeHighlightsOpts.length > 0) {
 					for (let j = 0; j < rangeHighlightsOpts.length; j++) {
 						var rangeHighlightElement = document.createElement("div");
-						rangeHighlightElement.className = "slider-rangeHighlight slider-selection " + (rangeHighlightsOpts[j].class || "");
+						const customClassString = rangeHighlightsOpts[j].class || "";
+						rangeHighlightElement.className = `slider-rangeHighlight slider-selection ${customClassString}`;
 						this.rangeHighlightElements.push(rangeHighlightElement);
 						sliderTrack.appendChild(rangeHighlightElement);
 					}
