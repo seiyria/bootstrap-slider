@@ -1,3 +1,7 @@
+9.8.0 / 2017-04-24
+==================
+* **New Feature:** Ability to add a custom class to the ranges of a slider with the `rangeHightlights` option specified. [See the PR for further details.](https://github.com/seiyria/bootstrap-slider/pull/742). Thanks to [jccode](https://github.com/jccode).
+
 Tooling Update / 2017-04-09
 ==================
 * Updates [grunt](https://github.com/gruntjs/grunt) dependency from version `0.4.4` to `^0.4.5`.
