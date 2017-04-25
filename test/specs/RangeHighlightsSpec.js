@@ -10,19 +10,29 @@ describe("RangeHighlights Render Tests", function() {
 
     //setup
     beforeEach(function() {
+        var rangeHighlightsOpts1 = [
+            { "start": 2, "end": 5, "class": "category1" },    // left: 10%; width: 15%
+            { "start": 7, "end": 8, "class": "category2" },    // left: 35%; width: 5%
+            { "start": 17, "end": 19 },  // left: 85%; width: 10%
+            { "start": 17, "end": 24 },  //out of range - not visible
+            { "start": -3, "end": 19 }   //out of range - not visible
+        ];
+
+        var rangeHighlightsOpts2 = [
+            { "start": 2, "end": 5, "class": "category1" },   // top: 10%; height: 15%
+            { "start": 7, "end": 8, "class": "category2" },   // top: 35%; height: 5%
+            { "start": 17, "end": 19 }, // top: 85%; height: 10%
+            { "start": 7, "end": -4 },  //out of range - not visible
+            { "start": 23, "end": 15 }  //out of range - not visible
+        ];
+        
         testSlider1 = $('#testSlider1').slider({
             id: 'slider1',
             min: 0,
             max: 20,
             step: 1,
             value: 14,
-            rangeHighlights: [
-                { "start": 2, "end": 5 },    // left: 10%; width: 15%
-                { "start": 7, "end": 8 },    // left: 35%; width: 5%
-                { "start": 17, "end": 19 },  // left: 85%; width: 10%
-                { "start": 17, "end": 24 },  //out of range - not visible
-                { "start": -3, "end": 19 }   //out of range - not visible
-            ]
+            rangeHighlights: rangeHighlightsOpts1
         });
 
         testSlider2 = $('#testSlider2').slider({
@@ -32,13 +42,7 @@ describe("RangeHighlights Render Tests", function() {
             step: 1,
             value: 14,
             orientation: 'vertical',
-            rangeHighlights: [
-                { "start": 2, "end": 5 },   // top: 10%; height: 15%
-                { "start": 7, "end": 8 },   // top: 35%; height: 5%
-                { "start": 17, "end": 19 }, // top: 85%; height: 10%
-                { "start": 7, "end": -4 },  //out of range - not visible
-                { "start": 23, "end": 15 }  //out of range - not visible
-            ]
+            rangeHighlights: rangeHighlightsOpts2
         });
 
         testSlider3 = $('#testSlider3').slider({
@@ -48,13 +52,7 @@ describe("RangeHighlights Render Tests", function() {
             step: 1,
             value: 14,
             reversed: true,
-            rangeHighlights: [
-                { "start": 2, "end": 5 },    // left: 75%; width: 15%
-                { "start": 7, "end": 8 },    // left: 60%; width: 5%
-                { "start": 17, "end": 19 },  // left: 5%; width: 10%
-                { "start": 17, "end": 24 },  //out of range - not visible
-                { "start": -3, "end": 19 }   //out of range - not visible
-            ]
+            rangeHighlights: rangeHighlightsOpts1
         });
 
         testSlider4 = $('#testSlider4').slider({
@@ -65,13 +63,7 @@ describe("RangeHighlights Render Tests", function() {
             value: 14,
             reversed: true,
             orientation: 'vertical',
-            rangeHighlights: [
-                { "start": 2, "end": 5 },   // top: 75%; height: 15%
-                { "start": 7, "end": 8 },   // top: 60%; height: 5%
-                { "start": 17, "end": 19 }, // top: 5%; height: 10%
-                { "start": 7, "end": -4 },  //out of range - not visible
-                { "start": 23, "end": 15 }  //out of range - not visible
-            ]
+            rangeHighlights: rangeHighlightsOpts2
         });
     });
 
@@ -97,6 +89,8 @@ describe("RangeHighlights Render Tests", function() {
         it("Highlighted ranges are rendered - " + sliderId, function() {
             expect($(sliderId).length).toBe(1);
             expect($(sliderId + ' .slider-rangeHighlight').length).toBe(5);
+            expect($(sliderId + ' .slider-rangeHighlight.category1').length).toBe(1);
+            expect($(sliderId + ' .slider-rangeHighlight.category2').length).toBe(1);
         });
 
         //check elements exist within proper display value
@@ -119,6 +113,7 @@ describe("RangeHighlights Render Tests", function() {
                 }
             }
         });
+
     }
 
     function _getLeftPercent(element) {
