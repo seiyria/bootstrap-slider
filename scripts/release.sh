@@ -30,7 +30,7 @@ grunt bump-commit
 git push origin master:master && git push --tags
 
 ## Update Github.io page
-sh ./update-gh-pages.sh
+sh ./scripts/update-gh-pages.sh
 
 ## Publish to NPM
 echo "."
