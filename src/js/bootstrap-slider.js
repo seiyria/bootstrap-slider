@@ -928,26 +928,8 @@ const windowIsDefined = (typeof window === "object");
 
 					try {
 						if (this.options.lock_to_ticks) {
-							var start_difference = Math.abs(this._state.value[0] - this.options.ticks[0]);
-							var start_index = 0;
-							for (var i = 0; i < this.options.ticks.length; ++i) {
-								var sd = Math.abs(this._state.value[0] - this.options.ticks[i]);
-								if (sd < start_difference) {
-									start_difference = sd;
-									start_index = i;
-								}
-							}
-							var end_difference = Math.abs(this._state.value[1] - this.options.ticks[0]);
-							var end_index = 0;
-							for (var y = 0; y < this.options.ticks.length; ++y) {
-								var ed = Math.abs(this._state.value[1] - this.options.ticks[y]);
-								if (ed < end_difference) {
-									end_difference = ed;
-									end_index = y;
-								}
-							}
-							this._state.value[0] = this.options.ticks[start_index];
-							this._state.value[1] = this.options.ticks[end_index];
+							this._state.value[0] = this.options.ticks[this._getClosestTickIndex(this._state.value[0])];
+							this._state.value[1] = this.options.ticks[this._getClosestTickIndex(this._state.value[1])];
 						}
 					} catch(err) {
 						console.error(err);
@@ -2016,6 +1998,18 @@ const windowIsDefined = (typeof window === "object");
 						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
 					}.bind(this));
 				}
+			},
+			_getClosestTickIndex: function(val) {
+				var difference = Math.abs(val - this.options.ticks[0]);
+				var index = 0;
+				for (var i = 0; i < this.options.ticks.length; ++i) {
+					var d = Math.abs(val - this.options.ticks[i]);
+					if (d < difference) {
+						difference = d;
+						index = i;
+					}
+				}
+				return index;
 			}
 		};
 
