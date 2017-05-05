@@ -1243,6 +1243,33 @@ $("#ex24").slider({});
 </pre></code>
 			</div>
 
+		  <div id="example-25" class='slider-example'>
+			  <h3>Example 25:</h3>
+			  <p>Lock selection to ticks</p>
+			  <div class='well' dir ="rtl">
+				  <span>Min </span>
+				  <input id="ex25" type="text" />;
+				  <span> Max </span>
+			  </div>
+			  <h5>HTML</h5>
+<pre><code class="html">
+&lt;div class='well' dir ="rtl"&gt;
+  &lt;span&gt;Min &lt;/span&gt;
+    &lt;input id="ex25" type="text" /&gt;
+  &lt;span&gt; Max &lt;/span&gt;
+&lt;/div&gt;
+</pre></code>
+
+			  <h5>JavaScript</h5>
+<pre><code class="js">
+// With JQuery
+$("#ex25").slider({
+	ticks: [1, 150, 100],
+	lock_to_ticks: true
+});
+</pre></code>
+		  </div>
+
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -1446,6 +1473,13 @@ $("#ex24").slider({});
 		});
 			/* example 24 */
 			$('#ex24').slider({});
+
+		/* example 25 */
+		$("#ex25").slider({
+			value: [1, 100],
+			ticks: [1, 50, 100],
+			lock_to_ticks: true
+		});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
