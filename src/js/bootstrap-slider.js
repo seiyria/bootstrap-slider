@@ -1098,6 +1098,10 @@ const windowIsDefined = (typeof window === "object");
 				_fnName : function() {...}
 
 			********************************/
+			_removeTooltipListener: function(event) {
+				this.handle1.removeEventListener(event, this.showTooltip, false);
+				this.handle2.removeEventListener(event, this.showTooltip, false);
+			},
 			_removeSliderEventHandlers: function() {
 				// Remove keydown event listeners
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
@@ -1122,12 +1126,10 @@ const windowIsDefined = (typeof window === "object");
 				this.ticksCallbackMap = null;
 
 				if (this.showTooltip) {
-					this.handle1.removeEventListener("focus", this.showTooltip, false);
-					this.handle2.removeEventListener("focus", this.showTooltip, false);
+					this._removeTooltipListener("focus");
 				}
 				if (this.hideTooltip) {
-					this.handle1.removeEventListener("blur", this.hideTooltip, false);
-					this.handle2.removeEventListener("blur", this.hideTooltip, false);
+					this._removeTooltipListener("blur");
 				}
 
 				// Remove event listeners from sliderElem
