@@ -201,6 +201,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | focus | bool | false | Focus the appropriate slider handle after a value change. |
 | labelledby | string,array | null | ARIA labels for the slider handle's, Use array for multiple values in a range slider. |
 | rangeHighlights | array | [] | Defines a range array that you want to highlight, for example: [{'start':val1, 'end': val2, 'class': 'optionalAdditionalClassName'}]. |
+| lock_to_ticks | bool | false | Lock the selection to the values defined at ticks. |
 
 Functions
 =========
