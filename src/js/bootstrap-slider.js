@@ -236,6 +236,15 @@ const windowIsDefined = (typeof window === "object");
 
 		var SliderScale = {
 			linear: {
+				getValue: function(value, options) {
+					if (value < options.min) {
+						return options.min;
+					} else if (value > options.max) {
+						return options.max;
+					} else {
+						return value;
+					}
+				},
 				toValue: function(percentage) {
 					var rawValue = percentage/100 * (this.options.max - this.options.min);
 					var shouldAdjustWithBase = true;
@@ -258,13 +267,7 @@ const windowIsDefined = (typeof window === "object");
 
 					var adjustment = shouldAdjustWithBase ? this.options.min : 0;
 					var value = adjustment + Math.round(rawValue / this.options.step) * this.options.step;
-					if (value < this.options.min) {
-						return this.options.min;
-					} else if (value > this.options.max) {
-						return this.options.max;
-					} else {
-						return value;
-					}
+					return SliderScale.linear.getValue(value, this.options);
 				},
 				toPercentage: function(value) {
 					if (this.options.max === this.options.min) {
@@ -306,13 +309,7 @@ const windowIsDefined = (typeof window === "object");
 					value = this.options.min + Math.round((value - this.options.min) / this.options.step) * this.options.step;
 					/* Rounding to the nearest step could exceed the min or
 					 * max, so clip to those values. */
-					if (value < this.options.min) {
-						return this.options.min;
-					} else if (value > this.options.max) {
-						return this.options.max;
-					} else {
-						return value;
-					}
+					return SliderScale.linear.getValue(value, this.options);
 				},
 				toPercentage: function(value) {
 					if (this.options.max === this.options.min) {
