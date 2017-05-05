@@ -1248,7 +1248,7 @@ $("#ex24").slider({});
 			  <p>Lock selection to ticks</p>
 			  <div class='well' dir ="rtl">
 				  <span>Min </span>
-				  <input id="ex25" type="text" />;
+				  <input id="ex25" type="text" />
 				  <span> Max </span>
 			  </div>
 			  <h5>HTML</h5>
