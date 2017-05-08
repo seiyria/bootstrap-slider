@@ -923,13 +923,9 @@ const windowIsDefined = (typeof window === "object");
 					this._state.value[0] = applyPrecision(this._state.value[0]);
 					this._state.value[1] = applyPrecision(this._state.value[1]);
 
-					try {
-						if (this.options.lock_to_ticks) {
-							this._state.value[0] = this.options.ticks[this._getClosestTickIndex(this._state.value[0])];
-							this._state.value[1] = this.options.ticks[this._getClosestTickIndex(this._state.value[1])];
-						}
-					} catch(err) {
-						console.error(err);
+					if (this.options.lock_to_ticks) {
+						this._state.value[0] = this.options.ticks[this._getClosestTickIndex(this._state.value[0])];
+						this._state.value[1] = this.options.ticks[this._getClosestTickIndex(this._state.value[1])];
 					}
 
 					this._state.value[0] = Math.max(this.options.min, Math.min(this.options.max, this._state.value[0]));
@@ -1767,14 +1763,19 @@ const windowIsDefined = (typeof window === "object");
 				return false;
 			},
 			_setValues: function(index, val) {
-				var comp = index === 0 ? 0 : 100;
+				let comp;
+				if(0 === index) {
+					comp = 0;
+				} else {
+					comp = 100;
+				}
 				if (this._state.percentage[index] !== comp) {
 					val.data[index] = this._toValue(this._state.percentage[index]);
 					val.data[index] = this._applyPrecision(val.data[index]);
 				}
 			},
 			_calculateValue: function(snapToClosestTick) {
-				var val = {};
+				let val = {};
 				if (this.options.range) {
 					val.data = [this.options.min, this.options.max];
 					this._setValues(0, val);
@@ -2001,10 +2002,10 @@ const windowIsDefined = (typeof window === "object");
 				}
 			},
 			_getClosestTickIndex: function(val) {
-				var difference = Math.abs(val - this.options.ticks[0]);
-				var index = 0;
-				for (var i = 0; i < this.options.ticks.length; ++i) {
-					var d = Math.abs(val - this.options.ticks[i]);
+				let difference = Math.abs(val - this.options.ticks[0]);
+				let index = 0;
+				for (let i = 0; i < this.options.ticks.length; ++i) {
+					let d = Math.abs(val - this.options.ticks[i]);
 					if (d < difference) {
 						difference = d;
 						index = i;
