@@ -1763,12 +1763,7 @@ const windowIsDefined = (typeof window === "object");
 				return false;
 			},
 			_setValues: function(index, val) {
-				let comp;
-				if(0 === index) {
-					comp = 0;
-				} else {
-					comp = 100;
-				}
+				const comp = (0 === index) ? 0 : 100;
 				if (this._state.percentage[index] !== comp) {
 					val.data[index] = this._toValue(this._state.percentage[index]);
 					val.data[index] = this._applyPrecision(val.data[index]);
