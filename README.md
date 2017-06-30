@@ -294,6 +294,7 @@ Other Platforms & Libraries
 - [NuGet](https://www.nuget.org/packages/bootstrap-slider/) ([@ChrisMissal](https://github.com/ChrisMissal))
 - [MeteorJS](https://github.com/kidovate/meteor-bootstrap-slider)
 - [Maven](http://mvnrepository.com/artifact/org.webjars.bower/seiyria-bootstrap-slider)
+- [Vue.js](https://github.com/pimlie/vue-bootstrap-slider) ([@pimlie](https://github.com/pimlie))
 
 Maintainers
 ============
