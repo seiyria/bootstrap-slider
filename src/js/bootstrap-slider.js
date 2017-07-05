@@ -298,7 +298,7 @@ const windowIsDefined = (typeof window === "object");
 					var min = (this.options.min === 0) ? 0 : Math.log(this.options.min);
 					var max = Math.log(this.options.max);
 					var value = Math.exp(min + (max - min) * percentage / 100);
-					if(Math.round(value) == this.options.max) {
+					if(Math.round(value) === this.options.max) {
 						return this.options.max;
 					}
 					value = this.options.min + Math.round((value - this.options.min) / this.options.step) * this.options.step;
