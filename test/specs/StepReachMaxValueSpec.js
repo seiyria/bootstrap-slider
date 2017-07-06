@@ -12,17 +12,14 @@ describe("TickMaxValueNotATickBehavior", function() {
         scale: "logarithmic",
         value: 44
       };
-
       slider = new Slider(document.getElementById(SLIDER_ID), options);
     });
 
     it("Value should contain max value when slider is moved to outer right position", function() {
-
       var sliderLeft = slider.sliderElem.offsetLeft;
       var offsetY = slider.sliderElem.offsetTop;
       // I think the + 10 work because it is half of the handle size;
       var offsetX = sliderLeft + slider.sliderElem.clientWidth + 10;
-
       var expectedValue = slider.options.max;
       var mouseEvent = getMouseDownEvent(offsetX, offsetY);
 
@@ -33,15 +30,11 @@ describe("TickMaxValueNotATickBehavior", function() {
     });
   });
 
-
-
   afterEach(function() {
     slider.destroy();
   });
 
   // helper functions
-
-
   function getMouseDownEvent(offsetXToClick, offsetYToClick) {
     var args = [
       'mousedown', // type
@@ -63,7 +56,6 @@ describe("TickMaxValueNotATickBehavior", function() {
 
     var event = document.createEvent('MouseEvents');
     event.initMouseEvent.apply(event, args);
-
     return event;
   }
 
