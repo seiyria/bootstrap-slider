@@ -22,10 +22,8 @@ describe("TickMaxValueNotATickBehavior", function() {
       var offsetX = sliderLeft + slider.sliderElem.clientWidth + 10;
       var expectedValue = slider.options.max;
       var mouseEvent = getMouseDownEvent(offsetX, offsetY);
-
       slider.mousedown(mouseEvent);
       slider.mouseup();
-
       expect(slider.getValue()).toBe(expectedValue);
     });
   });
