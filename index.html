@@ -125,8 +125,16 @@
 			}
 
 			#slider22 .slider-rangeHighlight {
-      	background: #f70616;
-      }
+				background: #f70616;
+			}
+        
+			#slider22 .slider-rangeHighlight.category1 {
+				background: #FF9900;
+			}
+        
+			#slider22 .slider-rangeHighlight.category2 {
+				background: #99CC00;
+			}
 
     </style>
 
@@ -980,8 +988,8 @@ var sliderB = new Slider("#ex18b", {
 					 data-slider-max="20"
 					 data-slider-step="1"
 					 data-slider-value="14"
-					 data-slider-rangeHighlights='[{ "start": 2, "end": 5 },
-					                               { "start": 7, "end": 8 },
+					 data-slider-rangeHighlights='[{ "start": 2, "end": 5, "class": "category1" },
+					                               { "start": 7, "end": 8, "class": "category2" },
 					                               { "start": 17, "end": 19 },
 					                               { "start": 17, "end": 24 },
 					                               { "start": -3, "end": 19 }]'/>
@@ -994,8 +1002,8 @@ var sliderB = new Slider("#ex18b", {
      data-slider-max="20"
      data-slider-step="1"
      data-slider-value="14"
-     data-slider-rangeHighlights='[{ "start": 2, "end": 5 },
-                                   { "start": 7, "end": 8 },
+     data-slider-rangeHighlights='[{ "start": 2, "end": 5, "class": "category1" },
+                                   { "start": 7, "end": 8, "class": "category2" },
                                    { "start": 17, "end": 19 },
                                    { "start": 17, "end": 24 }, //not visible -  out of slider range
                                    { "start": -3, "end": 19 }]' /&gt;
@@ -1010,8 +1018,8 @@ $('#ex22').slider({
     max: 20,
     step: 1,
     value: 14,
-    rangeHighlights: [{ "start": 2, "end": 5 },
-                      { "start": 7, "end": 8 },
+    rangeHighlights: [{ "start": 2, "end": 5, "class": "category1" },
+                      { "start": 7, "end": 8, "class": "category2" },
                       { "start": 17, "end": 19 },
                       { "start": 17, "end": 24 },
                       { "start": -3, "end": 19 }]});
@@ -1023,8 +1031,8 @@ var slider = new Slider("#ex22", {
     max: 20,
     step: 1,
     value: 14,
-    rangeHighlights: [{ "start": 2, "end": 5 },
-                      { "start": 7, "end": 8 },
+    rangeHighlights: [{ "start": 2, "end": 5, "class": "category1" },
+                      { "start": 7, "end": 8, "class": "category2" },
                       { "start": 17, "end": 19 },
                       { "start": 17, "end": 24 },
                       { "start": -3, "end": 19 }]});
@@ -1039,6 +1047,15 @@ var slider = new Slider("#ex22", {
 #slider22 .slider-rangeHighlight {
 	background: #f70616;
 }
+
+#slider22 .slider-rangeHighlight.category1 {
+    background: #FF9900;
+}
+
+#slider22 .slider-rangeHighlight.category2 {
+    background: #99CC00;
+}
+
 </pre></code>
 	  </div>
 

@@ -293,6 +293,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					var min = this.options.min === 0 ? 0 : Math.log(this.options.min);
 					var max = Math.log(this.options.max);
 					var value = Math.exp(min + (max - min) * percentage / 100);
+					if (Math.round(value) === this.options.max) {
+						return this.options.max;
+					}
 					value = this.options.min + Math.round((value - this.options.min) / this.options.step) * this.options.step;
 					/* Rounding to the nearest step could exceed the min or
       * max, so clip to those values. */
@@ -457,12 +460,12 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 				/* Create highlight range elements */
 				this.rangeHighlightElements = [];
-				if (Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
-					for (var j = 0; j < this.options.rangeHighlights.length; j++) {
-
+				var rangeHighlightsOpts = this.options.rangeHighlights;
+				if (Array.isArray(rangeHighlightsOpts) && rangeHighlightsOpts.length > 0) {
+					for (var j = 0; j < rangeHighlightsOpts.length; j++) {
 						var rangeHighlightElement = document.createElement("div");
-						rangeHighlightElement.className = "slider-rangeHighlight slider-selection";
-
+						var customClassString = rangeHighlightsOpts[j].class || "";
+						rangeHighlightElement.className = "slider-rangeHighlight slider-selection " + customClassString;
 						this.rangeHighlightElements.push(rangeHighlightElement);
 						sliderTrack.appendChild(rangeHighlightElement);
 					}
@@ -1524,8 +1527,13 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				}
 
 				var val = this._state.value[handleIdx] + dir * this.options.step;
+				var percentage = val / this.options.max * 100;
+				this._state.keyCtrl = handleIdx;
 				if (this.options.range) {
-					val = [!handleIdx ? val : this._state.value[0], handleIdx ? val : this._state.value[1]];
+					this._adjustPercentageForRangeSliders(percentage);
+					var val1 = !this._state.keyCtrl ? val : this._state.value[0];
+					var val2 = this._state.keyCtrl ? val : this._state.value[1];
+					val = [val1, val2];
 				}
 
 				this._trigger('slideStart', val);
@@ -1537,6 +1545,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._layout();
 
 				this._pauseEvent(ev);
+				delete this._state.keyCtrl;
 
 				return false;
 			},
@@ -1597,6 +1606,14 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					} else if (this._state.dragged === 1 && this._applyToFixedAndParseFloat(this._state.percentage[0], precision) > percentageWithAdjustedPrecision) {
 						this._state.percentage[1] = this._state.percentage[0];
 						this._state.dragged = 0;
+					} else if (this._state.keyCtrl === 0 && this._state.value[1] / this.options.max * 100 < percentage) {
+						this._state.percentage[0] = this._state.percentage[1];
+						this._state.keyCtrl = 1;
+						this.handle2.focus();
+					} else if (this._state.keyCtrl === 1 && this._state.value[0] / this.options.max * 100 > percentage) {
+						this._state.percentage[1] = this._state.percentage[0];
+						this._state.keyCtrl = 0;
+						this.handle1.focus();
 					}
 				}
 			},
@@ -1861,25 +1878,23 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
   		Attach to global namespace
   	*********************************/
 		if ($ && $.fn) {
-			(function () {
-				var autoRegisterNamespace = void 0;
+			var autoRegisterNamespace = void 0;
 
-				if (!$.fn.slider) {
-					$.bridget(NAMESPACE_MAIN, Slider);
-					autoRegisterNamespace = NAMESPACE_MAIN;
-				} else {
-					if (windowIsDefined) {
-						window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
-					}
-					autoRegisterNamespace = NAMESPACE_ALTERNATE;
+			if (!$.fn.slider) {
+				$.bridget(NAMESPACE_MAIN, Slider);
+				autoRegisterNamespace = NAMESPACE_MAIN;
+			} else {
+				if (windowIsDefined) {
+					window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
 				}
-				$.bridget(NAMESPACE_ALTERNATE, Slider);
+				autoRegisterNamespace = NAMESPACE_ALTERNATE;
+			}
+			$.bridget(NAMESPACE_ALTERNATE, Slider);
 
-				// Auto-Register data-provide="slider" Elements
-				$(function () {
-					$("input[data-provide=slider]")[autoRegisterNamespace]();
-				});
-			})();
+			// Auto-Register data-provide="slider" Elements
+			$(function () {
+				$("input[data-provide=slider]")[autoRegisterNamespace]();
+			});
 		}
 	})($);
 
