@@ -1,3 +1,7 @@
+9.8.1 / 2017-07-06
+==================
+* **Bug Fix** Addresses issue where the max value calculation was wrong due to the cutoff when the `max` option value was not a multiple of the `step` option value. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/759). Thanks to [Thomas Haitzer](https://github.com/thaitzer).
+
 9.8.0 / 2017-04-24
 ==================
 * **New Feature:** Ability to add a custom class to the ranges of a slider with the `rangeHightlights` option specified. [See the PR for further details.](https://github.com/seiyria/bootstrap-slider/pull/742). Thanks to [jccode](https://github.com/jccode).
