@@ -20,6 +20,7 @@ describe("TickMaxValueNotATickBehavior", function() {
 
       var sliderLeft = slider.sliderElem.offsetLeft;
       var offsetY = slider.sliderElem.offsetTop;
+      // I think the + 10 work because it is half of the handle size;
       var offsetX = sliderLeft + slider.sliderElem.clientWidth + 10;
 
       var expectedValue = slider.options.max;
