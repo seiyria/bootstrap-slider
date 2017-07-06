@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.8.0              
+                      VERSION  9.8.1              
 ========================================================= */
 "use strict";
 
@@ -296,6 +296,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					var min = this.options.min === 0 ? 0 : Math.log(this.options.min);
 					var max = Math.log(this.options.max);
 					var value = Math.exp(min + (max - min) * percentage / 100);
+					if (Math.round(value) === this.options.max) {
+						return this.options.max;
+					}
 					value = this.options.min + Math.round((value - this.options.min) / this.options.step) * this.options.step;
 					/* Rounding to the nearest step could exceed the min or
       * max, so clip to those values. */
