@@ -2,7 +2,6 @@ describe("TickMaxValueNotATickBehavior", function() {
 	var SLIDER_ID = "testSlider1";
 	var slider;
 	var options;
-  var cache = [];
 
 	describe('max value should be reached', function() {
 		beforeEach(function() {
@@ -38,22 +37,7 @@ describe("TickMaxValueNotATickBehavior", function() {
 	afterEach(function() { slider.destroy(); });
 
 	// helper functions
-	function clickTickAtIndexAndVerify(slider, tickIndex) {
-		var sliderLeft = slider.sliderElem.offsetLeft;
-		var tickLeft = slider.ticks[tickIndex].offsetLeft;
-		var handleHalfWidth = $('.slider-handle.round').width() / 2;
 
-		var offsetX = sliderLeft + tickLeft + handleHalfWidth;
-		var offsetY = slider.sliderElem.offsetTop;
-
-		var mouseEvent = getMouseDownEvent(offsetX, offsetY);
-
-		slider.mousedown(mouseEvent);
-		slider.mouseup();
-
-		var expectedValue = slider.options.ticks[tickIndex];
-		expect(slider.getValue()).toBe(expectedValue);
-	}
 
   function getMouseDownEvent(offsetXToClick, offsetYToClick) {
 		var args = [
