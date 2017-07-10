@@ -725,7 +725,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 			this._state.offset = this._offset(this.sliderElem);
 			this._state.size = this.sliderElem[this.sizePos];
-			this.setValue(this._state.value,false,false,{});
+			this.setValue(this._state.value);
 
 			/******************************************
    				Bind Event Listeners
@@ -870,11 +870,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				}
 			},
 
-			setValue: function setValue(val, triggerSlideEvent, triggerChangeEvent, originalEvent) {
+			setValue: function setValue(val, triggerSlideEvent, triggerChangeEvent) {
 				if (!val) {
 					val = 0;
 				}
-
 				var oldValue = this.getValue();
 				this._state.value = this._validateInputValue(val);
 				var applyPrecision = this._applyPrecision.bind(this);
@@ -907,13 +906,13 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 				this._setDataVal(newValue);
 				if (triggerSlideEvent === true) {
-					this._trigger('slide', newValue, originalEvent);
+					this._trigger('slide', newValue);
 				}
 				if (oldValue !== newValue && triggerChangeEvent === true) {
 					this._trigger('change', {
 						oldValue: oldValue,
 						newValue: newValue
-					}, originalEvent);
+					});
 				}
 
 				return this;
@@ -1467,10 +1466,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._state.inDrag = true;
 				var newValue = this._calculateValue();
 
-				this._trigger('slideStart', newValue, ev);
+				this._trigger('slideStart', newValue);
 
 				this._setDataVal(newValue);
-				this.setValue(newValue, false, true, ev);
+				this.setValue(newValue, false, true);
 
 				ev.returnValue = false;
 
@@ -1540,12 +1539,12 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					val = [val1, val2];
 				}
 
-				this._trigger('slideStart', val, ev);
+				this._trigger('slideStart', val);
 				this._setDataVal(val);
-				this.setValue(val, true, true, ev);
+				this.setValue(val, true, true);
 
 				this._setDataVal(val);
-				this._trigger('slideStop', val, ev);
+				this._trigger('slideStop', val);
 				this._layout();
 
 				this._pauseEvent(ev);
@@ -1574,7 +1573,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._layout();
 
 				var val = this._calculateValue(true);
-				this.setValue(val, true, true, ev);
+				this.setValue(val, true, true);
 
 				return false;
 			},
@@ -1621,7 +1620,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					}
 				}
 			},
-			_mouseup: function _mouseup(ev) {
+			_mouseup: function _mouseup() {
 				if (!this._state.enabled) {
 					return false;
 				}
@@ -1642,7 +1641,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 				this._layout();
 				this._setDataVal(val);
-				this._trigger('slideStop', val,ev);
+				this._trigger('slideStop', val);
 
 				return false;
 			},
@@ -1744,28 +1743,26 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this.element.setAttribute('value', val);
 				this.element.value = val;
 			},
-			_trigger: function _trigger(evt, val, originalEvent) {
+			_trigger: function _trigger(evt, val) {
 				val = val || val === 0 ? val : undefined;
-                originalEvent = originalEvent || originalEvent === 0 ? originalEvent : undefined;
 
 				var callbackFnArray = this.eventToCallbackMap[evt];
 				if (callbackFnArray && callbackFnArray.length) {
 					for (var i = 0; i < callbackFnArray.length; i++) {
 						var callbackFn = callbackFnArray[i];
-						callbackFn(val, originalEvent);
+						callbackFn(val);
 					}
 				}
 
 				/* If JQuery exists, trigger JQuery events */
 				if ($) {
-					this._triggerJQueryEvent(evt, val, originalEvent);
+					this._triggerJQueryEvent(evt, val);
 				}
 			},
-			_triggerJQueryEvent: function _triggerJQueryEvent(evt, val, originalEvent) {
+			_triggerJQueryEvent: function _triggerJQueryEvent(evt, val) {
 				var eventData = {
 					type: evt,
-					value: val,
-					originalEvent: originalEvent
+					value: val
 				};
 				this.$element.trigger(eventData);
 				this.$sliderElem.trigger(eventData);
