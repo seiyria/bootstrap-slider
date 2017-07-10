@@ -898,7 +898,7 @@ const windowIsDefined = (typeof window === "object");
 				}
 			},
 
-			setValue: function(val, triggerSlideEvent, triggerChangeEvent) {
+			setValue: function(val, triggerSlideEvent, triggerChangeEvent, originalEvt) {
 				if (!val) {
 					val = 0;
 				}
@@ -939,13 +939,13 @@ const windowIsDefined = (typeof window === "object");
 
 				this._setDataVal(newValue);
 				if(triggerSlideEvent === true) {
-					this._trigger('slide', newValue);
+					this._trigger('slide', newValue, originalEvt);
 				}
 				if( (oldValue !== newValue) && (triggerChangeEvent === true) ) {
 					this._trigger('change', {
 						oldValue: oldValue,
 						newValue: newValue
-					});
+					}, originalEvt);
 				}
 
 				return this;
@@ -1506,10 +1506,10 @@ const windowIsDefined = (typeof window === "object");
 				this._state.inDrag = true;
 				var newValue = this._calculateValue();
 
-				this._trigger('slideStart', newValue);
+				this._trigger('slideStart', newValue, ev);
 
 				this._setDataVal(newValue);
-				this.setValue(newValue, false, true);
+				this.setValue(newValue, false, true, ev);
 
 				ev.returnValue = false;
 
@@ -1577,12 +1577,12 @@ const windowIsDefined = (typeof window === "object");
 					val = [ val1, val2];
 				}
 
-				this._trigger('slideStart', val);
+				this._trigger('slideStart', val, ev);
 				this._setDataVal(val);
-				this.setValue(val, true, true);
+				this.setValue(val, true, true, ev);
 
 				this._setDataVal(val);
-				this._trigger('slideStop', val);
+				this._trigger('slideStop', val, ev);
 				this._layout();
 
 				this._pauseEvent(ev);
@@ -1611,7 +1611,7 @@ const windowIsDefined = (typeof window === "object");
 				this._layout();
 
 				var val = this._calculateValue(true);
-				this.setValue(val, true, true);
+				this.setValue(val, true, true, ev);
 
 				return false;
 			},
@@ -1660,7 +1660,7 @@ const windowIsDefined = (typeof window === "object");
 					}
 				}
 			},
-			_mouseup: function() {
+			_mouseup: function(ev) {
 				if(!this._state.enabled) {
 					return false;
 				}
@@ -1681,7 +1681,7 @@ const windowIsDefined = (typeof window === "object");
 
 				this._layout();
 				this._setDataVal(val);
-				this._trigger('slideStop', val);
+				this._trigger('slideStop', val, ev);
 
 				return false;
 			},
@@ -1779,26 +1779,28 @@ const windowIsDefined = (typeof window === "object");
 				this.element.setAttribute('value', val);
 				this.element.value = val;
 			},
-			_trigger: function(evt, val) {
+			_trigger: function(evt, val, originalEvt) {
 				val = (val || val === 0) ? val : undefined;
+                if (!originalEvt) originalEvt = {};
 
 				var callbackFnArray = this.eventToCallbackMap[evt];
 				if(callbackFnArray && callbackFnArray.length) {
 					for(var i = 0; i < callbackFnArray.length; i++) {
 						var callbackFn = callbackFnArray[i];
-						callbackFn(val);
+						callbackFn(val, originalEvt);
 					}
 				}
 
 				/* If JQuery exists, trigger JQuery events */
 				if($) {
-					this._triggerJQueryEvent(evt, val);
+					this._triggerJQueryEvent(evt, val, originalEvt);
 				}
 			},
-			_triggerJQueryEvent: function(evt, val) {
+			_triggerJQueryEvent: function(evt, val, originalEvt) {
 				var eventData = {
 					type: evt,
-					value: val
+					value: val,
+                    originalEvent: originalEvt
 				};
 				this.$element.trigger(eventData);
 				this.$sliderElem.trigger(eventData);
