@@ -15,7 +15,7 @@ describe("'originalEvent' slider tests", function() {
 
   describe("When a slide event is triggered", function() {
       beforeEach(function () {
-          testSlider = $("#testSlider1").slider($.extend(sliderOptions));
+          testSlider = $("#testSlider1").slider(sliderOptions);
           $slider = $("#" + sliderId);
           eventtriggered = 0;
           $slider.on('slide', function () {
@@ -28,7 +28,7 @@ describe("'originalEvent' slider tests", function() {
           expect(eventtriggered).toBe(1);
       });
   });
-  
+
   afterEach(function() {
     if(testSlider) {
       testSlider.slider('destroy');
