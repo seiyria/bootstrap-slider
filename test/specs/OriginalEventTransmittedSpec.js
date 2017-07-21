@@ -19,7 +19,7 @@ describe("'originalEvent' slider tests", function() {
           $slider = $("#" + sliderId);
           eventtriggered = 0;
           $slider.on('slide', function () {
-              eventtriggered = 1
+              eventtriggered = 1;
           });
           $slider.trigger('slide');
       });
