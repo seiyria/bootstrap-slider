@@ -902,9 +902,9 @@ const windowIsDefined = (typeof window === "object");
 				if (!val) {
 					val = 0;
 				}
-                if (!originalEvt) {
-				    originalEvt = {};
-                }
+				if (!originalEvt) {
+					originalEvt = {};
+				}
 
 				var oldValue = this.getValue();
 				this._state.value = this._validateInputValue(val);
@@ -1785,9 +1785,9 @@ const windowIsDefined = (typeof window === "object");
 			},
 			_trigger: function(evt, val, originalEvt) {
 				val = (val || val === 0) ? val : undefined;
-                if (!originalEvt) {
-                    originalEvt = {};
-                }
+				if (!originalEvt) {
+					originalEvt = {};
+				}
 
 				var callbackFnArray = this.eventToCallbackMap[evt];
 				if(callbackFnArray && callbackFnArray.length) {
@@ -1806,7 +1806,7 @@ const windowIsDefined = (typeof window === "object");
 				var eventData = {
 					type: evt,
 					value: val,
-                    originalEvent: originalEvt
+					originalEvent: originalEvt
 				};
 				this.$element.trigger(eventData);
 				this.$sliderElem.trigger(eventData);
