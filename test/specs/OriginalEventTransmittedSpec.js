@@ -10,22 +10,24 @@
 */
 describe("'originalEvent' slider tests", function() {
   var testSlider, sliderId = "origEvtTestSlider",
-      $slider, eventtriggered,
+      $slider, originalEvent_passed
 	  sliderOptions = {id: sliderId, value: [0, 10]}; // for the sake of testing, always display the tooltip
 
   describe("When a slide event is triggered", function() {
       beforeEach(function () {
           testSlider = $("#testSlider1").slider(sliderOptions);
           $slider = $("#" + sliderId);
-          eventtriggered = 0;
-          $slider.on('slide', function () {
-              eventtriggered = 1;
+          originalEvent_passed = 0;
+          $slider.on('slide', function (evt) {
+              if (evt && evt.originalEvent) {
+                  originalEvent_passed = 1;
+              }
           });
           $slider.trigger('slide');
       });
 
-      it("...", function () {
-          expect(eventtriggered).toBe(1);
+      it("should contain the original mouse event as property in the passed slide event.", function () {
+          expect(originalEvent_passed).toBe(1);
       });
   });
 
