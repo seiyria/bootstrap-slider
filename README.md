@@ -207,7 +207,7 @@ __NOTE:__ Optional parameters are italicized.
 | Function | Parameters | Description |
 | -------- | ----------- | ----------- |
 | getValue | --- | Get the current value from the slider |
-| setValue | newValue, _triggerSlideEvent_, _triggerChangeEvent_, _originalEvt_ | Set a new value for the slider. If optional triggerSlideEvent parameter is _true_, 'slide' events will be triggered. If optional triggerChangeEvent parameter is _true_, 'change' events will be triggered. This function takes `newValue` as either a `Number`, `String`, `Array`. If the value is of type `String` it must be convertable to an integer or it will throw an error. If this function is programmatically called, e.g. from a mouseMove event on the handle, the original mouse event is passed as optional argument _originalEvt_|
+| setValue | newValue, _triggerSlideEvent_, _triggerChangeEvent_, _originalEvt_ | Set a new value for the slider. If optional triggerSlideEvent parameter is _true_, 'slide' events will be triggered. If optional triggerChangeEvent parameter is _true_, 'change' events will be triggered. This function takes `newValue` as either a `Number`, `String`, `Array`. If the value is of type `String` it must be convertable to an integer or it will throw an error. If this function is implicetely called from a callback like _mousemove, the original mouse event is passed as optional argument _originalEvt_|
 | getElement | --- | Get the div slider element |
 | destroy | --- | Properly clean up and remove the slider instance |
 | disable | ---| Disables the slider and prevents the user from changing the value |
@@ -225,9 +225,9 @@ Events
 ======
 | Event | Description | Value |
 | ----- | ----------- | ----- |
-| slide | This event fires when the slider is dragged | The new slider value |
-| slideStart | This event fires when dragging starts | The new slider value |
-| slideStop | This event fires when the dragging stops or has been clicked on | The new slider value |
+| slide | This event fires when the slider is dragged | The new slider value, the original mouse or keyboard event |
+| slideStart | This event fires when dragging starts | The new slider value, the original mouse or keyboard event |
+| slideStop | This event fires when the dragging stops or has been clicked on | The new slider value, the original mouse or keyboard event |
 | change | This event fires when the slider value has changed | An object with 2 properties: "oldValue" and "newValue" |
 | slideEnabled | This event fires when the slider is enabled | N/A |
 | slideDisabled | This event fires when the slider is disabled | N/A |
