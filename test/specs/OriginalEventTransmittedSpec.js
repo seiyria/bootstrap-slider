@@ -10,22 +10,25 @@
 */
 describe("'originalEvent' slider tests", function() {
   var testSlider, sliderId = "origEvtTestSlider",
-      $slider, eventtriggered
+      $slider, eventtriggered,
 	  sliderOptions = {id: sliderId, value: [0, 10]}; // for the sake of testing, always display the tooltip
 
   describe("When a slide event is triggered", function() {
-    beforeEach(function() {
-      testSlider = $("#testSlider1").slider($.extend(sliderOptions));
-      $slider = $("#"+sliderId);
-	  eventtriggered = 0;
-	  $slider.on('slide',function(){eventtriggered = 1});
-	  $slider.trigger('slide');
-    });
+      beforeEach(function () {
+          testSlider = $("#testSlider1").slider($.extend(sliderOptions));
+          $slider = $("#" + sliderId);
+          eventtriggered = 0;
+          $slider.on('slide', function () {
+              eventtriggered = 1
+          });
+          $slider.trigger('slide');
+      });
 
-    it("...", function() {
-      expect(eventtriggered).toBe(1);
-    });
-
+      it("...", function () {
+          expect(eventtriggered).toBe(1);
+      });
+  });
+  
   afterEach(function() {
     if(testSlider) {
       testSlider.slider('destroy');
