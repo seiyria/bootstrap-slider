@@ -4,7 +4,7 @@ describe("Original Event trasmittance test", function() {
   var options;
   var originalEventTransmitted;
 
-  describe('When the slider is manipulated using the mouse', function() {
+  describe('When the slider track is clicked,', function() {
     beforeEach(function() {
       options = {
         min: 0,
@@ -14,7 +14,7 @@ describe("Original Event trasmittance test", function() {
       slider = new Slider(document.getElementById(SLIDER_ID), options);
     });
 
-    it("a slideStop event should contain the original mouse event (mouseup)", function() {
+    it("a slideStop event should be fired and contain the original mouse event of type mouseup", function() {
       slider.on("slideStop", function(evt) {
           console.log('slide');
           console.log(evt);
@@ -29,8 +29,8 @@ describe("Original Event trasmittance test", function() {
       var sliderLeft = slider.sliderElem.offsetLeft;
       var offsetY = slider.sliderElem.offsetTop;
       var offsetX = sliderLeft + slider.sliderElem.clientWidth;
-      var mouseMoveEvent = getMouseDownEvent('mousedown', offsetX, offsetY);
-      var mouseUpEvent = getMouseDownEvent('mouseup', offsetX, offsetY);
+      var mouseMoveEvent = getMouseEvent('mousedown', offsetX, offsetY);
+      var mouseUpEvent = getMouseEvent('mouseup', offsetX, offsetY);
 
       originalEventTransmitted = 0;
       slider.mousedown(mouseMoveEvent);
