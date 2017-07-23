@@ -24,15 +24,17 @@ describe("Original Event trasmittance test", function() {
             originalEventTransmitted = 1;
           } else {
             console.log('no');
-          };
+          }
       });
       var sliderLeft = slider.sliderElem.offsetLeft;
       var offsetY = slider.sliderElem.offsetTop;
       var offsetX = sliderLeft + slider.sliderElem.clientWidth;
-      var mouseEvent = getMouseDownEvent(offsetX, offsetY);
-        originalEventTransmitted = 0;
-      slider.mousedown(mouseEvent);
-      slider.mouseup();
+      var mouseMoveEvent = getMouseDownEvent('mousedown', offsetX, offsetY);
+      var mouseUpEvent = getMouseDownEvent('mouseup', offsetX, offsetY);
+
+      originalEventTransmitted = 0;
+      slider.mousedown(mouseMoveEvent);
+      slider.mouseup(mouseUpEvent);
       expect(originalEventTransmitted).toBe(1);
     });
   });
@@ -42,9 +44,9 @@ describe("Original Event trasmittance test", function() {
   });
 
   // helper functions
-  function getMouseDownEvent(offsetXToClick, offsetYToClick) {
+  function getMouseEvent(type, offsetXToClick, offsetYToClick) {
     var args = [
-      'mousedown', // type
+      type, // type, mousedown, mouseup, mousemove
       true, // canBubble
       true, // cancelable
       document, // view,
