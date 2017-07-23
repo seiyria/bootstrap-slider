@@ -27,9 +27,9 @@ describe("Original Event trasmittance test", function() {
             console.log('no');
           }
       });
-      var sliderLeft = slider.sliderElem.offsetLeft;
-      var offsetY = slider.sliderElem.offsetTop;
-      var offsetX = sliderLeft + slider.sliderElem.clientWidth;
+      var sliderLeft = slider.offset().left;
+      var offsetY = slider.offset().top;
+      var offsetX = sliderLeft + slider.width();
       var mouseMoveEvent = getMouseEvent('mousedown', offsetX, offsetY);
       var mouseUpEvent = getMouseEvent('mouseup', offsetX, offsetY);
 
