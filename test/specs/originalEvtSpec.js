@@ -2,7 +2,7 @@ describe("Original Event trasmittance test", function() {
   var SLIDER_ID = "testSlider1";
   var slider;
   var options;
-  var slidestopfired;
+  var originalEventTransmitted;
 
   describe('When clicking the slider track', function() {
     beforeEach(function() {
@@ -15,18 +15,20 @@ describe("Original Event trasmittance test", function() {
     });
 
     it("the slideStop event should contain the original mouse event", function() {
-      slider.on("slideStop", function() {
-          slidestopfired = 1;
+      slider.on("slideStop", function(evt) {
           console.log('slide');
+          console.log(evt);
+          console.log(evt.originalEvent);
+          originalEventTransmitted = 1;
       });
       var sliderLeft = slider.sliderElem.offsetLeft;
       var offsetY = slider.sliderElem.offsetTop;
       var offsetX = sliderLeft + slider.sliderElem.clientWidth;
       var mouseEvent = getMouseDownEvent(offsetX, offsetY);
-      slidestopfired = 0;
+        originalEventTransmitted = 0;
       slider.mousedown(mouseEvent);
       slider.mouseup();
-      expect(slidestopfired).toBe(1);
+      expect(originalEventTransmitted).toBe(1);
     });
   });
 
