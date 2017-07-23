@@ -19,6 +19,7 @@ describe("Original Event trasmittance test", function() {
           console.log('slide');
           console.log(evt);
           console.log(evt.originalEvent);
+          console.log(evt.type);
           if (evt.originalEvent) {
             console.log('yes');
             originalEventTransmitted = 1;
