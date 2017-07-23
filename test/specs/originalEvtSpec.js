@@ -4,7 +4,7 @@ describe("Original Event trasmittance test", function() {
   var options;
   var originalEventTransmitted;
 
-  describe('When clicking the slider track', function() {
+  describe('When the slider is manipulated using the mouse', function() {
     beforeEach(function() {
       options = {
         min: 0,
@@ -14,12 +14,17 @@ describe("Original Event trasmittance test", function() {
       slider = new Slider(document.getElementById(SLIDER_ID), options);
     });
 
-    it("the slideStop event should contain the original mouse event", function() {
+    it("a slideStop event should contain the original mouse event (mouseup)", function() {
       slider.on("slideStop", function(evt) {
           console.log('slide');
           console.log(evt);
           console.log(evt.originalEvent);
-          originalEventTransmitted = 1;
+          if (evt.originalEvent) {
+            console.log('yes');
+            originalEventTransmitted = 1;
+          } else {
+            console.log('no');
+          };
       });
       var sliderLeft = slider.sliderElem.offsetLeft;
       var offsetY = slider.sliderElem.offsetTop;
