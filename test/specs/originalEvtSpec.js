@@ -11,7 +11,7 @@ describe("Original Event trasmittance test", function() {
         max: 100,
         value: 0
       };
-      slider = $("#" + SLIDER_ID).bootstrapSlider(options);
+      slider = new Slider(document.getElementById(SLIDER_ID), options);
     });
 
     it("a slideStop event should be fired and contain the original mouse event of type mouseup", function() {
@@ -27,18 +27,15 @@ describe("Original Event trasmittance test", function() {
             console.log('no');
           }
       });
-      var sliderLeft = slider.offset().left;
-      var offsetY = slider.offset().top;
-      var offsetX = sliderLeft + slider.width();
-      console.log(offsetX, offsetY);
+      var sliderLeft = slider.sliderElem.offsetLeft;
+      var offsetY = slider.sliderElem.offsetTop;
+      var offsetX = sliderLeft + slider.sliderElem.clientWidth;
       var mouseMoveEvent = getMouseEvent('mousedown', offsetX, offsetY);
       var mouseUpEvent = getMouseEvent('mouseup', offsetX, offsetY);
-      console.log(mouseMoveEvent);
-      console.log(mouseUpEvent);
 
       originalEventTransmitted = 0;
-      slider.trigger(mouseMoveEvent);
-      slider.trigger(mouseUpEvent);
+      slider.mousedown(mouseMoveEvent);
+      slider.mouseup(mouseUpEvent);
       expect(originalEventTransmitted).toBe(1);
     });
   });
