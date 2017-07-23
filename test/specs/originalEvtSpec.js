@@ -2,7 +2,7 @@ describe("Original Event trasmittance test", function() {
   var SLIDER_ID = "testSlider1";
   var slider;
   var options;
-  var slidestopfired
+  var slidestopfired;
 
   describe('When clicking the slider track', function() {
     beforeEach(function() {
