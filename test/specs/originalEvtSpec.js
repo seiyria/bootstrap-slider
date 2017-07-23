@@ -11,7 +11,7 @@ describe("Original Event trasmittance test", function() {
         max: 100,
         value: 0
       };
-      slider = new Slider(document.getElementById(SLIDER_ID), options);
+      slider = $("#" + SLIDER_ID).bootstrapSlider(options);
     });
 
     it("a slideStop event should be fired and contain the original mouse event of type mouseup", function() {
