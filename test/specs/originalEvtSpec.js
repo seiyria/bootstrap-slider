@@ -3,8 +3,9 @@ describe("Original Event trasmittance test", function() {
   var slider;
   var options;
   var originalEventTransmitted;
+  var sliderCallback;
 
-  describe('When the slider track is clicked,', function() {
+  describe('When a slider is initialized w/o jQuery and the track is clicked,', function() {
     beforeEach(function() {
       options = {
         min: 0,
@@ -12,31 +13,25 @@ describe("Original Event trasmittance test", function() {
         value: 0
       };
       slider = new Slider(document.getElementById(SLIDER_ID), options);
+      originalEventTransmitted=0;
     });
 
-    it("a slideStop event should be fired and contain the original mouse event of type mouseup", function() {
-      slider.on("slideStop", function(evt) {
-          console.log('slide');
-          console.log(evt);
-          console.log(evt.originalEvent);
-          console.log(evt.type);
-          if (evt.originalEvent) {
-            console.log('yes');
-            originalEventTransmitted = 1;
-          } else {
-            console.log('no');
-          }
-      });
-      var sliderLeft = slider.sliderElem.offsetLeft;
-      var offsetY = slider.sliderElem.offsetTop;
-      var offsetX = sliderLeft + slider.sliderElem.clientWidth;
-      var mouseMoveEvent = getMouseEvent('mousedown', offsetX, offsetY);
-      var mouseUpEvent = getMouseEvent('mouseup', offsetX, offsetY);
+    it("a slideStop event should contain the original mouse event as second argument.", function() {
+        slider.on("slideStop", function(val, evt) {
+            if (evt.type == "mouseup") {
+                originalEventTransmitted = 1;
+            }
+        });
+        var sliderLeft = slider.sliderElem.offsetLeft;
+        var offsetY = slider.sliderElem.offsetTop;
+        var offsetX = sliderLeft + slider.sliderElem.clientWidth;
+        var mouseMoveEvent = getMouseEvent('mousedown', offsetX, offsetY);
+        var mouseUpEvent = getMouseEvent('mouseup', offsetX, offsetY);
 
-      originalEventTransmitted = 0;
-      slider.mousedown(mouseMoveEvent);
-      slider.mouseup(mouseUpEvent);
-      expect(originalEventTransmitted).toBe(1);
+        slider.mousedown(mouseMoveEvent);
+        slider.mouseup(mouseUpEvent);
+
+        expect(originalEventTransmitted).toBe(1);
     });
   });
 
@@ -46,26 +41,15 @@ describe("Original Event trasmittance test", function() {
 
   // helper functions
   function getMouseEvent(type, offsetXToClick, offsetYToClick) {
-    var args = [
-      type, // type, mousedown, mouseup, mousemove
-      true, // canBubble
-      true, // cancelable
-      document, // view,
-      0, // detail
-      0, // screenX
-      0, // screenY
-      offsetXToClick, // clientX
-      offsetYToClick, // clientY,
-      false, // ctrlKey
-      false, // altKey
-      false, // shiftKey
-      false, // metaKey,
-      0, // button
-      null // relatedTarget
-    ];
+    var args = {
+        clientX: offsetXToClick,
+        clientY: offsetYToClick,
+        ctrlKey: false,
+        shiftKey: false,
+        altKey: false,
+    }
 
-    var event = document.createEvent('MouseEvents');
-    event.initMouseEvent.apply(event, args);
+    var event = new MouseEvent(type, args);
     return event;
   }
 
