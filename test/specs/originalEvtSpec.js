@@ -30,6 +30,7 @@ describe("Original Event trasmittance test", function() {
       var sliderLeft = slider.offset().left;
       var offsetY = slider.offset().top;
       var offsetX = sliderLeft + slider.width();
+      console.log(offsetX, offsetY);
       var mouseMoveEvent = getMouseEvent('mousedown', offsetX, offsetY);
       var mouseUpEvent = getMouseEvent('mouseup', offsetX, offsetY);
 
