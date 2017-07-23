@@ -33,10 +33,12 @@ describe("Original Event trasmittance test", function() {
       console.log(offsetX, offsetY);
       var mouseMoveEvent = getMouseEvent('mousedown', offsetX, offsetY);
       var mouseUpEvent = getMouseEvent('mouseup', offsetX, offsetY);
+      console.log(mouseMoveEvent);
+      console.log(mouseUpEvent);
 
       originalEventTransmitted = 0;
-      slider.mousedown(mouseMoveEvent);
-      slider.mouseup(mouseUpEvent);
+      slider.trigger(mouseMoveEvent);
+      slider.trigger(mouseUpEvent);
       expect(originalEventTransmitted).toBe(1);
     });
   });
