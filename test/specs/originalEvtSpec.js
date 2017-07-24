@@ -37,49 +37,15 @@ describe("Original Event trasmittance test", function () {
             var mouseDownEvent = getMouseEvent(is_jquery, 'mousedown', offsetX, offsetY);
             console.log(mouseDownEvent);
             slider.mousedown(mouseDownEvent);
-
-            expect(origEvtInSlidestart).toBe(1);
-        });
-        it("a slide event fired should contain the original mouse event as second argument. (type mousemove)", function () {
-            slider.on("slide", function (val, evt) {
-                console.log(evt);
-                console.log('slide');
-                if (evt && evt.type === "mousemove") {
-                    console.log('yes');
-                    origEvtInSlide = 1;
-                } else {
-                    console.log('no');
-                }
-            });
-            var sliderLeft = $("#myslider")[0].offsetLeft;
-            var offsetY = $("#myslider")[0].offsetTop;
-            var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
             var mouseMoveEvent = getMouseEvent(is_jquery, 'mousemove', offsetX - 20, offsetY);
             console.log(mouseMoveEvent);
             slider.mousemove(mouseMoveEvent);
-
-            expect(origEvtInSlide).toBe(1);
-        });
-        it("a slideStart event should contain the original mouse event as second argument.", function () {
-            slider.on("slideStop", function (val, evt) {
-                console.log(evt);
-                console.log('slideStop');
-                if (evt && evt.type === "mouseup") {
-                    console.log('yes');
-                    origEvtInSlidestop = 1;
-                } else {
-                    console.log('no');
-                }
-            });
-            var sliderLeft = $("#myslider")[0].offsetLeft;
-            var offsetY = $("#myslider")[0].offsetTop;
-            var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
             var mouseUpEvent = getMouseEvent(is_jquery, 'mouseup', offsetX - 20, offsetY);
             console.log(mouseUpEvent);
             slider.mouseup(mouseUpEvent);
-
-            expect(origEvtInSlidestop).toBe(1);
+            expect(origEvtInSlidestart).toBe(1);
         });
+
     });
 
     afterEach(function () {
