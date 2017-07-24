@@ -8,6 +8,7 @@ describe("Original Event trasmittance test", function () {
     describe('When a slider is initialized w/o jQuery, and the handle is dragged...,', function () {
         beforeEach(function () {
             options = {
+                id: "myslider",
                 min: 0,
                 max: 100,
                 value: 0
