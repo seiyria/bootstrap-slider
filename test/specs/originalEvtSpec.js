@@ -103,7 +103,7 @@ describe("Original Event trasmittance test", function () {
                 ctrlKey: false, // ctrlKey
                 shiftKey: false, // altKey
                 altKey: false, // shiftKey
-            }
+            };
             event = new MouseEvent(type, args);
         }
         return event;
