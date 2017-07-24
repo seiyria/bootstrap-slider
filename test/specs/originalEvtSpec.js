@@ -86,7 +86,7 @@ describe("Original Event trasmittance test", function () {
     });
 
     function getMouseEvent(is_jquery, type, offsetXToClick, offsetYToClick) {
-        var event
+        var event;
         if (is_jquery) {
             // create a jQuery event
             event = $.Event(type);
