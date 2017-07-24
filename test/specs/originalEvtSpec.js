@@ -20,58 +20,37 @@ describe("Original Event trasmittance test", function () {
             slider.on("slideStart", function (val, evt) {
                 if (evt && evt.type && evt.type === "mousedown") {
                     origEvtInSlidestart = 1;
-                } else {
                 }
             });
             slider.on("slide", function (val, evt) {
                 if (evt && evt.type && evt.type === "mousemove") {
                     origEvtInSlide = 1;
-                } else {
                 }
             });
             slider.on("slideStop", function (val, evt) {
                 if (evt && evt.type && evt.type === "mouseup") {
                     origEvtInSlidestop = 1;
-                } else {
                 }
             });
 
+            var sliderLeft = $("#myslider")[0].offsetLeft;
+            var offsetY = $("#myslider")[0].offsetTop;
+            var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
+            var mouseDownEvent = getMouseEvent('mousedown', offsetX, offsetY);
+            var mouseMoveEvent = getMouseEvent('mousemove', offsetX - 20, offsetY);
+            var mouseUpEvent = getMouseEvent('mouseup', offsetX - 20, offsetY);
+            slider.mousedown(mouseDownEvent);
+            slider.mousemove(mouseMoveEvent);
+            slider.mouseup(mouseUpEvent);
         });
 
         it("slideStart event should contain mousedown evt", function () {
-            var sliderLeft = $("#myslider")[0].offsetLeft;
-            var offsetY = $("#myslider")[0].offsetTop;
-            var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
-            var mouseDownEvent = getMouseEvent('mousedown', offsetX, offsetY);
-            var mouseMoveEvent = getMouseEvent('mousemove', offsetX - 20, offsetY);
-            var mouseUpEvent = getMouseEvent('mouseup', offsetX - 20, offsetY);
-            slider.mousedown(mouseDownEvent);
-            slider.mousemove(mouseMoveEvent);
-            slider.mouseup(mouseUpEvent);
             expect(origEvtInSlidestart).toBe(1);
         });
         it("slide event should contain mousemove evt", function () {
-            var sliderLeft = $("#myslider")[0].offsetLeft;
-            var offsetY = $("#myslider")[0].offsetTop;
-            var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
-            var mouseDownEvent = getMouseEvent('mousedown', offsetX, offsetY);
-            var mouseMoveEvent = getMouseEvent('mousemove', offsetX - 20, offsetY);
-            var mouseUpEvent = getMouseEvent('mouseup', offsetX - 20, offsetY);
-            slider.mousedown(mouseDownEvent);
-            slider.mousemove(mouseMoveEvent);
-            slider.mouseup(mouseUpEvent);
             expect(origEvtInSlide).toBe(1);
         });
         it("slideStop event should contain mouseup evt", function () {
-            var sliderLeft = $("#myslider")[0].offsetLeft;
-            var offsetY = $("#myslider")[0].offsetTop;
-            var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
-            var mouseDownEvent = getMouseEvent('mousedown', offsetX, offsetY);
-            var mouseMoveEvent = getMouseEvent('mousemove', offsetX - 20, offsetY);
-            var mouseUpEvent = getMouseEvent('mouseup', offsetX - 20, offsetY);
-            slider.mousedown(mouseDownEvent);
-            slider.mousemove(mouseMoveEvent);
-            slider.mouseup(mouseUpEvent);
             expect(origEvtInSlidestop).toBe(1);
         });
     });
@@ -82,11 +61,11 @@ describe("Original Event trasmittance test", function () {
 
     function getMouseEvent(type, offsetXToClick, offsetYToClick) {
         var args = {
-            clientX: offsetXToClick, // clientX
-            clientY: offsetYToClick, // clientY,
-            ctrlKey: false, // ctrlKey
-            shiftKey: false, // altKey
-            altKey: false, // shiftKey
+            clientX: offsetXToClick,
+            clientY: offsetYToClick,
+            ctrlKey: false,
+            shiftKey: false,
+            altKey: false
         };
         var event = new MouseEvent(type, args);
         return event;
