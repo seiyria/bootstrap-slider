@@ -13,7 +13,7 @@ describe("Original Event trasmittance test", function () {
                 max: 100,
                 value: 0
             };
-            slider = $("#" + SLIDER_ID).slider(options);
+            slider = new Slider(document.getElementById(SLIDER_ID), options);
             origEvtInSlidestart = 0;
             origEvtInSlide = 0;
             origEvtInSlidestop = 0;
