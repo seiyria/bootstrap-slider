@@ -121,16 +121,16 @@ describe("Original Event trasmittance test", function () {
 
         // Polyfills DOM4 MouseEvent
 
-        var MouseEvent = function (eventType, params) {
+        var MouseEvent3 = function (eventType, params) {
             params = params || { bubbles: false, cancelable: false };
             var mouseEvent2 = document.createEvent('MouseEvent');
             mouseEvent2.initMouseEvent(eventType, params.bubbles, params.cancelable, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 
             return mouseEvent2;
-        }
+        };
 
-        MouseEvent.prototype = Event.prototype;
+        MouseEvent3.prototype = Event.prototype;
 
-        window.MouseEvent = MouseEvent;
+        window.MouseEvent = MouseEvent3;
     })(window);
 });
