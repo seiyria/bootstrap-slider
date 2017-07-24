@@ -1805,11 +1805,10 @@ const windowIsDefined = (typeof window === "object");
 			_triggerJQueryEvent: function(evt, val, originalEvt) {
 				var eventData = {
 					type: evt,
-					value: val,
-					originalEvent: originalEvt
+					value: val
 				};
-				this.$element.trigger(eventData);
-				this.$sliderElem.trigger(eventData);
+				this.$element.trigger(eventData, originalEvt);
+				this.$sliderElem.trigger(eventData, originalEvt);
 			},
 			_unbindJQueryEventHandlers: function() {
 				this.$element.off();
