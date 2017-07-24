@@ -4,7 +4,7 @@ describe("Original Event trasmittance test", function () {
     var options;
     var origEvtInSlidestart, origEvtInSlide, origEvtInSlidestop;
 
-    describe('When a slider w/o jQuery is dragged...,', function () {
+    describe('When a slider w/o jQuery is dragged', function () {
         beforeEach(function () {
             options = {
                 id: "myslider",
@@ -75,7 +75,7 @@ describe("Original Event trasmittance test", function () {
             expect(origEvtInSlidestop).toBe(1);
         });
     });
-    
+
     afterEach(function () {
         slider.destroy();
     });
