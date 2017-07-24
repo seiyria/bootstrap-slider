@@ -2,55 +2,110 @@ describe("Original Event trasmittance test", function() {
   var SLIDER_ID = "testSlider1";
   var slider;
   var options;
-  var originalEventTransmitted;
-  var sliderCallback;
+  var origEvtInSlidestart, origEvtInSlide, origEvtInSlidestop;
+  var is_jquery;
 
-  describe('When a slider is initialized w/o jQuery and the track is clicked,', function() {
-    beforeEach(function() {
-      options = {
-        min: 0,
-        max: 100,
-        value: 0
-      };
-      slider = new Slider(document.getElementById(SLIDER_ID), options);
-      originalEventTransmitted=0;
-    });
+  describe('When a slider is initialized w/o jQuery, and the handle is dragged...,', function() {
+      beforeEach(function() {
+          options = {
+            min: 0,
+            max: 100,
+            value: 0
+          };
+          slider = $("#"+SLIDER_ID).slider(options);
+          origEvtInSlidestart = 0;
+          origEvtInSlide = 0;
+          origEvtInSlidestop = 0;
+          is_jquery = 0;
+      });
 
-    it("a slideStop event should contain the original mouse event as second argument.", function() {
-        slider.on("slideStop", function(val, evt) {
-            if (evt.type == "mouseup") {
-                originalEventTransmitted = 1;
-            }
-        });
-        var sliderLeft = slider.sliderElem.offsetLeft;
-        var offsetY = slider.sliderElem.offsetTop;
-        var offsetX = sliderLeft + slider.sliderElem.clientWidth;
-        var mouseMoveEvent = getMouseEvent('mousedown', offsetX, offsetY);
-        var mouseUpEvent = getMouseEvent('mouseup', offsetX, offsetY);
+      it("a slideStart event fired should contain the original mouse event as second argument. (type mousedown)", function() {
+          slider.on("slideStart", function(val, evt) {
+              console.log(evt)
+              console.log('slideStart');
+              if (evt && evt.type === "mousedown") {
+                  console.log('yes');
+                  origEvtInSlidestart = 1;
+              } else {
+                  console.log('no');
+              }
+          });
+          var sliderLeft = $("#myslider")[0].offsetLeft;
+          var offsetY = $("#myslider")[0].offsetTop;
+          var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
+          var mouseDownEvent = getMouseEvent(is_jquery, 'mousedown', offsetX, offsetY);
 
-        slider.mousedown(mouseMoveEvent);
-        slider.mouseup(mouseUpEvent);
+          slider.mousedown(mouseDownEvent);
 
-        expect(originalEventTransmitted).toBe(1);
-    });
+          expect(origEvtInSlidestart).toBe(1);
+      });
+      it("a slide event fired should contain the original mouse event as second argument. (type mousemove)", function() {
+          slider.on("slide", function(val, evt) {
+              console.log(evt)
+              console.log('slide');
+              if (evt && evt.type === "mousemove") {
+                  console.log('yes');
+                  origEvtInSlide = 1;
+              } else {
+                  console.log('no');
+              }
+          });
+          var sliderLeft = $("#myslider")[0].offsetLeft;
+          var offsetY = $("#myslider")[0].offsetTop;
+          var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
+          var mouseMoveEvent = getMouseEvent(is_jquery, 'mousemove', offsetX-20, offsetY);
+
+          slider.mousemove(mouseMoveEvent);
+
+          expect(origEvtInSlide).toBe(1);
+      });
+      it("a slideStart event should contain the original mouse event as second argument.", function() {
+          slider.on("slideStop", function(val, evt) {
+              console.log(evt)
+              console.log('slideStop');
+              if (evt && evt.type === "mouseup") {
+                  console.log('yes');
+                  origEvtInSlidestop = 1;
+              } else {
+                  console.log('no');
+              }
+          });
+          var sliderLeft = $("#myslider")[0].offsetLeft;
+          var offsetY = $("#myslider")[0].offsetTop;
+          var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
+          var mouseUpEvent = getMouseEvent(is_jquery, 'mouseup', offsetX-20, offsetY);
+
+          slider.mouseup(mouseUpEvent );
+
+          expect(origEvtInSlidestop).toBe(1);
+      });
   });
 
   afterEach(function() {
     slider.destroy();
   });
 
-  // helper functions
-  function getMouseEvent(type, offsetXToClick, offsetYToClick) {
-    var args = {
-        clientX: offsetXToClick,
-        clientY: offsetYToClick,
-        ctrlKey: false,
-        shiftKey: false,
-        altKey: false,
-    }
+    function getMouseEvent(is_jquery, type, offsetXToClick, offsetYToClick) {
+        if (is_jquery) {
+            // create a jQuery event
+            var event = $.Event(type);
 
-    var event = new MouseEvent(type, args);
-    return event;
-  }
+            // set coordinates
+            event.pageX = offsetXToClick;
+            event.clientX = offsetXToClick;
+            event.pageY = offsetYToClick;
+            event.clientY = offsetYToClick;
+        } else {
+            var args = {
+                clientX: offsetXToClick, // clientX
+                clientY: offsetYToClick, // clientY,
+                ctrlKey: false, // ctrlKey
+                shiftKey: false, // altKey
+                altKey: false, // shiftKey
+            }
+            var event = new MouseEvent(type, args);
+        }
+        return event;
+    }
 
 });
