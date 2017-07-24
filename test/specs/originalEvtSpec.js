@@ -35,7 +35,7 @@ describe("Original Event trasmittance test", function () {
             var offsetY = $("#myslider")[0].offsetTop;
             var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
             var mouseDownEvent = getMouseEvent(is_jquery, 'mousedown', offsetX, offsetY);
-
+            console.log(mouseDownEvent);
             slider.mousedown(mouseDownEvent);
 
             expect(origEvtInSlidestart).toBe(1);
@@ -55,7 +55,7 @@ describe("Original Event trasmittance test", function () {
             var offsetY = $("#myslider")[0].offsetTop;
             var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
             var mouseMoveEvent = getMouseEvent(is_jquery, 'mousemove', offsetX - 20, offsetY);
-
+            console.log(mouseMoveEvent);
             slider.mousemove(mouseMoveEvent);
 
             expect(origEvtInSlide).toBe(1);
@@ -75,7 +75,7 @@ describe("Original Event trasmittance test", function () {
             var offsetY = $("#myslider")[0].offsetTop;
             var offsetX = sliderLeft + $("#myslider")[0].clientWidth;
             var mouseUpEvent = getMouseEvent(is_jquery, 'mouseup', offsetX - 20, offsetY);
-
+            console.log(mouseUpEvent);
             slider.mouseup(mouseUpEvent);
 
             expect(origEvtInSlidestop).toBe(1);
