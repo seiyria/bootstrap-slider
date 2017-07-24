@@ -21,7 +21,7 @@ describe("Original Event trasmittance test", function() {
 
       it("a slideStart event fired should contain the original mouse event as second argument. (type mousedown)", function() {
           slider.on("slideStart", function(val, evt) {
-              console.log(evt)
+              console.log(evt);
               console.log('slideStart');
               if (evt && evt.type === "mousedown") {
                   console.log('yes');
@@ -41,7 +41,7 @@ describe("Original Event trasmittance test", function() {
       });
       it("a slide event fired should contain the original mouse event as second argument. (type mousemove)", function() {
           slider.on("slide", function(val, evt) {
-              console.log(evt)
+              console.log(evt);
               console.log('slide');
               if (evt && evt.type === "mousemove") {
                   console.log('yes');
@@ -61,7 +61,7 @@ describe("Original Event trasmittance test", function() {
       });
       it("a slideStart event should contain the original mouse event as second argument.", function() {
           slider.on("slideStop", function(val, evt) {
-              console.log(evt)
+              console.log(evt);
               console.log('slideStop');
               if (evt && evt.type === "mouseup") {
                   console.log('yes');
