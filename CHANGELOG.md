@@ -1,3 +1,7 @@
+9.9.0 / 2017-09-23
+==================
+* **New Feature** LESS/CSS: refactor colors into variables file. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/779). Thanks to [Joseph Marikle](https://github.com/jmarikle).
+
 9.8.1 / 2017-07-06
 ==================
 * **Bug Fix** Addresses issue where the max value calculation was wrong due to the cutoff when the `max` option value was not a multiple of the `step` option value. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/759). Thanks to [Thomas Haitzer](https://github.com/thaitzer).
