@@ -181,7 +181,7 @@
 
   position: absolute;
   background: transparent;
-  border-radius: slider_border-radius($slider-border-radius);
+  @include slider_border-radius($slider-border-radius);
 }
 
 .slider-handle {
