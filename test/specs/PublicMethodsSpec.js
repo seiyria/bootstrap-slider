@@ -582,28 +582,6 @@ describe("Public Method Tests", function() {
     expect(orientationClassApplied).toBeTruthy();
   });
 
-  it("relayout: if slider is not displayed on initialization and then displayed later on, relayout() will re-adjust the margin-left of the tooltip", function() {
-    // Setup
-    testSlider = new Slider("#relayoutSliderInput", {
-      id: "relayoutSlider",
-      min: 0,
-      max: 10,
-      value: 5
-    });
-    var mainTooltipDOMRef = document.querySelector("#relayoutSlider .tooltip-main");
-    var relayoutSliderContainerDOMRef = document.querySelector("#relayoutSliderContainer");
-    var tooltipMarginLeft;
-    // Main tooltip margin-left offset should be 0 on slider intialization
-    tooltipMarginLeft = parseFloat(mainTooltipDOMRef.style.marginLeft);
-    expect(tooltipMarginLeft).toBe(0);
-    // Show slider and call relayout()
-    relayoutSliderContainerDOMRef.style.display = "block";
-    testSlider.relayout();
-    // Main tooltip margin-left offset should re-adjust to be > 0
-    tooltipMarginLeft = Math.abs( parseFloat(mainTooltipDOMRef.style.marginLeft) );
-    expect(tooltipMarginLeft).toBeGreaterThan(0);
-  });
-
   it("relayout: if slider is not displayed on initialization and then displayed later on, relayout() will re-adjust the tick label width", function() {
     // Setup
     testSlider = new Slider("#relayoutSliderInputTickLabels", {
