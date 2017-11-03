@@ -8,14 +8,13 @@ echo "..."
 grunt build-gh-pages
 # Create temporary copy of index file
 cp index.html index-temp.html
-cp node_modules/bootstrap/dist/css/bootstrap.min.css temp/bootstrap.min.css
 # Checkout to `gh-pages` branch
 git checkout -B gh-pages origin/gh-pages
 git pull -r origin gh-pages
 # Replace current files with temporary files
 mv index-temp.html index.html
+cp node_modules/bootstrap/dist/css/bootstrap.min.css css/bootstrap.min.css
 mv temp/bootstrap-slider.css css/bootstrap-slider.css
-mv temp/bootstrap.min.css css/bootstrap.min.css
 mv temp/bootstrap-slider.js js/bootstrap-slider.js
 # Remove /temp directory
 rm -rf temp
