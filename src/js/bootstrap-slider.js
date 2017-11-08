@@ -1314,18 +1314,11 @@ const windowIsDefined = (typeof window === "object");
 				}
 
 				var formattedTooltipVal;
-				var tooltip_translation;
-				if (this.options.orientation === 'vertical') {
-					tooltip_translation = `translateY(-50%)`;
-				} else {
-					tooltip_translation = `translateX(` + (this.stylePos === "left" ? "-" : "+") + `50%)`;
-				}
 
 				if (this.options.range) {
 					formattedTooltipVal = this.options.formatter(this._state.value);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 					this.tooltip.style[this.stylePos] = `${ (positionPercentages[1] + positionPercentages[0])/2 }%`;
-					this._css(this.tooltip, `transform`, tooltip_translation);
 
 					var innerTooltipMinText = this.options.formatter(this._state.value[0]);
 					this._setText(this.tooltipInner_min, innerTooltipMinText);
@@ -1334,17 +1327,14 @@ const windowIsDefined = (typeof window === "object");
 					this._setText(this.tooltipInner_max, innerTooltipMaxText);
 
 					this.tooltip_min.style[this.stylePos] = `${ positionPercentages[0] }%`;
-					this._css(this.tooltip_min, `transform`, tooltip_translation);
 
 					this.tooltip_max.style[this.stylePos] = `${ positionPercentages[1] }%`;
 
-					this._css(this.tooltip_max, `transform`, tooltip_translation);
 				} else {
 					formattedTooltipVal = this.options.formatter(this._state.value[0]);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 
 					this.tooltip.style[this.stylePos] = `${ positionPercentages[0] }%`;
-					this._css(this.tooltip, `transform`, tooltip_translation);
 				}
 
 				if (this.options.orientation === 'vertical') {
