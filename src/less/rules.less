@@ -23,6 +23,7 @@
 			&.triangle {
 				position: relative;
 				top: 50%;
+				-ms-transform: translateY(-50%);
 				transform: translateY(-50%);
 				border-width: 0 (@slider-line-height/2) (@slider-line-height/2) (@slider-line-height/2);
 				width: 0;
@@ -48,6 +49,10 @@
 				text-align: center;
 			}
 		}
+		.tooltip {
+			-ms-transform: translateX(-50%);
+			transform: translateX(-50%);
+		}
 		&.slider-rtl {
 			.slider-track {
 				left: initial;
@@ -61,6 +66,10 @@
 			.slider-tick-container {
 				left: initial;
 				right: 0;
+			}
+			.tooltip {
+				-ms-transform: translateX(+50%);
+				transform: translateX(+50%);
 			}
 		}
 	}
@@ -104,7 +113,10 @@
 				padding-left: @slider-line-height * .2;
 			}
 		}
-
+		.tooltip {
+			-ms-transform: translateY(-50%);
+			transform: translateY(-50%);
+		}
 		&.slider-rtl {
 			.slider-track {
 				left: initial;
