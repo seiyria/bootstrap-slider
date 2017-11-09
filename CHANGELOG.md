@@ -1,3 +1,7 @@
+10.0.0 / 2017-11-09
+==================
+* **Bug Fix** Refactoring tooltip CSS to use `transform` for positioning. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/798). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/483). Thanks to [wismill](https://github.com/wismill).
+
 9.10.0 / 2017-11-09
 ==================
 * **Build pipeline change** Refactoring bootstrap files to come from `node_modules` instead of `dependencies` directory so latest changes are reflected. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/788). Thanks to [Sebastiaan ten Pas](https://github.com/patchman-sebastiaan).
