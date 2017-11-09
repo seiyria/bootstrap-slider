@@ -7,4 +7,5 @@ _SpecRunner.html
 npm-debug.log
 .DS_STORE
 index.html
+dist
 package-lock.json
