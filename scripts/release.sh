@@ -1,10 +1,16 @@
 #!/bin/bash
 
+# Check if required CLI tools are available
+if ! [ -x "$(command -v grunt)" ]; then
+  echo "Error: grunt-cli is not installed. Please type 'npm install grunt-cli -g' to install" >&2
+  exit 1
+fi
+
 # Validate arguments
 versionBumpType=${1:-patch};
 
 if [ "$versionBumpType" != "major" ] && [ "$versionBumpType" != "minor" ] && [ "$versionBumpType" != "patch" ]; then
-  echo "Invalid version bump argument: ${versionBumpType}. Option must be one of the following: major, minor, patch"
+  echo "Invalid version bump argument: ${versionBumpType}. Option must be one of the following: major, minor, patch" >&2
   exit 1
 else
   echo "Publishing and bumping with ${versionBumpType} version bump"
