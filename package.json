@@ -76,7 +76,7 @@
       "variables": "src/less/variables.less"
     },
     "css": {
-      "bootstrap": "dependencies/css/bootstrap.min.css",
+      "bootstrap": "node_modules/bootstrap/dist/css/bootstrap.min.css",
       "highlightjs": "dependencies/css/highlightjs-github-theme.css"
     },
     "tpl": {

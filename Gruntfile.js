@@ -159,7 +159,7 @@ module.exports = function(grunt) {
             },
             css : {
               highlightjs: '<%= pkg.gruntConfig.css.highlightjs %>',
-              bootstrap : '<%= pkg.gruntConfig.css.bootstrap %>',
+              bootstrap : 'css/bootstrap.min.css',
               slider : 'css/bootstrap-slider.css'
             }
           }
