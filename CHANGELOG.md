@@ -1,3 +1,7 @@
+9.9.1 / 2017-11-09
+==================
+* **Bug Fix** LESS/CSS: Bug fix for mixin. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/789). Thanks to [Arman Poghosyan](https://github.com/armpogart).
+
 9.9.0 / 2017-09-23
 ==================
 * **New Feature** LESS/CSS: refactor colors into variables file. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/779). Thanks to [Joseph Marikle](https://github.com/jmarikle).
