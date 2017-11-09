@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  9.10.0              
+                      VERSION  10.0.0              
 ========================================================= */
 /*! =========================================================
  * bootstrap-slider.js
@@ -70,6 +70,7 @@
 .slider.slider-horizontal .slider-handle.triangle {
   position: relative;
   top: 50%;
+  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   border-width: 0 10px 10px 10px;
   width: 0;
@@ -93,6 +94,10 @@
   display: inline-block;
   text-align: center;
 }
+.slider.slider-horizontal .tooltip {
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
 .slider.slider-horizontal.slider-rtl .slider-track {
   left: initial;
   right: 0;
@@ -105,6 +110,10 @@
 .slider.slider-horizontal.slider-rtl .slider-tick-container {
   left: initial;
   right: 0;
+}
+.slider.slider-horizontal.slider-rtl .tooltip {
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
 }
 .slider.slider-vertical {
   height: 210px;
@@ -147,6 +156,10 @@
 }
 .slider.slider-vertical .slider-tick-label-container .slider-tick-label {
   padding-left: 4px;
+}
+.slider.slider-vertical .tooltip {
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 .slider.slider-vertical.slider-rtl .slider-track {
   left: initial;
