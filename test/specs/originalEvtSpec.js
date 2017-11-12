@@ -82,7 +82,7 @@ describe("Original Event trasmittance test", function () {
     }
 
     // MouseEvent constructor  polyfill
-    (function (window) {
+    function polyfill(window) {
         try {
             new MouseEvent('test');
             return false; // No need to polyfill
@@ -103,5 +103,6 @@ describe("Original Event trasmittance test", function () {
         MouseEvent3.prototype = Event.prototype;
 
         window.MouseEvent = MouseEvent3;
-    })(window);
+    }
+	polyfill(window);
 });
