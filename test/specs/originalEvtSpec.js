@@ -83,14 +83,6 @@ describe("Original Event trasmittance test", function () {
 
     // MouseEvent constructor  polyfill
     function polyfill(window) {
-		if (typeof MouseEvent !== "undefined") {
-	        return false; // No need to polyfill
-        } else {
-            // Need to polyfill - fall through
-        }
-
-        // Polyfills DOM4 MouseEvent
-
         var MouseEvent3 = function (eventType, params) {
             params = params || { bubbles: false, cancelable: false };
             var mouseEvent2 = document.createEvent('MouseEvent');
