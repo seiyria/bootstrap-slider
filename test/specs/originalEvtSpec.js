@@ -22,7 +22,7 @@ describe("Original Event trasmittance test", function () {
 						// do nothing.
 				}
                     origEvtInSlidestart = 1;
-            };
+            }
 		};
 	}
     
