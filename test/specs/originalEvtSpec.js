@@ -83,10 +83,9 @@ describe("Original Event trasmittance test", function () {
 
     // MouseEvent constructor  polyfill
     function polyfill(window) {
-        try {
-            new MouseEvent('test');
-            return false; // No need to polyfill
-        } catch (e) {
+		if (typeof MouseEvent !== "undefined") {
+	        return false; // No need to polyfill
+        } else {
             // Need to polyfill - fall through
         }
 
