@@ -1808,7 +1808,7 @@ const windowIsDefined = (typeof window === "object");
 					value: val
 				};
 				this.$element.trigger(eventData, originalEvt);
-				this.$sliderElem.trigger(eventData, originalEvt); 
+				this.$sliderElem.trigger(eventData, originalEvt);
 			},
 			_unbindJQueryEventHandlers: function() {
 				this.$element.off();

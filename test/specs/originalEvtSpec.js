@@ -4,6 +4,28 @@ describe("Original Event trasmittance test", function () {
     var options;
     var origEvtInSlidestart, origEvtInSlide, origEvtInSlidestop;
 
+	function slider_callback(evt_type) {
+		return function (val, evt) {
+			if (evt && evt.type && evt.type === evt_type) {
+				// check to which event this callback is bound:
+				switch (evt.type) {
+					case "mousedown":
+						origEvtInSlidestart = 1;
+						break;
+					case "mousemove":
+						origEvtInSlide = 1;
+						break;
+					case "mouseup":
+						origEvtInSlidestop = 1;
+						break;
+					default:
+						// do nothing.
+				}
+                    origEvtInSlidestart = 1;
+            }
+		}
+	}
+    
     describe('When a slider w/o jQuery is dragged', function () {
         beforeEach(function () {
             options = {
@@ -17,21 +39,9 @@ describe("Original Event trasmittance test", function () {
             origEvtInSlide = 0;
             origEvtInSlidestop = 0;
 
-            slider.on("slideStart", function (val, evt) {
-                if (evt && evt.type && evt.type === "mousedown") {
-                    origEvtInSlidestart = 1;
-                }
-            });
-            slider.on("slide", function (val, evt) {
-                if (evt && evt.type && evt.type === "mousemove") {
-                    origEvtInSlide = 1;
-                }
-            });
-            slider.on("slideStop", function (val, evt) {
-                if (evt && evt.type && evt.type === "mouseup") {
-                    origEvtInSlidestop = 1;
-                }
-            });
+            slider.on("slideStart", slider_callback("mousedown"));
+            slider.on("slide", slider_callback("mousemove"));
+            slider.on("slideStop", slider_callback("mouseup"));
 
             var sliderLeft = $("#myslider")[0].offsetLeft;
             var offsetY = $("#myslider")[0].offsetTop;
