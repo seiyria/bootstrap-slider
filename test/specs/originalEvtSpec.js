@@ -22,8 +22,8 @@ describe("Original Event trasmittance test", function () {
 						// do nothing.
 				}
                     origEvtInSlidestart = 1;
-            }
-		}
+            };
+		};
 	}
     
     describe('When a slider w/o jQuery is dragged', function () {
