@@ -199,6 +199,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | focus | bool | false | Focus the appropriate slider handle after a value change. |
 | labelledby | string,array | null | ARIA labels for the slider handle's, Use array for multiple values in a range slider. |
 | rangeHighlights | array | [] | Defines a range array that you want to highlight, for example: [{'start':val1, 'end': val2, 'class': 'optionalAdditionalClassName'}]. |
+| bsVersion | string | 'bs3' | Switch between Boostrap 3 ('bs3') and Bootstrap 4 ('bs4') |
 
 Functions
 =========

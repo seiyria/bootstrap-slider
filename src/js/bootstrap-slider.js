@@ -647,14 +647,15 @@ const windowIsDefined = (typeof window === "object");
 				}, this);
 
 				// Undo inline styles and classes on tooltips
+				const positionClasses = this._getTooltipPositionClassMap();
 				[this.tooltip, this.tooltip_min, this.tooltip_max].forEach(function(tooltip) {
 					this._removeProperty(tooltip, 'left');
 					this._removeProperty(tooltip, 'right');
 					this._removeProperty(tooltip, 'top');
 
-					this._removeClass(tooltip, 'right');
-					this._removeClass(tooltip, 'left');
-					this._removeClass(tooltip, 'top');
+					this._removeClass(tooltip, positionClasses.right);
+					this._removeClass(tooltip, positionClasses.left);
+					this._removeClass(tooltip, positionClasses.top);
 				}, this);
 			}
 
@@ -879,7 +880,8 @@ const windowIsDefined = (typeof window === "object");
 				focus: false,
 				tooltip_position: null,
 				labelledby: null,
-				rangeHighlights: []
+				rangeHighlights: [],
+				bsVersion: 'bs3'
 			},
 
 			getElement: function() {
@@ -1124,23 +1126,28 @@ const windowIsDefined = (typeof window === "object");
 					delete this.eventToCallbackMap[eventName];
 				}
 			},
+			_getTooltipShowClass: function() {
+				return (this.options.bsVersion === 'bs4') ? 'show' : 'in';	
+			},
 			_showTooltip: function() {
+				const showClass = this._getTooltipShowClass();
 				if (this.options.tooltip_split === false ){
-					this._addClass(this.tooltip, 'in');
+					this._addClass(this.tooltip, showClass);
 					this.tooltip_min.style.display = 'none';
 					this.tooltip_max.style.display = 'none';
 			    } else {
-					this._addClass(this.tooltip_min, 'in');
-					this._addClass(this.tooltip_max, 'in');
+					this._addClass(this.tooltip_min, showClass);
+					this._addClass(this.tooltip_max, showClass);
 					this.tooltip.style.display = 'none';
 				}
 				this._state.over = true;
 			},
 			_hideTooltip: function() {
+				const showClass = this._getTooltipShowClass();
 				if (this._state.inDrag === false && this.alwaysShowTooltip !== true) {
-					this._removeClass(this.tooltip, 'in');
-					this._removeClass(this.tooltip_min, 'in');
-					this._removeClass(this.tooltip_max, 'in');
+					this._removeClass(this.tooltip, showClass);
+					this._removeClass(this.tooltip_min, showClass);
+					this._removeClass(this.tooltip_max, showClass);
 				}
 				this._state.over = false;
 			},
@@ -1371,27 +1378,27 @@ const windowIsDefined = (typeof window === "object");
 
 					var offset_min = this.tooltip_min.getBoundingClientRect();
 					var offset_max = this.tooltip_max.getBoundingClientRect();
-
+					const positionClasses = this._getTooltipPositionClassMap();
 					if (this.options.tooltip_position === 'bottom') {
 						if (offset_min.right > offset_max.left) {
-							this._removeClass(this.tooltip_max, 'bottom');
-							this._addClass(this.tooltip_max, 'top');
+							this._removeClass(this.tooltip_max,  positionClasses.bottom);
+							this._addClass(this.tooltip_max, positionClasses.top);
 							this.tooltip_max.style.top = '';
 							this.tooltip_max.style.bottom = 22 + 'px';
 						} else {
-							this._removeClass(this.tooltip_max, 'top');
-							this._addClass(this.tooltip_max, 'bottom');
+							this._removeClass(this.tooltip_max, positionClasses.top);
+							this._addClass(this.tooltip_max, positionClasses.bottom);
 							this.tooltip_max.style.top = this.tooltip_min.style.top;
 							this.tooltip_max.style.bottom = '';
 						}
 					} else {
 						if (offset_min.right > offset_max.left) {
-							this._removeClass(this.tooltip_max, 'top');
-							this._addClass(this.tooltip_max, 'bottom');
+							this._removeClass(this.tooltip_max, positionClasses.top);
+							this._addClass(this.tooltip_max, positionClasses.bottom);
 							this.tooltip_max.style.top = 18 + 'px';
 						} else {
-							this._removeClass(this.tooltip_max, 'bottom');
-							this._addClass(this.tooltip_max, 'top');
+							this._removeClass(this.tooltip_max, positionClasses.bottom);
+							this._addClass(this.tooltip_max, positionClasses.top);
 							this.tooltip_max.style.top = this.tooltip_min.style.top;
 						}
 					}
@@ -1851,7 +1858,17 @@ const windowIsDefined = (typeof window === "object");
 			_toPercentage: function(value) {
 				return this.options.scale.toPercentage.apply(this, [value]);
 			},
+			_getTooltipPositionClassMap() {
+				const prefix = (this.options.bsVersion) === 'bs4' ? 'tooltip-' : '';
+				return {
+					right: `${prefix}right`,
+					left: `${prefix}left`,
+					top: `${prefix}top`,
+					bottom: `${prefix}bottom`,
+				};
+			},
 			_setTooltipPosition: function(){
+				const positionClasses = this._getTooltipPositionClassMap();
 				var tooltips = [this.tooltip, this.tooltip_min, this.tooltip_max];
 				if (this.options.orientation === 'vertical'){
 					var tooltipPos;
@@ -1866,17 +1883,17 @@ const windowIsDefined = (typeof window === "object");
 					}
 					var oppositeSide = (tooltipPos === 'left') ? 'right' : 'left';
 					tooltips.forEach(function(tooltip){
-						this._addClass(tooltip, tooltipPos);
+						this._addClass(tooltip, positionClasses[tooltipPos]);
 						tooltip.style[oppositeSide] = '100%';
 					}.bind(this));
 				} else if(this.options.tooltip_position === 'bottom') {
 					tooltips.forEach(function(tooltip){
-						this._addClass(tooltip, 'bottom');
+						this._addClass(tooltip, positionClasses.bottom);
 						tooltip.style.top = 22 + 'px';
 					}.bind(this));
 				} else {
 					tooltips.forEach(function(tooltip){
-						this._addClass(tooltip, 'top');
+						this._addClass(tooltip, positionClasses.top);
 						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
 					}.bind(this));
 				}
