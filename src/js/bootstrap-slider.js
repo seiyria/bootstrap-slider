@@ -1859,7 +1859,7 @@ const windowIsDefined = (typeof window === "object");
 				return this.options.scale.toPercentage.apply(this, [value]);
 			},
 			_getTooltipPositionClassMap() {
-				const prefix = (this.options.bsVersion) === 'bs4' ? 'tooltip-' : '';
+				const prefix = (this.options.bsVersion) === 'bs4' ? 'bs-tooltip-' : '';
 				return {
 					right: `${prefix}right`,
 					left: `${prefix}left`,

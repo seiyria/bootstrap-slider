@@ -29,7 +29,7 @@ describe("'bsVersion' Option tests", function() {
         var tooltip = testSlider.tooltip;
         var classList = tooltip.classList;
         expect(classList).toContain('tooltip');
-        expect(classList).toContain('tooltip-' + position);
+        expect(classList).toContain('bs-tooltip-' + position);
         expect(tooltip.classList.contains(position)).toBeFalsy();
         testSlider.destroy();
         testSlider = null;
