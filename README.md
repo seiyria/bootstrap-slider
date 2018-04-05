@@ -150,7 +150,7 @@ To exclude JQuery from your Webpack build, you will have to go into the Webpack 
 ```js
 resolve: {
     alias: {
-         "jquery": path.join(__dirname, "./jquery-stub.js");
+         "jquery": path.join(__dirname, "./jquery-stub.js")
     }
 }
 ```
