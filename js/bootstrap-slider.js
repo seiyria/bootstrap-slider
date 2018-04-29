@@ -655,7 +655,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				} else {
 					this.stylePos = 'left';
 				}
-				this.mousePos = 'pageX';
+				this.mousePos = 'clientX';
 				this.sizePos = 'offsetWidth';
 			}
 			// specific rtl class
