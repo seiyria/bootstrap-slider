@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.0.1              
+                      VERSION  10.0.2              
 ========================================================= */
 "use strict";
 
@@ -658,7 +658,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				} else {
 					this.stylePos = 'left';
 				}
-				this.mousePos = 'pageX';
+				this.mousePos = 'clientX';
 				this.sizePos = 'offsetWidth';
 			}
 			// specific rtl class
