@@ -1,3 +1,7 @@
+10.0.2 / 2018-04-28
+==================
+* **Bug Fix** Fixes an issue when determining mouse coords when pageXOffset >= 0 . [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/828). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/594). Thanks to [x-yuri](https://github.com/x-yuri).
+
 10.0.1 / 2018-04-28
 ==================
 * **Bug Fix** Fixing an issue where DOM elements were being selected on slide in FF and IE. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/829). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/746). Thanks to [Andreas Wulf](https://github.com/wulfsoft).
