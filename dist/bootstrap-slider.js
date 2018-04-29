@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.0.0              
+                      VERSION  10.0.1              
 ========================================================= */
 "use strict";
 
@@ -1389,6 +1389,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			_mousedown: function _mousedown(ev) {
 				if (!this._state.enabled) {
 					return false;
+				}
+
+				if (ev.preventDefault) {
+					ev.preventDefault();
 				}
 
 				this._state.offset = this._offset(this.sliderElem);
