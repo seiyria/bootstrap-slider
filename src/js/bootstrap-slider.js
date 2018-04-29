@@ -1432,6 +1432,10 @@ const windowIsDefined = (typeof window === "object");
 					return false;
 				}
 
+				if (ev.preventDefault){
+					ev.preventDefault();
+				}				
+
 				this._state.offset = this._offset(this.sliderElem);
 				this._state.size = this.sliderElem[this.sizePos];
 
