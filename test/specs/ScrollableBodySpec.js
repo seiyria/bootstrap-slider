@@ -80,4 +80,71 @@ describe("Scrollable body test", function() {
         });
     });
 
+
+    describe('Horizontal scrolled body', function() {
+        beforeEach(function() {
+            testSlider = new Slider('#offRightEdgeSliderInput', {
+                id: 'offRightEdgeSlider',
+                orientation: 'horizontal',
+                min: 0,
+                max: 20,
+                value: 10,
+                step: 1,
+            });
+
+            testSlider.sliderElem.scrollIntoView();
+
+            var handle = document.querySelector('#offRightEdgeSlider .slider-handle');
+            var handleRect = handle.getBoundingClientRect();
+            sliderHandleTopPos = handleRect.top;
+            sliderHandleLeftPos = handleRect.left;
+        });
+
+        afterEach(function() {
+            if (testSlider) {
+                testSlider.destroy();
+            }
+            window.scrollTo(0, 0);
+        });
+
+        it('slides left when clicked on the left of the handle', function() {
+            var x = sliderHandleLeftPos - 50;
+            var y = sliderHandleTopPos;
+            var mousedown, newSliderValue;
+
+            mousedown = createMouseDownEvent(x, y);
+            testSlider.sliderElem.dispatchEvent(mousedown);
+            newSliderValue = testSlider.getValue();
+
+            expect(newSliderValue).toEqual(4);
+        });
+
+        it('slides right when clicked on the left of the handle', function() {
+            var x = sliderHandleLeftPos + 50;
+            var y = sliderHandleTopPos;
+            var mousedown, newSliderValue;
+
+            mousedown = createMouseDownEvent(x, y);
+            testSlider.sliderElem.dispatchEvent(mousedown);
+            newSliderValue = testSlider.getValue();
+
+            expect(newSliderValue).toEqual(14);
+        });
+
+        function createMouseDownEvent(x, y) {
+            var mousedown = document.createEvent('MouseEvents');
+            mousedown.initMouseEvent(
+                'mousedown',
+                false     /* bubble */,
+                true      /* cancelable */,
+                window,   /* view */
+                null,     /* detail */
+                0, 0, x, y,                   /* coordinates */
+                false, false, false, false,   /* modifier keys */
+                0,     /* button: left */
+                null   /* relatedTarget */
+            );
+            return mousedown;
+        }
+    });
 });

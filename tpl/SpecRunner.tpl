@@ -29,6 +29,12 @@
 	</style>
 </head>
 <body>
+    <div style="
+        margin-left: 2000px;
+    ">
+        <input id="offRightEdgeSliderInput" type="text"/>
+    </div>
+
 	<input id="testSliderGeneric" type="text"/>
 
 	<!-- Slider used for PublicMethodsSpec and EventsSpec -->

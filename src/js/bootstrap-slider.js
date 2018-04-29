@@ -672,7 +672,7 @@ const windowIsDefined = (typeof window === "object");
 				} else {
 					this.stylePos = 'left';
 				}
-				this.mousePos = 'pageX';
+				this.mousePos = 'clientX';
 				this.sizePos = 'offsetWidth';
 			}
 			// specific rtl class
