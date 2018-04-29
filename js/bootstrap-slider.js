@@ -1388,6 +1388,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					return false;
 				}
 
+				if (ev.preventDefault) {
+					ev.preventDefault();
+				}
+
 				this._state.offset = this._offset(this.sliderElem);
 				this._state.size = this.sliderElem[this.sizePos];
 
