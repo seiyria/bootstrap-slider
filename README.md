@@ -195,7 +195,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | ticks_labels | array | [ ] | Defines the labels below the tick marks. Accepts HTML input. |
 | ticks_snap_bounds | float | 0 | Used to define the snap bounds of a tick. Snaps to the tick if value is within these bounds. |
 | ticks_tooltip | bool | false | Used to allow for a user to hover over a given tick to see it's value. Useful if custom formatter passed in |
-| scale | string | 'linear' | Set to 'logarithmic' to use a logarithmic scale. |
+| scale | string | 'linear' | Set to 'logarithmic' to use a logarithmic scale. Logarithmic scales will be calculated based on the difference between min to max; e.g. (0..10000) (-100..9900) both have a net range of 10001 and will slide in the same net increments. |
 | focus | bool | false | Focus the appropriate slider handle after a value change. |
 | labelledby | string,array | null | ARIA labels for the slider handle's, Use array for multiple values in a range slider. |
 | rangeHighlights | array | [] | Defines a range array that you want to highlight, for example: [{'start':val1, 'end': val2, 'class': 'optionalAdditionalClassName'}]. |

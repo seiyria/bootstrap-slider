@@ -6,7 +6,7 @@ describe("TickMaxValueNotATickBehavior", function() {
   describe('max value should be reached', function() {
     beforeEach(function() {
       options = {
-        min: 39,
+        min: 40,
         max: 1310,
         step: 5,
         scale: "logarithmic",
