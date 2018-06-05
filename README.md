@@ -91,7 +91,7 @@ turns it into a slider. Options can be supplied via `data-slider-` attributes.
 What if there is already a _slider_ plugin bound to the JQuery namespace?
 ======================
 
-If there is already a JQuery plugin named _slider_ bound to the JQuery namespace, then this plugin will emit a console warning telling you this namespace has already been taken and will encourage you to use the alternate namespace _bootstrapSlider_ instead.
+If there is already a JQuery plugin named _slider_ bound to the JQuery namespace, then this plugin will provide an alternative namespace _bootstrapSlider_ and will emit a console warning telling you the _slider_ namespace has already been taken and will encourage you to use the alternate namespace instead. If the _slider_ namespace is available however, the _bootstrapSlider_ namespace will not exist.
 
 ```js
 // Instantiate a slider
