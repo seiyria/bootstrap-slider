@@ -115,9 +115,6 @@ module.exports = function(grunt) {
       },
       target: ['./src/sass/**/*.scss']
     },
-    lesslint: {
-      src: ['./src/less/bootstrap-slider.less']
-    },
     jasmine : {
       src : '<%= pkg.gruntConfig.temp.js %>',
       options : {
@@ -187,11 +184,12 @@ module.exports = function(grunt) {
       },
       css: {
         files: [
-          '<%= pkg.gruntConfig.less.slider %>',
-          '<%= pkg.gruntConfig.less.rules %>',
-          '<%= pkg.gruntConfig.less.variables %>'
+          '<%= pkg.gruntConfig.sass.slider %>',
+          '<%= pkg.gruntConfig.sass.variables %>',
+          '<%= pkg.gruntConfig.sass.mixins %>',
+          '<%= pkg.gruntConfig.sass.rules %>'
         ],
-        tasks: ['less:development']
+        tasks: ['sass:development']
       },
       index: {
         files: '<%= pkg.gruntConfig.tpl.index %>',
@@ -210,26 +208,36 @@ module.exports = function(grunt) {
         path: 'http://localhost:<%= connect.server.options.port %>'
       }
     },
-    less: {
-      options: {
-        paths: ["bower_components/bootstrap/less"]
-      },
+    sass: {
       development: {
+        // TODO: autoprefixer
+        options: {
+          sourceMap: true,
+          outputStyle: 'expanded'
+        },
         files: {
-          '<%= pkg.gruntConfig.temp.css %>': '<%= pkg.gruntConfig.less.slider %>'
+          '<%= pkg.gruntConfig.temp.css %>': '<%= pkg.gruntConfig.sass.slider %>'
         }
       },
       production: {
+        // TODO: autoprefixer
+        options: {
+          sourceMap: true,
+          outputStyle: 'compact'
+        },
         files: {
-         '<%= pkg.gruntConfig.temp.css %>': '<%= pkg.gruntConfig.less.slider %>',
+          '<%= pkg.gruntConfig.temp.css %>': '<%= pkg.gruntConfig.sass.slider %>'
         }
       },
       "production-min": {
+        // TODO: autoprefixer
+        // TODO: minimize
         options: {
-          yuicompress: true
+          sourceMap: true,
+          outputStyle: 'compressed'
         },
         files: {
-         '<%= pkg.gruntConfig.temp.cssMin %>': '<%= pkg.gruntConfig.less.slider %>'
+          '<%= pkg.gruntConfig.temp.cssMin %>': '<%= pkg.gruntConfig.sass.slider %>'
         }
       }
     },
@@ -260,48 +268,46 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-template');
   grunt.loadNpmTasks('grunt-header');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-sass-lint');
-  grunt.loadNpmTasks('grunt-lesslint');
 
   // Create custom tasks
   grunt.registerTask('append-header', ['header', 'clean:temp']);
   grunt.registerTask('lint', [
     'jshint',
-    'lesslint',
     'sasslint'
   ]);
   grunt.registerTask('test', [
     'babel',
-    'less:development',
+    'sass:development',
     'jasmine',
     'clean:temp'
   ]);
   grunt.registerTask('build', [
-    'less:development',
+    'sass:development',
     'test',
     'template:generate-index-page'
   ]);
   grunt.registerTask('build-gh-pages', [
-    'less:development',
+    'sass:development',
     'babel',
     'template:generate-gh-pages'
   ]);
   grunt.registerTask('dist', [
     'clean:dist',
-    'less:production',
-    'less:production-min',
+    'sass:production',
+    'sass:production-min',
     'babel',
     'uglify',
     'append-header'
   ]);
   grunt.registerTask('development', [
-    'less:development',
+    'sass:development',
     'babel',
     'template:generate-index-page',
     'connect',
