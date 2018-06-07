@@ -1309,6 +1309,7 @@ slider.refresh({ useCurrentValue: true });
     <!-- core JavaScript
     ================================================== -->
     <script src="<%= js.jquery %>"></script>
+    <script src="<%= js.popper %>"></script>
     <script src="<%= js.bootstrap %>"></script>
     <script src="<%= js.slider %>"></script>
     <script src="<%= js.highlightjs %>"></script>

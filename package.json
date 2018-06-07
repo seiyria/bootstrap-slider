@@ -43,7 +43,6 @@
   "dependencies": {},
   "engine": {},
   "devDependencies": {
-    "autoprefixer": "^8.6.0",
     "babel-preset-es2015": "6.3.13",
     "bootstrap": "^4.1.1",
     "grunt": "^0.4.5",
@@ -62,7 +61,8 @@
     "grunt-sass-lint": "^0.2.2",
     "grunt-template": "0.2.0",
     "jquery": "1.9.1 - 3",
-    "node-sass": "^4.9.0"
+    "node-sass": "^4.9.0",
+    "popper.js": "^1.14.3"
   },
   "gruntConfig": {
     "devPort": 9000,
@@ -70,7 +70,8 @@
       "highlightjs": "dependencies/js/highlight.min.js",
       "modernizr": "dependencies/js/modernizr.js",
       "jquery": "node_modules/jquery/dist/jquery.min.js",
-      "bootstrap": "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "popper": "node_modules/popper.js/dist/umd/popper.min.js",
+      "bootstrap": "node_modules/bootstrap/dist/js/bootstrap.min.js",
       "bindPolyfill": "test/phantom_bind_polyfill.js",
       "slider": "src/js/bootstrap-slider.js"
     },

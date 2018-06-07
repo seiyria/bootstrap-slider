@@ -132,6 +132,7 @@ module.exports = function(grunt) {
               highlightjs: '<%= pkg.gruntConfig.js.highlightjs %>',
               modernizr : '<%= pkg.gruntConfig.js.modernizr %>',
               jquery : '<%= pkg.gruntConfig.js.jquery %>',
+              popper : '<%= pkg.gruntConfig.js.popper %>',
               bootstrap : '<%= pkg.gruntConfig.js.bootstrap %>',
               slider : '<%= pkg.gruntConfig.temp.js %>'
             },
@@ -153,6 +154,8 @@ module.exports = function(grunt) {
               highlightjs: '<%= pkg.gruntConfig.js.highlightjs %>',
               modernizr : '<%= pkg.gruntConfig.js.modernizr %>',
               jquery : '<%= pkg.gruntConfig.js.jquery %>',
+              popper : '<%= pkg.gruntConfig.js.popper %>',
+              bootstrap : '<%= pkg.gruntConfig.js.bootstrap %>',
               slider : 'js/bootstrap-slider.js'
             },
             css : {
