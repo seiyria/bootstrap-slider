@@ -211,7 +211,6 @@ module.exports = function(grunt) {
     },
     sass: {
       development: {
-        // TODO: autoprefixer
         options: {
           sourceMap: true,
           outputStyle: 'expanded'
@@ -221,7 +220,6 @@ module.exports = function(grunt) {
         }
       },
       production: {
-        // TODO: autoprefixer
         options: {
           sourceMap: true,
           outputStyle: 'compact'
@@ -231,8 +229,6 @@ module.exports = function(grunt) {
         }
       },
       "production-min": {
-        // TODO: autoprefixer
-        // TODO: minimize
         options: {
           sourceMap: true,
           outputStyle: 'compressed'
