@@ -183,7 +183,7 @@ describe("Public Method Tests", function() {
           tooltip : "show"
         });
 
-        var tooltipIsHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in"));
+        var tooltipIsHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("show"));
         expect(tooltipIsHidden).toBeTruthy();
 
         // Trigger hover
@@ -191,7 +191,7 @@ describe("Public Method Tests", function() {
         mouseenterEvent.initEvent("mouseenter", true, true);
         testSlider.data('slider').sliderElem.dispatchEvent(mouseenterEvent);
 
-        var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
+        var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("show");
         expect(tooltipIsShownAfterSlide).toBeTruthy();
       });
 
@@ -200,7 +200,7 @@ describe("Public Method Tests", function() {
           tooltip : "show"
         });
 
-        var tooltipIsHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in"));
+        var tooltipIsHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("show"));
         expect(tooltipIsHidden).toBeTruthy();
 
         // Trigger hover
@@ -208,7 +208,7 @@ describe("Public Method Tests", function() {
         mouseenterEvent.initEvent("mouseenter", true, true);
         testSlider.data('slider').sliderElem.dispatchEvent(mouseenterEvent);
 
-        var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
+        var tooltipIsShownAfterSlide = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("show");
         expect(tooltipIsShownAfterSlide).toBeTruthy();
 
 
@@ -217,7 +217,7 @@ describe("Public Method Tests", function() {
         mouseleaveEvent.initEvent("mouseleave", true, true);
         testSlider.data('slider').sliderElem.dispatchEvent(mouseleaveEvent);
 
-        var tooltipIsAgainHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in"));
+        var tooltipIsAgainHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("show"));
         expect(tooltipIsAgainHidden).toBeTruthy();
       });
 
@@ -226,7 +226,7 @@ describe("Public Method Tests", function() {
           tooltip : "always"
         });
 
-        var tooltipIsShown = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
+        var tooltipIsShown = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("show");
         expect(tooltipIsShown).toBeTruthy();
       });
 
@@ -235,7 +235,7 @@ describe("Public Method Tests", function() {
           tooltip : "invalid option value"
         });
 
-        var tooltipIsHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in"));
+        var tooltipIsHidden = !($("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("show"));
         expect(tooltipIsHidden).toBeTruthy();
 
         // Trigger hover
@@ -244,7 +244,7 @@ describe("Public Method Tests", function() {
         testSlider.data('slider').sliderElem.dispatchEvent(mouseenterEvent);
 
 
-        var tooltipIsShownOnHover = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("in");
+        var tooltipIsShownOnHover = $("#testSlider1").siblings(".slider").children("div.tooltip").hasClass("show");
         expect(tooltipIsShownOnHover).toBeTruthy();
       });
     });
