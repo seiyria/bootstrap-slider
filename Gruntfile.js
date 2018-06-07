@@ -225,7 +225,7 @@ module.exports = function(grunt) {
       production: {
         options: {
           sourceMap: true,
-          outputStyle: 'compact'
+          outputStyle: 'expanded'
         },
         files: {
           '<%= pkg.gruntConfig.temp.css %>': '<%= pkg.gruntConfig.sass.slider %>'
