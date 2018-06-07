@@ -426,7 +426,7 @@ const windowIsDefined = (typeof window === "object");
 			}
 			else if(this.options.orientation === "horizontal" && (this.options.tooltip_position === "left" || this.options.tooltip_position === "right")) {
 
-				this.options.tooltip_position	= "top";
+				this.options.tooltip_position = "top";
 
 			}
 
@@ -1219,12 +1219,12 @@ const windowIsDefined = (typeof window === "object");
 			},
 			_showTooltip: function() {
 				if (this.options.tooltip_split === false ){
-					this._addClass(this.tooltip, 'in');
+					this._addClass(this.tooltip, 'show');
 					this.tooltip_min.style.display = 'none';
 					this.tooltip_max.style.display = 'none';
 			    } else {
-					this._addClass(this.tooltip_min, 'in');
-					this._addClass(this.tooltip_max, 'in');
+					this._addClass(this.tooltip_min, 'show');
+					this._addClass(this.tooltip_max, 'show');
 					this.tooltip.style.display = 'none';
 				}
 				this._state.over = true;
@@ -1521,24 +1521,20 @@ const windowIsDefined = (typeof window === "object");
 
 					if (this.options.tooltip_position === 'bottom') {
 						if (offset_min.right > offset_max.left) {
-							this._removeClass(this.tooltip_max, 'bottom');
-							this._addClass(this.tooltip_max, 'top');
+							this.tooltip_max.setAttribute('data-placement', 'top');
 							this.tooltip_max.style.top = '';
 							this.tooltip_max.style.bottom = 22 + 'px';
 						} else {
-							this._removeClass(this.tooltip_max, 'top');
-							this._addClass(this.tooltip_max, 'bottom');
+							this.tooltip_max.setAttribute('data-placement', 'bottom');
 							this.tooltip_max.style.top = this.tooltip_min.style.top;
 							this.tooltip_max.style.bottom = '';
 						}
 					} else {
 						if (offset_min.right > offset_max.left) {
-							this._removeClass(this.tooltip_max, 'top');
-							this._addClass(this.tooltip_max, 'bottom');
+							this.tooltip_max.setAttribute('data-placement', 'bottom');
 							this.tooltip_max.style.top = 18 + 'px';
 						} else {
-							this._removeClass(this.tooltip_max, 'bottom');
-							this._addClass(this.tooltip_max, 'top');
+							this.tooltip_max.setAttribute('data-placement', 'top');
 							this.tooltip_max.style.top = this.tooltip_min.style.top;
 						}
 					}
@@ -2046,17 +2042,17 @@ const windowIsDefined = (typeof window === "object");
 					}
 					var oppositeSide = (tooltipPos === 'left') ? 'right' : 'left';
 					tooltips.forEach(function(tooltip){
-						this._addClass(tooltip, tooltipPos);
+						tooltip.setAttribute('data-placement', tooltipPos);
 						tooltip.style[oppositeSide] = '100%';
 					}.bind(this));
 				} else if(this.options.tooltip_position === 'bottom') {
 					tooltips.forEach(function(tooltip){
-						this._addClass(tooltip, 'bottom');
+						tooltip.setAttribute('data-placement', 'bottom');
 						tooltip.style.top = 22 + 'px';
 					}.bind(this));
 				} else {
 					tooltips.forEach(function(tooltip){
-						this._addClass(tooltip, 'top');
+						tooltip.setAttribute('data-placement', 'top');
 						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
 					}.bind(this));
 				}

@@ -132,6 +132,7 @@ module.exports = function(grunt) {
               highlightjs: '<%= pkg.gruntConfig.js.highlightjs %>',
               modernizr : '<%= pkg.gruntConfig.js.modernizr %>',
               jquery : '<%= pkg.gruntConfig.js.jquery %>',
+              bootstrap : '<%= pkg.gruntConfig.js.bootstrap %>',
               slider : '<%= pkg.gruntConfig.temp.js %>'
             },
             css : {

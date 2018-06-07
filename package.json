@@ -62,15 +62,15 @@
     "grunt-sass-lint": "^0.2.2",
     "grunt-template": "0.2.0",
     "jquery": "1.9.1 - 3",
-    "node-sass": "^4.9.0",
-    "popper.js": "^1.14.3"
+    "node-sass": "^4.9.0"
   },
   "gruntConfig": {
     "devPort": 9000,
     "js": {
       "highlightjs": "dependencies/js/highlight.min.js",
       "modernizr": "dependencies/js/modernizr.js",
-      "jquery": "dependencies/js/jquery.min.js",
+      "jquery": "node_modules/jquery/dist/jquery.min.js",
+      "bootstrap": "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
       "bindPolyfill": "test/phantom_bind_polyfill.js",
       "slider": "src/js/bootstrap-slider.js"
     },
