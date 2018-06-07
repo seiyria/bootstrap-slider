@@ -139,11 +139,27 @@
     white-space: nowrap;
     max-width: none;
   }
+  .bs-tooltip-top,
+  .bs-tooltip-bottom {
+    .tooltip-inner {
+      position: relative;
+      left: -50%;
+    }
+  }
   .tooltip {
     pointer-events: none;
 
-    &.tooltip-top {
-      margin-top: -36px;
+    &.bs-tooltip-top,
+    &.bs-tooltip-bottom {
+      .arrow {
+        left: -.4rem;  // $tooltip-arrow-width / 2.
+      }
+    }
+    &.bs-tooltip-top {
+      margin-top: -44px;
+    }
+    &.bs-tooltip-bottom {
+      margin-top: 2px;
     }
   }
   .hide {
