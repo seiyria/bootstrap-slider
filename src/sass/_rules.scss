@@ -194,7 +194,9 @@
   height: $slider-line-height;
   background-color: $slider-primary;
   border: 0px solid transparent;
-
+  &:hover {
+    cursor: pointer;
+  }
   &.round {
     @include slider_border-radius($slider-line-height);
   }
