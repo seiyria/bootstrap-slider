@@ -1,3 +1,7 @@
+10.2.0 / 2018-07-21
+==================
+* **New Feature** Show pointer cursor on slider ticks. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/849). Thanks to [Erik Demaine](https://github.com/edemaine).
+
 10.1.0 / 2018-07-21
 ==================
 * **Bug Fix** Allow any value on logarithmic scale. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/836). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/835). Thanks to [James Mason](https://github.com/bear454).
