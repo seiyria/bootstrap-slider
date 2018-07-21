@@ -220,6 +220,7 @@
   @include slider_box-sizing(border-box);
 
   position: absolute;
+  cursor: pointer;
   width: $slider-line-height;
   height: $slider-line-height;
   filter: none;
