@@ -1,3 +1,11 @@
+10.1.0 / 2018-07-21
+==================
+* **Bug Fix** Allow any value on logarithmic scale. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/836). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/835). Thanks to [James Mason](https://github.com/bear454).
+* **Documentation Fix:** Adds note about lack of current Bootstrap 4 compatability. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/689). Thanks to [Anders Olsson](https://github.com/anderso).
+* **Documentation Fix:** Increases clarity around when alternate namespace is bound. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/838). Thanks to [putrefactio](https://github.com/putrefactio).
+* **New Feature** Show pointer cursor on slider handle. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/839). Thanks to [David Lesieur](https://github.com/davidlesieur).
+
+
 10.0.2 / 2018-04-28
 ==================
 * **Bug Fix** Fixes an issue when determining mouse coords when pageXOffset >= 0 . [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/828). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/594). Thanks to [x-yuri](https://github.com/x-yuri).
