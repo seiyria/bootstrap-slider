@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.1.0              
+                      VERSION  10.2.0              
 ========================================================= */
 /*! =========================================================
  * bootstrap-slider.js
@@ -283,6 +283,7 @@
 }
 .slider-tick {
   position: absolute;
+  cursor: pointer;
   width: 20px;
   height: 20px;
   background-image: -webkit-linear-gradient(top, #f9f9f9 0%, #f5f5f5 100%);
