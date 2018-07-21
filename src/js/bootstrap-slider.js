@@ -295,11 +295,12 @@ const windowIsDefined = (typeof window === "object");
 			logarithmic: {
 				/* Based on http://stackoverflow.com/questions/846221/logarithmic-slider */
 				toValue: function(percentage) {
-					var min = (this.options.min === 0) ? 0 : Math.log(this.options.min);
-					var max = Math.log(this.options.max);
-					var value = Math.exp(min + (max - min) * percentage / 100);
-					if(Math.round(value) === this.options.max) {
-						return this.options.max;
+					var offset = 1 - this.options.min;
+					var min = Math.log(this.options.min + offset);
+					var max = Math.log(this.options.max + offset);
+					var value = Math.exp(min + (max - min) * percentage / 100) - offset;
+					if(Math.round(value) === max) {
+						return max;
 					}
 					value = this.options.min + Math.round((value - this.options.min) / this.options.step) * this.options.step;
 					/* Rounding to the nearest step could exceed the min or
@@ -316,9 +317,10 @@ const windowIsDefined = (typeof window === "object");
 					if (this.options.max === this.options.min) {
 						return 0;
 					} else {
-						var max = Math.log(this.options.max);
-						var min = this.options.min === 0 ? 0 : Math.log(this.options.min);
-						var v = value === 0 ? 0 : Math.log(value);
+						var offset = 1 - this.options.min;
+						var max = Math.log(this.options.max + offset);
+						var min = Math.log(this.options.min + offset);
+						var v = Math.log(value + offset);
 						return 100 * (v - min) / (max - min);
 					}
 				}
@@ -1434,7 +1436,7 @@ const windowIsDefined = (typeof window === "object");
 
 				if (ev.preventDefault){
 					ev.preventDefault();
-				}				
+				}
 
 				this._state.offset = this._offset(this.sliderElem);
 				this._state.size = this.sliderElem[this.sizePos];

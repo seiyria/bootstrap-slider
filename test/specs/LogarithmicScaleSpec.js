@@ -11,38 +11,51 @@ describe("Slider with logarithmic scale tests", function() {
 
 	var testSlider;
 
-	it("Should properly position the slider", function() {
-		testSlider = $("#testSlider1").slider({
-			min: 0,
-			max: 10000,
-			scale: 'logarithmic',
-			value: 100 // This should be at 50%
-		});
+	describe("Should properly position the slider", function() {
 
-		var expectedPostition = 210 / 2 + 'px';
+		function testSliderPosition(min, max, value){
+			testSlider = $("#testSlider1").slider({
+    			min: min,
+    			max: max,
+    			scale: 'logarithmic',
+    			value: value // This should be at 50%
+    		});
+			var expectedPostition = 210 / 2 + 'px';
+			var handle = $("#testSlider1").siblings('div.slider').find('.min-slider-handle');
+			expect(handle.css('left')).toBe(expectedPostition);
+		}
 
-		var handle = $("#testSlider1").siblings('div.slider').find('.min-slider-handle');
-		expect(handle.css('left')).toBe(expectedPostition);
-	});
+        it("with positive values", function() {
+			testSliderPosition(1, 10000, 100);
+    	});
+
+        it("with zero", function() {
+			testSliderPosition(0, 63, 7);
+        });
+
+        it("with a negative value", function() {
+			testSliderPosition(-7, 56, 0);
+        });
+    });
 
 	it("Should properly position the tick marks", function() {
 		testSlider = $("#testSlider1").slider({
-			min: 0,
+			min: 1,
 			max: 100,
 			scale: 'logarithmic',
-			ticks: [0,10,20,50,100]
+			ticks: [1,10,20,50,100]
 		});
 
 		// Position expected for the '10' tick
 		var expectedTickOnePosition = 210 / 2 + 'px'; //should be at 50%
-		
+
 		var handle = $("#testSlider1").siblings('div.slider').find(".slider-tick").eq(1);
 		expect(handle.css('left')).toBe(expectedTickOnePosition);
 	});
 
 	it("Should use step size when navigating the keyboard", function() {
 		testSlider = $("#testSlider1").slider({
-			min: 0,
+			min: 1,
 			max: 10000,
 			scale: 'logarithmic',
 			value: 100,
