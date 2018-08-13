@@ -480,9 +480,9 @@ var slider = new Slider("#ex4", {
       	<div id="example-5" class='slider-example'>
       		<h3>Example 5: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Destroy instance of slider by calling destroy() method on slider instance via JavaScript.</p>
-      		<div class="card card-body mb-3">
+      		<div class="card card-body mb-3 flex-row">
       			<input id="ex5" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="0"/>
-      			<button id="destroyEx5Slider" class='btn btn-danger'>Click to Destroy</button>
+      			<button id="destroyEx5Slider" class="btn btn-danger ml-3">Click to Destroy</button>
       		</div>
 <h5>HTML</h5>
 <pre><code class="html">
@@ -1242,19 +1242,17 @@ var slider = new Slider("#ex23", {
 
 			<div id="example-24" class='slider-example'>
 				<h3>Example 24: <a href="#top"><small>Back to Top</small></a></h3>
-				<p>rtl mode (auto).</p>
-				<div class='well' dir ="rtl">
-					<span>-5</span>
-						<input id="ex24" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
-					<span>20</span>
+				<p>rtl mode (auto)</p>
+				<div class="card card-body mb-3 flex-row" dir="rtl">
+					<span class="ml-1">-5</span>
+					<input id="ex24" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+					<span class="mr-1">20</span>
 				</div>
 <h5>HTML</h5>
 <pre><code class="html">
-&lt;div class='well' dir ="rtl"&gt;
   &lt;span&gt;-5&lt;/span&gt;
   &lt;span&gt;20&lt;/span&gt;
     &lt;input id="ex24" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/&gt;
-&lt;/div&gt;
 </pre></code>
 
 <h5>JavaScript</h5>
