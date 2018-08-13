@@ -43,7 +43,6 @@
       margin-top: $slider-line-height;
       .slider-tick-label {
         display: inline-block;
-        padding-top: $slider-line-height * 1.2;
         text-align: center;
       }
     }
@@ -146,6 +145,14 @@
       left: -50%;
     }
   }
+  &.bs-tooltip-left,
+  &.bs-tooltip-right {
+    .tooltip-inner {
+      position: relative;
+      top: -100%;
+    }
+  }
+
   .tooltip {
     pointer-events: none;
 
@@ -159,7 +166,14 @@
       margin-top: -44px;
     }
     &.bs-tooltip-bottom {
-      margin-top: 5px;
+      margin-top: 2px;
+    }
+    &.bs-tooltip-left,
+    &.bs-tooltip-right {
+      margin-top: -14px;
+      .arrow {
+        top: 8px;
+      }
     }
   }
   .hide {
