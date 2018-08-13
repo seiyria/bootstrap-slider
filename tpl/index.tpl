@@ -358,9 +358,9 @@ var slider = new Slider('#ex1', {
       	<div id="example-2" class='slider-example'>
       		<h3>Example 2: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Range selector, options specified via data attribute.</p>
-      		<div class="card card-body mb-3">
-      			Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
-      		</div>
+            <div class="card card-body mb-3 flex-row">
+                <span class="mr-1">Filter by price interval: </span><b class="mr-1">€ 10</b><input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/><b class="mr-1 ml-1">€ 1000</b>
+            </div>
 <h5>HTML</h5>
 <pre><code class="html">
 Filter by price interval: &ltb&gt€ 10&lt/b&gt &ltinput id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/&gt &ltb&gt€ 1000&lt/b&gt
@@ -512,7 +512,7 @@ $("#destroyEx5Slider").click(function() {
       	<div id="example-6" class='slider-example'>
       		<h3>Example 6: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Able to bind to 'slide' JQuery event on slider, which is triggered whenever the slider is used.</p>
-      		<div class="card card-body mb-3">
+      		<div class="card card-body mb-3 flex-row">
       			<input id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
       			<span id="ex6CurrentSliderValLabel">Current Slider Value: <span id="ex6SliderVal">3</span></span>
       		</div>
@@ -544,9 +544,9 @@ slider.on("slide", function(sliderValue) {
       	<div id="example-7" class='slider-example'>
       		<h3>Example 7: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Sliders can be enabled and disabled.</p>
-      		<div class="card card-body mb-3">
+      		<div class="card card-body mb-3 flex-row">
       			<input id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
-      			<input id="ex7-enabled" type="checkbox"/> Enabled
+      			<input id="ex7-enabled" type="checkbox" class="mr-1"/> Enabled
       		</div>
 <h5>HTML</h5>
 <pre><code class="html">
@@ -697,17 +697,21 @@ var slider = new Slider("#ex11", {
   <div id="example-12" class='slider-example'>
     <h3>Example 12: <a href="#top"><small>Back to Top</small></a></h3>
     <p>Coloring the low and high track segments.</p>
-	<div class="card card-body mb-3">
-      Single-value slider, high track:<br/>
-      <input id="ex12a" type="text"/><br/>
-      Note that there is no low track on the single-value slider.  The
-      area lesser than the value of the handle is the selection.
-      <br/><br/>
-      Range slider, low track:<br/>
-      <input id="ex12b" type="text"/>
-      <br/><br/>
-      Range slider, low and high tracks, and selection:<br/>
-      <input id="ex12c" type="text"/>
+    <div class="card card-body mb-3">
+      <div class="mb-3">
+          Single-value slider, high track:<br/>
+          <input id="ex12a" type="text"/><br/>
+          Note that there is no low track on the single-value slider.  The
+          area lesser than the value of the handle is the selection.
+      </div>
+      <div class="mb-3">
+        Range slider, low track:<br/>
+        <input id="ex12b" type="text"/>
+      </div>
+      <div>
+        Range slider, low and high tracks, and selection:<br/>
+        <input id="ex12c" type="text"/>
+      </div>
     </div>
 <h5>HTML</h5>
 <pre><code class="html">
@@ -848,11 +852,14 @@ var slider = new Slider('#ex15', {
         <h3>Example 16: <a href="#top"><small>Back to Top</small></a></h3>
         <p>Focus the slider handle after a value change.</p>
         <div class="card card-body mb-3">
-          Single-value slider:<br/>
-          <input id="ex16a" type="text"/><br/>
-          <br/><br/>
-          Range slider:<br/>
-          <input id="ex16b" type="text"/>
+          <div class="mb-3">
+            Single-value slider:<br/>
+            <input id="ex16a" type="text"/>
+          </div>
+          <div>
+            Range slider:<br/>
+            <input id="ex16b" type="text"/>
+          </div>
         </div>
 <h5>HTML</h5>
 <pre><code class="html">
@@ -881,12 +888,15 @@ var sliderB = new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: tru
       		<p>Unusual tooltip positions.</p>
 
       		<div class="card card-body mb-3">
-      			Horizontal slider with tooltip on the bottom<br/><br/>
-      			<input id="ex17a" type="text"/><br/><br/><br/>
-
-      			Vertical slider with tooltip on the left<br/><br/>
-      			<input id="ex17b" type="text"/>
-      		</div>
+            <div class="mb-4">
+              Horizontal slider with tooltip on the bottom<br/>
+              <input id="ex17a" type="text"/>
+            </div>
+            <div>
+              <div class="mb-2">Vertical slider with tooltip on the left<br/></div>
+              <input id="ex17b" type="text"/>
+            </div>
+          </div>
 <h5>HTML</h5>
 <pre><code class="html">
 &ltinput id="ex17a" type="text"/&gt
@@ -931,31 +941,34 @@ var sliderB = new Slider("#ex17b", {
 
       <div id="example-18" class="slider-example">
         <h3>Example 18: <a href="#top"><small>Back to Top</small></a></h3>
-        <p>Accessibility with ARIA labels.</p>
+        <p>Accessibility with labels only visible to screenreaders.</p>
 
         <div class="card card-body mb-3">
-          Slider with single value and label:<br/><br/>
-          <span id="ex18-label-1" class="hidden">
-            Example slider label
-          </span>
-          <input id="ex18a" type="text" /><br/><br/><br/>
-
-          Range slider with multiple labels:<br/><br/>
-          <span id="ex18-label-2a" class="hidden">
-            Example low value
-          </span>
-          <span id="ex18-label-2b" class="hidden">
-            Example high value
-          </span>
-          <input id="ex18b" type="text" />
+          <div class="mb-3">
+            Slider with single value and label:<br/>
+            <span id="ex18-label-1" class="sr-only">
+              Example slider label
+            </span>
+            <input id="ex18a" type="text" />
+          </div>
+          <div>
+            Range slider with multiple labels:<br/>
+            <span id="ex18-label-2a" class="sr-only">
+              Example low value
+            </span>
+            <span id="ex18-label-2b" class="sr-only">
+              Example high value
+            </span>
+            <input id="ex18b" type="text" />
+          </div>
         </div>
 <h5>HTML</h5>
 <pre><code class="html">
-&lt;span id="ex18-label-1" class="hidden"&gt;Example slider label&lt;/span&gt;
+&lt;span id="ex18-label-1" class="sr-only"&gt;Example slider label&lt;/span&gt;
 &lt;input id="ex18a" type="text"/&gt;
 
-&lt;span id="ex18-label-2a" class="hidden"&gt;Example low value&lt;/span&gt;
-&lt;span id="ex18-label-2b" class="hidden"&gt;Example high value&lt;/span&gt;
+&lt;span id="ex18-label-2a" class="sr-only"&gt;Example low value&lt;/span&gt;
+&lt;span id="ex18-label-2b" class="sr-only"&gt;Example high value&lt;/span&gt;
 &lt;input id="ex18b" type="text"/&gt;
 </pre></code>
 
@@ -996,8 +1009,8 @@ var sliderB = new Slider("#ex18b", {
         <p>Auto-Register data-provide="slider" Elements.</p>
 
         <div class="card card-body mb-3">
-          Slider-Element not accompanied by any custom Javascript:<br/><br/>
-          <span id="ex18-label-1" class="hidden">
+          <div class="mb-3">Slider-Element not accompanied by any custom Javascript:</div>
+          <span id="ex18-label-1" class="sr-only">
             Example slider label
           </span>
           <input id="ex19" type="text"
@@ -1012,7 +1025,7 @@ var sliderB = new Slider("#ex18b", {
         </div>
 <h5>HTML</h5>
 <pre><code class="html">
- &lt;span id="ex18-label-1" class="hidden">Example slider label&lt;/span&gt;
+ &lt;span id="ex18-label-1" class="sr-only">Example slider label&lt;/span&gt;
         &lt;input id="ex19" type="text"
               data-provide="slider"
               data-slider-ticks="[1, 2, 3]"
@@ -1032,8 +1045,8 @@ var sliderB = new Slider("#ex18b", {
         <a class="btn btn-primary" href="" id="ex20a">Show</a>
         <br><br>
         <div class="card card-body mb-3" style="display: none">
-          Slider-Element initially hidden, revealed by Javascript:<br/><br/>
-          <span id="ex18-label-1" class="hidden">
+          <div class="mb-3">Slider-Element initially hidden, revealed by Javascript:</div>
+          <span id="ex18-label-1" class="sr-only">
             Example slider label
           </span>
           <input id="ex20" type="text"
@@ -1050,7 +1063,7 @@ var sliderB = new Slider("#ex18b", {
 <pre><code class="html">
  &lt;a class="btn btn-primary" href="" id="ex20a">Show&lt;/a&gt;
         &lt;div class="card card-body mb-3" style="display: none"&gt;
-            &lt;span id="ex18-label-1" class="hidden"&gt;Example slider label&lt;/span&gt;
+            &lt;span id="ex18-label-1" class="sr-only"&gt;Example slider label&lt;/span&gt;
             &lt;input id="ex19" type="text"
                   data-provide="slider"
                   data-slider-ticks="[1, 2, 3]"
@@ -1068,8 +1081,8 @@ var sliderB = new Slider("#ex18b", {
  $('#ex20a').on('click', function(e) {
       $('#ex20a')
           .parent()
-          .find(' >.well')
-          .toggle()
+          .find(' >.card')
+          .toggleClass()
           .find('input')
           .slider('relayout');
       e.preventDefault();
@@ -1486,7 +1499,7 @@ slider.refresh({ useCurrentValue: true });
 			$('#ex20a').on('click', function(e) {
 				$('#ex20a')
 					.parent()
-					.find(' >.well')
+					.find(' >.card')
 					.toggle()
 					.find('input')
 					.slider('relayout');
