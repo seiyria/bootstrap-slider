@@ -1,3 +1,7 @@
+10.2.1 / 2018-09-25
+==================
+* **Bug Fix** Hovering next to slider does not show the tooltip. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/858). Thanks to [Alexa Schlegel](https://github.com/aschle).
+
 10.2.0 / 2018-07-21
 ==================
 * **New Feature** Show pointer cursor on slider ticks. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/849). Thanks to [Erik Demaine](https://github.com/edemaine).
