@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.2.0              
+                      VERSION  10.2.1              
 ========================================================= */
 /*! =========================================================
  * bootstrap-slider.js
@@ -194,6 +194,9 @@
 }
 .slider input {
   display: none;
+}
+.slider .tooltip {
+  pointer-events: none;
 }
 .slider .tooltip.top {
   margin-top: -36px;
