@@ -140,6 +140,8 @@
     max-width: none;
   }
   .tooltip {
+    pointer-events: none;
+
     &.top {
       margin-top: -36px;
     }
