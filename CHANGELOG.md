@@ -1,6 +1,5 @@
-
 10.2.2 / 2018-10-25
-
+==================
 * **Documentation Fix** Fix a typo to show tick position example correctly [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/866). Thanks [Jeffrey Espiritu](https://github.com/jespirit).
 
 10.2.1 / 2018-09-25
