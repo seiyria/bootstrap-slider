@@ -391,7 +391,14 @@ const windowIsDefined = (typeof window === "object");
 
 			// Check options.rtl
 			if(this.options.rtl==='auto'){
-				this.options.rtl = window.getComputedStyle(this.element).direction==='rtl';
+				if (window.getComputedStyle(this.element) != null) {
+					this.options.rtl = window.getComputedStyle(this.element).direction === 'rtl';
+				} else {
+					// Fix for Firefox bug in versions less than 62:
+					// https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+					// https://bugzilla.mozilla.org/show_bug.cgi?id=1467722
+					this.options.rtl = this.element.style.direction === 'rtl';
+				}
 			}
 
 			/*
