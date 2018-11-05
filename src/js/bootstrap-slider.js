@@ -1659,6 +1659,9 @@ const windowIsDefined = (typeof window === "object");
 				this._setDataVal(val);
 				this._trigger('slideStop', val);
 
+				// No longer need 'dragged' after mouse up
+				this._state.dragged = null;
+
 				return false;
 			},
 			_calculateValue: function(snapToClosestTick) {
