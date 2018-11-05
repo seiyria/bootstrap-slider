@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.2.2              
+                      VERSION  10.2.3              
 ========================================================= */
 "use strict";
 
@@ -1617,6 +1617,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._layout();
 				this._setDataVal(val);
 				this._trigger('slideStop', val);
+
+				// No longer need 'dragged' after mouse up
+				this._state.dragged = null;
 
 				return false;
 			},
