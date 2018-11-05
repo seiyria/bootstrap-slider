@@ -1,3 +1,7 @@
+10.2.3 / 2018-11-05
+==================
+* **Bug Fix** Fixes an issue where sliding a min handle over the max handle causes a strange skip in the values. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/854). Thanks [Jeffrey Espiritu](https://github.com/jespirit).
+
 10.2.2 / 2018-10-25
 ==================
 * **Documentation Fix** Fix a typo to show tick position example correctly [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/866). Thanks [Jeffrey Espiritu](https://github.com/jespirit).
