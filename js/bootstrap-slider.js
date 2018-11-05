@@ -1615,6 +1615,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this._setDataVal(val);
 				this._trigger('slideStop', val);
 
+				// No longer need 'dragged' after mouse up
+				this._state.dragged = null;
+
 				return false;
 			},
 			_calculateValue: function _calculateValue(snapToClosestTick) {
