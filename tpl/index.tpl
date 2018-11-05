@@ -660,7 +660,7 @@ var slider = new Slider("#ex13", {
       </div>
 <h5>HTML</h5>
 <pre><code class="html">
-&ltinput id="ex14" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]' data-slider-ticks-positions="[0, 30, 60, 70, 90, 100]" /&gt
+&ltinput id="ex14" type="text" data-slider-ticks="[0, 100, 200, 300, 400]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["$0", "$100", "$200", "$300", "$400"]' data-slider-ticks-positions="[0, 30, 70, 90, 100]" /&gt
 </code></pre>
 
 <h5>JavaScript</h5>
@@ -668,7 +668,7 @@ var slider = new Slider("#ex13", {
 // With JQuery
 $("#ex14").slider({
     ticks: [0, 100, 200, 300, 400],
-    ticks_positions: [0, 30, 60, 70, 90, 100],
+    ticks_positions: [0, 30, 70, 90, 100],
     ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
     ticks_snap_bounds: 30
 });
@@ -676,7 +676,7 @@ $("#ex14").slider({
 // Without JQuery
 var slider = new Slider("#ex14", {
     ticks: [0, 100, 200, 300, 400],
-    ticks_positions: [0, 30, 60, 70, 90, 100],
+    ticks_positions: [0, 30, 70, 90, 100],
     ticks_labels: ['$0', '$100', '$200', '$300', '$400'],
     ticks_snap_bounds: 30
 });
@@ -1245,7 +1245,6 @@ $("#ex24").slider({});
 				ticks_positions: [0, 30, 70, 90, 100],
 				ticks_snap_bounds: 20,
 				value: 200,
-				reversed: true
 			});
 
 			/* Example 15 */
