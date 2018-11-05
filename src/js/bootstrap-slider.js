@@ -1044,7 +1044,6 @@ const windowIsDefined = (typeof window === "object");
 
 			relayout: function() {
 				this._resize();
-				this._layout();
 				return this;
 			},
 
