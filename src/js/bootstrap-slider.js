@@ -391,8 +391,9 @@ const windowIsDefined = (typeof window === "object");
 
 			// Check options.rtl
 			if(this.options.rtl==='auto'){
-				if (window.getComputedStyle(this.element) != null) {
-					this.options.rtl = window.getComputedStyle(this.element).direction === 'rtl';
+				var computedStyle = window.getComputedStyle(this.element);
+				if (computedStyle != null) {
+					this.options.rtl = computedStyle.direction === 'rtl';
 				} else {
 					// Fix for Firefox bug in versions less than 62:
 					// https://bugzilla.mozilla.org/show_bug.cgi?id=548397
