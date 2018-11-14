@@ -1,4 +1,4 @@
-bootstrap-slider [![Build Status](https://travis-ci.org/seiyria/bootstrap-slider.png?branch=master)](https://travis-ci.org/seiyria/bootstrap-slider) [![Code Climate](https://codeclimate.com/github/seiyria/bootstrap-slider/badges/gpa.svg)](https://codeclimate.com/github/seiyria/bootstrap-slider)
+bootstrap-slider [![Build Status](https://travis-ci.org/seiyria/bootstrap-slider.png?branch=master)](https://travis-ci.org/seiyria/bootstrap-slider)
 ================
 Originally began as a loose "fork" of bootstrap-slider found on http://www.eyecon.ro/ by Stefan Petre.
 
