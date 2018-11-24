@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.2.3              
+                      VERSION  10.2.4              
 ========================================================= */
 "use strict";
 
@@ -1011,7 +1011,6 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 			relayout: function relayout() {
 				this._resize();
-				this._layout();
 				return this;
 			},
 
