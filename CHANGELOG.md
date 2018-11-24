@@ -1,3 +1,9 @@
+10.2.4 / 2018-11-24
+==================
+* **Bug Fix:** Remove duplicate call to `relayout()` in `_layout()` function. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/872).
+* **Documentation Fix:** Fix a typo in Example 14 on the API examples page. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/871).
+* **Documentation Fix:** Fix a typo in Example 1 on the API examples page. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/870).
+
 10.2.3 / 2018-11-05
 ==================
 * **Bug Fix** Fixes an issue where sliding a min handle over the max handle causes a strange skip in the values. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/854). Thanks [Jeffrey Espiritu](https://github.com/jespirit).
