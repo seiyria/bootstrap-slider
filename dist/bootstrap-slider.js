@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.3.0              
+                      VERSION  10.3.1              
 ========================================================= */
 "use strict";
 
@@ -384,7 +384,15 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 			// Check options.rtl
 			if (this.options.rtl === 'auto') {
-				this.options.rtl = window.getComputedStyle(this.element).direction === 'rtl';
+				var computedStyle = window.getComputedStyle(this.element);
+				if (computedStyle != null) {
+					this.options.rtl = computedStyle.direction === 'rtl';
+				} else {
+					// Fix for Firefox bug in versions less than 62:
+					// https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+					// https://bugzilla.mozilla.org/show_bug.cgi?id=1467722
+					this.options.rtl = this.element.style.direction === 'rtl';
+				}
 			}
 
 			/*
