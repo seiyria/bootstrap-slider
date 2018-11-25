@@ -1,3 +1,7 @@
+10.3.0 / 2018-11-24
+==================
+* **New Feature:** Add selection CSS classes to tick labels. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/752). Thanks to [Doug Lee](https://github.com/duggi).
+
 10.2.4 / 2018-11-24
 ==================
 * **Bug Fix:** Remove duplicate call to `relayout()` in `_layout()` function. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/872).
