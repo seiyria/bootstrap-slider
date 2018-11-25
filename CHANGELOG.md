@@ -1,3 +1,7 @@
+10.3.1 / 2018-11-24
+==================
+* **Bug Fix:** Check if `getComputedStyle()` returns `null`. Addresses issue with Firefox browsers running version < 62. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/869). Thanks to [Tyler Wilding](https://github.com/xTVaser).
+
 10.3.0 / 2018-11-24
 ==================
 * **New Feature:** Add selection CSS classes to tick labels. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/752). Thanks to [Doug Lee](https://github.com/duggi).
