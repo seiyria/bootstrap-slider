@@ -178,5 +178,33 @@ describe("Dragging handles tests", function() {
 			expect(testSlider._state.keyCtrl).toBeUndefined();
 			expect(testSlider.getValue()).toEqual([4, 5]);
 		});
+    });
+
+    it("Should snap to a tick within tick bounds when using the mouse navigation", function() {
+
+        testSlider.setAttribute('range', true);
+        testSlider.setAttribute('ticks_snap_bounds', 0.45);
+        testSlider.setAttribute('step', 0.1);
+        testSlider.refresh();
+
+		// Create mouse events
+        var mouseDown = document.createEvent("MouseEvents");
+        mouseEventArguments[7] = tickOffsets[1];
+        mouseDown.initMouseEvent.apply(mouseDown, mouseEventArguments);
+
+        var mouseRight = document.createEvent("MouseEvents");
+        mouseEventArguments[7] = tickOffsets[2] - 2;
+        mouseRight.initMouseEvent.apply(mouseRight, mouseEventArguments);
+
+        testSlider.mousedown(mouseDown);
+		expect(testSlider.getValue()).toEqual([0.7, 5]);
+
+        testSlider.mousemove(mouseRight);
+        expect(testSlider.getValue()).toEqual([2, 5]);
+
+        // End with mouse up
+        testSlider.mouseup();
+        expect(testSlider.getValue()).toEqual([2, 5]);
+
 	});
 });
