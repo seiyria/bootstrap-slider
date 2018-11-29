@@ -1,3 +1,7 @@
+10.3.2 / 2018-11-28
+==================
+* **Bug Fix:** Allow range slider to snap to ticks within bounds. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/873). Thanks to [Michael Kriese](https://github.com/ViceIce).
+
 10.3.1 / 2018-11-24
 ==================
 * **Bug Fix:** Check if `getComputedStyle()` returns `null`. Addresses issue with Firefox browsers running version < 62. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/869). Thanks to [Tyler Wilding](https://github.com/xTVaser).
