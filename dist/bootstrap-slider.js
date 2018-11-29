@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.3.1              
+                      VERSION  10.3.2              
 ========================================================= */
 "use strict";
 
@@ -1660,27 +1660,35 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 						val[1] = this._toValue(this._state.percentage[1]);
 						val[1] = this._applyPrecision(val[1]);
 					}
+					if (snapToClosestTick) {
+						val[0] = this._snapToClosestTick(val[0]);
+						val[1] = this._snapToClosestTick(val[1]);
+					}
 				} else {
 					val = this._toValue(this._state.percentage[0]);
 					val = parseFloat(val);
 					val = this._applyPrecision(val);
-				}
-
-				if (snapToClosestTick) {
-					var min = [val, Infinity];
-					for (var i = 0; i < this.options.ticks.length; i++) {
-						var diff = Math.abs(this.options.ticks[i] - val);
-						if (diff <= min[1]) {
-							min = [this.options.ticks[i], diff];
-						}
-					}
-					if (min[1] <= this.options.ticks_snap_bounds) {
-						return min[0];
+					if (snapToClosestTick) {
+						val = this._snapToClosestTick(val);
 					}
 				}
 
 				return val;
 			},
+			_snapToClosestTick: function _snapToClosestTick(val) {
+				var min = [val, Infinity];
+				for (var i = 0; i < this.options.ticks.length; i++) {
+					var diff = Math.abs(this.options.ticks[i] - val);
+					if (diff <= min[1]) {
+						min = [this.options.ticks[i], diff];
+					}
+				}
+				if (min[1] <= this.options.ticks_snap_bounds) {
+					return min[0];
+				}
+				return val;
+			},
+
 			_applyPrecision: function _applyPrecision(val) {
 				var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step);
 				return this._applyToFixedAndParseFloat(val, precision);
