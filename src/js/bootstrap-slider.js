@@ -1607,7 +1607,6 @@ const windowIsDefined = (typeof window === "object");
 				var percentage = this._getPercentage(ev);
 				this._adjustPercentageForRangeSliders(percentage);
 				this._state.percentage[this._state.dragged] = percentage;
-				this._layout();
 
 				var val = this._calculateValue(true);
 				this.setValue(val, true, true);
