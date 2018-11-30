@@ -1478,7 +1478,6 @@ const windowIsDefined = (typeof window === "object");
 				}
 
 				this._state.percentage[this._state.dragged] = percentage;
-				this._layout();
 
 				if (this.touchCapable) {
 					document.removeEventListener("touchmove", this.mousemove, false);
@@ -1509,7 +1508,6 @@ const windowIsDefined = (typeof window === "object");
 
 				this._trigger('slideStart', newValue);
 
-				this._setDataVal(newValue);
 				this.setValue(newValue, false, true);
 
 				ev.returnValue = false;
