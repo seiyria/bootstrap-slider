@@ -1577,12 +1577,10 @@ const windowIsDefined = (typeof window === "object");
 				}
 
 				this._trigger('slideStart', val);
-				this._setDataVal(val);
+
 				this.setValue(val, true, true);
 
-				this._setDataVal(val);
 				this._trigger('slideStop', val);
-				this._layout();
 
 				this._pauseEvent(ev);
 				delete this._state.keyCtrl;
