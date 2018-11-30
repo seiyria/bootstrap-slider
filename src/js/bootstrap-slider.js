@@ -1575,7 +1575,12 @@ const windowIsDefined = (typeof window === "object");
 					this._adjustPercentageForRangeSliders(percentage);
 					const val1 = (!this._state.keyCtrl) ? val : this._state.value[0];
 					const val2 = (this._state.keyCtrl) ? val : this._state.value[1];
-					val = [ val1, val2];
+					// Restrict values within limits
+					val = [ Math.max(this.options.min, Math.min(this.options.max, val1)),
+						Math.max(this.options.min, Math.min(this.options.max, val2)) ];
+				}
+				else {
+					val = Math.max(this.options.min, Math.min(this.options.max, val));
 				}
 
 				this._trigger('slideStart', val);
