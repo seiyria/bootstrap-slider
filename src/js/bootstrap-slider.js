@@ -1214,10 +1214,22 @@ const windowIsDefined = (typeof window === "object");
 					addMouseEnter: function(reference, tick, index){
 						var enter = function(){
 							var tempState = reference._copyState();
-							var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
-							var hoverIndex = parseInt(idString, 10);
-							tempState.value[0] = hoverIndex;
-							tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
+							// Which handle is being hovered over?
+							var val = tick === reference.handle1 ? tempState.value[0] : tempState.value[1];
+							var per;
+
+							// Setup value and percentage for tick's 'mouseenter'
+							if (index !== undefined) {
+								val = reference.options.ticks[index];
+								per = (reference.options.ticks_positions.length > 0 && reference.options.ticks_positions[index]) ||
+									reference._toPercentage(reference.options.ticks[index]);
+							}
+							else {
+								per = reference._toPercentage(val);
+							}
+
+							tempState.value[0] = val;
+							tempState.percentage[0] = per;
 							reference._setToolTipOnMouseOver(tempState);
 							reference._showTooltip();
 						};
