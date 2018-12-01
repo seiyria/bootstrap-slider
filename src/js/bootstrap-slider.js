@@ -1569,7 +1569,7 @@ const windowIsDefined = (typeof window === "object");
 				}
 
 				var val = this._state.value[handleIdx] + dir * this.options.step;
-				const percentage = (val / this.options.max) * 100;
+				const percentage = this._toPercentage(val);
 				this._state.keyCtrl = handleIdx;
 				if (this.options.range) {
 					this._adjustPercentageForRangeSliders(percentage);
@@ -1649,12 +1649,12 @@ const windowIsDefined = (typeof window === "object");
 						this._state.percentage[1] = this._state.percentage[0];
 						this._state.dragged = 0;
 					}
-					else if (this._state.keyCtrl === 0 && (((this._state.value[1] / this.options.max) * 100) < percentage)) {
+					else if (this._state.keyCtrl === 0 && (this._toPercentage(this._state.value[1]) < percentage)) {
 						this._state.percentage[0] = this._state.percentage[1];
 						this._state.keyCtrl = 1;
 						this.handle2.focus();
 					}
-					else if (this._state.keyCtrl === 1 && (((this._state.value[0] / this.options.max) * 100) > percentage)) {
+					else if (this._state.keyCtrl === 1 && (this._toPercentage(this._state.value[0]) > percentage)) {
 						this._state.percentage[1] = this._state.percentage[0];
 						this._state.keyCtrl = 0;
 						this.handle1.focus();
