@@ -1193,6 +1193,7 @@ const windowIsDefined = (typeof window === "object");
 			},
 			_layout: function() {
 				var positionPercentages;
+				var formattedValue;
 
 				if(this.options.reversed) {
 					positionPercentages = [ 100 - this._state.percentage[0], this.options.range ? 100 - this._state.percentage[1] : this._state.percentage[1]];
@@ -1203,14 +1204,22 @@ const windowIsDefined = (typeof window === "object");
 
 				this.handle1.style[this.stylePos] = `${positionPercentages[0]}%`;
 				this.handle1.setAttribute('aria-valuenow', this._state.value[0]);
-				if (isNaN(this.options.formatter(this._state.value[0])) ) {
-					this.handle1.setAttribute('aria-valuetext', this.options.formatter(this._state.value[0]));
+				formattedValue = this.options.formatter(this._state.value[0]);
+				if (isNaN(formattedValue)) {
+					this.handle1.setAttribute('aria-valuetext', formattedValue);
+				}
+				else {
+					this.handle1.removeAttribute('aria-valuetext');
 				}
 
 				this.handle2.style[this.stylePos] =`${positionPercentages[1]}%`;
 				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
-				if (isNaN(this.options.formatter(this._state.value[1])) ) {
-					this.handle2.setAttribute('aria-valuetext', this.options.formatter(this._state.value[1]));
+				formattedValue = this.options.formatter(this._state.value[1]);
+				if (isNaN(formattedValue)) {
+					this.handle2.setAttribute('aria-valuetext', formattedValue);
+				}
+				else {
+					this.handle2.removeAttribute('aria-valuetext');
 				}
 
 				/* Position highlight range elements */
