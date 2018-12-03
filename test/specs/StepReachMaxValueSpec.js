@@ -23,7 +23,8 @@ describe("TickMaxValueNotATickBehavior", function() {
       var expectedValue = slider.options.max;
       var mouseEvent = getMouseDownEvent(offsetX, offsetY);
       slider.mousedown(mouseEvent);
-      slider.mouseup();
+      // FIXME: Use 'mouseup' event type
+      slider.mouseup(mouseEvent);
       expect(slider.getValue()).toBe(expectedValue);
     });
   });

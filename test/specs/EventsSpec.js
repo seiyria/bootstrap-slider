@@ -81,7 +81,7 @@ describe("Event Tests", function() {
           flag += 1;
         });
         testSlider.slider('refresh');
-        testSlider.data('slider')._mouseup();
+        testSlider.data('slider')._mouseup(mouse);
         expect(flag).toEqual(1);
       });
 
@@ -110,7 +110,7 @@ describe("Event Tests", function() {
           testSlider.on('slideStop', function() {
             flag = true;
           });
-          testSlider.data('slider')._mouseup();
+          testSlider.data('slider')._mouseup(mouse);
           expect(flag).not.toBeTruthy();
         });
       });
@@ -195,7 +195,7 @@ describe("Event Tests", function() {
         testSlider.on('slideStop', function() {
           flag = true;
         });
-        testSlider.data('slider')._mouseup();
+        testSlider.data('slider')._mouseup(mouse);
 
         expect(flag).toBeTruthy();
       });
@@ -209,7 +209,7 @@ describe("Event Tests", function() {
           flag += 1;
         });
         testSlider.slider('refresh');
-        testSlider.data('slider')._mouseup();
+        testSlider.data('slider')._mouseup(mouse);
 
         expect(flag).toEqual(1);
       });
@@ -260,7 +260,7 @@ describe("Event Tests", function() {
           testSlider.on('slideStop', function() {
             flag = true;
           });
-          testSlider.data('slider')._mouseup();
+          testSlider.data('slider')._mouseup(mouse);
 
           expect(flag).not.toBeTruthy();
         });

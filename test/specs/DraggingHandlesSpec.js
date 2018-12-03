@@ -56,6 +56,10 @@ describe("Dragging handles tests", function() {
 			var mouseRight = document.createEvent('MouseEvents');
 			mouseEventArguments[7] = tickOffsets[6]; // clientX
 			mouseRight.initMouseEvent.apply(mouseRight, mouseEventArguments);
+			// Same offset as 'mouseLeft'
+			var mouseUp = document.createEvent('MouseEvents');
+			mouseEventArguments[7] = testSlider.ticks[4].offsetLeft + testSlider.sliderElem.offsetLeft; // clientX
+			mouseUp.initMouseEvent.apply(mouseUp, mouseEventArguments);
 			// Simulate drag without swapping
 			testSlider.mousedown(mouseLeft);
 			expect(testSlider._state.dragged).toBe(0);
@@ -82,7 +86,7 @@ describe("Dragging handles tests", function() {
 			expect(testSlider._state.dragged).toBe(0);
 			expect(testSlider.getValue()).toEqual([4, 5]);
 			// End with mouse up
-			testSlider.mouseup();
+			testSlider.mouseup(mouseUp);
 			expect(testSlider._state.dragged).toBeNull();
 			expect(testSlider.getValue()).toEqual([4, 5]);
 		});

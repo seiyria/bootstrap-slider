@@ -43,7 +43,8 @@ describe("'ticks_tooltip' Option tests", function() {
 			//Simulate random movements
 			testSlider.mousedown(mouse49);
 			testSlider.mousemove(mouse95);
-			testSlider.mouseup();
+			// FIXME: Use 'mouseup' event type
+			testSlider.mouseup(mouse95);
 			testSlider.mousedown(mouse49);
 			testSlider.mousemove(mouse100);
 			testSlider.mousemove(mouse95);
