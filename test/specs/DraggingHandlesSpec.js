@@ -212,4 +212,55 @@ describe("Dragging handles tests", function() {
         expect(testSlider.getValue()).toEqual([2, 5]);
 
 	});
+
+	describe("Test 'mousemove' and 'mouseup' produces correct results", function() {
+		var $mySlider;
+		var $handle1;
+
+		function arraysEqual(a, b) {
+			if (a === b) { return true; }
+			if (a == null || b == null) { return false; }
+			if (a.length !== b.length) { return false; }
+
+			for (var i = 0; i < a.length; ++i) {
+				if (a[i] !== b[i]) { return false; }
+			}
+			return true;
+		}
+
+		it("Last value changed in 'change' event should equal 'mouseup' event value for slider", function(done) {
+			// Change attributes for 'testSlider'
+			testSlider.setAttribute('value', 3);
+			testSlider.setAttribute('range', false);
+			testSlider.refresh();
+
+			$mySlider = $('#testSlider1');
+
+			function createMouseEvent(type, tickIdx) {
+				var mouseEvent = document.createEvent('MouseEvent');
+				mouseEventArguments[0] = type;
+				mouseEventArguments[7] = tickOffsets[tickIdx];
+				mouseEvent.initMouseEvent.apply(mouseEvent, mouseEventArguments);
+				return mouseEvent;
+			}
+
+			var lastValue = 99;  // Dummy value
+			$mySlider.on('change', function(eventData) {
+				lastValue = eventData.value.newValue;
+			});
+
+			$mySlider.on('slideStop', function(eventData) {
+				var value = eventData.value;
+				var isEqual = Array.isArray(value) ? arraysEqual(lastValue, value) : value === lastValue;
+				expect(isEqual).toBe(true);
+				done();
+			});
+
+			// Simulate drag and release from tick[1] to tick[4]
+			$handle1 = testSlider.$sliderElem.find('.slider-handle:first');
+			$handle1[0].dispatchEvent(createMouseEvent('mousedown', 1));
+			$handle1[0].dispatchEvent(createMouseEvent('mousemove', 4));
+			$handle1[0].dispatchEvent(createMouseEvent('mouseup', 4));
+		});
+	});
 });
