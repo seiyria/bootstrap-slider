@@ -130,7 +130,7 @@ describe("Dragging handles tests", function() {
 			expect(testSlider.getValue()).toEqual([5, 6]);
 
 			// End with mouse up
-			testSlider.mouseup();
+			testSlider.mouseup(createMouseEvent('mouseup', 6));
 			expect(testSlider._state.dragged).toBeNull();
 			expect(testSlider.getValue()).toEqual([5, 6]);
 
@@ -165,7 +165,7 @@ describe("Dragging handles tests", function() {
 			expect(testSlider.getValue()).toEqual([3, 4]);
 
 			// End with mouse up
-			testSlider.mouseup();
+			testSlider.mouseup(createMouseEvent('mouseup', 3));
 			expect(testSlider._state.dragged).toBeNull();
 			expect(testSlider.getValue()).toEqual([3, 4]);
 
@@ -206,8 +206,9 @@ describe("Dragging handles tests", function() {
         testSlider.mousemove(mouseRight);
         expect(testSlider.getValue()).toEqual([2, 5]);
 
+		// FIXME: Use 'mouseup' event type
         // End with mouse up
-        testSlider.mouseup();
+        testSlider.mouseup(mouseRight);
         expect(testSlider.getValue()).toEqual([2, 5]);
 
 	});
