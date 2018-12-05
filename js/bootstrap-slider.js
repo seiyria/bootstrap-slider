@@ -1127,11 +1127,25 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					return [state.percentage[0], state.percentage[1]];
 				}
 			},
+			_copyState: function _copyState() {
+				return {
+					value: [this._state.value[0], this._state.value[1]],
+					enabled: this._state.enabled,
+					offset: this._state.offset,
+					size: this._state.size,
+					percentage: [this._state.percentage[0], this._state.percentage[1], this._state.percentage[2]],
+					inDrag: this._state.inDrag,
+					over: this._state.over,
+					// deleted or null'd keys
+					dragged: this._state.dragged,
+					keyCtrl: this._state.keyCtrl
+				};
+			},
 			_addTickListener: function _addTickListener() {
 				return {
 					addMouseEnter: function addMouseEnter(reference, tick, index) {
 						var enter = function enter() {
-							var tempState = reference._state;
+							var tempState = reference._copyState();
 							var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
 							var hoverIndex = parseInt(idString, 10);
 							tempState.value[0] = hoverIndex;
