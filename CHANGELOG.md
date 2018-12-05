@@ -1,3 +1,7 @@
+10.3.3 / 2018-12-05
+==================
+* **Bug Fix:** Add `_copyState()` function to create a temporary copy of slider state. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/883).
+
 10.3.2 / 2018-11-28
 ==================
 * **Bug Fix:** Allow range slider to snap to ticks within bounds. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/873). Thanks to [Michael Kriese](https://github.com/ViceIce).
