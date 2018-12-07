@@ -495,7 +495,7 @@ describe("Navigating slider with the keyboard", function() {
   var mySlider;
   var keyboardEvent;
   var options;
-  // var $handle1;
+  var $handle1;
 
   describe("Does not trigger 'change' event when values do not change", function() {
 
@@ -521,13 +521,12 @@ describe("Navigating slider with the keyboard", function() {
       }
     });
 
-    it("Should not trigger 'change' event", function() {
+    it("Should not trigger 'change' event", function(done) {
       var hasSlideStarted = false;
       var hasChanged = false;
-      var hasSlideStopped = false;
       options.value = [-100, 0];
       mySlider = new Slider($('#testSlider1')[0], options);
-      // $handle1 = $('#mySlider').find('.slider-handle:first');
+      $handle1 = $('#mySlider').find('.slider-handle:first');
 
       mySlider.on('slideStart', function() {
         hasSlideStarted = true;
@@ -538,18 +537,15 @@ describe("Navigating slider with the keyboard", function() {
       });
 
       mySlider.on('slideStop', function() {
-        hasSlideStopped = true;
+        expect(hasSlideStarted).toBe(true);
+        expect(hasChanged).toBe(false);
+        done();
       });
 
       // Move the handle to the left
       keyboardEvent.keyCode = keyboardEvent.which = 37;
 
-      // FIXME: Setup async event dispatch
-      // $handle1[0].dispatchEvent(keyboardEvent);
-      mySlider.handle1Keydown(keyboardEvent);
-      expect(hasSlideStarted).toBe(true);
-      expect(hasChanged).toBe(false);
-      expect(hasSlideStopped).toBe(true);
+      $handle1[0].dispatchEvent(keyboardEvent);
     });
   });
 });
