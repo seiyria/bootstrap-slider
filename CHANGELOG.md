@@ -1,3 +1,11 @@
+10.3.4 / 2018-12-08
+==================
+* **Bug Fix:** Fix range slider values for `sliderStart` event. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/877).
+* **Bug Fix:** Properly check if slider values have changed. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/879).
+* **Bug Fix:** Correctly unset `aria-valuetext` attribute. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/885).
+* **Bug Fix:** Fix **Public Method** unit test. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/888). Thanks to [Xiaochen Wang](https://github.com/xwang345).
+* **Documentation Update:** Add a table of links for the Bootstrap-Slider API examples. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/886). Thanks to [Susan Truong](https://github.com/susantruong).
+
 10.3.3 / 2018-12-05
 ==================
 * **Bug Fix:** Add `_copyState()` function to create a temporary copy of slider state. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/883).
