@@ -19,6 +19,7 @@ describe("Public Method Tests", function() {
       expect(sliderInstancesExists).toBeTruthy();
       var sliderInstancesCount = $(".makeSlider").siblings(".slider").length;
       expect(sliderInstancesCount).toEqual(2);
+
       $('.makeSlider').slider('destroy');
     });
 
