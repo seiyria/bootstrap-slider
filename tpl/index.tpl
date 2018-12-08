@@ -26,6 +26,23 @@
 				font-size: 51%;
 			}
 
+			table {
+				border-collapse: collapse;
+				width: 100%; 
+			}
+
+			th, td {
+				text-align: left;
+				padding: 5px;
+			}
+
+			tr:nth-child(even){background-color: #e5e5e5}
+
+			th {
+				background-color: #00008B;
+				color: white;
+			}
+
 			/* Everything but the jumbotron gets side spacing for mobile first views */
 			.header,
 			.marketing,
@@ -171,6 +188,7 @@
 				width: 300px;
 			}
     </style>
+	
 	<script type='text/javascript' src="<%= js.modernizr %>"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -184,14 +202,117 @@
 
     <div class="container">
 
-      <div class="jumbotron">
+      <div id="top" class="jumbotron">
         <h1>Slider for Bootstrap <small>bootstrap-slider.js</small></h1>
         <p class="lead">Examples for the <a target="_blank" href="https://github.com/seiyria/bootstrap-slider">bootstrap-slider</a> component.<p>
       </div>
-
+	
+	  <table>
+		<tr>
+		  <th>Example Link</th>
+		  <th>Example Description</th>
+		</tr>
+		<tr>
+		  <td><a href="#example-1">Example 1</a></td>
+		  <td>Basic example with custom formatter and colored selected region via CSS</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-2">Example 2</a></td>
+		  <td>Range selector, options specified via data attribute</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-3">Example 3</a></td>
+		  <td>Using events to work with the values and style the selection and handles via CSS. The tooltip is disabled and diferent shapes for the handles</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-4">Example 4</a></td>
+		  <td>Vertical Slider with reversed values (largest to smallest)</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-5">Example 5</a></td>
+		  <td>Destroy instance of slider by calling destroy() method on slider instance via JavaScript</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-6">Example 6</a></td>
+		  <td>Able to bind to 'slide' JQuery event on slider, which is triggered whenever the slider is used</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-7">Example 7</a></td>
+		  <td>Sliders can be enabled and disabled</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-8">Example 8</a></td>
+		  <td>Tooltip can always be displayed</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-9">Example 9</a></td>
+		  <td>Precision (number of places after the decimal) can be specified</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-10">Example 10</a></td>
+		  <td>Setting custom handlers</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-11">Example 11</a></td>
+		  <td>Using a custom step interval</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-12">Example 12</a></td>
+		  <td>Coloring the low and high track segments</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-13">Example 13</a></td>
+		  <td>Using tick marks and labels</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-14">Example 14</a></td>
+		  <td>Using tick marks at specific positions</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-15">Example 15</a></td>
+		  <td>With a logarithmic scale</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-16">Example 16</a></td>
+		  <td>Focus the slider handle after a value changes</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-17">Example 17</a></td>
+		  <td>Unusual tooltip positions</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-18">Example 18</a></td>
+		  <td>Accessibility with ARIA labels</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-19">Example 19</a></td>
+		  <td>Auto-Register data-provide="slider" Elements</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-20">Example 20</a></td>
+		  <td>Slider-Elements initially hidden</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-21">Example 21</a></td>
+		  <td>Create an input element with the <strong>data-provide="slider"</strong> attribute automatically turns it into a slider. Options can be supplied via <strong>data-slider-</strong> attributes</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-22">Example 22</a></td>
+		  <td>Highlight ranges on slider with <strong>rangeHighlights</strong> attribute</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-23">Example 23</a></td>
+		  <td>Using tick marks at specific positions</td>
+		</tr>
+		<tr>
+		  <td><a href="#example-24">Example 24</a></td>
+		  <td>rtl mode (auto)</td>
+		</tr>
+      </table>
+	  
       <div class="examples">
       	<div id="example-1" class='slider-example'>
-      		<h3>Example 1:</h3>
+      		<h3>Example 1: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Basic example with custom formatter and colored selected region via CSS.</p>
       		<div class="well">
 				<input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
@@ -227,7 +348,7 @@ var slider = new Slider('#ex1', {
       	</div>
 
       	<div id="example-2" class='slider-example'>
-      		<h3>Example 2:</h3>
+      		<h3>Example 2: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Range selector, options specified via data attribute.</p>
       		<div class="well">
       			Filter by price interval: <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>
@@ -248,7 +369,7 @@ var slider = new Slider('#ex2', {});
       	</div>
 
       	<div id="example-3" class='slider-example'>
-      		<h3>Example 3:</h3>
+      		<h3>Example 3: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Using events to work with the values and style the selection and handles via CSS. The tooltip is disabled and diferent shapes for the handles.</p>
       		<div class="well">
       			<p>
@@ -324,7 +445,7 @@ var b = $('#B').slider()
       	</div>
 
       	<div id="example-4" class='slider-example'>
-      		<h3>Example 4:</h3>
+      		<h3>Example 4: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Vertical Slider with reversed values (largest to smallest).</p>
       		<div class="well">
       			<input id="ex4" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="-3" data-slider-orientation="vertical"/>
@@ -349,8 +470,8 @@ var slider = new Slider("#ex4", {
       	</div>
 
       	<div id="example-5" class='slider-example'>
-      		<h3>Example 5:</h3>
-      		<p>Destroy instance of slider by calling destroy() method on slider instance via JavaScript.
+      		<h3>Example 5: <a href="#top"><small>Back to Top</small></a></h3>
+      		<p>Destroy instance of slider by calling destroy() method on slider instance via JavaScript.</p>
       		<div class="well">
       			<input id="ex5" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="0"/>
       			<button id="destroyEx5Slider" class='btn btn-danger'>Click to Destroy</button>
@@ -381,7 +502,7 @@ $("#destroyEx5Slider").click(function() {
       	</div>
 
       	<div id="example-6" class='slider-example'>
-      		<h3>Example 6:</h3>
+      		<h3>Example 6: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Able to bind to 'slide' JQuery event on slider, which is triggered whenever the slider is used.</p>
       		<div class="well">
       			<input id="ex6" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="3"/>
@@ -413,7 +534,7 @@ slider.on("slide", function(sliderValue) {
       	</div>
 
       	<div id="example-7" class='slider-example'>
-      		<h3>Example 7:</h3>
+      		<h3>Example 7: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Sliders can be enabled and disabled.</p>
       		<div class="well">
       			<input id="ex7" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="5" data-slider-enabled="false"/>
@@ -453,7 +574,7 @@ $("#ex7-enabled").click(function() {
       	</div>
 
       <div id="example-8" class='slider-example'>
-      		<h3>Example 8:</h3>
+      		<h3>Example 8: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Tooltip can always be displayed.</p>
       		<div class="well">
   				<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
@@ -478,7 +599,7 @@ var slider = new Slider("#ex8", {
       	</div>
 
       <div id="example-9" class='slider-example'>
-      		<h3>Example 9:</h3>
+      		<h3>Example 9: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>Precision (number of places after the decimal) can be specified.</p>
       		<div class="well">
   				<input id="ex9" type="text"/>
@@ -504,7 +625,7 @@ var slider = new Slider("#ex9", {
 </code></pre>
       	</div>
 <div id="example-10" class='slider-example'>
-    <h3>Example 10:</h3>
+    <h3>Example 10: <a href="#top"><small>Back to Top</small></a></h3>
     <p>Setting custom handlers.</p>
     <div class="well">
     <input id="ex10" type="text" data-slider-handle="custom"/>
@@ -541,7 +662,7 @@ var slider = new Slider("#ex10", {});
   </div>
 
   <div id="example-11" class='slider-example'>
-      <h3>Example 11:</h3>
+      <h3>Example 11: <a href="#top"><small>Back to Top</small></a></h3>
       <p>Using a custom step interval.</p>
       <div class="well">
       <input id="ex11" type="text" data-slider-handle="custom"/>
@@ -566,7 +687,7 @@ var slider = new Slider("#ex11", {
   </div>
 
   <div id="example-12" class='slider-example'>
-    <h3>Example 12:</h3>
+    <h3>Example 12: <a href="#top"><small>Back to Top</small></a></h3>
     <p>Coloring the low and high track segments.</p>
 	<div class="well">
       Single-value slider, high track:<br/>
@@ -623,7 +744,7 @@ var sliderC = new Slider("#ex12c", { id: "slider12c", min: 0, max: 10, range: tr
   </div>
 
   <div id="example-13" class='slider-example'>
-      <h3>Example 13:</h3>
+      <h3>Example 13: <a href="#top"><small>Back to Top</small></a></h3>
       <p>Using tick marks and labels.</p>
       <div class="well">
       <input id="ex13" type="text"/>
@@ -653,8 +774,8 @@ var slider = new Slider("#ex13", {
   </div>
 
 	<div id="example-14" class='slider-example'>
-      <h3>Example 14:</h3>
-      <p>Using tick marks at specific positions..</p>
+      <h3>Example 14: <a href="#top"><small>Back to Top</small></a></h3>
+      <p>Using tick marks at specific positions.</p>
       <div class="well">
       <input id="ex14" type="text"/>
       </div>
@@ -684,7 +805,7 @@ var slider = new Slider("#ex14", {
 	</div>
 
       	<div id="example-15" class='slider-example'>
-      		<h3>Example 15:</h3>
+      		<h3>Example 15: <a href="#top"><small>Back to Top</small></a></h3>
       		<p>With a logarithmic scale.</p>
       		<div class="well">
 						<input id="ex15" type="text" data-slider-min="1000" data-slider-max="10000000" data-slider-step="5" />
@@ -716,7 +837,7 @@ var slider = new Slider('#ex15', {
       </div>
 
       <div id="example-16" class="slider-example">
-        <h3>Example 16:</h3>
+        <h3>Example 16: <a href="#top"><small>Back to Top</small></a></h3>
         <p>Focus the slider handle after a value change.</p>
         <div class="well">
           Single-value slider:<br/>
@@ -748,8 +869,8 @@ var sliderB = new Slider("#ex16b", { min: 0, max: 10, value: [0, 10], focus: tru
       </div>
 
       <div id="example-17" class="slider-example">
-      		<h3>Example 17:</h3>
-      		<p>Unusual tooltip positions</p>
+      		<h3>Example 17: <a href="#top"><small>Back to Top</small></a></h3>
+      		<p>Unusual tooltip positions.</p>
 
       		<div class="well">
       			Horizontal slider with tooltip on the bottom<br/><br/>
@@ -801,8 +922,8 @@ var sliderB = new Slider("#ex17b", {
       </div>
 
       <div id="example-18" class="slider-example">
-        <h3>Example 18:</h3>
-        <p>Accessibility with ARIA labels</p>
+        <h3>Example 18: <a href="#top"><small>Back to Top</small></a></h3>
+        <p>Accessibility with ARIA labels.</p>
 
         <div class="well">
           Slider with single value and label:<br/><br/>
@@ -863,8 +984,8 @@ var sliderB = new Slider("#ex18b", {
       </div>
 
       <div  id="example-19" class="slider-example">
-        <h3>Example 19:</h3>
-        <p>Auto-Register data-provide="slider" Elements</p>
+        <h3>Example 19: <a href="#top"><small>Back to Top</small></a></h3>
+        <p>Auto-Register data-provide="slider" Elements.</p>
 
         <div class="well">
           Slider-Element not accompanied by any custom Javascript:<br/><br/>
@@ -897,8 +1018,8 @@ var sliderB = new Slider("#ex18b", {
       </div>
 
       <div  id="example-20" class="slider-example">
-        <h3>Example 20:</h3>
-        <p>Slider-Elements initially hidden</p>
+        <h3>Example 20: <a href="#top"><small>Back to Top</small></a></h3>
+        <p>Slider-Elements initially hidden.</p>
 
         <a class="btn btn-primary" href="" id="ex20a">Show</a>
         <br><br>
@@ -949,7 +1070,7 @@ var sliderB = new Slider("#ex18b", {
       </div>
 
       <div id="example-21" class="slider-example">
-        <h3>Example 21:</h3>
+        <h3>Example 21: <a href="#top"><small>Back to Top</small></a></h3>
         <p>Create an input element with the <strong>data-provide="slider"</strong> attribute automatically turns it into a slider. Options can be supplied via <strong>data-slider-</strong> attributes.</p>
 
         <div class="well">
@@ -978,8 +1099,8 @@ var sliderB = new Slider("#ex18b", {
       </div>
 
     <div id="example-22" class="slider-example">
-		  <h3>Example 22:</h3>
-		  <p>Highlight ranges on slider with <strong>rangeHighlights</strong> attribute</p>
+		  <h3>Example 22: <a href="#top"><small>Back to Top</small></a></h3>
+		  <p>Highlight ranges on slider with <strong>rangeHighlights</strong> attribute.</p>
 
 		  <div class="well">
 			  <input id="ex22" type="text"
@@ -1060,8 +1181,8 @@ var slider = new Slider("#ex22", {
 	  </div>
 
 	  	<div id="example-23" class='slider-example'>
-		<h3>Example 23:</h3>
-		<p>Using tick marks at specific positions..</p>
+		<h3>Example 23: <a href="#top"><small>Back to Top</small></a></h3>
+		<p>Using tick marks at specific positions.</p>
 		<div class="well">
 		<input id="ex23" type="text"/>
 		</div>
@@ -1099,8 +1220,8 @@ var slider = new Slider("#ex23", {
 	</div>
 
 			<div id="example-24" class='slider-example'>
-				<h3>Example 24:</h3>
-				<p>rtl mode (auto)</p>
+				<h3>Example 24: <a href="#top"><small>Back to Top</small></a></h3>
+				<p>rtl mode (auto).</p>
 				<div class='well' dir ="rtl">
 					<span>-5</span>
 						<input id="ex24" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
@@ -1110,8 +1231,8 @@ var slider = new Slider("#ex23", {
 <pre><code class="html">
 &lt;div class='well' dir ="rtl"&gt;
   &lt;span&gt;-5&lt;/span&gt;
-    &lt;input id="ex24" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/&gt;
   &lt;span&gt;20&lt;/span&gt;
+    &lt;input id="ex24" type="text" data-slider-min="-5" data-slider-max="20" data-slider-step="1" data-slider-value="14"/&gt;
 &lt;/div&gt;
 </pre></code>
 
