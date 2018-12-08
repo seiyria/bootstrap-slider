@@ -14,14 +14,13 @@ describe("Public Method Tests", function() {
     });
 
     it("generates multiple slider instances from selector", function() {
-
       $(".makeSlider").slider();
-
       var sliderInstancesExists = $(".makeSlider").siblings().is(".slider");
       expect(sliderInstancesExists).toBeTruthy();
-
       var sliderInstancesCount = $(".makeSlider").siblings(".slider").length;
       expect(sliderInstancesCount).toEqual(2);
+
+      $('.makeSlider').slider('destroy');
     });
 
     it("reads and sets the 'min' option properly", function() {
@@ -146,21 +145,20 @@ describe("Public Method Tests", function() {
       expect(sliderSelectionHeightAtMaxValue).toBe(0);
     });
 
-    /* TODO: Fix this test! It keeps throwing a weird bug where is says '955' instead of '9' for the value */
-    // it("reads and sets the 'formatter' option properly", function() {
-    //   var tooltipFormatter = function(value) {
-    //     return 'Current value: ' + value;
-    //   };
+    it("reads and sets the 'formatter' option properly", function() {
+      var tooltipFormatter = function(value) {
+        return 'Current value: ' + value;
+      };
 
-    //   testSlider = $("#testSlider1").slider({
-    //     formatter : tooltipFormatter
-    //   });
-    //   testSlider.slider('setValue', 9);
+      testSlider = $("#testSlider1").slider({
+        formatter : tooltipFormatter
+      });
+      testSlider.slider('setValue', 9);
 
-    //   var tooltipMessage = $("#testSlider1").siblings(".slider").find("div.tooltip").children("div.tooltip-inner").text();
-    //   var expectedMessage = tooltipFormatter(9);
-    //   expect(tooltipMessage).toBe(expectedMessage);
-    // });
+      var tooltipMessage = $("#testSlider1").siblings(".slider").find("div.tooltip").children("div.tooltip-inner").text();
+      var expectedMessage = tooltipFormatter(9);
+      expect(tooltipMessage).toBe(expectedMessage);
+    });
 
     it("reads and sets the 'enabled' option properly", function() {
       testSlider = $("#testSlider1").slider({
