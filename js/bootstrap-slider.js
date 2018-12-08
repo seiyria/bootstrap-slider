@@ -912,7 +912,15 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				if (triggerSlideEvent === true) {
 					this._trigger('slide', newValue);
 				}
-				if (oldValue !== newValue && triggerChangeEvent === true) {
+
+				var hasChanged = false;
+				if (Array.isArray(newValue)) {
+					hasChanged = oldValue[0] !== newValue[0] && oldValue[1] !== newValue[1];
+				} else {
+					hasChanged = oldValue !== newValue;
+				}
+
+				if (hasChanged && triggerChangeEvent === true) {
 					this._trigger('change', {
 						oldValue: oldValue,
 						newValue: newValue
@@ -1167,6 +1175,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			},
 			_layout: function _layout() {
 				var positionPercentages;
+				var formattedValue;
 
 				if (this.options.reversed) {
 					positionPercentages = [100 - this._state.percentage[0], this.options.range ? 100 - this._state.percentage[1] : this._state.percentage[1]];
@@ -1176,14 +1185,20 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 				this.handle1.style[this.stylePos] = positionPercentages[0] + "%";
 				this.handle1.setAttribute('aria-valuenow', this._state.value[0]);
-				if (isNaN(this.options.formatter(this._state.value[0]))) {
-					this.handle1.setAttribute('aria-valuetext', this.options.formatter(this._state.value[0]));
+				formattedValue = this.options.formatter(this._state.value[0]);
+				if (isNaN(formattedValue)) {
+					this.handle1.setAttribute('aria-valuetext', formattedValue);
+				} else {
+					this.handle1.removeAttribute('aria-valuetext');
 				}
 
 				this.handle2.style[this.stylePos] = positionPercentages[1] + "%";
 				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
-				if (isNaN(this.options.formatter(this._state.value[1]))) {
-					this.handle2.setAttribute('aria-valuetext', this.options.formatter(this._state.value[1]));
+				formattedValue = this.options.formatter(this._state.value[1]);
+				if (isNaN(formattedValue)) {
+					this.handle2.setAttribute('aria-valuetext', formattedValue);
+				} else {
+					this.handle2.removeAttribute('aria-valuetext');
 				}
 
 				/* Position highlight range elements */
@@ -1547,7 +1562,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					this._adjustPercentageForRangeSliders(percentage);
 					var val1 = !this._state.keyCtrl ? val : this._state.value[0];
 					var val2 = this._state.keyCtrl ? val : this._state.value[1];
-					val = [val1, val2];
+					// Restrict values within limits
+					val = [Math.max(this.options.min, Math.min(this.options.max, val1)), Math.max(this.options.min, Math.min(this.options.max, val2))];
+				} else {
+					val = Math.max(this.options.min, Math.min(this.options.max, val));
 				}
 
 				this._trigger('slideStart', val);
