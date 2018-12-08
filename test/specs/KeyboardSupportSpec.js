@@ -490,3 +490,67 @@ describe("Keyboard Support Tests", function() {
     });
   });
 });
+
+describe("Navigating range sliders with the keyboard", function() {
+  var mySlider;
+  var keyboardEvent;
+  var options;
+  var $handle1;
+  var $handle2;
+
+  describe("Range slider values", function() {
+
+    beforeEach(function() {
+      options = {
+        id: 'mySlider',
+        min: -100,
+        max: 100,
+        step: 1,
+        value: [0, 1],
+        range: true
+      };
+
+      // Create keyboard event
+      keyboardEvent = document.createEvent('Event');
+      keyboardEvent.initEvent('keydown', true, true);
+    });
+
+    afterEach(function() {
+      if (mySlider) {
+        if (mySlider instanceof Slider) { mySlider.destroy(); }
+        mySlider = null;
+      }
+    });
+
+    it("Should not go below minimum at 'slideStart'", function(done) {
+      options.value = [-100, 0];
+      mySlider = new Slider($('#testSlider1')[0], options);
+      $handle1 = $('#mySlider').find('.slider-handle:first');
+
+      mySlider.on('slideStart', function(newVal) {
+        expect(newVal).toEqual([-100, 0]);
+        done();
+      });
+
+      // Move the handle to the left
+      keyboardEvent.keyCode = keyboardEvent.which = 37;
+
+      $handle1[0].dispatchEvent(keyboardEvent);
+    });
+
+    it("Should not go above maximum at 'slideStart'", function(done) {
+      options.value = [0, 100];
+      mySlider = new Slider($('#testSlider1')[0], options);
+      $handle2 = $('#mySlider').find('.slider-handle:last');
+
+      mySlider.on('slideStart', function(newVal) {
+        expect(newVal).toEqual([0, 100]);
+        done();
+      });
+
+      // Move the handle to the right
+      keyboardEvent.keyCode = keyboardEvent.which = 39;
+      $handle2[0].dispatchEvent(keyboardEvent);
+    });
+  });
+});
