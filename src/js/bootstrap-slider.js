@@ -372,6 +372,9 @@ const windowIsDefined = (typeof window === "object");
 			options = options ? options : {};
 			var optionTypes = Object.keys(this.defaultOptions);
 
+			const isMinSet = options.hasOwnProperty('min');
+			const isMaxSet = options.hasOwnProperty('max');
+
 			for(var i = 0; i < optionTypes.length; i++) {
 				var optName = optionTypes[i];
 
@@ -692,8 +695,12 @@ const windowIsDefined = (typeof window === "object");
 			this._setTooltipPosition();
 			/* In case ticks are specified, overwrite the min and max bounds */
 			if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
+				if (!isMaxSet) {
 					this.options.max = Math.max.apply(Math, this.options.ticks);
+				}
+				if (!isMinSet) {
 					this.options.min = Math.min.apply(Math, this.options.ticks);
+				}
 			}
 
 			if (Array.isArray(this.options.value)) {
