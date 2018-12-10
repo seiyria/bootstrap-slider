@@ -58,7 +58,7 @@ describe("RTL Tests", function() {
         orientation: "vertical",
       });
 
-      var mainTooltipHasClassLeft = testSlider.tooltip.classList.contains("left");
+      var mainTooltipHasClassLeft = testSlider.tooltip.classList.contains("bs-tooltip-left");
 
       expect(mainTooltipHasClassLeft).toBeTruthy();
       expect(testSlider.tooltip.style.right).toBe("100%");
@@ -70,7 +70,7 @@ describe("RTL Tests", function() {
         tooltip_position: "right",
       });
 
-      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("right");
+      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("bs-tooltip-right");
 
       expect(mainTooltipHasClassRight).toBeTruthy();
       expect(testSlider.tooltip.style.left).toBe("100%");
