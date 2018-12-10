@@ -4,14 +4,14 @@ describe("Namespace Tests", function() {
   var alternateNamespace = 'bootstrapSlider';
 
   it("should always set the plugin namespace to 'bootstrapSlider'", function(done) {
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       expect($.fn.bootstrapSlider).toBeDefined();
       done();   
     });
   });
 
   it("should set the plugin namespace to 'slider' if the namespace is available", function(done) {
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       expect($.fn.slider).toBeDefined();
       done();
     });
@@ -21,7 +21,7 @@ describe("Namespace Tests", function() {
     $.fn.slider = function() {};
     spyOn(window.console, "warn");
 
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       var expectedWarningMessage = "bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.";
       expect(window.console.warn).toHaveBeenCalledWith(expectedWarningMessage);
       done();
@@ -66,7 +66,7 @@ describe("Namespace Tests", function() {
     $.fn.bootstrapSlider = undefined;
     $.fn.slider = undefined;
 
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       done();
     });
   });
