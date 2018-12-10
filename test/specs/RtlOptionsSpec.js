@@ -49,7 +49,7 @@ describe("RTL Tests", function() {
       var sliderTrackHighLeft=$("#rtlSlider").siblings(".slider-rtl").children("div.slider-track").children("div.slider-track-high").css("left");
 
       expect(sliderTrackLowRight).toBe("0px");
-      expect(sliderSelectionRight).toBe("0%");
+      expect(sliderSelectionRight).toBe("0px");
       expect(sliderTrackHighLeft).toBe("0px");
     });
 
