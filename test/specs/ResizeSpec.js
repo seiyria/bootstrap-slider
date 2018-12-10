@@ -29,7 +29,7 @@ describe("Resize Tests", function() {
 
       $('.slider').width(210);
       dataSlider._resize();
-      expect($el.siblings('div.slider').find('.slider-tick-label:eq(0)').width()).toBe(53);
+      expect($el.siblings('div.slider').find('.slider-tick-label:eq(0)').width()).toBe(52.5);
 
       $('.slider').width(120);
       dataSlider._resize();
@@ -41,7 +41,7 @@ describe("Resize Tests", function() {
 
       $('.slider').width(210);
       dataSlider._resize();
-      expect($el.siblings('div.slider').find('.slider-tick-label:eq(0)').width()).toBe(53);
+      expect($el.siblings('div.slider').find('.slider-tick-label:eq(0)').width()).toBe(52.5);
     });
 
     it('should resize the tick labels when vertical', function() {
@@ -52,7 +52,7 @@ describe("Resize Tests", function() {
 
       $('.slider').height(210);
       dataSlider._resize();
-      expect($el.siblings('div.slider').find('.slider-tick-label:eq(0)').height()).toBe(53);
+      expect($el.siblings('div.slider').find('.slider-tick-label:eq(0)').height()).toBe(52.5);
 
       $('.slider').height(120);
       dataSlider._resize();
@@ -64,7 +64,7 @@ describe("Resize Tests", function() {
 
       $('.slider').height(210);
       dataSlider._resize();
-      expect($el.siblings('div.slider').find('.slider-tick-label:eq(0)').height()).toBe(53);
+      expect($el.siblings('div.slider').find('.slider-tick-label:eq(0)').height()).toBe(52.5);
     });
   });
 }); // End of spec
