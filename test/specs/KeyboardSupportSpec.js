@@ -340,6 +340,7 @@ describe("Keyboard Support Tests", function() {
     describe("when handle1 tries to overtake handle2 from the left", function() {
       beforeEach(function() {
         handle1 = $("#testSlider").find(".slider-handle:first");
+        handle2 = $("#testSlider").find(".slider-handle:last");
         handle1.focus();
       });
 
@@ -368,10 +369,21 @@ describe("Keyboard Support Tests", function() {
         keyboardEvent.keyCode = keyboardEvent.which = 39;
         handle1[0].dispatchEvent(keyboardEvent);
       });
+
+      it("Should give focus to handle2 after overtaking from the left", function(done) {
+        handle2.on("focus", function() {
+          expect(true).toBe(true);
+          done();
+        });
+
+        keyboardEvent.keyCode = keyboardEvent.which = 39;
+        handle1[0].dispatchEvent(keyboardEvent);
+      });
     });
 
     describe("when handle2 tries to overtake handle1 from the right", function() {
       beforeEach(function() {
+        handle1 = $("#testSlider").find(".slider-handle:first");
         handle2 = $("#testSlider").find(".slider-handle:last");
         handle2.focus();
       });
@@ -395,6 +407,16 @@ describe("Keyboard Support Tests", function() {
 
         handle2.on("keydown", function() {
           expect(sliderValue[1]).toBe(initialSliderVal);
+          done();
+        });
+
+        keyboardEvent.keyCode = keyboardEvent.which = 37;
+        handle2[0].dispatchEvent(keyboardEvent);
+      });
+
+      it("Should give focus to handle1 after overtaking from the right", function(done) {
+        handle1.on("focus", function() {
+          expect(true).toBe(true);
           done();
         });
 
