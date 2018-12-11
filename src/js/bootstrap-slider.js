@@ -1211,11 +1211,11 @@ const windowIsDefined = (typeof window === "object");
 			},
 			_addTickListener: function _addTickListener() {
 				return {
-					addMouseEnter: function(reference, tick, index){
+					addMouseEnter: function(reference, element, index){
 						var enter = function(){
 							var tempState = reference._copyState();
 							// Which handle is being hovered over?
-							var val = tick === reference.handle1 ? tempState.value[0] : tempState.value[1];
+							var val = element === reference.handle1 ? tempState.value[0] : tempState.value[1];
 							var per;
 
 							// Setup value and percentage for tick's 'mouseenter'
@@ -1233,14 +1233,14 @@ const windowIsDefined = (typeof window === "object");
 							reference._setToolTipOnMouseOver(tempState);
 							reference._showTooltip();
 						};
-						tick.addEventListener("mouseenter", enter, false);
+						element.addEventListener("mouseenter", enter, false);
 						return enter;
 					},
-					addMouseLeave: function(reference, tick){
+					addMouseLeave: function(reference, element){
 						var leave = function(){
 							reference._hideTooltip();
 						};
-						tick.addEventListener("mouseleave", leave, false);
+						element.addEventListener("mouseleave", leave, false);
 						return leave;
 					}
 				};
