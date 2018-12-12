@@ -1,3 +1,10 @@
+10.4.0 / 2018-12-12
+==================
+* **Minor API Update:** Update behaviour so that min/max tick values do not overwrite min/max settings. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/889).
+* **Bug Fix:** Remove unnecessary function calls. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/880).
+* **Bug Fix:** Fix calculation of percentage values. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/881).
+* **Bug Fix:** Recalculate the percentage on `mouseup` event. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/825). Thanks to [purpose233](https://github.com/purpose233).
+
 10.3.4 / 2018-12-08
 ==================
 * **Bug Fix:** Fix range slider values for `sliderStart` event. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/877).
