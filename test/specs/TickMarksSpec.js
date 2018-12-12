@@ -59,17 +59,6 @@ describe("Slider with ticks tests", function() {
 		});
 	});
 
-	it("Should overwrite the min/max values", function() {
-		testSlider = $("#testSlider1").slider({
-			ticks: [100, 200, 300, 400, 500],
-			min: 15000,
-			max: 25000
-		});
-
-		expect(testSlider.slider('getAttribute','min')).toBe(100);
-		expect(testSlider.slider('getAttribute','max')).toBe(500);
-	});
-
 	it("Should not snap to a tick within tick bounds when using the keyboard navigation", function() {
 		testSlider = $("#testSlider1").slider({
 			ticks: [100, 200, 300, 400, 500],
@@ -190,5 +179,69 @@ describe("Slider with ticks tests", function() {
       testSlider.slider('destroy');
       testSlider = null;
     }
+	});
+});
+
+describe("Slider min/max settings", function() {
+	var $inputSlider;
+
+	afterEach(function() {
+		if ($inputSlider) {
+			if ($inputSlider instanceof jQuery) {
+				$inputSlider.slider('destroy');
+			}
+			$inputSlider = null;
+		}
+	});
+
+	it("Should use min/max tick values for min/max settings", function() {
+		$inputSlider = $('#testSlider1').slider({
+			ticks: [1, 2, 3]
+		});
+
+		expect($inputSlider.slider('getAttribute', 'min')).toBe(1);
+		expect($inputSlider.slider('getAttribute', 'max')).toBe(3);
+	});
+
+	it("Should not overwrite 'min' setting", function() {
+		$inputSlider = $('#testSlider1').slider({
+			min: 0,
+			ticks: [1, 2, 3]
+		});
+
+		expect($inputSlider.slider('getAttribute', 'min')).toBe(0);
+		expect($inputSlider.slider('getAttribute', 'max')).toBe(3);
+	});
+
+	it("Should not overwrite 'max' setting", function() {
+		$inputSlider = $('#testSlider1').slider({
+			max: 5,
+			ticks: [1, 2, 3]
+		});
+
+		expect($inputSlider.slider('getAttribute', 'min')).toBe(1);
+		expect($inputSlider.slider('getAttribute', 'max')).toBe(5);
+	});
+
+	it("Should not overwrite 'min' or max' settings", function() {
+		$inputSlider = $('#testSlider1').slider({
+			min: 0,
+			max: 5,
+			ticks: [1, 2, 3]
+		});
+
+		expect($inputSlider.slider('getAttribute', 'min')).toBe(0);
+		expect($inputSlider.slider('getAttribute', 'max')).toBe(5);
+	});
+
+	it("Should ignore the ticks when outside of min/max range", function() {
+		$inputSlider = $("#testSlider1").slider({
+			ticks: [100, 200, 300, 400, 500],
+			min: 15000,
+			max: 25000
+		});
+
+		expect($inputSlider.slider('getAttribute', 'min')).toBe(15000);
+		expect($inputSlider.slider('getAttribute', 'max')).toBe(25000);
 	});
 });
