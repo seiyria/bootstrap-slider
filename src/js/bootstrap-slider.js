@@ -1751,7 +1751,6 @@ const windowIsDefined = (typeof window === "object");
 					}	
 				} else {
 					val = this._toValue(this._state.percentage[0]);
-					val = parseFloat(val);
 					val = this._applyPrecision(val);
 					if (snapToClosestTick) {
 						val = this._snapToClosestTick(val);
