@@ -149,4 +149,63 @@ describe("Element Data Attributes Tests", function() {
   afterEach(function() {
     if(slider) { slider.slider('destroy'); }
   });
+
+  describe("Test element attribute values after calling 'setValue()'", function() {
+    var sliderObj;
+
+    afterEach(function() {
+      if (sliderObj) {
+        sliderObj.destroy();
+        sliderObj = null;
+      }
+    });
+
+    it("The 'data-value' attribute of the original <input> element should equal the new value", function() {
+      // Setup
+      var sliderInputElem = document.getElementById("testSliderGeneric");
+      var newVal = 7;
+
+      sliderObj = new Slider(sliderInputElem, {
+        min: 0,
+        max: 10,
+        value: 5
+      });
+
+      sliderObj.setValue(newVal);
+
+      expect(sliderInputElem.dataset.value).toBe(newVal.toString());
+    });
+
+    it("The 'value' attribute of the original <input> element should equal the new value", function() {
+      var sliderInputElem = document.getElementById("testSliderGeneric");
+      var newVal = 7;
+
+      sliderObj = new Slider(sliderInputElem, {
+        min: 0,
+        max: 10,
+        value: 5
+      });
+
+      sliderObj.setValue(newVal);
+
+      var sliderValueAttrib = sliderInputElem.getAttribute('value');
+
+      expect(sliderValueAttrib).toBe(newVal.toString());
+    });
+
+    it("The 'value' property of the original <input> element should equal the new value", function() {
+      var sliderInputElem = document.getElementById("testSliderGeneric");
+      var newVal = 7;
+
+      sliderObj = new Slider(sliderInputElem, {
+        min: 0,
+        max: 10,
+        value: 5
+      });
+
+      sliderObj.setValue(newVal);
+
+      expect(sliderInputElem.value).toBe(newVal.toString());
+    });
+  });
 });

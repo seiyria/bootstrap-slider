@@ -1510,7 +1510,6 @@ const windowIsDefined = (typeof window === "object");
 				}
 
 				this._state.percentage[this._state.dragged] = percentage;
-				this._layout();
 
 				if (this.touchCapable) {
 					document.removeEventListener("touchmove", this.mousemove, false);
@@ -1541,7 +1540,6 @@ const windowIsDefined = (typeof window === "object");
 
 				this._trigger('slideStart', newValue);
 
-				this._setDataVal(newValue);
 				this.setValue(newValue, false, true);
 
 				ev.returnValue = false;
@@ -1616,12 +1614,10 @@ const windowIsDefined = (typeof window === "object");
 				}
 
 				this._trigger('slideStart', val);
-				this._setDataVal(val);
+
 				this.setValue(val, true, true);
 
-				this._setDataVal(val);
 				this._trigger('slideStop', val);
-				this._layout();
 
 				this._pauseEvent(ev);
 				delete this._state.keyCtrl;
@@ -1646,7 +1642,6 @@ const windowIsDefined = (typeof window === "object");
 				var percentage = this._getPercentage(ev);
 				this._adjustPercentageForRangeSliders(percentage);
 				this._state.percentage[this._state.dragged] = percentage;
-				this._layout();
 
 				var val = this._calculateValue(true);
 				this.setValue(val, true, true);
