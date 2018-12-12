@@ -1698,10 +1698,15 @@ const windowIsDefined = (typeof window === "object");
 					}
 				}
 			},
-			_mouseup: function() {
+			_mouseup: function(ev) {
 				if(!this._state.enabled) {
 					return false;
 				}
+
+				var percentage = this._getPercentage(ev);
+				this._adjustPercentageForRangeSliders(percentage);
+				this._state.percentage[this._state.dragged] = percentage;
+
 				if (this.touchCapable) {
 					// Touch: Unbind touch event handlers:
 					document.removeEventListener("touchmove", this.mousemove, false);

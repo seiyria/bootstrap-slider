@@ -74,7 +74,8 @@ describe("TickClickingBehavior", function() {
 		var mouseEvent = getMouseDownEvent(offsetX, offsetY);
 
 		slider.mousedown(mouseEvent);
-		slider.mouseup();
+		// FIXME: Use 'mouseup' event type
+		slider.mouseup(mouseEvent);
 
 		var expectedValue = slider.options.ticks[tickIndex];
 		expect(slider.getValue()).toBe(expectedValue);
