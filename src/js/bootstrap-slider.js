@@ -1162,7 +1162,7 @@ const windowIsDefined = (typeof window === "object");
 				this._state.over = true;
 			},
 			_hideTooltip: function() {
-				if (this._state.inDrag === false && this.alwaysShowTooltip !== true) {
+				if (this._state.inDrag === false && this._alwaysShowTooltip !== true) {
 					this._removeClass(this.tooltip, 'in');
 					this._removeClass(this.tooltip_min, 'in');
 					this._removeClass(this.tooltip_max, 'in');
