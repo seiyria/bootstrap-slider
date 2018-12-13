@@ -933,6 +933,11 @@ const windowIsDefined = (typeof window === "object");
 				}
 				else {
 					this._state.value = applyPrecision(this._state.value);
+
+					if (this.options.lock_to_ticks) {
+						this._state.value = this.options.ticks[this._getClosestTickIndex(this._state.value)];
+					}
+
 					this._state.value = [ Math.max(this.options.min, Math.min(this.options.max, this._state.value))];
 					this._addClass(this.handle2, 'hide');
 					if (this.options.selection === 'after') {
