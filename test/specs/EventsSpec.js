@@ -224,7 +224,7 @@ describe("Event Tests", function() {
           done();
         });
         testSlider.slider('refresh');
-        $('.slider .slider-handle').get(0).dispatchEvent(touch);
+        $('#testSlider2').prev('div.slider').find('.slider-handle').get(0).dispatchEvent(touch);
       });
 
       describe("Disabled Slider Event Tests", function() {

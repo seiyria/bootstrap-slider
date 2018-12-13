@@ -21,7 +21,7 @@ describe("Slider with logarithmic scale tests", function() {
     			value: value // This should be at 50%
     		});
 			var expectedPostition = 210 / 2 + 'px';
-			var handle = $("#testSlider1").siblings('div.slider').find('.min-slider-handle');
+			var handle = $("#testSlider1").prev('div.slider').find('.min-slider-handle');
 			expect(handle.css('left')).toBe(expectedPostition);
 		}
 
@@ -49,7 +49,7 @@ describe("Slider with logarithmic scale tests", function() {
 		// Position expected for the '10' tick
 		var expectedTickOnePosition = 210 / 2 + 'px'; //should be at 50%
 
-		var handle = $("#testSlider1").siblings('div.slider').find(".slider-tick").eq(1);
+		var handle = $("#testSlider1").prev('div.slider').find(".slider-tick").eq(1);
 		expect(handle.css('left')).toBe(expectedTickOnePosition);
 	});
 
@@ -63,7 +63,7 @@ describe("Slider with logarithmic scale tests", function() {
 		});
 
 		// Focus on handle1
-		var handle1 = $("#testSlider1").siblings('div.slider:first').find('.slider-handle');
+		var handle1 = $("#testSlider1").prev('div.slider').find('.slider-handle');
 		handle1.focus();
 
 		// Create keyboard event
