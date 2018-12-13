@@ -142,6 +142,8 @@ describe("'destroy()' Method tests", function() {
         throwsRuntimeError = true;
       }
 
+      testSlider.destroy();
+
       // reCreateSliderAndBindEvent(): Assert error is not thrown
       expect(throwsRuntimeError).toBeFalsy();
     });
