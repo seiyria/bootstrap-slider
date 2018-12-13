@@ -15,7 +15,8 @@ describe("Aria-valuetext Tests", function() {
       var tooltipMessageA = $("#accessibilitySliderA").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
       var expectedMessageA = tooltipFormatterA(2);
       expect(tooltipMessageA).toBe(expectedMessageA);
-     
+
+      $("#accessibilitySliderA").slider('destroy');
     });
     
     it("Does not use aria-valuetext if 'formatter' is not used", function() {
@@ -26,6 +27,8 @@ describe("Aria-valuetext Tests", function() {
     
       var ariaValueTextB = $("#accessibilitySliderB").prev(".slider").children(".min-slider-handle").attr("aria-valuetext");
       expect(ariaValueTextB).not.toBeDefined();
+
+      $("#accessibilitySliderB").slider('destroy');
     });
     
     it("aria-valuetext if 'formatter' is used and has min & max value", function() {
