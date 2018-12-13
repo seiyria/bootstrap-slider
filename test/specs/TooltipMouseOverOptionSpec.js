@@ -53,6 +53,64 @@ describe("'ticks_tooltip' Option tests", function() {
             expect(testSlider.tooltip.style.left).toBe("0%");
 		});
 	});
+
+	describe("Always show the tooltip", function() {
+		it("Should always display the tooltip after hovering over a tick", function(done) {
+			testSlider = new Slider(document.getElementById("testSlider1"), {
+				id: 'mySlider',
+				min: 0,
+				max: 10,
+				step: 1,
+				value: 1,
+				ticks: [0, 5, 10],
+				tooltip: 'always',
+				ticks_tooltip: true,
+				orientation: 'horizontal'
+			});
+			var mouseEventArguments = [
+				'mousemove', // type
+				true, // canBubble
+				true, // cancelable
+				document, // view,
+				0, // detail
+				0, // screenX
+				0, // screenY
+				undefined, // clientX
+				testSlider.sliderElem.offsetTop, // clientY,
+				false, // ctrlKey
+				false, // altKey
+				false, // shiftKey
+				false, // metaKey,
+				0, // button
+				null // relatedTarget
+			];
+
+			var isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('in');
+			expect(isTooltipVisible).toBe(true);
+
+			var mouseenter = document.createEvent('MouseEvent');
+			mouseEventArguments[0] = 'mouseenter';
+			mouseEventArguments[7] = 
+				testSlider.ticks[1].offsetLeft + testSlider.sliderElem.offsetLeft; // clientX
+			mouseenter.initMouseEvent.apply(mouseenter, mouseEventArguments);
+
+			var mouseleave = document.createEvent('MouseEvent');
+			mouseEventArguments[0] = 'mouseleave';
+			mouseEventArguments[7] = testSlider.sliderElem.offsetLeft + testSlider.sliderElem.offsetWidth;
+				// testSlider.ticks[1].offsetLeft + testSlider.sliderElem.offsetLeft; // clientX
+			mouseleave.initMouseEvent.apply(mouseleave, mouseEventArguments);
+
+			testSlider.ticks[1].addEventListener('mouseleave', function() {
+				isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('in');
+				expect(isTooltipVisible).toBe(true);
+				done();
+			});
+
+			testSlider.ticks[1].dispatchEvent(mouseenter);
+			testSlider.ticks[1].dispatchEvent(mouseleave);
+		});
+	});
+
 	afterEach(function() {
 		if(testSlider) {
 			if(testSlider instanceof Slider) { testSlider.destroy(); }
