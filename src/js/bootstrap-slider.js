@@ -349,7 +349,8 @@ const windowIsDefined = (typeof window === "object");
 				size: null,
 				percentage: null,
 				inDrag: false,
-				over: false
+				over: false,
+				tickIndex: null
 			};
 
 			// The objects used to store the reference to the tick methods if ticks_tooltip is on
@@ -390,8 +391,10 @@ const windowIsDefined = (typeof window === "object");
 				this.options[optName] = val;
 			}
 
+			this.ticksAreValid = Array.isArray(this.options.ticks) && this.options.ticks.length > 0;
+
 			// Lock to ticks only when ticks[] is defined and set
-			if (!(Array.isArray(this.options.ticks) && this.options.ticks.length > 0)) {
+			if (!this.ticksAreValid) {
 				this.options.lock_to_ticks = false;
 			}
 
@@ -928,7 +931,7 @@ const windowIsDefined = (typeof window === "object");
 					this._state.value[0] = applyPrecision(this._state.value[0]);
 					this._state.value[1] = applyPrecision(this._state.value[1]);
 
-					if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0 && this.options.lock_to_ticks) {
+					if (this.ticksAreValid && this.options.lock_to_ticks) {
 						this._state.value[0] = this.options.ticks[this._getClosestTickIndex(this._state.value[0])];
 						this._state.value[1] = this.options.ticks[this._getClosestTickIndex(this._state.value[1])];
 					}
@@ -939,7 +942,7 @@ const windowIsDefined = (typeof window === "object");
 				else {
 					this._state.value = applyPrecision(this._state.value);
 
-					if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0 && this.options.lock_to_ticks) {
+					if (this.ticksAreValid && this.options.lock_to_ticks) {
 						this._state.value = this.options.ticks[this._getClosestTickIndex(this._state.value)];
 					}
 
@@ -951,6 +954,9 @@ const windowIsDefined = (typeof window === "object");
 						this._state.value[1] = this.options.min;
 					}
 				}
+
+				// Determine which ticks the handle(s) are set at (if applicable)
+				this._setTickIndex();
 
 				if (this.options.max > this.options.min) {
 					this._state.percentage = [
@@ -1645,7 +1651,27 @@ const windowIsDefined = (typeof window === "object");
 					}
 				}
 
-				var val = this._state.value[handleIdx] + dir * this.options.step;
+				var val;
+				if (this.ticksAreValid && this.options.lock_to_ticks) {
+					var index;
+					try {
+						index = this.options.ticks.indexOf(this._state.value[handleIdx]);
+						if (index === -1) {
+							throw 'index should not be -1';
+						}
+					}
+					catch (e) {
+						window.console.warn('_keydown: ' + e);
+						// Set default to first tick
+						index = 0;
+					}
+					index += dir;
+					index = Math.max(0, Math.min(this.options.ticks.length-1, index));
+					val = this.options.ticks[index];
+				}
+				else {
+					val = this._state.value[handleIdx] + dir * this.options.step;
+				}
 				const percentage = this._toPercentage(val);
 				this._state.keyCtrl = handleIdx;
 				if (this.options.range) {
@@ -2017,7 +2043,19 @@ const windowIsDefined = (typeof window === "object");
 					}
 				}
 				return index;
-			}
+			},
+			/**
+			 * Attempts to find the index in `ticks[]` the slider values are set at.
+			 * The indexes can be -1 to indicate the slider value is not set at a value in `ticks[]`.
+			 */
+			_setTickIndex: function() {
+				if (this.ticksAreValid) {
+					this._state.tickIndex = [
+						this.options.ticks.indexOf(this._state.value[0]),
+						this.options.ticks.indexOf(this._state.value[1])
+					];
+				}
+			},
 		};
 
 		/*********************************
