@@ -1643,11 +1643,27 @@ const windowIsDefined = (typeof window === "object");
 
 				// use natural arrow keys instead of from min to max
 				if (this.options.natural_arrow_keys) {
-					var ifVerticalAndNotReversed = (this.options.orientation === 'vertical' && !this.options.reversed);
-					var ifHorizontalAndReversed = (this.options.orientation === 'horizontal' && this.options.reversed); // @todo control with rtl
+					const isHorizontal = this.options.orientation === 'horizontal';
+					const isVertical = this.options.orientation === 'vertical';
+					const isRTL = this.options.rtl;
+					const isReversed = this.options.reversed;
 
-					if (ifVerticalAndNotReversed || ifHorizontalAndReversed) {
-						dir = -dir;
+					if (isHorizontal) {
+						if (isRTL) {
+							if (!isReversed) {
+								dir = -dir;
+							}
+						}
+						else {
+							if (isReversed) {
+								dir = -dir;
+							}
+						}
+					}
+					else if (isVertical) {
+						if (!isReversed) {
+							dir = -dir;
+						}
 					}
 				}
 
