@@ -390,6 +390,11 @@ const windowIsDefined = (typeof window === "object");
 				this.options[optName] = val;
 			}
 
+			// Lock to ticks only when ticks[] is defined and set
+			if (!(Array.isArray(this.options.ticks) && this.options.ticks.length > 0)) {
+				this.options.lock_to_ticks = false;
+			}
+
 			// Check options.rtl
 			if(this.options.rtl==='auto'){
 				var computedStyle = window.getComputedStyle(this.element);
@@ -923,7 +928,7 @@ const windowIsDefined = (typeof window === "object");
 					this._state.value[0] = applyPrecision(this._state.value[0]);
 					this._state.value[1] = applyPrecision(this._state.value[1]);
 
-					if (this.options.lock_to_ticks) {
+					if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0 && this.options.lock_to_ticks) {
 						this._state.value[0] = this.options.ticks[this._getClosestTickIndex(this._state.value[0])];
 						this._state.value[1] = this.options.ticks[this._getClosestTickIndex(this._state.value[1])];
 					}
@@ -934,7 +939,7 @@ const windowIsDefined = (typeof window === "object");
 				else {
 					this._state.value = applyPrecision(this._state.value);
 
-					if (this.options.lock_to_ticks) {
+					if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0 && this.options.lock_to_ticks) {
 						this._state.value = this.options.ticks[this._getClosestTickIndex(this._state.value)];
 					}
 
