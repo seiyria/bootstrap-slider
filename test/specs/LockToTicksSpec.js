@@ -430,3 +430,207 @@ describe("`lock_to_ticks: true` mouse navigation test cases", function() {
 		});
 	});
 });
+
+/**
+ * The keyboard navigation tests are based on the following slider properties:
+ * 
+ * initial value: 3 or [3, 7]
+ * ticks: [0, 3, 5, 7, 10]
+ * step: 0.1
+ * 
+ * See description for mouse navigation tests for explanation for test setup values.
+ * 
+ * These tests are setup to test for all combinations of relevant slider configurations:
+ * single/range, horizontal/vertical orientation, LTR/RTL, natural keys navigation,
+ * ordered/reversed, and all key presses (left, up, right, down).
+ * 
+ * The test data is fairly straightforward and passes most configurations except for
+ * special cases when using natural key navigation. For these cases, the test data
+ * had to be 'inverted'. For example, the test data had to be inverted when the
+ * slider has a horizontal orientation with either RTL or reversed option set (but not both).
+ * 
+ * The test logic for sliders:
+ * - Key to the left should change the value and lock to the tick to the left
+ * - Key to the right should change the value and lock to the tick to the right
+ * 
+ * For range sliders, the same logic is applied except test both handle1 and handle2.
+ */
+describe("`lock_to_ticks: true` keyboard navigation test cases", function() {
+	var initialValue = 3;
+	var initialRangeValues = [3, 7];
+	var tickValues = [0, 3, 5, 7, 10];
+	var stepValue = 0.1;
+	var keyData = {
+		left: 37,
+		up: 38,
+		right: 39,
+		down: 40
+	};
+
+	var keys = ['left', 'up', 'right', 'down'];
+	var orientations = ['horizontal', 'vertical'];
+	var reversed = [false, true];
+	var naturalKeys = [false, true];
+	var ranged = [false, true];
+	var rtl = [false, true];
+	var rangeHandles = ['handle1', 'handle2'];
+	var testCases = [];
+
+	orientations.forEach(function(orientation) {
+		ranged.forEach(function(isRange) {
+			rtl.forEach(function(isRTL) {
+				naturalKeys.forEach(function(isNatural) {
+					reversed.forEach(function(isReversed) {
+						testCases.push({
+							value: isRange ? initialRangeValues : initialValue,
+							step: stepValue,
+							range: isRange,
+							orientation: orientation,
+							reversed: isReversed,
+							rtl: 'auto',
+							natural_arrow_keys: isNatural,
+							isRTL: isRTL,
+							inputId: isRTL ? 'rtlSlider' : 'testSlider1',
+						});
+					});
+				});
+			});
+		});
+	});
+
+	testCases.forEach(function(testCase) {
+		var handles = testCase.range ? rangeHandles : ['handle1'];
+
+		describe("orientation=" + testCase.orientation + ", range=" + testCase.range + ", rtl=" + testCase.isRTL +
+			", natural_arrow_keys=" + testCase.natural_arrow_keys +
+			", reversed=" + testCase.reversed, function() {
+			var $testSlider;
+			var $handle;
+			var keyboardEvent;
+			var sliderId;
+			var sliderOptions;
+
+			beforeEach(function() {
+				sliderId = testCase.range ? 'myRangeSlider' : 'mySlider';
+
+				sliderOptions = {
+					id: sliderId,
+					step: testCase.step,
+					orientation: testCase.orientation,
+					value: testCase.value,
+					range: testCase.range,
+					lock_to_ticks: true,
+					reversed: testCase.reversed,
+					rtl: 'auto',
+					natural_arrow_keys: testCase.natural_arrow_keys,
+					ticks: tickValues,
+				};
+
+				// Create keyboard event
+				keyboardEvent = document.createEvent('Event');
+				keyboardEvent.initEvent('keydown', true, true);
+			});
+
+			afterEach(function() {
+				keyboardEvent = null;
+				if ($testSlider) {
+					$testSlider.slider('destroy');
+					$testSlider = null;
+				}
+			});
+
+			handles.forEach(function(handleKey) {
+				keys.forEach(function(key) {
+					var isHorizontal = testCase.orientation === 'horizontal';
+					var isVertical = testCase.orientation === 'vertical';
+					var isRange = testCase.range;
+					var isRTL = testCase.isRTL;
+					var isReversed = testCase.reversed;
+					var isNatural = testCase.natural_arrow_keys;
+
+					var testData = {
+						keyCode: keyData[key],
+						handle1: {
+							expectedValue: null
+						},
+						handle2: {
+							expectedValue: null
+						}
+					};
+
+					if (isRange) {
+						// If initial value is [3, 7] Then
+						// These expected values will pass 96/128 tests (32 failures)
+						if (key === 'left' || key === 'down') {
+							testData.handle1.expectedValue = [0, 7];
+							testData.handle2.expectedValue = [3, 5];
+						}
+						else if (key === 'right' || key === 'up') {
+							testData.handle1.expectedValue = [5, 7];
+							testData.handle2.expectedValue = [3, 10];
+						}
+
+						// Special cases when using natural keys
+						if (isNatural) {
+							if ((isHorizontal && isReversed && !isRTL) ||
+								(isHorizontal && isRTL && !isReversed) ||
+								(isVertical && !isReversed))
+							{
+								if (key === 'left' || key === 'down') {
+									testData.handle1.expectedValue = [5, 7];
+									testData.handle2.expectedValue = [3, 10];
+								}
+								else if (key === 'right' || key === 'up') {
+									testData.handle1.expectedValue = [0, 7];
+									testData.handle2.expectedValue = [3, 5];
+								}
+							}
+						}
+					}
+					else {
+						// If initial value is 3 Then
+						// These expected values will pass 48/64 tests (16 failures)
+						if (key === 'left' || key === 'down') {
+							testData.handle1.expectedValue = 0;
+						}
+						else if (key === 'right' || key === 'up') {
+							testData.handle1.expectedValue = 5;
+						}
+
+						// Special cases when using natural keys
+						if (isNatural) {
+							// XOR
+							// One or the other needs to be true
+							if ((isHorizontal && isReversed && !isRTL) ||
+								(isHorizontal && isRTL && !isReversed) ||
+								(isVertical && !isReversed))
+							{
+								if (key === 'left' || key === 'down') {
+									testData.handle1.expectedValue = 5;
+								}
+								else if (key === 'right' || key === 'up') {
+									testData.handle1.expectedValue = 0;
+								}
+							}
+						}
+					}
+
+					it("Should lock to tick (" + handleKey + ", key=" + key + ")", function(done) {
+						$testSlider = $('#'+testCase.inputId).slider(sliderOptions);
+
+						$handle = $('#'+sliderId).find('.slider-handle:' + (handleKey === 'handle1' ? 'first' : 'last'));
+
+						$handle.on('keydown', function() {
+							var value = $testSlider.slider('getValue');
+							expect(value).toEqual(testData[handleKey].expectedValue);
+							done();
+						});
+
+						keyboardEvent.keyCode = keyboardEvent.which = testData.keyCode;
+						$handle[0].dispatchEvent(keyboardEvent);
+					});
+				});
+			});
+		});
+	});
+});
