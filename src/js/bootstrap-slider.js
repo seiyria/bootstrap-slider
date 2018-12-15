@@ -1767,31 +1767,33 @@ const windowIsDefined = (typeof window === "object");
 
 				return false;
 			},
+			_setValues: function(index, val) {
+				var comp = index === 0 ? 0 : 100;
+				if (this._state.percentage[index] !== comp) {
+					val.data[index] = this._toValue(this._state.percentage[index]);
+					val.data[index] = this._applyPrecision(val.data[index]);
+				}
+			},
 			_calculateValue: function(snapToClosestTick) {
-				var val;
+				var val = {};
 				if (this.options.range) {
-					val = [this.options.min,this.options.max];
-					if (this._state.percentage[0] !== 0){
-						val[0] = this._toValue(this._state.percentage[0]);
-						val[0] = this._applyPrecision(val[0]);
-					}
-					if (this._state.percentage[1] !== 100){
-						val[1] = this._toValue(this._state.percentage[1]);
-						val[1] = this._applyPrecision(val[1]);
-					}
+					val.data = [this.options.min, this.options.max];
+					this._setValues(0, val);
+					this._setValues(1, val);
 					if (snapToClosestTick) {
-						val[0] = this._snapToClosestTick(val[0]);
-						val[1] = this._snapToClosestTick(val[1]);
+						val.data[0] = this._snapToClosestTick(val.data[0]);
+						val.data[1] = this._snapToClosestTick(val.data[1]);
 					}
 				} else {
-					val = this._toValue(this._state.percentage[0]);
-					val = this._applyPrecision(val);
+					val.data = this._toValue(this._state.percentage[0]);
+					val.data = parseFloat(val.data);
+					val.data = this._applyPrecision(val.data);
 					if (snapToClosestTick) {
-						val = this._snapToClosestTick(val);
+						val.data = this._snapToClosestTick(val.data);
 					}
 				}
 
-				return val;
+				return val.data;
 			},
 			_snapToClosestTick(val){
 				var min = [val, Infinity];
