@@ -308,6 +308,10 @@
 		  <td><a href="#example-24">Example 24</a></td>
 		  <td>rtl mode (auto)</td>
 		</tr>
+		<tr>
+		  <td><a href="#example-25">Example 25</a></td>
+		  <td>Lock selection to ticks</td>
+		</tr>
       </table>
 	  
       <div class="examples">
@@ -1244,27 +1248,22 @@ $("#ex24").slider({});
 			</div>
 
 		  <div id="example-25" class='slider-example'>
-			  <h3>Example 25:</h3>
+			  <h3>Example 25: <a href="#top"><small>Back to Top</small></a></h3>
 			  <p>Lock selection to ticks</p>
-			  <div class='well' dir ="rtl">
-				  <span>Min </span>
+			  <div class="well">
 				  <input id="ex25" type="text" />
-				  <span> Max </span>
 			  </div>
 			  <h5>HTML</h5>
 <pre><code class="html">
-&lt;div class='well' dir ="rtl"&gt;
-  &lt;span&gt;Min &lt;/span&gt;
-    &lt;input id="ex25" type="text" /&gt;
-  &lt;span&gt; Max &lt;/span&gt;
-&lt;/div&gt;
+&lt;input id="ex25" type="text" data-slider-value="[1, 100]" data-slider-ticks="[1, 50, 100]" data-slider-lock-to-ticks="true"/&gt;
 </pre></code>
 
 			  <h5>JavaScript</h5>
 <pre><code class="js">
 // With JQuery
 $("#ex25").slider({
-	ticks: [1, 150, 100],
+	value: [1, 100],
+	ticks: [1, 50, 100],
 	lock_to_ticks: true
 });
 </pre></code>
