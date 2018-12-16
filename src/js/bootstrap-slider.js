@@ -876,6 +876,7 @@ const windowIsDefined = (typeof window === "object");
 				selection: 'before',
 				tooltip: 'show',
 				tooltip_split: false,
+				lock_to_ticks: false,
 				handle: 'round',
 				reversed: false,
 				rtl: 'auto',
@@ -924,6 +925,33 @@ const windowIsDefined = (typeof window === "object");
 				if (this.options.range) {
 					this._state.value[0] = applyPrecision(this._state.value[0]);
 					this._state.value[1] = applyPrecision(this._state.value[1]);
+
+					try {
+						if (this.options.lock_to_ticks) {
+							var start_difference = Math.abs(this._state.value[0] - this.options.ticks[0]);
+							var start_index = 0;
+							for (var i = 0; i < this.options.ticks.length; ++i) {
+								var sd = Math.abs(this._state.value[0] - this.options.ticks[i]);
+								if (sd < start_difference) {
+									start_difference = sd;
+									start_index = i;
+								}
+							}
+							var end_difference = Math.abs(this._state.value[1] - this.options.ticks[0]);
+							var end_index = 0;
+							for (var y = 0; y < this.options.ticks.length; ++y) {
+								var ed = Math.abs(this._state.value[1] - this.options.ticks[y]);
+								if (ed < end_difference) {
+									end_difference = ed;
+									end_index = y;
+								}
+							}
+							this._state.value[0] = this.options.ticks[start_index];
+							this._state.value[1] = this.options.ticks[end_index];
+						}
+					} catch(err) {
+						console.error(err);
+					}
 
 					this._state.value[0] = Math.max(this.options.min, Math.min(this.options.max, this._state.value[0]));
 					this._state.value[1] = Math.max(this.options.min, Math.min(this.options.max, this._state.value[1]));
