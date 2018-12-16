@@ -1787,9 +1787,12 @@ const windowIsDefined = (typeof window === "object");
 					return false;
 				}
 
-				var percentage = this._getPercentage(ev);
-				this._adjustPercentageForRangeSliders(percentage);
-				this._state.percentage[this._state.dragged] = percentage;
+				// Don't recalculate percentage when locking to ticks
+				if (!(this.ticksAreValid && this.options.lock_to_ticks)) {
+					var percentage = this._getPercentage(ev);
+					this._adjustPercentageForRangeSliders(percentage);
+					this._state.percentage[this._state.dragged] = percentage;
+				}
 
 				if (this.touchCapable) {
 					// Touch: Unbind touch event handlers:
