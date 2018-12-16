@@ -265,6 +265,8 @@ The following is a list of the commonly-used command line tasks:
 
 Version Bumping and Publishing (Maintainers Only)
 =======
+For versioning rules, we follow the [Semver convention](https://semver.org/).
+
 To do the following release tasks:
 * bump the version
 * publish a new version to NPM
