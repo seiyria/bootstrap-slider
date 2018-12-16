@@ -141,6 +141,8 @@ describe("Slider with lock_to_ticks: true tests", function() {
  * 
  * These tests are setup to test for all combinations of relevant slider configurations:
  * single/range, horizontal/vertical orientation, LTR/RTL, and ordered/reversed.
+ * The tests also check that the handles have the correct positioning, which should
+ * match the ticks that the handles lock to.
  * 
  * The test data was carefully chosen based on following the test logic below.
  * 
@@ -155,6 +157,8 @@ describe("`lock_to_ticks: true` mouse navigation test cases", function() {
 	var initialValue = 3;
 	var initialRangeValues = [3, 7];
 	var tickValues = [0, 3, 5, 7, 10];
+	// Quick lookup from value to index
+	var tickIndexes = {0: 0, 3: 1, 5: 2, 7: 3, 10: 4};
 	var stepValue = 0.1;
 
 	var orientations = ['horizontal', 'vertical'];
@@ -337,6 +341,7 @@ describe("`lock_to_ticks: true` mouse navigation test cases", function() {
 					var isVertical = orientation === 'vertical';
 					var isRange = sliderType === 'range';
 					var whichData;
+					var whichStyle;
 
 					whichData = mouseTestData[sliderType].testData;
 
@@ -353,6 +358,18 @@ describe("`lock_to_ticks: true` mouse navigation test cases", function() {
 						}
 					}
 
+					if (isHorizontal) {
+						if (isRTL) {
+							whichStyle = 'right';
+						}
+						else {
+							whichStyle = 'left';
+						}
+					}
+					else if (isVertical) {
+						whichStyle = 'top';
+					}
+
 					testCases.push({
 						value: isRange ? initialRangeValues : initialValue,
 						step: stepValue,
@@ -362,7 +379,8 @@ describe("`lock_to_ticks: true` mouse navigation test cases", function() {
 						rtl: 'auto',
 						isRTL: isRTL,
 						inputId: isRTL ? 'rtlSlider' : 'testSlider1',
-						testData: whichData
+						testData: whichData,
+						stylePos: whichStyle
 					});
 				});
 			});
@@ -373,8 +391,13 @@ describe("`lock_to_ticks: true` mouse navigation test cases", function() {
 		describe("range=" + testCase.range + ", orientation=" + testCase.orientation +
 			", rtl=" + testCase.isRTL + ", reversed=" + testCase.reversed, function() {
 			var $testSlider;
+			var $handle1;
+			var $handle2;
 			var sliderId;
 			var sliderOptions;
+			var $tick1;
+			var $tick2;
+			var $ticks;
 
 			beforeEach(function() {
 				sliderId = testCase.range ? 'myRangeSlider' : 'mySlider';
@@ -403,28 +426,68 @@ describe("`lock_to_ticks: true` mouse navigation test cases", function() {
 				it("Should snap to closest tick (percent=" + testData.percent + ", changed=" + testData.willChange + ")", function(done) {
 					$testSlider = $('#'+testCase.inputId).slider(sliderOptions);
 					var sliderElem = $('#'+sliderId)[0];
+					$ticks = $('#'+sliderId).find('.slider-tick');
+					$handle1 = $('#'+sliderId).find('.slider-handle:first');
+					$handle2 = $('#'+sliderId).find('.slider-handle:last');
 
 					var coords = calcMouseEventCoords(sliderElem, testCase.orientation, testData.percent);
+
+					var checkMouseMove = function() {
+						var value = $testSlider.slider('getValue');
+						expect(value).toEqual(testData.expectedValue);
+						if (testCase.range) {
+							$tick1 = $ticks.eq(tickIndexes[testData.expectedValue[0]]);
+							$tick2 = $ticks.eq(tickIndexes[testData.expectedValue[1]]);
+							expect($handle1.css(testCase.stylePos)).toBe($tick1.css(testCase.stylePos));
+							expect($handle2.css(testCase.stylePos)).toBe($tick2.css(testCase.stylePos));
+						}
+						else {
+							$tick1 = $ticks.eq(tickIndexes[testData.expectedValue]);
+							expect($handle1.css(testCase.stylePos)).toBe($tick1.css(testCase.stylePos));
+						}
+					};
+
+					var checkMouseUp = function() {
+						var value = $testSlider.slider('getValue');
+						expect(value).toEqual(testData.expectedValue);
+						if (testCase.range) {
+							$tick1 = $ticks.eq(tickIndexes[testData.expectedValue[0]]);
+							$tick2 = $ticks.eq(tickIndexes[testData.expectedValue[1]]);
+							expect($handle1.css(testCase.stylePos)).toBe($tick1.css(testCase.stylePos));
+							expect($handle2.css(testCase.stylePos)).toBe($tick2.css(testCase.stylePos));
+						}
+						else {
+							$tick1 = $ticks.eq(tickIndexes[testData.expectedValue]);
+							expect($handle1.css(testCase.stylePos)).toBe($tick1.css(testCase.stylePos));
+						}
+
+						document.removeEventListener('mousemove', checkMouseMove, false);
+						document.removeEventListener('mouseup', checkMouseUp, false);
+						done();
+					};
 
 					sliderElem.addEventListener('mousedown', function() {
 						var value = $testSlider.slider('getValue');
 						expect(value).toEqual(testData.expectedValue);
-					}, false);
+						// Check position of handles
+						if (testCase.range) {
+							$tick1 = $ticks.eq(tickIndexes[testData.expectedValue[0]]);
+							$tick2 = $ticks.eq(tickIndexes[testData.expectedValue[1]]);
+							expect($handle1.css(testCase.stylePos)).toBe($tick1.css(testCase.stylePos));
+							expect($handle2.css(testCase.stylePos)).toBe($tick2.css(testCase.stylePos));
+						}
+						else {
+							$tick1 = $ticks.eq(tickIndexes[testData.expectedValue]);
+							expect($handle1.css(testCase.stylePos)).toBe($tick1.css(testCase.stylePos));
+						}
 
-					sliderElem.addEventListener('mousemove', function() {
-						var value = $testSlider.slider('getValue');
-						expect(value).toEqual(testData.expectedValue);
-					}, false);
-
-					sliderElem.addEventListener('mouseup', function() {
-						var value = $testSlider.slider('getValue');
-						expect(value).toEqual(testData.expectedValue);
-						done();
-					}, false);
+						document.addEventListener('mousemove', checkMouseMove, false);
+						document.addEventListener('mouseup', checkMouseUp, false);
+					});
 
 					sliderElem.dispatchEvent(createMouseEvent('mousedown', coords.clientX, coords.clientY));
-					sliderElem.dispatchEvent(createMouseEvent('mousemove', coords.clientX, coords.clientY));
-					sliderElem.dispatchEvent(createMouseEvent('mouseup', coords.clientX, coords.clientY));
+					document.dispatchEvent(createMouseEvent('mousemove', coords.clientX, coords.clientY));
+					document.dispatchEvent(createMouseEvent('mouseup', coords.clientX, coords.clientY));
 				});
 			});
 		});
