@@ -923,7 +923,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 				var hasChanged = false;
 				if (Array.isArray(newValue)) {
-					hasChanged = oldValue[0] !== newValue[0] && oldValue[1] !== newValue[1];
+					hasChanged = oldValue[0] !== newValue[0] || oldValue[1] !== newValue[1];
 				} else {
 					hasChanged = oldValue !== newValue;
 				}
