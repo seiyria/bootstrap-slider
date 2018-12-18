@@ -1,3 +1,10 @@
+10.4.1 / 2018-12-18
+==================
+* **Bug Fix:** Remove unnecessary call to `parseFloat()`. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/892).
+* **Bug Fix:** Fix namespace handling. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/893).
+* **Bug Fix:** Fix tooltip when option is set to 'always'. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/895)
+* **Bug Fix:** Fixes Issue #884: Hovering over ticks displays the tick index. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/891)
+
 10.4.0 / 2018-12-12
 ==================
 * **Minor API Update:** Update behaviour so that min/max tick values do not overwrite min/max settings. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/889).
