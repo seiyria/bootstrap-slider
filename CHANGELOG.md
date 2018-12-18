@@ -1,3 +1,7 @@
+10.4.2 / 2018-12-18
+==================
+* **Bug Fix:** Fix 'change' event should trigger when either values change for range sliders. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/897). Thanks to [pimlie](https://github.com/pimlie).
+
 10.4.1 / 2018-12-18
 ==================
 * **Bug Fix:** Remove unnecessary call to `parseFloat()`. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/892).
