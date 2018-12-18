@@ -1182,6 +1182,7 @@ const windowIsDefined = (typeof window === "object");
 				this._state.over = false;
 			},
 			_setToolTipOnMouseOver: function _setToolTipOnMouseOver(tempState){
+				let self = this;
 				var formattedTooltipVal = this.options.formatter(!tempState ? this._state.value[0]: tempState.value[0]);
 				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
 				this._setText(this.tooltipInner, formattedTooltipVal);
@@ -1190,7 +1191,7 @@ const windowIsDefined = (typeof window === "object");
 
 				function getPositionPercentages(state, reversed){
 					if (reversed) {
-						return [100 - state.percentage[0], this.options.range ? 100 - state.percentage[1] : state.percentage[1]];
+						return [100 - state.percentage[0], self.options.range ? 100 - state.percentage[1] : state.percentage[1]];
 					}
 					return [state.percentage[0], state.percentage[1]];
 				}
