@@ -6,8 +6,6 @@ Over time, this project has diverged sigfinicantly from Stefan Petre's version a
 
 __Please ensure that you are using this library instead of the Petre version before creating issues in the repository issue tracker!!__
 
-__Note also that Bootstrap 4 is not yet supported, see issue [#689](https://github.com/seiyria/bootstrap-slider/issues/689).__
-
 Installation
 ============
 Want to use bower? `bower install seiyria-bootstrap-slider`
@@ -28,7 +26,7 @@ Look below to see an example of how to interact with the non-JQuery interface.
 
 Supported Browsers
 ========
-__We only support modern browsers!!! Basically, anything below IE9 is not compatible with this plugin!__
+__We only support modern browsers!!! Basically, anything below IE10 is not compatible with this plugin!__
 
 Examples
 ========
