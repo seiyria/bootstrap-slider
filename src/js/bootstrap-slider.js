@@ -1182,6 +1182,7 @@ const windowIsDefined = (typeof window === "object");
 				this._state.over = false;
 			},
 			_setToolTipOnMouseOver: function _setToolTipOnMouseOver(tempState){
+				let self = this;
 				var formattedTooltipVal = this.options.formatter(!tempState ? this._state.value[0]: tempState.value[0]);
 				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
 				this._setText(this.tooltipInner, formattedTooltipVal);
@@ -1190,7 +1191,7 @@ const windowIsDefined = (typeof window === "object");
 
 				function getPositionPercentages(state, reversed){
 					if (reversed) {
-						return [100 - state.percentage[0], this.options.range ? 100 - state.percentage[1] : state.percentage[1]];
+						return [100 - state.percentage[0], self.options.range ? 100 - state.percentage[1] : state.percentage[1]];
 					}
 					return [state.percentage[0], state.percentage[1]];
 				}
@@ -1211,24 +1212,36 @@ const windowIsDefined = (typeof window === "object");
 			},
 			_addTickListener: function _addTickListener() {
 				return {
-					addMouseEnter: function(reference, tick, index){
+					addMouseEnter: function(reference, element, index){
 						var enter = function(){
-							var tempState = reference._copyState();
-							var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
-							var hoverIndex = parseInt(idString, 10);
-							tempState.value[0] = hoverIndex;
-							tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
+							let tempState = reference._copyState();
+							// Which handle is being hovered over?
+							let val = element === reference.handle1 ? tempState.value[0] : tempState.value[1];
+							let per;
+
+							// Setup value and percentage for tick's 'mouseenter'
+							if (index !== undefined) {
+								val = reference.options.ticks[index];
+								per = (reference.options.ticks_positions.length > 0 && reference.options.ticks_positions[index]) ||
+									reference._toPercentage(reference.options.ticks[index]);
+							}
+							else {
+								per = reference._toPercentage(val);
+							}
+
+							tempState.value[0] = val;
+							tempState.percentage[0] = per;
 							reference._setToolTipOnMouseOver(tempState);
 							reference._showTooltip();
 						};
-						tick.addEventListener("mouseenter", enter, false);
+						element.addEventListener("mouseenter", enter, false);
 						return enter;
 					},
-					addMouseLeave: function(reference, tick){
+					addMouseLeave: function(reference, element){
 						var leave = function(){
 							reference._hideTooltip();
 						};
-						tick.addEventListener("mouseleave", leave, false);
+						element.addEventListener("mouseleave", leave, false);
 						return leave;
 					}
 				};
