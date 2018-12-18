@@ -214,17 +214,17 @@ describe("Event Tests", function() {
         expect(flag).toEqual(1);
       });
 
-      it("slider should not bind multiple touchstart events after calling 'refresh'", function() {
+      it("slider should not bind multiple touchstart events after calling 'refresh'", function(done) {
         touch.initEvent("touchstart", true, true);
         flag = 0;
 
         testSlider.on('slideStart', function() {
           flag += 1;
+          expect(flag).toEqual(1);
+          done();
         });
         testSlider.slider('refresh');
-        $('.slider .slider-handle').get(0).dispatchEvent(touch);
-
-        expect(flag).toEqual(1);
+        $('#testSlider2').prev('div.slider').find('.slider-handle').get(0).dispatchEvent(touch);
       });
 
       describe("Disabled Slider Event Tests", function() {

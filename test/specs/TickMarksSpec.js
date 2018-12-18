@@ -66,7 +66,7 @@ describe("Slider with ticks tests", function() {
 		});
 
 		// Focus on handle1
-		var handle1 = $("#testSlider1").siblings('div.slider:first').find('.slider-handle');
+		var handle1 = $("#testSlider1").prev('div.slider').find('.slider-handle');
 		handle1.focus();
 
 		// Create keyboard event

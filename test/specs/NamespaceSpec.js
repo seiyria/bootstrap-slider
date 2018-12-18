@@ -1,5 +1,7 @@
 describe("Namespace Tests", function() {
   var sourceJS = "temp/bootstrap-slider.js";
+  var defaultNamespace = 'slider';
+  var alternateNamespace = 'bootstrapSlider';
 
   it("should always set the plugin namespace to 'bootstrapSlider'", function(done) {
     $.getScript(sourceJS, function() {
@@ -22,6 +24,36 @@ describe("Namespace Tests", function() {
     $.getScript(sourceJS, function() {
       var expectedWarningMessage = "bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.";
       expect(window.console.warn).toHaveBeenCalledWith(expectedWarningMessage);
+      done();
+    });
+  });
+
+  it("Should not create instance when 'slider' namespace is in use", function(done) {
+    $.fn.slider = function() {};  // Overwrite temporarily
+
+    $.getScript(sourceJS, function() {
+      var $testSlider = $('#testSlider1').bootstrapSlider();
+
+      var sliderInst = $testSlider.data(defaultNamespace);
+      expect(sliderInst).toBeUndefined();
+
+      $testSlider.bootstrapSlider('destroy');
+
+      done();
+    });
+  });
+
+  it("Should create instance associated with the alternate 'bootstrapSlider' namespace", function(done) {
+    $.fn.slider = function() {};
+
+    $.getScript(sourceJS, function() {
+      var $testSlider = $('#testSlider1').bootstrapSlider();
+
+      var sliderInst = $testSlider.data(alternateNamespace);
+      expect(sliderInst).toBeTruthy();
+
+      $testSlider.bootstrapSlider('destroy');
+
       done();
     });
   });

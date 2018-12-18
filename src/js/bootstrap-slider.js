@@ -225,6 +225,7 @@ const windowIsDefined = (typeof window === "object");
 	**************************************************/
 
 	(function($) {
+		let autoRegisterNamespace;
 
 		var ErrorMsgs = {
 			formatInvalidInputErrorMsg : function(input) {
@@ -992,7 +993,10 @@ const windowIsDefined = (typeof window === "object");
 				// Remove JQuery handlers/data
 				if($) {
 					this._unbindJQueryEventHandlers();
-					this.$element.removeData('slider');
+					if (autoRegisterNamespace === NAMESPACE_MAIN) {
+						this.$element.removeData(autoRegisterNamespace);
+					}
+					this.$element.removeData(NAMESPACE_ALTERNATE);
 				}
 			},
 
@@ -1061,7 +1065,13 @@ const windowIsDefined = (typeof window === "object");
 				createNewSlider.call(this, this.element, this.options);
 				if($) {
 					// Bind new instance of slider to the element
-					$.data(this.element, 'slider', this);
+					if (autoRegisterNamespace === NAMESPACE_MAIN) {
+						$.data(this.element, NAMESPACE_MAIN, this);
+						$.data(this.element, NAMESPACE_ALTERNATE, this);
+					}
+					else {
+						$.data(this.element, NAMESPACE_ALTERNATE, this);
+					}
 				}
 				return this;
 			},
@@ -1973,8 +1983,6 @@ const windowIsDefined = (typeof window === "object");
 
 		*********************************/
 		if($ && $.fn) {
-			let autoRegisterNamespace;
-
 			if (!$.fn.slider) {
 				$.bridget(NAMESPACE_MAIN, Slider);
 				autoRegisterNamespace = NAMESPACE_MAIN;

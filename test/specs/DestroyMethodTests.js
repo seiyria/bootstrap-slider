@@ -20,6 +20,50 @@ describe("'destroy()' Method tests", function() {
     expect(sliderChildrenElements).toBe(0);
   });
 
+  describe("Destroy slider instance associated with <input> element", function() {
+    var sourceJS = "temp/bootstrap-slider.js";
+    var defaultNamespace = 'slider';
+    var alternateNamespace = 'bootstrapSlider';
+
+    it("Should remove the instance associated with the <input> DOM element", function() {
+      var $testSlider = $('#testSlider1').slider();
+
+      var sliderInst = $testSlider.data(defaultNamespace);
+      expect(sliderInst).toBeTruthy();
+
+      $testSlider.slider('destroy');
+      sliderInst = $testSlider.data(defaultNamespace);
+      expect(sliderInst).toBeUndefined();
+    });
+
+    describe("Check alternate namespace", function() {
+
+      afterEach(function(done) {
+        $.fn.bootstrapSlider = undefined;
+        $.fn.slider = undefined;
+    
+        $.getScript(sourceJS, function() {
+          done();
+        });
+      });
+
+      it("Should remove the instance associated with the <input> DOM element with alternate namespace", function(done) {
+        $.fn.slider = function() {};
+
+        $.getScript(sourceJS, function() {
+          var $testSlider = $('#testSlider1').bootstrapSlider();
+
+          $testSlider.bootstrapSlider('destroy');
+
+          var sliderInst = $testSlider.data(alternateNamespace);
+          expect(sliderInst).toBeUndefined();
+
+          done();
+        });
+      });
+    });
+  });
+
   describe("unbinds all slider events", function() {
     var flag, evtName;
 
@@ -97,6 +141,8 @@ describe("'destroy()' Method tests", function() {
       catch (e) {
         throwsRuntimeError = true;
       }
+
+      testSlider.destroy();
 
       // reCreateSliderAndBindEvent(): Assert error is not thrown
       expect(throwsRuntimeError).toBeFalsy();
