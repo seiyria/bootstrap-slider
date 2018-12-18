@@ -76,12 +76,12 @@ describe("'ticks_tooltip' Option tests", function() {
 			});
 			var bigOffset = 100000;
 
-			var isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('in');
+			var isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('show');
 			expect(isTooltipVisible).toBe(true);
 
 			var mouseenter = document.createEvent('MouseEvent');
 			mouseEventArguments[0] = 'mouseenter';
-			mouseEventArguments[7] = 
+			mouseEventArguments[7] =
 				testSlider.ticks[1].offsetLeft + testSlider.sliderElem.offsetLeft; // clientX
 			mouseenter.initMouseEvent.apply(mouseenter, mouseEventArguments);
 
@@ -91,7 +91,7 @@ describe("'ticks_tooltip' Option tests", function() {
 			mouseleave.initMouseEvent.apply(mouseleave, mouseEventArguments);
 
 			testSlider.ticks[1].addEventListener('mouseleave', function() {
-				isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('in');
+				isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('show');
 				expect(isTooltipVisible).toBe(true);
 				done();
 			});
@@ -294,7 +294,7 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 
 					var tickCallback = function() {
 						// Check that tooltip shows
-						expect($tooltip.hasClass('in')).toBe(true);
+						expect($tooltip.hasClass('show')).toBe(true);
 
 						if (index === lastTickIndex) {
 							done();
@@ -314,7 +314,7 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 
 					var tickCallback = function() {
 						// Check that tooltip shows
-						expect($tooltip.hasClass('in')).toBe(false);
+						expect($tooltip.hasClass('show')).toBe(false);
 
 						if (index === lastTickIndex) {
 							done();
