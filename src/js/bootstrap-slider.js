@@ -1213,10 +1213,10 @@ const windowIsDefined = (typeof window === "object");
 				return {
 					addMouseEnter: function(reference, element, index){
 						var enter = function(){
-							var tempState = reference._copyState();
+							let tempState = reference._copyState();
 							// Which handle is being hovered over?
-							var val = element === reference.handle1 ? tempState.value[0] : tempState.value[1];
-							var per;
+							let val = element === reference.handle1 ? tempState.value[0] : tempState.value[1];
+							let per;
 
 							// Setup value and percentage for tick's 'mouseenter'
 							if (index !== undefined) {
