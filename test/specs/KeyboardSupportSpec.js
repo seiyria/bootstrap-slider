@@ -518,8 +518,10 @@ describe("Navigating slider with the keyboard", function() {
   var keyboardEvent;
   var options;
   var $handle1;
+  var $handle2;
 
   describe("Does not trigger 'change' event when values do not change", function() {
+    var initialValues = [0, 1];
 
     beforeEach(function() {
       options = {
@@ -527,7 +529,7 @@ describe("Navigating slider with the keyboard", function() {
         min: -100,
         max: 100,
         step: 1,
-        value: [0, 1],
+        value: initialValues,
         range: true
       };
 
@@ -559,15 +561,142 @@ describe("Navigating slider with the keyboard", function() {
       });
 
       mySlider.on('slideStop', function() {
+        var value = mySlider.getValue();
         expect(hasSlideStarted).toBe(true);
         expect(hasChanged).toBe(false);
+        expect(value).toEqual([-100, 0]);
         done();
       });
 
       // Move the handle to the left
       keyboardEvent.keyCode = keyboardEvent.which = 37;
-
       $handle1[0].dispatchEvent(keyboardEvent);
+    });
+
+    it("Should not trigger 'change' event via `setValue()`", function(done) {
+      var isSliding = false;
+      var hasChanged = false;
+      mySlider = new Slider($('#testSlider1')[0], options);
+      $handle1 = $('#mySlider').find('.slider-handle:first');
+
+      mySlider.on('slide', function() {
+        isSliding = true;
+      });
+
+      mySlider.on('change', function() {
+        hasChanged = true;
+      });
+
+      // Change both values of the range slider
+      mySlider.setValue(initialValues, true, true);
+
+      var value = mySlider.getValue();
+      expect(isSliding).toBe(true);
+      expect(hasChanged).toBe(false);
+      expect(value).toEqual(initialValues);
+      done();
+    });
+  });
+
+  describe("Does trigger 'change' event when either value changes for range sliders", function() {
+
+    beforeEach(function() {
+      options = {
+        id: 'mySlider',
+        min: -100,
+        max: 100,
+        step: 1,
+        value: [-10, 10],
+        range: true
+      };
+
+      // Create keyboard event
+      keyboardEvent = document.createEvent('Event');
+      keyboardEvent.initEvent('keydown', true, true);
+    });
+
+    afterEach(function() {
+      if (mySlider) {
+        if (mySlider instanceof Slider) { mySlider.destroy(); }
+        mySlider = null;
+      }
+    });
+
+    it("Should trigger 'change' event when the moving the lower handle", function(done) {
+      var hasSlideStarted = false;
+      var hasChanged = false;
+
+      mySlider = new Slider($('#testSlider1')[0], options);
+      $handle1 = $('#mySlider').find('.slider-handle:first');
+
+      mySlider.on('slideStart', function() {
+        hasSlideStarted = true;
+      });
+
+      mySlider.on('change', function() {
+        hasChanged = true;
+      });
+
+      mySlider.on('slideStop', function() {
+        var value = mySlider.getValue();
+        expect(hasSlideStarted).toBe(true);
+        expect(hasChanged).toBe(true);
+        expect(value).toEqual([-11, 10]);
+        done();
+      });
+
+      // Move the handle to the left
+      keyboardEvent.keyCode = keyboardEvent.which = 37;
+      $handle1[0].dispatchEvent(keyboardEvent);
+    });
+
+    it("Should trigger 'change' event when moving the upper handle", function(done) {
+      var hasSlideStarted = false;
+      var hasChanged = false;
+
+      mySlider = new Slider($('#testSlider1')[0], options);
+      $handle2 = $('#mySlider').find('.slider-handle:last');
+
+      mySlider.on('slideStart', function() {
+        hasSlideStarted = true;
+      });
+
+      mySlider.on('change', function() {
+        hasChanged = true;
+      });
+
+      mySlider.on('slideStop', function() {
+        var value = mySlider.getValue();
+        expect(hasSlideStarted).toBe(true);
+        expect(hasChanged).toBe(true);
+        expect(value).toEqual([-10, 11]);
+        done();
+      });
+
+      // Move the handle to the right
+      keyboardEvent.keyCode = keyboardEvent.which = 39;
+      $handle2[0].dispatchEvent(keyboardEvent);
+    });
+
+    it("Should trigger 'change' event when both values change via `setValue()`", function(done) {
+      var isSliding = false;
+
+      mySlider = new Slider($('#testSlider1')[0], options);
+      $handle2 = $('#mySlider').find('.slider-handle:last');
+
+      mySlider.on('slide', function() {
+        isSliding = true;
+      });
+
+      mySlider.on('change', function() {
+        var value = mySlider.getValue();
+        expect(isSliding).toBe(true);
+        expect(value).toEqual([-50, 50]);
+        done();
+      });
+
+      // Change both values of the range slider
+      mySlider.setValue([-50, 50], true, true);
     });
   });
 });
