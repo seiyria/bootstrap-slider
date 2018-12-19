@@ -1866,7 +1866,7 @@ const windowIsDefined = (typeof window === "object");
 			*/
 			_getPercentage: function(ev) {
 				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove' || ev.type === 'touchend')) {
-					ev = ev.touches[0];
+					ev = ev.changedTouches[0];
 				}
 
 				var eventPosition = ev[this.mousePos];
