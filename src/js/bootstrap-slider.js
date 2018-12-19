@@ -782,23 +782,9 @@ const windowIsDefined = (typeof window === "object");
 			this.touchstart = this._touchstart.bind(this);
 			this.touchmove = this._touchmove.bind(this);
 
-			if (this.touchCapable) {
-				// Test for passive event support
-				let supportsPassive = false;
-				try {
-					let opts = Object.defineProperty({}, 'passive', {
-						get: function() {
-							supportsPassive = true;
-						}
-					});
-					window.addEventListener("test", null, opts);
-				} catch (e) {}
-				// Use our detect's results. passive applied if supported, capture will be false either way.
-				let eventOptions = supportsPassive ? { passive: true } : false;
-				// Bind touch handlers
-				this.sliderElem.addEventListener("touchstart", this.touchstart, eventOptions);
-				this.sliderElem.addEventListener("touchmove", this.touchmove, eventOptions);
-			}
+			this.sliderElem.addEventListener("touchstart", this.touchstart, false);
+			this.sliderElem.addEventListener("touchmove", this.touchmove, false);
+
 			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
 			// Bind window handlers
@@ -1609,14 +1595,7 @@ const windowIsDefined = (typeof window === "object");
 				return true;
 			},
 			_touchstart: function(ev) {
-				if (ev.changedTouches === undefined) {
-					this._mousedown(ev);
-					return;
-				}
-
-				var touch = ev.changedTouches[0];
-				this.touchX = touch.pageX;
-				this.touchY = touch.pageY;
+				this._mousedown(ev);
 			},
 			_triggerFocusOnHandle: function(handleIdx) {
 				if(handleIdx === 0) {
@@ -1743,20 +1722,9 @@ const windowIsDefined = (typeof window === "object");
 					return;
 				}
 
-				var touch = ev.changedTouches[0];
-
-				var xDiff = touch.pageX - this.touchX;
-				var yDiff = touch.pageY - this.touchY;
-
-				if (!this._state.inDrag) {
-					// Vertical Slider
-					if (this.options.orientation === 'vertical' && (xDiff <= 5 && xDiff >= -5) && (yDiff >=15 || yDiff <= -15)) {
-						this._mousedown(ev);
-					}
-					// Horizontal slider.
-					else if ((yDiff <= 5 && yDiff >= -5) && (xDiff >= 15 || xDiff <= -15)) {
-						this._mousedown(ev);
-					}
+				// Prevent page from scrolling and only drag the slider
+				if(ev.preventDefault) {
+					ev.preventDefault();
 				}
 			},
 			_adjustPercentageForRangeSliders: function(percentage) {
@@ -1874,7 +1842,7 @@ const windowIsDefined = (typeof window === "object");
 				Source: http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
 			*/
 			_getPercentage: function(ev) {
-				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove')) {
+				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove' || ev.type === 'touchend')) {
 					ev = ev.touches[0];
 				}
 
