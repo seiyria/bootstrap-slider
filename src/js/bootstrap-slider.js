@@ -782,8 +782,10 @@ const windowIsDefined = (typeof window === "object");
 			this.touchstart = this._touchstart.bind(this);
 			this.touchmove = this._touchmove.bind(this);
 
-			this.sliderElem.addEventListener("touchstart", this.touchstart, false);
-			this.sliderElem.addEventListener("touchmove", this.touchmove, false);
+			if (this.touchCapable) {
+				this.sliderElem.addEventListener("touchstart", this.touchstart, false);
+				this.sliderElem.addEventListener("touchmove", this.touchmove, false);
+			}
 
 			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
@@ -826,24 +828,29 @@ const windowIsDefined = (typeof window === "object");
 					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
 					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
 
-					this.sliderElem.addEventListener("touchstart", this.showTooltip, false);
-					this.sliderElem.addEventListener("touchmove", this.showTooltip, false);
-					this.sliderElem.addEventListener("touchend", this.hideTooltip, false);
+					if (this.touchCapable) {
+						this.sliderElem.addEventListener("touchstart", this.showTooltip, false);
+						this.sliderElem.addEventListener("touchmove", this.showTooltip, false);
+						this.sliderElem.addEventListener("touchend", this.hideTooltip, false);
+					}
 				}
 
 				this.handle1.addEventListener("focus", this.showTooltip, false);
 				this.handle1.addEventListener("blur", this.hideTooltip, false);
 
-				this.handle1.addEventListener("touchstart", this.showTooltip, false);
-				this.handle1.addEventListener("touchmove", this.showTooltip, false);
-				this.handle1.addEventListener("touchend", this.hideTooltip, false);
-
+				
 				this.handle2.addEventListener("focus", this.showTooltip, false);
 				this.handle2.addEventListener("blur", this.hideTooltip, false);
 
-				this.handle2.addEventListener("touchstart", this.showTooltip, false);
-				this.handle2.addEventListener("touchmove", this.showTooltip, false);
-				this.handle2.addEventListener("touchend", this.hideTooltip, false);
+				if (this.touchCapable) {
+					this.handle1.addEventListener("touchstart", this.showTooltip, false);
+					this.handle1.addEventListener("touchmove", this.showTooltip, false);
+					this.handle1.addEventListener("touchend", this.hideTooltip, false);
+
+					this.handle2.addEventListener("touchstart", this.showTooltip, false);
+					this.handle2.addEventListener("touchmove", this.showTooltip, false);
+					this.handle2.addEventListener("touchend", this.hideTooltip, false);
+				}
 			}
 
 			if(this.options.enabled) {
@@ -1143,31 +1150,47 @@ const windowIsDefined = (typeof window === "object");
 				if (this.showTooltip) {
 					this.handle1.removeEventListener("focus", this.showTooltip, false);
 					this.handle2.removeEventListener("focus", this.showTooltip, false);
-					this.handle1.removeEventListener("touchstart", this.showTooltip, false);
-					this.handle1.removeEventListener("touchmove", this.showTooltip, false);
-					this.handle2.removeEventListener("touchstart", this.showTooltip, false);
-					this.handle2.removeEventListener("touchmove", this.showTooltip, false);
 				}
 				if (this.hideTooltip) {
 					this.handle1.removeEventListener("blur", this.hideTooltip, false);
 					this.handle2.removeEventListener("blur", this.hideTooltip, false);
-					this.handle1.removeEventListener("touchend", this.hideTooltip, false);
-					this.handle2.removeEventListener("touchend", this.hideTooltip, false);
 				}
 
 				// Remove event listeners from sliderElem
 				if (this.showTooltip) {
 					this.sliderElem.removeEventListener("mouseenter", this.showTooltip, false);
-					this.sliderElem.removeEventListener("touchstart", this.showTooltip, false);
-					this.sliderElem.removeEventListener("touchmove", this.showTooltip, false);
 				}
 				if (this.hideTooltip) {
 					this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
-					this.sliderElem.removeEventListener("touchend", this.hideTooltip, false);
 				}
-				this.sliderElem.removeEventListener("touchstart", this.touchstart, false);
-				this.sliderElem.removeEventListener("touchmove", this.touchmove, false);
+
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
+
+				if (this.touchCapable) {
+					// Remove touch event listeners from handles
+					if (this.showTooltip) {
+						this.handle1.removeEventListener("touchstart", this.showTooltip, false);
+						this.handle1.removeEventListener("touchmove", this.showTooltip, false);
+						this.handle2.removeEventListener("touchstart", this.showTooltip, false);
+						this.handle2.removeEventListener("touchmove", this.showTooltip, false);
+					}
+					if (this.hideTooltip) {
+						this.handle1.removeEventListener("touchend", this.hideTooltip, false);
+						this.handle2.removeEventListener("touchend", this.hideTooltip, false);
+					}
+
+					// Remove event listeners from sliderElem
+					if (this.showTooltip) {
+						this.sliderElem.removeEventListener("touchstart", this.showTooltip, false);
+						this.sliderElem.removeEventListener("touchmove", this.showTooltip, false);
+					}
+					if (this.hideTooltip) {
+						this.sliderElem.removeEventListener("touchend", this.hideTooltip, false);
+					}
+
+					this.sliderElem.removeEventListener("touchstart", this.touchstart, false);
+					this.sliderElem.removeEventListener("touchmove", this.touchmove, false);
+				}
 
 				// Remove window event listener
 				window.removeEventListener("resize", this.resize, false);
