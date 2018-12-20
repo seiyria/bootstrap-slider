@@ -1,5 +1,6 @@
 describe("Event Tests", function() {
   var testSlider, flag, mouse;
+  var sliderElem;
 
   beforeEach(function() {
     flag = false;
@@ -11,6 +12,7 @@ describe("Event Tests", function() {
       testSlider = $("#testSlider2").slider({
         value: 1
       });
+      sliderElem = testSlider.slider('getElement');
     });
 
     afterEach(function() {
@@ -18,6 +20,7 @@ describe("Event Tests", function() {
         testSlider.slider('destroy');
         testSlider = null;
       }
+      sliderElem = null;
     });
 
     describe("Mouse Events", function() {
@@ -137,11 +140,15 @@ describe("Event Tests", function() {
     describe("Touch Events", function() {
       var touch;
       var spy;
+      var coords;
+      var touchStart;
+      var touchMove;
+      var touchEnd;
 
       /*
-            list can be either [[x, y], [x, y]] or [x, y]
-        */
-       function createTouchList(target, list) {
+          list can be either [[x, y], [x, y]] or [x, y]
+      */
+      function createTouchList(target, list) {
         if (Array.isArray(list) && list[0] && !Array.isArray(list[0])) {
             list = [list];
         }
@@ -206,6 +213,11 @@ describe("Event Tests", function() {
         touch.touches = [dummyTouchEvent];
         window.ontouchstart = true;
         spy = jasmine.createSpy('spy');
+
+        coords = calcTouchEventCoords(sliderElem);
+        touchStart = createTouchEvent(sliderElem, 'touchstart', [coords.clientX, coords.clientY]);
+        touchMove = createTouchEvent(sliderElem, 'touchmove', [coords.clientX, coords.clientY]);
+        touchEnd = createTouchEvent(sliderElem, 'touchend', [[0, 0]]);
       });
 
       afterEach(function() {
@@ -213,10 +225,6 @@ describe("Event Tests", function() {
       });
 
       it("'slideStart' event is triggered properly and can be binded to", function(done) {
-        var sliderElem = testSlider.slider('getElement');
-
-        var coords = calcTouchEventCoords(sliderElem);
-        var touchEvent = createTouchEvent(sliderElem, 'touchstart', [coords.clientX, coords.clientY]);
         testSlider.on('slideStart', spy);
 
         window.setTimeout(function() {
@@ -224,27 +232,36 @@ describe("Event Tests", function() {
           done();
         });
 
-        sliderElem.dispatchEvent(touchEvent);
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchEnd);
       });
 
       it("'slide' event is triggered properly and can be binded to", function(done) {
-        touch.initEvent("touchmove");
         testSlider.on('slide', spy);
-        testSlider.data('slider')._mousemove(touch);
+
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
         });
+
+        // Expect to fail if ONLY dispatching 'touchmove' because `preventDefault()` will prevent
+        // the browser from sending the corresponding 'mousemove'.
+        // The 'mousedown' event must happen first via 'touchstart'.
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchMove);
+        // Always call 'touchend' to remove any touch event listeners on the document.
+        sliderElem.dispatchEvent(touchEnd);
       });
 
       it("'slide' event sets the right value on the input", function(done) {
-        touch.initEvent("touchmove");
-
         testSlider.on('slide', function() {
           expect(isNaN(testSlider.val())).not.toBeTruthy();
           done();
         });
-        testSlider.data('slider')._mousemove(touch);
+
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchMove);
+        sliderElem.dispatchEvent(touchEnd);
       });
 
       it("'slide' event value and input value properties are synchronous", function() {
@@ -262,32 +279,38 @@ describe("Event Tests", function() {
       });
 
       it("'slideStop' event is triggered properly and can be binded to", function(done) {
-        touch.initEvent("touchstop");
         testSlider.on('slideStop', spy);
-        testSlider.data('slider')._mouseup(mouse);
+
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
         });
+
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchMove);
+        sliderElem.dispatchEvent(touchEnd);
       });
 
-
       it("slider should not have duplicate events after calling 'refresh'", function(done) {
-        touch.initEvent("touchstop");
+        // FIXME: Should set `flag` to 0 and make sure spy is called only once
         testSlider.on('slideStop', spy);
-        testSlider.slider('refresh');
-        testSlider.data('slider')._mouseup(mouse);
+
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
         });
+
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchMove);
+        sliderElem.dispatchEvent(touchEnd);
+        testSlider.slider('refresh');
       });
 
       it("slider should not bind multiple touchstart events after calling 'refresh'", function(done) {
         flag = 0;
         var obj = {
             addOne: function() {
-            flag++;
+                flag++;
             }
         };
         spyOn(obj, 'addOne').and.callThrough();
@@ -296,8 +319,11 @@ describe("Event Tests", function() {
 
         testSlider.on('slideStart', obj.addOne);
 
+        var handleElem = $('#testSlider2').prev('div.slider').find('.slider-handle:first').get(0);
+        handleElem.dispatchEvent(touchStart);
+        handleElem.dispatchEvent(touchMove);
+        handleElem.dispatchEvent(touchEnd);
         testSlider.slider('refresh');
-        $('#testSlider2').prev('div.slider').find('.slider-handle').get(0).dispatchEvent(touch);
 
         window.setTimeout(function() {
             expect(flag).toBe(1);
