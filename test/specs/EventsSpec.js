@@ -138,6 +138,68 @@ describe("Event Tests", function() {
       var touch;
       var spy;
 
+      /*
+            list can be either [[x, y], [x, y]] or [x, y]
+        */
+       function createTouchList(target, list) {
+        if (Array.isArray(list) && list[0] && !Array.isArray(list[0])) {
+            list = [list];
+        }
+        list = list.map(function (entry, index) {
+            var x = entry[0], y = entry[1], id = entry[2] ? entry[2] : index + 1;
+            return createTouch(x, y, target, id);
+        });
+        return document.createTouchList.apply(document, list);
+      }
+
+      function createTouch(x, y, target, id) {
+        return document.createTouch(window, target,
+            id || 1,  //identifier
+            x,  //pageX / clientX
+            y,  //pageY / clientY
+            x,  //screenX
+            y  //screenY
+        );
+      }
+
+      function initTouchEvent(touchEvent, type, touches) {
+        var touch1 = touches[0];
+        return touchEvent.initTouchEvent(
+            touches, //touches
+            touches, //targetTouches
+            touches, //changedTouches
+            type, //type
+            window, //view
+            touch1.screenX, //screenX
+            touch1.screenY, //screenY
+            touch1.clientX, //clientX
+            touch1.clientY, //clientY
+            false, //ctrlKey
+            false, //altKey
+            false, //shiftKey
+            false //metaKey
+        );
+      }
+
+      function createTouchEvent(elem, type, touches) {
+        var touchEvent = document.createEvent('TouchEvent');
+        if (Array.isArray(touches)) {
+            touches = createTouchList(elem, touches);
+        }
+
+        initTouchEvent(touchEvent, type, touches);
+        return touchEvent;
+      }
+
+      function calcTouchEventCoords(element) {
+        var elementBB = element.getBoundingClientRect();
+    
+        return {
+          clientX: elementBB.left,
+          clientY: elementBB.top
+        };
+      }
+
       beforeEach(function() {
         touch = document.createEvent('Event');
         var dummyTouchEvent = document.createEvent('MouseEvents');
@@ -151,13 +213,18 @@ describe("Event Tests", function() {
       });
 
       it("'slideStart' event is triggered properly and can be binded to", function(done) {
-        touch.initEvent("touchstart");
+        var sliderElem = testSlider.slider('getElement');
+
+        var coords = calcTouchEventCoords(sliderElem);
+        var touchEvent = createTouchEvent(sliderElem, 'touchstart', [coords.clientX, coords.clientY]);
         testSlider.on('slideStart', spy);
-        testSlider.data('slider')._mousedown(touch);
+
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
         });
+
+        sliderElem.dispatchEvent(touchEvent);
       });
 
       it("'slide' event is triggered properly and can be binded to", function(done) {
