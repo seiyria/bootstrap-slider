@@ -1749,8 +1749,7 @@ const windowIsDefined = (typeof window === "object");
 				}
 				var val = this._calculateValue(true);
 
-				this._layout();
-				this._setDataVal(val);
+				this.setValue(val, false, true);
 				this._trigger('slideStop', val);
 
 				// No longer need 'dragged' after mouse up
@@ -1773,7 +1772,7 @@ const windowIsDefined = (typeof window === "object");
 					if (snapToClosestTick) {
 						val[0] = this._snapToClosestTick(val[0]);
 						val[1] = this._snapToClosestTick(val[1]);
-					}	
+					}
 				} else {
 					val = this._toValue(this._state.percentage[0]);
 					val = this._applyPrecision(val);
