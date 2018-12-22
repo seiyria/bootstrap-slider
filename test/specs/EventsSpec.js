@@ -21,19 +21,28 @@ describe("Event Tests", function() {
     });
 
     describe("Mouse Events", function() {
+      var spy;
+
+      beforeEach(function() {
+        spy = jasmine.createSpy('spy');
+      });
 
       it("'slideStart' event is triggered properly and can be binded to", function(done) {
-        testSlider.on('slideStart', function() {
+        testSlider.on('slideStart', spy);
+        testSlider.data('slider')._mousedown(mouse);
+        setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
           done();
         });
-        testSlider.data('slider')._mousedown(mouse);
       });
 
       it("'slide' event is triggered properly and can be binded to", function(done) {
-        testSlider.on('slide', function() {
+        testSlider.on('slide', spy);
+        testSlider.data('slider')._mousemove(mouse);
+        setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
           done();
         });
-        testSlider.data('slider')._mousemove(mouse);
       });
 
       it("'slide' event sets the right value on the input", function(done) {
@@ -61,18 +70,22 @@ describe("Event Tests", function() {
       });
 
       it("'slideStop' event is triggered properly and can be binded to", function(done) {
-        testSlider.on('slideStop', function() {
+        testSlider.on('slideStop', spy);
+        testSlider.data('slider')._mouseup(mouse);
+        setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
           done();
         });
-        testSlider.data('slider')._mouseup(mouse);
       });
 
       it("slider should not have duplicate events after calling 'refresh'", function(done) {
-        testSlider.on('slideStop', function() {
-          done();
-        });
+        testSlider.on('slideStop', spy);
         testSlider.slider('refresh');
         testSlider.data('slider')._mouseup(mouse);
+        setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        });
       });
 
       describe("Disabled Slider Event Tests", function() {
@@ -115,12 +128,14 @@ describe("Event Tests", function() {
 
     describe("Touch Events", function() {
       var touch;
+      var spy;
 
       beforeEach(function() {
         touch = document.createEvent('Event');
         var dummyTouchEvent = document.createEvent('MouseEvents');
         touch.touches = [dummyTouchEvent];
         window.ontouchstart = true;
+        spy = jasmine.createSpy('spy');
       });
 
       afterEach(function() {
@@ -129,20 +144,22 @@ describe("Event Tests", function() {
 
       it("'slideStart' event is triggered properly and can be binded to", function(done) {
         touch.initEvent("touchstart");
-
-        testSlider.on('slideStart', function() {
-          done();
-        });
+        testSlider.on('slideStart', spy);
         testSlider.data('slider')._mousedown(touch);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
 
       it("'slide' event is triggered properly and can be binded to", function(done) {
         touch.initEvent("touchmove");
-
-        testSlider.on('slide', function() {
-          done();
-        });
+        testSlider.on('slide', spy);
         testSlider.data('slider')._mousemove(touch);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
 
       it("'slide' event sets the right value on the input", function(done) {
@@ -177,32 +194,47 @@ describe("Event Tests", function() {
 
       it("'slideStop' event is triggered properly and can be binded to", function(done) {
         touch.initEvent("touchstop");
-
-        testSlider.on('slideStop', function() {
-          done();
-        });
+        testSlider.on('slideStop', spy);
         testSlider.data('slider')._mouseup(mouse);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
 
 
       it("slider should not have duplicate events after calling 'refresh'", function(done) {
         touch.initEvent("touchstop");
-
-        testSlider.on('slideStop', function() {
-          done();
-        });
+        testSlider.on('slideStop', spy);
         testSlider.slider('refresh');
         testSlider.data('slider')._mouseup(mouse);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
 
       it("slider should not bind multiple touchstart events after calling 'refresh'", function(done) {
+        flag = 0;
+        var obj = {
+            addOne: function() {
+            flag++;
+            }
+        };
+        spyOn(obj, 'addOne').and.callThrough();
+
         touch.initEvent("touchstart", true, true);
 
-        testSlider.on('slideStart', function() {
-          done();
-        });
+        testSlider.on('slideStart', obj.addOne);
+
         testSlider.slider('refresh');
         $('#testSlider2').prev('div.slider').find('.slider-handle').get(0).dispatchEvent(touch);
+
+        window.setTimeout(function() {
+            expect(flag).toBe(1);
+            expect(obj.addOne.calls.count()).toBe(1);
+            done();
+        }, 0);
       });
 
       describe("Disabled Slider Event Tests", function() {
@@ -253,26 +285,38 @@ describe("Event Tests", function() {
     });
 
     describe("Enabled/Disabled tests", function() {
-      it("'slideDisabled' event is triggered properly and can be binded to", function(done) {
-        testSlider.on('slideDisabled', function() {
-          done();
-        });
-        testSlider.slider('disable');
+      var spy;
+
+      beforeEach(function() {
+        spy = jasmine.createSpy('spy');
       });
 
       it("'slideDisabled' event is triggered properly and can be binded to", function(done) {
-          testSlider.on('slideEnabled', function() {
-            done();
-          });
+        testSlider.on('slideDisabled', spy);
+        testSlider.slider('disable');
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
+      });
+
+      it("'slideDisabled' event is triggered properly and can be binded to", function(done) {
+          testSlider.on('slideEnabled', spy);
           testSlider.slider('disable');
           testSlider.slider('enable');
+          window.setTimeout(function() {
+            expect(spy).toHaveBeenCalled();
+            done();
+          }, 0);
       });
 
       it("'change' event is triggered properly and can be binded to", function(done) {
-        testSlider.on('change', function() {
-          done();
-        });
+        testSlider.on('change', spy);
         testSlider.slider("setValue", 3, false, true);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
     });
 
@@ -280,11 +324,12 @@ describe("Event Tests", function() {
 
   describe("CommonJS version", function() {
     describe("Event repetition tests", function() {
-      var testSlider, numTimesFired;
+      var testSlider, numTimesFired, spy;
 
       beforeEach(function() {
         testSlider = new Slider("#testSlider2");
         numTimesFired = 0;
+        spy = jasmine.createSpy('spy');
       });
 
       afterEach(function() {
@@ -292,31 +337,39 @@ describe("Event Tests", function() {
       });
 
       it("'slide' event is triggered only once per slide action", function(done) {
-        testSlider.on('slide', function() {
-          done();
-        });
+        testSlider.on('slide', spy);
         testSlider._mousemove(mouse);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
 
       it("'slideStart' event is triggered only once per slide action", function(done) {
-        testSlider.on('slideStart', function() {
-          done();
-        });
+        testSlider.on('slideStart', spy);
         testSlider._mousedown(mouse);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
 
       it("'slideStop' event is triggered only once per slide action", function(done) {
-        testSlider.on('slideStop', function() {
-          done();
-        });
+        testSlider.on('slideStop', spy);
         testSlider._mouseup(mouse);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
 
       it("'change' event is triggered only once per value change action", function(done) {
-        testSlider.on('change', function() {
-          done();
-        });
+        testSlider.on('change', spy);
         testSlider.setValue(3, false, true);
+        window.setTimeout(function() {
+          expect(spy).toHaveBeenCalled();
+          done();
+        }, 0);
       });
     });
   }); // End of common JS tests
