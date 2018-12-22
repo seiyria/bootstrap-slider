@@ -68,7 +68,7 @@ const windowIsDefined = (typeof window === "object");
 	const NAMESPACE_MAIN = 'slider';
 	const NAMESPACE_ALTERNATE = 'bootstrapSlider';
 
-	// Polyfill console methods
+	// Polyfills
 	if (windowIsDefined && !window.console) {
 		window.console = {};
 	}
@@ -77,6 +77,9 @@ const windowIsDefined = (typeof window === "object");
 	}
 	if (windowIsDefined && !window.console.warn) {
 		window.console.warn = function () { };
+	}
+	if (windowIsDefined && !window.setTimeout) {
+		window.setTimeout = function(fn) { fn(); };
 	}
 
 	// Reference to Slider constructor
@@ -1862,9 +1865,11 @@ const windowIsDefined = (typeof window === "object");
 
 				var callbackFnArray = this.eventToCallbackMap[evt];
 				if(callbackFnArray && callbackFnArray.length) {
-					for(var i = 0; i < callbackFnArray.length; i++) {
-						var callbackFn = callbackFnArray[i];
-						callbackFn(val);
+					for(let i = 0; i < callbackFnArray.length; i++) {
+						let callbackFn = callbackFnArray[i];
+						window.setTimeout(() => {
+							callbackFn(val);
+						}, 0);
 					}
 				}
 

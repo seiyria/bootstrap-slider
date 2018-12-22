@@ -221,28 +221,23 @@ describe("Dragging handles tests", function() {
         expect(testSlider.getValue()).toEqual([2, 5]);
     });
 
-    it("Should trigger change on mouseup", function() {
-        var ups = 0;
+    it("Should trigger change on mouseup", function(done) {
         var changes = 0;
 
         testSlider.on('slideStop', function(){
             expect(changes).toBe(1);
-            ups++;
+			expect(testSlider.getValue()).toEqual([2, 5]);
+			done();
         });
 
         testSlider.mousedown(mouseEvent('mousedown', tickOffsets[1]));
         expect(testSlider.getValue()).toEqual([1, 5]);
-        expect(ups).toBe(0);
 
         testSlider.on('change', function(){
-            expect(ups).toBe(0);
             changes++;
         });
 
         testSlider.mouseup(mouseEvent('mouseup', tickOffsets[2]));
-        expect(testSlider.getValue()).toEqual([2, 5]);
-        expect(changes).toBe(1);
-        expect(ups).toBe(1);
 	});
 
 	describe("Test 'mousemove' and 'mouseup' produces correct results", function() {
