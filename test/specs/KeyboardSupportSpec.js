@@ -596,7 +596,7 @@ describe("Navigating slider with the keyboard", function() {
         expect(hasChanged).toBe(false);
         expect(value).toEqual(initialValues);
         done();
-      }, 0);
+      });
     });
   });
 

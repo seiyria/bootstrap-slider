@@ -102,7 +102,7 @@ describe("Event Tests", function() {
           window.setTimeout(function() {
             expect(spy).not.toHaveBeenCalled();
             done();
-          }, 0);
+          });
         });
 
         it("should not trigger 'slide' event when disabled", function(done) {
@@ -111,7 +111,7 @@ describe("Event Tests", function() {
           window.setTimeout(function() {
             expect(spy).not.toHaveBeenCalled();
             done();
-          }, 0);
+          });
         });
 
         it("should not trigger 'slideStop' event when disabled", function(done) {
@@ -120,7 +120,7 @@ describe("Event Tests", function() {
           window.setTimeout(function() {
             expect(spy).not.toHaveBeenCalled();
             done();
-          }, 0);
+          });
         });
       });
 
@@ -149,7 +149,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
 
       it("'slide' event is triggered properly and can be binded to", function(done) {
@@ -159,7 +159,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
 
       it("'slide' event sets the right value on the input", function(done) {
@@ -199,7 +199,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
 
 
@@ -211,7 +211,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
 
       it("slider should not bind multiple touchstart events after calling 'refresh'", function(done) {
@@ -234,7 +234,7 @@ describe("Event Tests", function() {
             expect(flag).toBe(1);
             expect(obj.addOne.calls.count()).toBe(1);
             done();
-        }, 0);
+        });
       });
 
       describe("Disabled Slider Event Tests", function() {
@@ -254,7 +254,7 @@ describe("Event Tests", function() {
           window.setTimeout(function() {
             expect(spy).not.toHaveBeenCalled();
             done();
-          }, 0);
+          });
         });
 
         it("should not trigger 'slide' event when disabled", function(done) {
@@ -267,7 +267,7 @@ describe("Event Tests", function() {
             expect(spy).not.toHaveBeenCalled();
             done();
           });
-        }, 0);
+        });
 
         it("should not trigger 'slideStop' event when disabled", function(done) {
           touch.initEvent("touchend");
@@ -278,7 +278,7 @@ describe("Event Tests", function() {
           window.setTimeout(function() {
             expect(spy).not.toHaveBeenCalled();
             done();
-          }, 0);
+          });
         });
       });
 
@@ -297,7 +297,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
 
       it("'slideDisabled' event is triggered properly and can be binded to", function(done) {
@@ -307,7 +307,7 @@ describe("Event Tests", function() {
           window.setTimeout(function() {
             expect(spy).toHaveBeenCalled();
             done();
-          }, 0);
+          });
       });
 
       it("'change' event is triggered properly and can be binded to", function(done) {
@@ -316,7 +316,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
     });
 
@@ -351,7 +351,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
 
       it("'slideStop' event is triggered only once per slide action", function(done) {
@@ -360,7 +360,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
 
       it("'change' event is triggered only once per value change action", function(done) {
@@ -369,7 +369,7 @@ describe("Event Tests", function() {
         window.setTimeout(function() {
           expect(spy).toHaveBeenCalled();
           done();
-        }, 0);
+        });
       });
     });
   }); // End of common JS tests
