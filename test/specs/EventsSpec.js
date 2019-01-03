@@ -77,11 +77,21 @@ describe("Event Tests", function() {
       });
 
       it("slider should not have duplicate events after calling 'refresh'", function(done) {
-        testSlider.on('slideStop', spy);
+        var numTimesFired = 0;
+        var obj = {
+            addOne: function() {
+              numTimesFired++;
+            }
+        };
+        spyOn(obj, 'addOne').and.callThrough();
+
+        testSlider.on('slideStop', obj.addOne);
         testSlider.slider('refresh');
         testSlider.data('slider')._mouseup(mouse);
+
         setTimeout(function() {
-          expect(spy).toHaveBeenCalled();
+          expect(numTimesFired).toBe(1);
+          expect(obj.addOne.calls.count()).toBe(1);
           done();
         });
       });
@@ -316,12 +326,17 @@ describe("Event Tests", function() {
 
   describe("CommonJS version", function() {
     describe("Event repetition tests", function() {
-      var testSlider, numTimesFired, spy;
+      var testSlider, numTimesFired;
+      var testObj;
 
       beforeEach(function() {
         testSlider = new Slider("#testSlider2");
         numTimesFired = 0;
-        spy = jasmine.createSpy('spy');
+        testObj = {
+          addOne: function() {
+            numTimesFired++;
+          }
+        };
       });
 
       afterEach(function() {
@@ -329,37 +344,53 @@ describe("Event Tests", function() {
       });
 
       it("'slide' event is triggered only once per slide action", function(done) {
-        testSlider.on('slide', spy);
+        spyOn(testObj, 'addOne').and.callThrough();
+
+        testSlider.on('slide', testObj.addOne);
         testSlider._mousemove(mouse);
-        window.setTimeout(function() {
-          expect(spy).toHaveBeenCalled();
+
+        setTimeout(function() {
+          expect(numTimesFired).toBe(1);
+          expect(testObj.addOne.calls.count()).toBe(1);
           done();
-        }, 0);
+        });
       });
 
       it("'slideStart' event is triggered only once per slide action", function(done) {
-        testSlider.on('slideStart', spy);
+        spyOn(testObj, 'addOne').and.callThrough();
+
+        testSlider.on('slideStart', testObj.addOne);
         testSlider._mousedown(mouse);
-        window.setTimeout(function() {
-          expect(spy).toHaveBeenCalled();
+
+        setTimeout(function() {
+          expect(numTimesFired).toBe(1);
+          expect(testObj.addOne.calls.count()).toBe(1);
           done();
         });
       });
 
       it("'slideStop' event is triggered only once per slide action", function(done) {
-        testSlider.on('slideStop', spy);
+        spyOn(testObj, 'addOne').and.callThrough();
+
+        testSlider.on('slideStop', testObj.addOne);
         testSlider._mouseup(mouse);
-        window.setTimeout(function() {
-          expect(spy).toHaveBeenCalled();
+
+        setTimeout(function() {
+          expect(numTimesFired).toBe(1);
+          expect(testObj.addOne.calls.count()).toBe(1);
           done();
         });
       });
 
       it("'change' event is triggered only once per value change action", function(done) {
-        testSlider.on('change', spy);
+        spyOn(testObj, 'addOne').and.callThrough();
+
+        testSlider.on('change', testObj.addOne);
         testSlider.setValue(3, false, true);
-        window.setTimeout(function() {
-          expect(spy).toHaveBeenCalled();
+
+        setTimeout(function() {
+          expect(numTimesFired).toBe(1);
+          expect(testObj.addOne.calls.count()).toBe(1);
           done();
         });
       });
