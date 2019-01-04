@@ -1,3 +1,9 @@
+10.5.0 / 2019-01-04
+==================
+* **New Feature:** Add lock to ticks feature. See [Example 25](https://seiyria.com/bootstrap-slider/#example-25) for a demonstration. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/744). Thanks to [Heidar](https://github.com/heidarsaleh).
+* **Bug Fix:** Fix mouseup event should trigger 'change' event. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/900). Thanks to [Michael Kriese](https://github.com/ViceIce).
+* **Update Copyright:** Update Copyright year references to 2019. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/904).
+
 10.4.2 / 2018-12-18
 ==================
 * **Bug Fix:** Fix 'change' event should trigger when either values change for range sliders. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/897). Thanks to [pimlie](https://github.com/pimlie).
