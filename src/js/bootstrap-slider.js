@@ -1669,17 +1669,13 @@ const windowIsDefined = (typeof window === "object");
 
 				var val;
 				if (this.ticksAreValid && this.options.lock_to_ticks) {
-					var index;
-					try {
-						index = this.options.ticks.indexOf(this._state.value[handleIdx]);
-						if (index === -1) {
-							throw 'index should not be -1';
-						}
-					}
-					catch (e) {
-						window.console.warn('_keydown: ' + e);
+					let index;
+					// Find tick index that handle 1/2 is currently on
+					index = this.options.ticks.indexOf(this._state.value[handleIdx]);
+					if (index === -1) {
 						// Set default to first tick
 						index = 0;
+						window.console.warn('(lock_to_ticks) _keydown: index should not be -1');
 					}
 					index += dir;
 					index = Math.max(0, Math.min(this.options.ticks.length-1, index));
