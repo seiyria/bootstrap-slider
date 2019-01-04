@@ -294,6 +294,7 @@ Other Platforms & Libraries
 - [Ruby on Rails](https://github.com/YourCursus/bootstrap-slider-rails)
 - [knockout.js](https://github.com/cosminstefanxp/bootstrap-slider-knockout-binding) ([@cosminstefanxp](https://github.com/cosminstefanxp), [#81](https://github.com/seiyria/bootstrap-slider/issues/81))
 - [AngularJS](https://github.com/seiyria/angular-bootstrap-slider)
+- [Angular](https://github.com/moritzvieli/ngx-bootstrap-slider) ([@moritzvieli](https://github.com/moritzvieli))
 - [EmberJS](https://github.com/lifegadget/ui-slider) ([@ksnyde](https://github.com/ksnyde))
 - [ReactJS](https://github.com/brownieboy/react-bootstrap-slider)
 - [NuGet](https://www.nuget.org/packages/bootstrap-slider/) ([@ChrisMissal](https://github.com/ChrisMissal))
