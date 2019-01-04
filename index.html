@@ -308,6 +308,10 @@
 		  <td><a href="#example-24">Example 24</a></td>
 		  <td>rtl mode (auto)</td>
 		</tr>
+		<tr>
+		  <td><a href="#example-25">Example 25</a></td>
+		  <td>Lock selection to ticks</td>
+		</tr>
       </table>
 	  
       <div class="examples">
@@ -1243,6 +1247,28 @@ $("#ex24").slider({});
 </pre></code>
 			</div>
 
+		  <div id="example-25" class='slider-example'>
+			  <h3>Example 25: <a href="#top"><small>Back to Top</small></a></h3>
+			  <p>Lock selection to ticks</p>
+			  <div class="well">
+				  <input id="ex25" type="text" />
+			  </div>
+			  <h5>HTML</h5>
+<pre><code class="html">
+&lt;input id="ex25" type="text" data-slider-value="[1, 100]" data-slider-ticks="[1, 50, 100]" data-slider-lock-to-ticks="true"/&gt;
+</pre></code>
+
+			  <h5>JavaScript</h5>
+<pre><code class="js">
+// With JQuery
+$("#ex25").slider({
+	value: [1, 100],
+	ticks: [1, 50, 100],
+	lock_to_ticks: true
+});
+</pre></code>
+		  </div>
+
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -1443,9 +1469,17 @@ $("#ex24").slider({});
 				step: 0.01,
 				ticks_tooltip: true
 			});
-		});
+
 			/* example 24 */
 			$('#ex24').slider({});
+
+			/* example 25 */
+			$("#ex25").slider({
+				value: [1, 100],
+				ticks: [1, 50, 100],
+				lock_to_ticks: true
+			});
+		});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
