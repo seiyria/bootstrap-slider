@@ -1080,7 +1080,7 @@ const windowIsDefined = (typeof window === "object");
 			},
 
 			refresh: function(options) {
-				var currentValue = this.getValue();
+				const currentValue = this.getValue();
 				this._removeSliderEventHandlers();
 				createNewSlider.call(this, this.element, this.options);
 				// Don't reset slider's value on refresh if `useCurrentValue` is true
