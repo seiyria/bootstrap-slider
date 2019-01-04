@@ -2,17 +2,20 @@ describe("refresh() Method Tests", function() {
   var testSlider;
   var options;
   var initialValue, initialRangeValue;
+  var newValue, newRangeValue;
 
   beforeEach(function() {
     initialValue = 5;
     initialRangeValue = [4, 5];
+    newValue = 7;
+    newRangeValue = [7, 10];
 
     options = {
       id: 'mySlider',
       min: 0,
       max: 10,
       step: 1,
-      value: initialValue,
+      value: initialValue
     };
   });
 
@@ -50,14 +53,13 @@ describe("refresh() Method Tests", function() {
     // Initialize non-range slider
     testSlider = new Slider('#testSlider1', options);
 
-    testSlider.setValue(7, true, true);
+    testSlider.setValue(newValue, true, true);
     testSlider.refresh();
 
     expect(testSlider.getValue()).toBe(initialValue);
   });
 
   it("should maintain its current value on refresh", function() {
-    var newValue = 7;
     // Initialize non-range slider
     testSlider = new Slider('#testSlider1', options);
 
@@ -73,14 +75,13 @@ describe("refresh() Method Tests", function() {
     options.range = true;
     testSlider = new Slider('#testSlider1', options);
 
-    testSlider.setValue([7, 10], true, true);
+    testSlider.setValue(newRangeValue, true, true);
     testSlider.refresh();
 
     expect(testSlider.getValue()).toBe(initialRangeValue);
   });
 
   it("should maintain its current value on refresh (range)", function() {
-    var newRangeValue = [7, 10];
     // Initialize range slider
     options.value = initialRangeValue;
     options.range = true;
