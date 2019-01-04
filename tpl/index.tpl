@@ -1469,15 +1469,16 @@ $("#ex25").slider({
 				step: 0.01,
 				ticks_tooltip: true
 			});
-		});
+
 			/* example 24 */
 			$('#ex24').slider({});
 
-		/* example 25 */
-		$("#ex25").slider({
-			value: [1, 100],
-			ticks: [1, 50, 100],
-			lock_to_ticks: true
+			/* example 25 */
+			$("#ex25").slider({
+				value: [1, 100],
+				ticks: [1, 50, 100],
+				lock_to_ticks: true
+			});
 		});
     </script>
     <!-- Placed at the end of the document so the pages load faster -->
