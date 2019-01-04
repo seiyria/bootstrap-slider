@@ -1,5 +1,6 @@
 describe("refresh() Method Tests", function() {
   var testSlider;
+  var $testSlider;
   var options;
   var initialValue, initialRangeValue;
   var newValue, newRangeValue;
@@ -22,6 +23,11 @@ describe("refresh() Method Tests", function() {
   afterEach(function() {
     if(testSlider) {
       testSlider.destroy();
+      testSlider = null;
+    }
+    if ($testSlider) {
+      $testSlider.slider('destroy');
+      $testSlider = null;
     }
   });
 
@@ -67,6 +73,26 @@ describe("refresh() Method Tests", function() {
     testSlider.refresh({ useCurrentValue: true });
 
     expect(testSlider.getValue()).toBe(newValue);
+  });
+
+  it("should reset slider to its default value on refresh (jQuery)", function() {
+    // Initialize non-range slider
+    $testSlider = $('#testSlider1').slider(options);
+
+    $testSlider.slider('setValue', newValue, true, true);
+    $testSlider.slider('refresh');
+
+    expect($testSlider.slider('getValue')).toBe(initialValue);
+  });
+
+  it("should maintain its current value on refresh (jQuery)", function() {
+    // Initialize non-range slider
+    $testSlider = $('#testSlider1').slider(options);
+
+    $testSlider.slider('setValue', newValue, true, true);
+    $testSlider.slider('refresh', { useCurrentValue: true });
+
+    expect($testSlider.slider('getValue')).toBe(newValue);
   });
 
   it("should reset slider to its default value on refresh (range)", function() {
