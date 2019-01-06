@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.5.0              
+                      VERSION  10.6.0              
 ========================================================= */
 "use strict";
 
@@ -1045,9 +1045,14 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				return this;
 			},
 
-			refresh: function refresh() {
+			refresh: function refresh(options) {
+				var currentValue = this.getValue();
 				this._removeSliderEventHandlers();
 				createNewSlider.call(this, this.element, this.options);
+				// Don't reset slider's value on refresh if `useCurrentValue` is true
+				if (options && options.useCurrentValue === true) {
+					this.setValue(currentValue);
+				}
 				if ($) {
 					// Bind new instance of slider to the element
 					if (autoRegisterNamespace === NAMESPACE_MAIN) {
