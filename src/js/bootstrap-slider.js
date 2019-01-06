@@ -1079,9 +1079,14 @@ const windowIsDefined = (typeof window === "object");
 				return this;
 			},
 
-			refresh: function() {
+			refresh: function(options) {
+				const currentValue = this.getValue();
 				this._removeSliderEventHandlers();
 				createNewSlider.call(this, this.element, this.options);
+				// Don't reset slider's value on refresh if `useCurrentValue` is true
+				if (options && options.useCurrentValue === true) {
+					this.setValue(currentValue);
+				}
 				if($) {
 					// Bind new instance of slider to the element
 					if (autoRegisterNamespace === NAMESPACE_MAIN) {

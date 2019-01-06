@@ -219,7 +219,7 @@ __NOTE:__ Optional parameters are italicized.
 | isEnabled | --- |Returns true if enabled, false if disabled |
 | setAttribute | attribute, value | Updates the slider's [attributes](#options) |
 | getAttribute | attribute | Get the slider's [attributes](#options) |
-| refresh | --- | Refreshes the current slider |
+| refresh | _options_ | Refreshes the current slider and resets the slider's value to its default value on initial setup. To override this behaviour and instead maintain the slider's current value, pass the optional `options` parameter with the property `useCurrentValue` set to `true` (eg. `refresh({ useCurrentValue: true })`. |
 | on | eventType, callback | When the slider event _eventType_ is triggered, the callback function will be invoked |
 | off | eventType, callback | Removes the callback function from the slider event _eventType_ |
 | relayout | --- | Renders the tooltip again, after initialization. Useful in situations when the slider and tooltip are initially hidden. |

@@ -312,6 +312,10 @@
 		  <td><a href="#example-25">Example 25</a></td>
 		  <td>Lock selection to ticks</td>
 		</tr>
+		<tr>
+			<td><a href="#example-26">Example 26</a></td>
+			<td>Refresh method with optional `options` object</td>
+		</tr>
       </table>
 	  
       <div class="examples">
@@ -1269,6 +1273,35 @@ $("#ex25").slider({
 </pre></code>
 		  </div>
 
+			<div id="example-26" class='slider-example'>
+				<h3>Example 26: <a href="#top"><small>Back to Top</small></a></h3>
+				<p>Refresh method with optional `options` object</p>
+				<div class="well">
+					<input id="ex26" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+					<button id="ex26_Refresh" class='btn btn-primary'>Refresh</button>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="ex26_UseCurrentVal">
+						<label class="form-check-label" for="ex26_UseCurrentVal">
+							Use Current Value
+						</label>
+					</div>
+				</div>
+<h5>HTML</h5>
+<pre><code class="html">
+&lt;input id="ex26" data-slider-id="ex26Slider" type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/&gt;
+</code></pre>
+
+<h5>JavaScript</h5>
+<pre><code class="js">
+// With JQuery
+$('#ex26').slider('refresh', { useCurrentValue: true });
+
+// Without JQuery
+var slider = new Slider('#ex26');
+slider.refresh({ useCurrentValue: true });
+</code></pre>
+			</div> <!-- /example-26 -->
+
 	  </div> <!-- /examples -->
     </div> <!-- /container -->
 
@@ -1478,6 +1511,18 @@ $("#ex25").slider({
 				value: [1, 100],
 				ticks: [1, 50, 100],
 				lock_to_ticks: true
+			});
+
+			/* example 26 */
+			$('#ex26').slider();
+
+			$('#ex26_Refresh').on('click', function() {
+				if ($('#ex26_UseCurrentVal').prop('checked')) {
+					$('#ex26').slider('refresh', { useCurrentValue: true });
+				}
+				else {
+					$('#ex26').slider('refresh');
+				}
 			});
 		});
     </script>
