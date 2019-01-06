@@ -1,3 +1,9 @@
+10.6.0 / 2019-01-06
+==================
+* **New Feature:** Add new feature to persist the value after a refresh. See [Example 26](https://seiyria.com/bootstrap-slider/#example-26) for a demonstration. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/905).
+* **Bug Fix:** Fix unit tests to execute event callbacks asynchronously. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/902).
+* **Documentation:** Add link to Angular Bootstrap-Slider project. [Commit](https://github.com/seiyria/bootstrap-slider/commit/4899ce155c419892573269b98084655de40b1893).
+
 10.5.0 / 2019-01-04
 ==================
 * **New Feature:** Add lock to ticks feature. See [Example 25](https://seiyria.com/bootstrap-slider/#example-25) for a demonstration. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/744). Thanks to [Heidar](https://github.com/heidarsaleh).
