@@ -27,7 +27,7 @@ describe("Keyboard Support Tests", function() {
     Begin Tests
   */
   describe("Clicking on slider handle automatically gives it focus", function() {
-    
+
     beforeEach(function() {
       testSlider = $("#testSlider1").slider({
         id: 'testSlider'
@@ -56,7 +56,7 @@ describe("Keyboard Support Tests", function() {
       // Check for no tooltip before focus
       var tooltipIsShown = $("#testSlider").find("div.tooltip").hasClass("in");
       expect(tooltipIsShown).toBeFalsy();
-      
+
       handle1.focus();
 
       // Tooltip should be present after focus
@@ -74,7 +74,7 @@ describe("Keyboard Support Tests", function() {
       // Check for hidden tooltip before focus
       var tooltipIsHidden = $("#testSlider").children("div.tooltip").hasClass("hide");
       expect(tooltipIsHidden).toBeTruthy();
-      
+
       handle1.focus();
 
       // Tooltip should remain hidden after focus
@@ -93,7 +93,7 @@ describe("Keyboard Support Tests", function() {
       // Check for shown tooltip before focus
       var tooltipIsShown = $tooltip.hasClass("in");
       expect(tooltipIsShown).toBeTruthy();
-      
+
       handle1.focus();
 
       // Tooltip should remain present after focus
@@ -123,7 +123,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = $("#testSlider1").slider('getValue');
         var expectedSliderValue = initialSliderVal - initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -137,7 +137,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = $("#testSlider1").slider('getValue');
         var expectedSliderValue = initialSliderVal + initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -151,7 +151,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal - initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -165,7 +165,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal + initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -177,7 +177,7 @@ describe("Keyboard Support Tests", function() {
   });
 
   describe("For vertical sliders where its handle has focus", function() {
-    
+
     beforeEach(function() {
       // Initialize the slider
       testSlider = $("#testSlider1").slider({
@@ -197,7 +197,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal - initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -211,7 +211,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal + initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -225,7 +225,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal - initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -239,7 +239,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal + initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -251,7 +251,7 @@ describe("Keyboard Support Tests", function() {
   });
 
   describe("For a reversed slider (regardless of 'orientation')", function() {
-      
+
     beforeEach(function() {
       // Initialize the slider
       testSlider = $("#testSlider1").slider({
@@ -271,7 +271,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal - initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -285,7 +285,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal + initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -299,7 +299,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal - initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -313,7 +313,7 @@ describe("Keyboard Support Tests", function() {
       handle1.on("keydown", function() {
         var sliderValue = testSlider.slider('getValue');
         var expectedSliderValue = initialSliderVal + initialStepVal;
-        
+
         expect(sliderValue).toBe(expectedSliderValue);
 
         done();
@@ -325,7 +325,7 @@ describe("Keyboard Support Tests", function() {
   });
 
   describe("For a range slider (regardless of 'orientation')", function() {
-    
+
     beforeEach(function() {
       // Initialize the slider
       testSlider = $("#testSlider1").slider({
@@ -348,7 +348,7 @@ describe("Keyboard Support Tests", function() {
         handle1.on("keydown", function() {
           var sliderValue = testSlider.slider('getValue');
           var expectedSliderValue = initialSliderVal + initialStepVal;
-          
+
           expect(sliderValue[1]).toBe(expectedSliderValue);
 
           done();
@@ -392,7 +392,7 @@ describe("Keyboard Support Tests", function() {
         handle2.on("keydown", function() {
           var sliderValue = testSlider.slider('getValue');
           var expectedSliderValue = initialSliderVal - initialStepVal;
-          
+
           expect(sliderValue[0]).toBe(expectedSliderValue);
 
           done();
@@ -504,7 +504,7 @@ describe("Keyboard Support Tests", function() {
             done();
           });
 
-          
+
           keyboardEvent.keyCode = keyboardEvent.which = testCase.keyEvent;
           handle1[0].dispatchEvent(keyboardEvent);
         });
@@ -590,11 +590,13 @@ describe("Navigating slider with the keyboard", function() {
       // Change both values of the range slider
       mySlider.setValue(initialValues, true, true);
 
-      var value = mySlider.getValue();
-      expect(isSliding).toBe(true);
-      expect(hasChanged).toBe(false);
-      expect(value).toEqual(initialValues);
-      done();
+      window.setTimeout(function() {
+        var value = mySlider.getValue();
+        expect(isSliding).toBe(true);
+        expect(hasChanged).toBe(false);
+        expect(value).toEqual(initialValues);
+        done();
+      });
     });
   });
 
