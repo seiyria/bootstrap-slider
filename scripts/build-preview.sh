@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # log
-# Generate index.html and /temp assetts for GH Pages branch
+# Generate index.html and /temp assets for GH Pages branch
 grunt build-gh-pages
 
 cp node_modules/bootstrap/dist/css/bootstrap.min.css css/bootstrap.min.css

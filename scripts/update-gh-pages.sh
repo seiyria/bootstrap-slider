@@ -4,7 +4,7 @@
 echo "..."
 echo "Updating Github.io page"
 echo "..."
-# Generate index.html and /temp assetts for GH Pages branch
+# Generate index.html and /temp assets for GH Pages branch
 grunt build-gh-pages
 # Create temporary copy of index file
 cp index.html index-temp.html
