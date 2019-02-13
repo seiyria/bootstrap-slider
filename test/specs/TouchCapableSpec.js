@@ -89,13 +89,15 @@ describe("Touch Capable Tests", function() {
   var touchStart;
   var touchMove;
   var touchEnd;
+
   var $testSlider;
   var sliderInst;
-  var inputId = 'testSlider1';
+  var inputId;
   var sliderId;
   var sliderOptions;
 
   beforeEach(function() {
+    inputId = 'testSlider1';
     sliderId = 'mySlider';
 
     sliderOptions = {
@@ -105,14 +107,8 @@ describe("Touch Capable Tests", function() {
       ticks: [0, 3, 5, 7, 10]
     };
 
-    // Initialize the slider
-    $testSlider = $('#' + inputId).slider(sliderOptions);
-
     // Enable touch
     window.ontouchstart = true;
-
-    // Get slider instance
-    sliderInst = $testSlider.data('slider');
   });
 
   afterEach(function() {
@@ -124,30 +120,131 @@ describe("Touch Capable Tests", function() {
     }
   });
 
-  // 0 1 2 3 4
-  // 0 3 5 7 10
-  it("should slide the handle to the left from 5 to 3", function(done) {
-    var sliderElem = $testSlider.slider('getElement');
-    $testSlider.on('slideStop', function() {
-      var value = $testSlider.slider('getValue');
-      expect(value).toBe(3);
-      done();
+  describe("single slider", function() {
+
+    beforeEach(function() {
+      // Initialize the slider
+      $testSlider = $('#' + inputId).slider(sliderOptions);
+
+      // Get slider instance
+      sliderInst = $testSlider.data('slider');
     });
 
-    var tick = sliderInst.ticks[2];  // 5
-    var sliderCoords = calcTouchEventCoords(sliderElem);
-    var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
-    touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+    // index= [0 1 2 3 4]
+    // ticks= [0 3 5 7 10]
+    it("should slide the handle to the left from 5 to 3", function(done) {
+      var sliderElem = $testSlider.slider('getElement');
+      $testSlider.on('slideStop', function() {
+        var value = $testSlider.slider('getValue');
+        expect(value).toBe(3);
+        done();
+      });
 
-    tick = sliderInst.ticks[1];  // 3
-    coords = coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
-    touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
+      var tick = sliderInst.ticks[2];  // 5
+      var sliderCoords = calcTouchEventCoords(sliderElem);
+      var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+      touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
 
-    touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+      tick = sliderInst.ticks[1];  // 3
+      coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+      touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
 
-    sliderElem.dispatchEvent(touchStart);
-    sliderElem.dispatchEvent(touchMove);
-    sliderElem.dispatchEvent(touchEnd);
+      touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+      sliderElem.dispatchEvent(touchStart);
+      sliderElem.dispatchEvent(touchMove);
+      sliderElem.dispatchEvent(touchEnd);
+    });
+
+    it("should slide the handle to the right from 5 to 7", function(done) {
+      var sliderElem = $testSlider.slider('getElement');
+      $testSlider.on('slideStop', function() {
+        var value = $testSlider.slider('getValue');
+        expect(value).toBe(7);
+        done();
+      });
+
+      var tick = sliderInst.ticks[2];  // 5
+      var sliderCoords = calcTouchEventCoords(sliderElem);
+      var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+      touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+      tick = sliderInst.ticks[3];  // 7
+      coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+      touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
+
+      touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+      sliderElem.dispatchEvent(touchStart);
+      sliderElem.dispatchEvent(touchMove);
+      sliderElem.dispatchEvent(touchEnd);
+    });
+
+  });
+
+  describe("range slider", function() {
+
+    beforeEach(function() {
+      sliderOptions.range = true;
+      sliderOptions.value = [3, 7];
+
+      // Initialize the slider
+      $testSlider = $('#' + inputId).slider(sliderOptions);
+
+      // Get slider instance
+      sliderInst = $testSlider.data('slider');
+    });
+
+    // index= [0 1 2 3 4]
+    // ticks= [0 3 5 7 10]
+    it("should slide the first handle to the left from 3 to 0", function(done) {
+      var sliderElem = $testSlider.slider('getElement');
+      $testSlider.on('slideStop', function() {
+        var value = $testSlider.slider('getValue');
+        expect(value).toEqual([0, 7]);
+        done();
+      });
+
+      var tick = sliderInst.ticks[1];  // 3
+      var sliderCoords = calcTouchEventCoords(sliderElem);
+      var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+      touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+      tick = sliderInst.ticks[0];  // 0
+      coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+      touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
+
+      touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+      sliderElem.dispatchEvent(touchStart);
+      sliderElem.dispatchEvent(touchMove);
+      sliderElem.dispatchEvent(touchEnd);
+    });
+
+    it("should slide the second handle to the right from 7 to 10", function(done) {
+      var sliderElem = $testSlider.slider('getElement');
+      $testSlider.on('slideStop', function() {
+        var value = $testSlider.slider('getValue');
+        expect(value).toEqual([3, 10]);
+        done();
+      });
+
+      var tick = sliderInst.ticks[3];  // 7
+      var sliderCoords = calcTouchEventCoords(sliderElem);
+      var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+      touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+      tick = sliderInst.ticks[4];  // 10
+      coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+      touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
+
+      touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+      sliderElem.dispatchEvent(touchStart);
+      sliderElem.dispatchEvent(touchMove);
+      sliderElem.dispatchEvent(touchEnd);
+    });
+
   });
 
 });
