@@ -310,4 +310,70 @@ describe("Touch Capable Tests", function() {
 
   });
 
+  describe("range, vertical slider", function() {
+
+    beforeEach(function() {
+      sliderOptions.range = true;
+      sliderOptions.value = [3, 7];
+      sliderOptions.orientation = 'vertical';
+
+      // Initialize the slider
+      $testSlider = $('#' + inputId).slider(sliderOptions);
+
+      // Get slider instance
+      sliderInst = $testSlider.data('slider');
+    });
+
+    // index= [0 1 2 3 4]
+    // ticks= [0 3 5 7 10]
+    it("should slide the first handle to the top from 3 to 0", function(done) {
+      var sliderElem = $testSlider.slider('getElement');
+      $testSlider.on('slideStop', function() {
+        var value = $testSlider.slider('getValue');
+        expect(value).toEqual([0, 7]);
+        done();
+      });
+
+      var tick = sliderInst.ticks[1];  // 3
+      var sliderCoords = calcTouchEventCoords(sliderElem);
+      var coords = [sliderCoords.x, sliderCoords.y + tick.offsetTop];
+      touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+      tick = sliderInst.ticks[0];  // 0
+      coords = [sliderCoords.x, sliderCoords.y + tick.offsetTop];
+      touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
+
+      touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+      sliderElem.dispatchEvent(touchStart);
+      sliderElem.dispatchEvent(touchMove);
+      sliderElem.dispatchEvent(touchEnd);
+    });
+
+    it("should slide the second handle to the bottom from 7 to 10", function(done) {
+      var sliderElem = $testSlider.slider('getElement');
+      $testSlider.on('slideStop', function() {
+        var value = $testSlider.slider('getValue');
+        expect(value).toEqual([3, 10]);
+        done();
+      });
+
+      var tick = sliderInst.ticks[3];  // 7
+      var sliderCoords = calcTouchEventCoords(sliderElem);
+      var coords = [sliderCoords.x, sliderCoords.y + tick.offsetTop];
+      touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+      tick = sliderInst.ticks[4];  // 10
+      coords = [sliderCoords.x, sliderCoords.y + tick.offsetTop];
+      touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
+
+      touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+      sliderElem.dispatchEvent(touchStart);
+      sliderElem.dispatchEvent(touchMove);
+      sliderElem.dispatchEvent(touchEnd);
+    });
+
+  });
+
 });
