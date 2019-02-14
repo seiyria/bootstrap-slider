@@ -26,6 +26,16 @@
 			padding: 2000px 0 500px 0;
 		}
 
+		#horz-scroll-div {
+			overflow-x: scroll;
+			width: 300px;
+			height: 150px;
+		}
+		#vert-scroll-div {
+			overflow-y: scroll;
+			width: 150px;
+			height: 300px;
+		}
 	</style>
 </head>
 <body>
@@ -94,6 +104,16 @@
 		<p>just a row</p>
 		<p>just a row</p>
 		<input id="ex1" data-slider-id='ex1Slider' type="text"/>
+	</div>
+
+	<div id="horz-scroll-div">
+		<input id="horz-touch-slider" type="text"/>
+		<div style="position: relative; left: 1000px">Text</div>
+	</div>
+
+	<div id="vert-scroll-div">
+		<input id="vert-touch-slider" type="text"/>
+		<div style="position: relative; top: 1000px">More text</div>
 	</div>
 
 	<div id="low-div">

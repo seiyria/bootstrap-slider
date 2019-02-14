@@ -480,4 +480,92 @@ describe("Touch Capable Tests", function() {
 
   });
 
+  describe("Scrolling tests", function() {
+
+    describe("horizontal sliding tests", function() {
+      var horzScrollDiv;
+
+      beforeEach(function() {
+        // Initialize the slider
+        $testSlider = $('#' + inputId).slider(sliderOptions);
+
+        // Get slider instance
+        sliderInst = $testSlider.data('slider');
+
+        horzScrollDiv = document.getElementById('horz-scroll-div');
+      });
+
+      // index= [0 1 2 3 4]
+      // ticks= [0 3 5 7 10]
+      it("should not scroll the div horizontally while sliding the slider", function(done) {
+        var sliderElem = $testSlider.slider('getElement');
+
+        $testSlider.on('slideStop', function() {
+          expect(horzScrollDiv.scrollLeft).toBe(0);
+          done();
+        });
+
+        var tick = sliderInst.ticks[2];  // 5
+        var sliderCoords = calcTouchEventCoords(sliderElem);
+        var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+        touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+        tick = sliderInst.ticks[3];  // 7
+        coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+        touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
+
+        touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchMove);
+        sliderElem.dispatchEvent(touchEnd);
+      });
+
+    });
+
+    describe("vertical sliding tests", function() {
+      var vertScrollDiv;
+
+      beforeEach(function() {
+        sliderOptions.orientation = 'vertical';
+
+        // Initialize the slider
+        $testSlider = $('#' + inputId).slider(sliderOptions);
+
+        // Get slider instance
+        sliderInst = $testSlider.data('slider');
+
+        vertScrollDiv = document.getElementById('vert-scroll-div');
+      });
+
+      // index= [0 1 2 3 4]
+      // ticks= [0 3 5 7 10]
+      it("should not scroll the div vertically while sliding the slider", function(done) {
+        var sliderElem = $testSlider.slider('getElement');
+
+        $testSlider.on('slideStop', function() {
+          expect(vertScrollDiv.scrollTop).toBe(0);
+          done();
+        });
+
+        var tick = sliderInst.ticks[2];  // 5
+        var sliderCoords = calcTouchEventCoords(sliderElem);
+        var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+        touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+        tick = sliderInst.ticks[3];  // 7
+        coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+        touchMove = createTouchEvent(sliderElem, 'touchmove', coords);
+
+        touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchMove);
+        sliderElem.dispatchEvent(touchEnd);
+      });
+
+    });
+
+  });
+
 });
