@@ -376,4 +376,108 @@ describe("Touch Capable Tests", function() {
 
   });
 
+  describe("Tooltip tests", function() {
+    var $tooltip;
+
+    describe("single slider", function() {
+
+      beforeEach(function() {
+        // Initialize the slider
+        $testSlider = $('#' + inputId).slider(sliderOptions);
+
+        // Get slider instance
+        sliderInst = $testSlider.data('slider');
+      });
+
+      // index= [0 1 2 3 4]
+      // ticks= [0 3 5 7 10]
+      it("should show the tooltip when touching the slider at value 5", function(done) {
+        var sliderElem = $testSlider.slider('getElement');
+        $tooltip = $(sliderElem).find('.tooltip.tooltip-main');
+
+        /* Note: You can't use $testSlider.on('slideStart', function() {}) because jQuery
+         * maintains its own list of event handlers and you may get unexpected results
+         * when you add event handlers using $.on() versus DOM.addEventListener()
+         * as they are called in a different order.
+         * 
+         * The browser will call the event handlers registered with addEventListener()
+         * in the order in which they are registered. For example, you'll get the following
+         * execution order when listening for "touchstart" events.
+         * 
+         * 1) _touchstart()
+         * 2) _showTooltip()
+         * 3) your event handler here
+         */
+        sliderElem.addEventListener('touchstart', function() {
+          expect($tooltip.hasClass('in')).toBe(true);
+        }, false);
+
+        $testSlider.on('slideStop', function() {
+          expect($tooltip.hasClass('in')).toBe(false);
+          done();
+        });
+
+        var tick = sliderInst.ticks[2];  // 5
+        var sliderCoords = calcTouchEventCoords(sliderElem);
+        var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+        touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+        touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchEnd);
+      });
+
+    });
+
+    describe("range slider", function() {
+      var touchStart2;
+
+      beforeEach(function() {
+        sliderOptions.range = true;
+        sliderOptions.value = [3, 7];
+
+        // Initialize the slider
+        $testSlider = $('#' + inputId).slider(sliderOptions);
+
+        // Get slider instance
+        sliderInst = $testSlider.data('slider');
+      });
+
+      // index= [0 1 2 3 4]
+      // ticks= [0 3 5 7 10]
+      it("should show the tooltip when touching the slider at value 3 and 7", function(done) {
+        var sliderElem = $testSlider.slider('getElement');
+        $tooltip = $(sliderElem).find('.tooltip.tooltip-main');
+
+        sliderElem.addEventListener('touchstart', function() {
+          expect($tooltip.hasClass('in')).toBe(true);
+        }, false);
+
+        $testSlider.on('slideStop', function() {
+          expect($tooltip.hasClass('in')).toBe(false);
+          done();
+        });
+
+        var tick = sliderInst.ticks[1];  // 3
+        var sliderCoords = calcTouchEventCoords(sliderElem);
+        var coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+        touchStart = createTouchEvent(sliderElem, 'touchstart', coords);
+
+        // For second handle
+        tick = sliderInst.ticks[3];  // 7
+        coords = [sliderCoords.x + tick.offsetLeft, sliderCoords.y];
+        touchStart2 = createTouchEvent(sliderElem, 'touchstart', coords);
+
+        touchEnd = createTouchEvent(sliderElem, 'touchend', coords);
+
+        sliderElem.dispatchEvent(touchStart);
+        sliderElem.dispatchEvent(touchStart2);
+        sliderElem.dispatchEvent(touchEnd);
+      });
+
+    });
+
+  });
+
 });
