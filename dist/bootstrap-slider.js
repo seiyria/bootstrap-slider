@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  10.6.0              
+                      VERSION  10.6.1              
 ========================================================= */
 "use strict";
 
@@ -763,22 +763,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			this.touchmove = this._touchmove.bind(this);
 
 			if (this.touchCapable) {
-				// Test for passive event support
-				var supportsPassive = false;
-				try {
-					var opts = Object.defineProperty({}, 'passive', {
-						get: function get() {
-							supportsPassive = true;
-						}
-					});
-					window.addEventListener("test", null, opts);
-				} catch (e) {}
-				// Use our detect's results. passive applied if supported, capture will be false either way.
-				var eventOptions = supportsPassive ? { passive: true } : false;
-				// Bind touch handlers
-				this.sliderElem.addEventListener("touchstart", this.touchstart, eventOptions);
-				this.sliderElem.addEventListener("touchmove", this.touchmove, eventOptions);
+				this.sliderElem.addEventListener("touchstart", this.touchstart, false);
+				this.sliderElem.addEventListener("touchmove", this.touchmove, false);
 			}
+
 			this.sliderElem.addEventListener("mousedown", this.mousedown, false);
 
 			// Bind window handlers
@@ -816,6 +804,12 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				} else {
 					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
 					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+
+					if (this.touchCapable) {
+						this.sliderElem.addEventListener("touchstart", this.showTooltip, false);
+						this.sliderElem.addEventListener("touchmove", this.showTooltip, false);
+						this.sliderElem.addEventListener("touchend", this.hideTooltip, false);
+					}
 				}
 
 				this.handle1.addEventListener("focus", this.showTooltip, false);
@@ -823,6 +817,16 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 
 				this.handle2.addEventListener("focus", this.showTooltip, false);
 				this.handle2.addEventListener("blur", this.hideTooltip, false);
+
+				if (this.touchCapable) {
+					this.handle1.addEventListener("touchstart", this.showTooltip, false);
+					this.handle1.addEventListener("touchmove", this.showTooltip, false);
+					this.handle1.addEventListener("touchend", this.hideTooltip, false);
+
+					this.handle2.addEventListener("touchstart", this.showTooltip, false);
+					this.handle2.addEventListener("touchmove", this.showTooltip, false);
+					this.handle2.addEventListener("touchend", this.hideTooltip, false);
+				}
 			}
 
 			if (this.options.enabled) {
@@ -1076,9 +1080,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
    - Place it underneath this comment block and write its signature like so:
    		_fnName : function() {...}
    	********************************/
-			_removeTooltipListener: function _removeTooltipListener(event) {
-				this.handle1.removeEventListener(event, this.showTooltip, false);
-				this.handle2.removeEventListener(event, this.showTooltip, false);
+			_removeTooltipListener: function _removeTooltipListener(event, handler) {
+				this.handle1.removeEventListener(event, handler, false);
+				this.handle2.removeEventListener(event, handler, false);
 			},
 			_removeSliderEventHandlers: function _removeSliderEventHandlers() {
 				// Remove keydown event listeners
@@ -1104,10 +1108,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				this.ticksCallbackMap = null;
 
 				if (this.showTooltip) {
-					this._removeTooltipListener("focus");
+					this._removeTooltipListener("focus", this.showTooltip);
 				}
 				if (this.hideTooltip) {
-					this._removeTooltipListener("blur");
+					this._removeTooltipListener("blur", this.hideTooltip);
 				}
 
 				// Remove event listeners from sliderElem
@@ -1117,9 +1121,34 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				if (this.hideTooltip) {
 					this.sliderElem.removeEventListener("mouseleave", this.hideTooltip, false);
 				}
-				this.sliderElem.removeEventListener("touchstart", this.touchstart, false);
-				this.sliderElem.removeEventListener("touchmove", this.touchmove, false);
+
 				this.sliderElem.removeEventListener("mousedown", this.mousedown, false);
+
+				if (this.touchCapable) {
+					// Remove touch event listeners from handles
+					if (this.showTooltip) {
+						this.handle1.removeEventListener("touchstart", this.showTooltip, false);
+						this.handle1.removeEventListener("touchmove", this.showTooltip, false);
+						this.handle2.removeEventListener("touchstart", this.showTooltip, false);
+						this.handle2.removeEventListener("touchmove", this.showTooltip, false);
+					}
+					if (this.hideTooltip) {
+						this.handle1.removeEventListener("touchend", this.hideTooltip, false);
+						this.handle2.removeEventListener("touchend", this.hideTooltip, false);
+					}
+
+					// Remove event listeners from sliderElem
+					if (this.showTooltip) {
+						this.sliderElem.removeEventListener("touchstart", this.showTooltip, false);
+						this.sliderElem.removeEventListener("touchmove", this.showTooltip, false);
+					}
+					if (this.hideTooltip) {
+						this.sliderElem.removeEventListener("touchend", this.hideTooltip, false);
+					}
+
+					this.sliderElem.removeEventListener("touchstart", this.touchstart, false);
+					this.sliderElem.removeEventListener("touchmove", this.touchmove, false);
+				}
 
 				// Remove window event listener
 				window.removeEventListener("resize", this.resize, false);
@@ -1562,14 +1591,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				return true;
 			},
 			_touchstart: function _touchstart(ev) {
-				if (ev.changedTouches === undefined) {
-					this._mousedown(ev);
-					return;
-				}
-
-				var touch = ev.changedTouches[0];
-				this.touchX = touch.pageX;
-				this.touchY = touch.pageY;
+				this._mousedown(ev);
 			},
 			_triggerFocusOnHandle: function _triggerFocusOnHandle(handleIdx) {
 				if (handleIdx === 0) {
@@ -1693,20 +1715,9 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 					return;
 				}
 
-				var touch = ev.changedTouches[0];
-
-				var xDiff = touch.pageX - this.touchX;
-				var yDiff = touch.pageY - this.touchY;
-
-				if (!this._state.inDrag) {
-					// Vertical Slider
-					if (this.options.orientation === 'vertical' && xDiff <= 5 && xDiff >= -5 && (yDiff >= 15 || yDiff <= -15)) {
-						this._mousedown(ev);
-					}
-					// Horizontal slider.
-					else if (yDiff <= 5 && yDiff >= -5 && (xDiff >= 15 || xDiff <= -15)) {
-							this._mousedown(ev);
-						}
+				// Prevent page from scrolling and only drag the slider
+				if (ev.preventDefault) {
+					ev.preventDefault();
 				}
 			},
 			_adjustPercentageForRangeSliders: function _adjustPercentageForRangeSliders(percentage) {
@@ -1825,8 +1836,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
    	Source: http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
    */
 			_getPercentage: function _getPercentage(ev) {
-				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove')) {
-					ev = ev.touches[0];
+				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove' || ev.type === 'touchend')) {
+					ev = ev.changedTouches[0];
 				}
 
 				var eventPosition = ev[this.mousePos];
