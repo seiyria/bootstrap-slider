@@ -1,3 +1,8 @@
+10.6.1 / 2019-02-15
+==================
+* **Bug Fix:** Fix slider for touch-enabled devices. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/899).
+* **Build Deployment:** Added `build-preview.sh` script for deploying API examples page for the purpose of testing aforementioned bug fix for touch-enabled devices.
+
 10.6.0 / 2019-01-06
 ==================
 * **New Feature:** Add new feature to persist the value after a refresh. See [Example 26](https://seiyria.com/bootstrap-slider/#example-26) for a demonstration. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/905).
