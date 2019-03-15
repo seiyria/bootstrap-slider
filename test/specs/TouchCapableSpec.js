@@ -409,11 +409,11 @@ describe("Touch Capable Tests", function() {
          * 3) your event handler here
          */
         sliderElem.addEventListener('touchstart', function() {
-          expect($tooltip.hasClass('in')).toBe(true);
+          expect($tooltip.hasClass('show')).toBe(true);
         }, false);
 
         $testSlider.on('slideStop', function() {
-          expect($tooltip.hasClass('in')).toBe(false);
+          expect($tooltip.hasClass('show')).toBe(false);
           done();
         });
 
@@ -451,11 +451,11 @@ describe("Touch Capable Tests", function() {
         $tooltip = $(sliderElem).find('.tooltip.tooltip-main');
 
         sliderElem.addEventListener('touchstart', function() {
-          expect($tooltip.hasClass('in')).toBe(true);
+          expect($tooltip.hasClass('show')).toBe(true);
         }, false);
 
         $testSlider.on('slideStop', function() {
-          expect($tooltip.hasClass('in')).toBe(false);
+          expect($tooltip.hasClass('show')).toBe(false);
           done();
         });
 
