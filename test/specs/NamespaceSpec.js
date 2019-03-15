@@ -31,7 +31,7 @@ describe("Namespace Tests", function() {
   it("Should not create instance when 'slider' namespace is in use", function(done) {
     $.fn.slider = function() {};  // Overwrite temporarily
 
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       var $testSlider = $('#testSlider1').bootstrapSlider();
 
       var sliderInst = $testSlider.data(defaultNamespace);
@@ -46,7 +46,7 @@ describe("Namespace Tests", function() {
   it("Should create instance associated with the alternate 'bootstrapSlider' namespace", function(done) {
     $.fn.slider = function() {};
 
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       var $testSlider = $('#testSlider1').bootstrapSlider();
 
       var sliderInst = $testSlider.data(alternateNamespace);
