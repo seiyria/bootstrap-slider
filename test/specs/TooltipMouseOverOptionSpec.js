@@ -269,24 +269,29 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 				}
 			});
 
-			it("Should position the tooltip correctly", function(done) {
-				$ticks.each(function(index, tickElem) {
-					var coords = calcMouseEventCoords(tickElem);
+			if (!testCase.range) {
+				it("Should position the tooltip correctly when hovering over each tick (single only)", function(done) {
+					$ticks.each(function(index, tickElem) {
+						var coords = calcMouseEventCoords(tickElem);
 
-					var tickCallback = function() {
-						// Check position
-						expect($tooltip.css(testCase.stylePos)).toBe($(this).css(testCase.stylePos));
+						var tickCallback = function() {
+							// Check position
+							var tooltip_pos = $tooltip[0].style[testCase.stylePos];
+							var tick_pos = tickElem.style[testCase.stylePos];
 
-						if (index === lastTickIndex) {
-							done();
-						}
-					};
+							expect(tooltip_pos).toBe(tick_pos);
 
-					// Set up listener and dispatch event
-					this.addEventListener(mouseEventType, tickCallback, false);
-					this.dispatchEvent(createMouseEvent(mouseEventType, coords.clientX, coords.clientY));
+							if (index === lastTickIndex) {
+								done();
+							}
+						};
+
+						// Set up listener and dispatch event
+						this.addEventListener(mouseEventType, tickCallback, false);
+						this.dispatchEvent(createMouseEvent(mouseEventType, coords.clientX, coords.clientY));
+					});
 				});
-			});
+			}
 
 			it("Should show the tooltip", function(done) {
 				$ticks.each(function(index, tickElem) {
@@ -375,7 +380,10 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 
 							var handleCallback = function() {
 								// Check position
-								expect($tooltip.css(testCase.stylePos)).toBe($(handleElem).css(testCase.stylePos));
+								var tooltip_pos = $tooltip[0].style[testCase.stylePos];
+								var handle_pos = handleElem.style[testCase.stylePos];
+
+								expect(tooltip_pos).toBe(handle_pos);
 
 								if (index === 1) {
 									done();
@@ -416,7 +424,11 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 
 						var handleCallback = function() {
 							// Check position
-							expect($tooltip.css(testCase.stylePos)).toBe($(handleElem).css(testCase.stylePos));
+							var tooltip_pos = $tooltip[0].style[testCase.stylePos];
+							var handle_pos = handleElem.style[testCase.stylePos];
+
+							expect(tooltip_pos).toBe(handle_pos);
+
 							done();
 						};
 
