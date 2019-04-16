@@ -1998,14 +1998,7 @@ const windowIsDefined = (typeof window === "object");
 				return obj.getBoundingClientRect().right;
 			},
 			_offsetTop: function(obj){
-				var offsetTop = obj.offsetTop;
-				while((obj = obj.offsetParent) && !isNaN(obj.offsetTop)){
-					offsetTop += obj.offsetTop;
-					if( obj.tagName !== 'BODY') {
-						offsetTop -= obj.scrollTop;
-					}
-				}
-				return offsetTop;
+				return obj.getBoundingClientRect().top;
 			},
 			_offset: function (obj) {
 				return {
