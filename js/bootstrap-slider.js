@@ -180,11 +180,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 							return $(this);
 						});
 
-						if (!objects || objects.length > 1) {
-							return objects;
-						} else {
+						if (objects.length === 1) {
 							return objects[0];
 						}
+						return objects;
 					}
 				};
 			}
