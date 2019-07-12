@@ -1,6 +1,10 @@
+10.6.2 / 2019-07-11
+==================
+* **Bug Fix:** Fixes bridget bug with empty jquery object. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/916). Thanks to [ollycross](https://github.com/ollycross)
+
 10.6.1 / 2019-02-15
 ==================
-* **Bug Fix:** Fix slider for touch-enabled devices. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/899).
+* **Bug Fix:** Fixes slider for touch-enabled devices. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/899).
 * **Build Deployment:** Added `build-preview.sh` script for deploying API examples page for the purpose of testing aforementioned bug fix for touch-enabled devices.
 
 10.6.0 / 2019-01-06
