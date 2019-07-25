@@ -1889,7 +1889,7 @@ const windowIsDefined = (typeof window === "object");
 					ev = ev.changedTouches[0];
 				}
 				var scrollDelta = 0, parentEl = this.sliderElem.parentNode;
-				while (!scrollDelta && parentEl) {
+				while (!scrollDelta && parentEl && (parentEl.tagName.toLowerCase() !== 'html')) {
 					if ((this.options.orientation === 'vertical') && (parentEl.scrollTop > 0)) {
 						scrollDelta = parentEl.scrollTop;
 					} else if ((this.options.orientation === 'horizontal') && (parentEl.scrollLeft > 0)) {
