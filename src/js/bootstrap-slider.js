@@ -837,7 +837,7 @@ const windowIsDefined = (typeof window === "object");
 				this.handle1.addEventListener("focus", this.showTooltip, false);
 				this.handle1.addEventListener("blur", this.hideTooltip, false);
 
-				
+
 				this.handle2.addEventListener("focus", this.showTooltip, false);
 				this.handle2.addEventListener("blur", this.hideTooltip, false);
 
@@ -1888,8 +1888,16 @@ const windowIsDefined = (typeof window === "object");
 				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove' || ev.type === 'touchend')) {
 					ev = ev.changedTouches[0];
 				}
-
-				var eventPosition = ev[this.mousePos];
+				var scrollDelta = 0, parentEl = this.sliderElem.parentNode;
+				while (!scrollDelta && parentEl) {
+					if ((this.options.orientation === 'vertical') && (parentEl.scrollTop > 0)) {
+						scrollDelta = parentEl.scrollTop;
+					} else if ((this.options.orientation === 'horizontal') && (parentEl.scrollLeft > 0)) {
+						scrollDelta = parentEl.scrollLeft;
+					}
+					if (!scrollDelta) { parentEl = parentEl.parentNode; }
+				}
+				var eventPosition = ev[this.mousePos] + scrollDelta;
 				var sliderOffset = this._state.offset[this.stylePos];
 				var distanceToSlide = eventPosition - sliderOffset;
 				if(this.stylePos==='right') {
