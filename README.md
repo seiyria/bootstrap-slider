@@ -180,7 +180,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | step | float |	1 |	increment step |
 | precision | float |	number of digits after the decimal of _step_ value |	The number of digits shown after the decimal. Defaults to the number of digits after the decimal of _step_ value. |
 | orientation |	string | 'horizontal' |	set the orientation. Accepts 'vertical' or 'horizontal' |
-| value |	float,array |	5	| initial value. Use array to have a range slider. |
+| value |	float, array |	5	| initial value. Use array to have a range slider. |
 | range |	bool |	false	| make range slider. Optional if initial value is an array. If initial value is scalar, max will be used for second value. |
 | selection |	string |	'before' |	selection placement. Accepts: 'before', 'after' or 'none'. In case of a range slider, the selection will be placed between the handles |
 | tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', or 'always' |
@@ -188,7 +188,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | tooltip_position |	string |	null |	Position of tooltip, relative to slider. Accepts 'top'/'bottom' for horizontal sliders and 'left'/'right' for vertically orientated sliders. Default positions are 'top' for horizontal and 'right' for vertical slider. |
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square', 'triangle' or 'custom' |
 | reversed | bool | false | whether or not the slider should be reversed |
-| rtl | bool|string | 'auto' | whether or not the slider should be shown in rtl mode. Accepts true, false, 'auto'. Default 'auto' : use actual direction of HTML (`dir='rtl'`) |
+| rtl | string, bool| 'auto' | whether or not the slider should be shown in rtl mode. Accepts true, false, 'auto'. Default 'auto' : use actual direction of HTML (`dir='rtl'`) |
 | enabled | bool | true | whether or not the slider is initially enabled |
 | formatter |	function |	returns the plain value |	formatter callback. Return the value wanted to be displayed in the tooltip, useful for string values. If a string is returned it will be indicated in an `aria-valuetext` attribute.  |
 | natural_arrow_keys | bool | false | The natural order is used for the arrow keys. Arrow up select the upper slider value for vertical sliders, arrow right the righter slider value for a horizontal slider - no matter if the slider was reversed or not. By default the arrow keys are oriented by arrow up/right to the higher slider value, arrow down/left to the lower slider value. |
@@ -199,7 +199,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | ticks_tooltip | bool | false | Used to allow for a user to hover over a given tick to see it's value. Useful if custom formatter passed in |
 | scale | string | 'linear' | Set to 'logarithmic' to use a logarithmic scale. Logarithmic scales will be calculated based on the difference between min to max; e.g. (0..10000) (-100..9900) both have a net range of 10001 and will slide in the same net increments. |
 | focus | bool | false | Focus the appropriate slider handle after a value change. |
-| labelledby | string,array | null | ARIA labels for the slider handle's, Use array for multiple values in a range slider. |
+| labelledby | string, array | null | ARIA labels for the slider handle's, Use array for multiple values in a range slider. |
 | rangeHighlights | array | [] | Defines a range array that you want to highlight, for example: [{'start':val1, 'end': val2, 'class': 'optionalAdditionalClassName'}]. |
 | lock_to_ticks | bool | false | Lock the selection to the values defined at ticks array. |
 
