@@ -4,14 +4,14 @@ describe("Namespace Tests", function() {
   var alternateNamespace = 'bootstrapSlider';
 
   it("should always set the plugin namespace to 'bootstrapSlider'", function(done) {
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       expect($.fn.bootstrapSlider).toBeDefined();
       done();   
     });
   });
 
   it("should set the plugin namespace to 'slider' if the namespace is available", function(done) {
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       expect($.fn.slider).toBeDefined();
       done();
     });
@@ -21,7 +21,7 @@ describe("Namespace Tests", function() {
     $.fn.slider = function() {};
     spyOn(window.console, "warn");
 
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       var expectedWarningMessage = "bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.";
       expect(window.console.warn).toHaveBeenCalledWith(expectedWarningMessage);
       done();
@@ -31,7 +31,7 @@ describe("Namespace Tests", function() {
   it("Should not create instance when 'slider' namespace is in use", function(done) {
     $.fn.slider = function() {};  // Overwrite temporarily
 
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       var $testSlider = $('#testSlider1').bootstrapSlider();
 
       var sliderInst = $testSlider.data(defaultNamespace);
@@ -46,7 +46,7 @@ describe("Namespace Tests", function() {
   it("Should create instance associated with the alternate 'bootstrapSlider' namespace", function(done) {
     $.fn.slider = function() {};
 
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       var $testSlider = $('#testSlider1').bootstrapSlider();
 
       var sliderInst = $testSlider.data(alternateNamespace);
@@ -66,7 +66,7 @@ describe("Namespace Tests", function() {
     $.fn.bootstrapSlider = undefined;
     $.fn.slider = undefined;
 
-    $.getScript(sourceJS, function() {
+    $.when($.getScript(sourceJS)).then(function() {
       done();
     });
   });

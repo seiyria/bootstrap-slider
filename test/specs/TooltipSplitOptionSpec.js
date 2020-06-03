@@ -22,16 +22,16 @@ describe("'tooltip_split' Option tests", function() {
       $tooltipMax  = $slider.find(".tooltip-max");
     });
 
-    it("should have `tooltip-main` displayed with `in` class", function() {
+    it("should have `tooltip-main` displayed with `show` class", function() {
       expect($tooltipMain.css("display")).not.toBe("none");
-      expect($tooltipMain.hasClass("in")).toBeTruthy();
+      expect($tooltipMain.hasClass("show")).toBeTruthy();
     });
 
     it("should have `tooltip-min, tooltip-max` not displayed", function() {
       expect($tooltipMin.css("display")).toBe("none");
-      expect($tooltipMin.hasClass("in")).toBeFalsy();
+      expect($tooltipMin.hasClass("show")).toBeFalsy();
       expect($tooltipMax.css("display")).toBe("none");
-      expect($tooltipMax.hasClass("in")).toBeFalsy();
+      expect($tooltipMax.hasClass("show")).toBeFalsy();
     });
   });
 
@@ -44,21 +44,21 @@ describe("'tooltip_split' Option tests", function() {
       $tooltipMax  = $slider.find(".tooltip-max");
     });
 
-    it("should have `tooltip-min, tooltip-max` displayed with `in` class", function() {
+    it("should have `tooltip-min, tooltip-max` displayed with `show` class", function() {
       expect($tooltipMin.css("display")).not.toBe("none");
-      expect($tooltipMin.hasClass("in")).toBeTruthy();
+      expect($tooltipMin.hasClass("show")).toBeTruthy();
       expect($tooltipMax.css("display")).not.toBe("none");
-      expect($tooltipMax.hasClass("in")).toBeTruthy();
+      expect($tooltipMax.hasClass("show")).toBeTruthy();
     });
 
     it("should have `tooltip-main` not displayed", function() {
       expect($tooltipMain.css("display")).toBe("none");
-      expect($tooltipMain.hasClass("in")).toBeFalsy();
+      expect($tooltipMain.hasClass("show")).toBeFalsy();
     });
 
     it("should be aligned above the handle on init if set to 'top'", function() {
-      expect($tooltipMin.hasClass("top")).toBeTruthy();
-      expect($tooltipMax.hasClass("top")).toBeTruthy();
+      expect($tooltipMin.hasClass("bs-tooltip-top")).toBeTruthy();
+      expect($tooltipMax.hasClass("bs-tooltip-top")).toBeTruthy();
     });
   });
 

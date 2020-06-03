@@ -6,15 +6,14 @@
     "Kyle Kemp <kyle@seiyria.com>",
     "Rohit Kalkur <rohit.kalkur@gmail.com>"
   ],
-  "description": "a slider element for bootstrap 2/3",
+  "description": "a slider element for bootstrap 4",
   "main": [
     "dist/bootstrap-slider.js",
     "dist/css/bootstrap-slider.css"
   ],
   "keywords": [
     "slider",
-    "bootstrap2",
-    "bootstrap3",
+    "bootstrap4",
     "bootstrap"
   ],
   "license": "MIT",

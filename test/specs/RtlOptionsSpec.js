@@ -49,7 +49,7 @@ describe("RTL Tests", function() {
       var sliderTrackHighLeft=$("#rtlSlider").siblings(".slider-rtl").children("div.slider-track").children("div.slider-track-high").css("left");
 
       expect(sliderTrackLowRight).toBe("0px");
-      expect(sliderSelectionRight).toBe("0%");
+      expect(sliderSelectionRight).toBe("0px");
       expect(sliderTrackHighLeft).toBe("0px");
     });
 
@@ -58,7 +58,7 @@ describe("RTL Tests", function() {
         orientation: "vertical",
       });
 
-      var mainTooltipHasClassLeft = testSlider.tooltip.classList.contains("left");
+      var mainTooltipHasClassLeft = testSlider.tooltip.classList.contains("bs-tooltip-left");
 
       expect(mainTooltipHasClassLeft).toBeTruthy();
       expect(testSlider.tooltip.style.right).toBe("100%");
@@ -70,7 +70,7 @@ describe("RTL Tests", function() {
         tooltip_position: "right",
       });
 
-      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("right");
+      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("bs-tooltip-right");
 
       expect(mainTooltipHasClassRight).toBeTruthy();
       expect(testSlider.tooltip.style.left).toBe("100%");

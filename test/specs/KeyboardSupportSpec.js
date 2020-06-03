@@ -54,13 +54,13 @@ describe("Keyboard Support Tests", function() {
       handle1 = $("#testSlider").find(".slider-handle:first");
 
       // Check for no tooltip before focus
-      var tooltipIsShown = $("#testSlider").find("div.tooltip").hasClass("in");
+      var tooltipIsShown = $("#testSlider").find("div.tooltip").hasClass("show");
       expect(tooltipIsShown).toBeFalsy();
 
       handle1.focus();
 
       // Tooltip should be present after focus
-      tooltipIsShown = $("#testSlider").find("div.tooltip").hasClass("in");
+      tooltipIsShown = $("#testSlider").find("div.tooltip").hasClass("show");
       expect(tooltipIsShown).toBeTruthy();
     });
 
@@ -91,13 +91,13 @@ describe("Keyboard Support Tests", function() {
       var $tooltip = $("#testSlider").children("div.tooltip");
 
       // Check for shown tooltip before focus
-      var tooltipIsShown = $tooltip.hasClass("in");
+      var tooltipIsShown = $tooltip.hasClass("show");
       expect(tooltipIsShown).toBeTruthy();
 
       handle1.focus();
 
       // Tooltip should remain present after focus
-      tooltipIsShown = $tooltip.hasClass("in");
+      tooltipIsShown = $tooltip.hasClass("show");
       expect(tooltipIsShown).toBeTruthy();
     });
   });

@@ -43,7 +43,6 @@
       margin-top: $slider-line-height;
       .slider-tick-label {
         display: inline-block;
-        padding-top: $slider-line-height * 1.2;
         text-align: center;
       }
     }
@@ -139,19 +138,44 @@
     white-space: nowrap;
     max-width: none;
   }
-  .tooltip {
-    pointer-events: none;
-
-    &.top {
-      margin-top: -36px;
+  .bs-tooltip-top,
+  .bs-tooltip-bottom {
+    .tooltip-inner {
+      position: relative;
+      left: -50%;
+    }
+  }
+  &.bs-tooltip-left,
+  &.bs-tooltip-right {
+    .tooltip-inner {
+      position: relative;
+      top: -100%;
     }
   }
 
-  .tooltip-inner {
-    white-space: nowrap;
-    max-width: none;
-  }
+  .tooltip {
+    pointer-events: none;
 
+    &.bs-tooltip-top,
+    &.bs-tooltip-bottom {
+      .arrow {
+        left: -.4rem;  // $tooltip-arrow-width / 2.
+      }
+    }
+    &.bs-tooltip-top {
+      margin-top: -44px;
+    }
+    &.bs-tooltip-bottom {
+      margin-top: 2px;
+    }
+    &.bs-tooltip-left,
+    &.bs-tooltip-right {
+      margin-top: -14px;
+      .arrow {
+        top: 8px;
+      }
+    }
+  }
   .hide {
     display: none;
   }

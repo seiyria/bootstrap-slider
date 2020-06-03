@@ -6,8 +6,6 @@ Over time, this project has diverged sigfinicantly from Stefan Petre's version a
 
 __Please ensure that you are using this library instead of the Petre version before creating issues in the repository issue tracker!!__
 
-__Note also that Bootstrap 4 is not yet supported, see issue [#689](https://github.com/seiyria/bootstrap-slider/issues/689).__
-
 Installation
 ============
 Want to use bower? `bower install seiyria-bootstrap-slider`
@@ -28,7 +26,7 @@ Look below to see an example of how to interact with the non-JQuery interface.
 
 Supported Browsers
 ========
-__We only support modern browsers!!! Basically, anything below IE9 is not compatible with this plugin!__
+__We only support modern browsers!!! Basically, anything below IE10 is not compatible with this plugin!__
 
 Examples
 ========
@@ -254,13 +252,13 @@ To execute any of the commands, type `grunt <task-name>` in your terminal instan
 
 The following is a list of the commonly-used command line tasks:
 
-* `grunt development`: Generates the `index.html`, compiles the LESS/JS to the `/temp` directory, and launches the index.html in your system's default browser. As changes are made to source code, the
+* `grunt development`: Generates the `index.html`, compiles the SASS/JS to the `/temp` directory, and launches the index.html in your system's default browser. As changes are made to source code, the
 	browser window will auto-refresh.
 * `grunt production`: Generates the `/dist` directory with minified and unminified assetts.
 * `grunt dev`: Alias for `grunt development`
 * `grunt prod`: Alias for `grunt production`
 * `grunt build`: Transpiles JavaScript source via Babel and compiles LESS source to CSS to `temp` directory.
-* `grunt lint`: Runs JSLint on the JavaScript source code files, SASS-Lint on the SASS source code files, and LESSLint on the LESS source code files.
+* `grunt lint`: Runs JSLint on the JavaScript source code files, and SASS-Lint on the SASS source code files.
 * `grunt test`: Runs unit tests contained in `/test` directory via Jasmine 2.x.x
 
 

@@ -76,12 +76,12 @@ describe("'ticks_tooltip' Option tests", function() {
 			});
 			var bigOffset = 100000;
 
-			var isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('in');
+			var isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('show');
 			expect(isTooltipVisible).toBe(true);
 
 			var mouseenter = document.createEvent('MouseEvent');
 			mouseEventArguments[0] = 'mouseenter';
-			mouseEventArguments[7] = 
+			mouseEventArguments[7] =
 				testSlider.ticks[1].offsetLeft + testSlider.sliderElem.offsetLeft; // clientX
 			mouseenter.initMouseEvent.apply(mouseenter, mouseEventArguments);
 
@@ -91,7 +91,7 @@ describe("'ticks_tooltip' Option tests", function() {
 			mouseleave.initMouseEvent.apply(mouseleave, mouseEventArguments);
 
 			testSlider.ticks[1].addEventListener('mouseleave', function() {
-				isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('in');
+				isTooltipVisible = $('#mySlider').find('.tooltip.tooltip-main').hasClass('show');
 				expect(isTooltipVisible).toBe(true);
 				done();
 			});
@@ -269,24 +269,29 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 				}
 			});
 
-			it("Should position the tooltip correctly", function(done) {
-				$ticks.each(function(index, tickElem) {
-					var coords = calcMouseEventCoords(tickElem);
+			if (!testCase.range) {
+				it("Should position the tooltip correctly when hovering over each tick (single only)", function(done) {
+					$ticks.each(function(index, tickElem) {
+						var coords = calcMouseEventCoords(tickElem);
 
-					var tickCallback = function() {
-						// Check position
-						expect($tooltip.css(testCase.stylePos)).toBe($(this).css(testCase.stylePos));
+						var tickCallback = function() {
+							// Check position
+							var tooltip_pos = $tooltip[0].style[testCase.stylePos];
+							var tick_pos = tickElem.style[testCase.stylePos];
 
-						if (index === lastTickIndex) {
-							done();
-						}
-					};
+							expect(tooltip_pos).toBe(tick_pos);
 
-					// Set up listener and dispatch event
-					this.addEventListener(mouseEventType, tickCallback, false);
-					this.dispatchEvent(createMouseEvent(mouseEventType, coords.clientX, coords.clientY));
+							if (index === lastTickIndex) {
+								done();
+							}
+						};
+
+						// Set up listener and dispatch event
+						this.addEventListener(mouseEventType, tickCallback, false);
+						this.dispatchEvent(createMouseEvent(mouseEventType, coords.clientX, coords.clientY));
+					});
 				});
-			});
+			}
 
 			it("Should show the tooltip", function(done) {
 				$ticks.each(function(index, tickElem) {
@@ -294,7 +299,7 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 
 					var tickCallback = function() {
 						// Check that tooltip shows
-						expect($tooltip.hasClass('in')).toBe(true);
+						expect($tooltip.hasClass('show')).toBe(true);
 
 						if (index === lastTickIndex) {
 							done();
@@ -314,7 +319,7 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 
 					var tickCallback = function() {
 						// Check that tooltip shows
-						expect($tooltip.hasClass('in')).toBe(false);
+						expect($tooltip.hasClass('show')).toBe(false);
 
 						if (index === lastTickIndex) {
 							done();
@@ -375,7 +380,10 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 
 							var handleCallback = function() {
 								// Check position
-								expect($tooltip.css(testCase.stylePos)).toBe($(handleElem).css(testCase.stylePos));
+								var tooltip_pos = $tooltip[0].style[testCase.stylePos];
+								var handle_pos = handleElem.style[testCase.stylePos];
+
+								expect(tooltip_pos).toBe(handle_pos);
 
 								if (index === 1) {
 									done();
@@ -416,7 +424,11 @@ describe("`ticks_tooltip: true` mouse navigation test cases", function() {
 
 						var handleCallback = function() {
 							// Check position
-							expect($tooltip.css(testCase.stylePos)).toBe($(handleElem).css(testCase.stylePos));
+							var tooltip_pos = $tooltip[0].style[testCase.stylePos];
+							var handle_pos = handleElem.style[testCase.stylePos];
+
+							expect(tooltip_pos).toBe(handle_pos);
+
 							done();
 						};
 

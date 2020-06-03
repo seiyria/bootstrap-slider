@@ -29,7 +29,7 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassLeft = testSlider.tooltip.classList.contains("left");
+      var mainTooltipHasClassLeft = testSlider.tooltip.classList.contains("bs-tooltip-left");
 
       // Assert
       expect(mainTooltipHasClassLeft).toBeTruthy();
@@ -47,7 +47,7 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("right");
+      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("bs-tooltip-right");
 
       // Assert
       expect(mainTooltipHasClassRight).toBeTruthy();
@@ -65,7 +65,7 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("right");
+      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("bs-tooltip-right");
 
       // Assert
       expect(mainTooltipHasClassRight).toBeTruthy();
@@ -83,7 +83,7 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("right");
+      var mainTooltipHasClassRight = testSlider.tooltip.classList.contains("bs-tooltip-right");
 
       // Assert
       expect(mainTooltipHasClassRight).toBeTruthy();
@@ -106,7 +106,7 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassTop = testSlider.tooltip.classList.contains("top");
+      var mainTooltipHasClassTop = testSlider.tooltip.classList.contains("bs-tooltip-top");
 
       // Assert
       expect(mainTooltipHasClassTop).toBeTruthy();
@@ -124,7 +124,7 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassTop = testSlider.tooltip.classList.contains("bottom");
+      var mainTooltipHasClassTop = testSlider.tooltip.classList.contains("bs-tooltip-bottom");
 
       // Assert
       expect(mainTooltipHasClassTop).toBeTruthy();
@@ -143,8 +143,8 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassTopMin = testSlider.tooltip_min.classList.contains("bottom");
-      var mainTooltipHasClassTopMax = testSlider.tooltip_max.classList.contains("bottom");
+      var mainTooltipHasClassTopMin = testSlider.tooltip_min.classList.contains("bs-tooltip-bottom");
+      var mainTooltipHasClassTopMax = testSlider.tooltip_max.classList.contains("bs-tooltip-bottom");
 
       // Assert
       expect(mainTooltipHasClassTopMin).toBeTruthy();
@@ -164,7 +164,7 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassTop = testSlider.tooltip.classList.contains("top");
+      var mainTooltipHasClassTop = testSlider.tooltip.classList.contains("bs-tooltip-top");
 
       // Assert
       expect(mainTooltipHasClassTop).toBeTruthy();
@@ -182,7 +182,7 @@ describe("'tooltip_position' Option tests", function() {
       });
 
       // Extract needed references/values
-      var mainTooltipHasClassTop = testSlider.tooltip.classList.contains("top");
+      var mainTooltipHasClassTop = testSlider.tooltip.classList.contains("bs-tooltip-top");
 
       // Assert
       expect(mainTooltipHasClassTop).toBeTruthy();
