@@ -73,7 +73,16 @@
       "popper": "node_modules/popper.js/dist/umd/popper.min.js",
       "bootstrap": "node_modules/bootstrap/dist/js/bootstrap.min.js",
       "bindPolyfill": "test/phantom_bind_polyfill.js",
-      "slider": "src/js/bootstrap-slider.js"
+      "slider": "src/js/bootstrap-slider.js",
+      "ghpages": {
+        "highlightjs": "dependencies/js/highlight.min.js",
+        "modernizr": "dependencies/js/modernizr.js",
+        "jquery": "dependencies/js/jquery.min.js",
+        "popper": "dependencies/js/popper.min.js",
+        "bootstrap": "dependencies/js/bootstrap.min.js",
+        "bindPolyfill": "test/phantom_bind_polyfill.js",
+        "slider": "src/js/bootstrap-slider.js"
+      }
     },
     "sass": {
       "slider": "src/sass/bootstrap-slider.scss",
