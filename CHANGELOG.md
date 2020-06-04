@@ -1,3 +1,7 @@
+11.0.1 / 2020-06-03
+==================
+* Resolves issue with GH Pages not loading sliders properly.
+
 11.0.0 / 2020-06-03
 ==================
 * **Bootstrap 4 Compatibility:** We are now compatible with Bootstrap 4! Major thanks goes to [Jeffrey Espiritu](https://github.com/jespirit) and [David Lesieur](https://github.com/davidlesieur) for leading this effort!
