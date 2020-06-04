@@ -6,6 +6,8 @@ Over time, this project has diverged sigfinicantly from Stefan Petre's version a
 
 __Please ensure that you are using this library instead of the Petre version before creating issues in the repository issue tracker!!__
 
+__Starting with major release 11.0.0, we only support Bootstrap 4!__
+
 Installation
 ============
 Want to use bower? `bower install seiyria-bootstrap-slider`

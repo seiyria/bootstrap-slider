@@ -28,7 +28,7 @@
 
 			table {
 				border-collapse: collapse;
-				width: 100%; 
+				width: 100%;
 			}
 
 			th, td {
@@ -144,11 +144,11 @@
 			#slider22 .slider-rangeHighlight {
 				background: #f70616;
 			}
-        
+
 			#slider22 .slider-rangeHighlight.category1 {
 				background: #FF9900;
 			}
-        
+
 			#slider22 .slider-rangeHighlight.category2 {
 				background: #99CC00;
 			}
@@ -188,7 +188,7 @@
 				width: 300px;
 			}
     </style>
-	
+
 	<script type='text/javascript' src="<%= js.modernizr %>"></script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -204,9 +204,14 @@
 
       <div id="top" class="jumbotron">
         <h1>Slider for Bootstrap <small>bootstrap-slider.js</small></h1>
-        <p class="lead">Examples for the <a target="_blank" href="https://github.com/seiyria/bootstrap-slider">bootstrap-slider</a> component.<p>
+        <p class="lead">
+			Examples for the <a target="_blank" href="https://github.com/seiyria/bootstrap-slider">bootstrap-slider</a> component.
+			</br>
+			</br>
+			Now compatible with <a target="_blank" href="https://getbootstrap.com/docs/4.0/getting-started/introduction/">Bootstrap 4</a>
+		<p>
       </div>
-	
+
 	  <table>
 		<tr>
 		  <th>Example Link</th>
@@ -317,7 +322,7 @@
 			<td>Refresh method with optional `options` object</td>
 		</tr>
       </table>
-	  
+
       <div class="examples">
       	<div id="example-1" class='slider-example'>
       		<h3>Example 1: <a href="#top"><small>Back to Top</small></a></h3>
