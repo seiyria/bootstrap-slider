@@ -3,7 +3,7 @@
 * **Bootstrap 4 Compatibility:** We are now compatible with Bootstrap 4! Major thanks goes to [Jeffrey Espiritu](https://github.com/jespirit) and [David Lesieur](https://github.com/davidlesieur) for leading this effort!
 * Starting with this major release, all new changes will only be compatible with Bootstrap 4. **We will not support backwards compatibility with older versions of Bootstrap!**
 * **We (the maintainers) will no longer support the 10.x and older versions of this plugin!**
-* However we will still accept bug fix pull requests for this version. If you want to make a pull request against this version, please branch off the `bs3` branch of our repository and create your pull requests against that branch.
+* However we will still accept bug fix pull requests for the `10.x` version. If you want to make a pull request against this version, please branch off the `bs3` branch of our repository and create your pull requests against that branch.
 
 10.6.2 / 2019-07-11
 ==================
