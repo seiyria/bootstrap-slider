@@ -157,6 +157,21 @@ resolve: {
 }
 ```
 
+### [Webpack-encore](https://symfony.com/doc/current/frontend.html)
+```js
+Encore
+    // directory where compiled assets will be stored
+    .setOutputPath('public/build/')
+    // ...
+    webpack-encore config
+    ...
+;
+
+const config = Encore.getWebpackConfig();
+config.resolve.alias["jquery"] = path.resolve(__dirname, 'assets/js/jquery-stub.js');
+module.exports = config
+```
+
 Then in your project, you will have to create a stub module for jquery that exports a `null` value. Whenever `require("jquery")` is mentioned in your project, it will load this stubbed module.
 
 ```js
