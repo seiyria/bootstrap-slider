@@ -791,6 +791,11 @@ const windowIsDefined = (typeof window === "object");
 			// Bind window handlers
 			this.resize = this._resize.bind(this);
 			window.addEventListener("resize", this.resize, false);
+			// Simulate Popper's behavior of listening to both resize and scroll:
+			// https://popper.js.org/docs/v2/modifiers/event-listeners/
+			if (this.options.preventOverflow) {
+				window.addEventListener("scroll", this.resize, false);
+			}
 
 
 			// Bind tooltip-related handlers
@@ -906,6 +911,7 @@ const windowIsDefined = (typeof window === "object");
 				scale: 'linear',
 				focus: false,
 				tooltip_position: null,
+				preventOverflow: false,
 				labelledby: null,
 				rangeHighlights: []
 			},
@@ -1243,6 +1249,7 @@ const windowIsDefined = (typeof window === "object");
 				this._setText(this.tooltipInner, formattedTooltipVal);
 
 				this.tooltip.style[this.stylePos] = `${positionPercentages[0]}%`;
+				this._preventOverflow(this.tooltip);
 
 				function getPositionPercentages(state, reversed){
 					if (reversed) {
@@ -1250,6 +1257,52 @@ const windowIsDefined = (typeof window === "object");
 					}
 					return [state.percentage[0], state.percentage[1]];
 				}
+      },
+			_preventOverflow: function _prevetOverflow(tooltip){
+				if (!this.options.preventOverflow) {
+					return;
+				}
+				const rect = tooltip.getBoundingClientRect();
+				if (rect.width === 0 && rect.height === 0) {
+					return; // not rendered
+				}
+				const style = tooltip.style[this.stylePos];
+				const arrow = tooltip.querySelector('.arrow');
+				let offset;
+				if(this.options.orientation === 'vertical') {
+					const minY = 0, maxY = document.body.clientHeight;
+					if (rect.y < minY) {
+						offset = minY - rect.y;
+					} else if (rect.y + rect.height > maxY) {
+						offset = maxY - (rect.y + rect.height);
+					}
+					if (offset) {
+						tooltip.style.top = `calc(${style} + ${offset}px)`;
+						//arrow.style.top = `calc(50% - .4rem + ${offset}px)`;
+						arrow.style.transform = `translateY(${-offset}px)`;
+					} else {
+						arrow.style.transform = null;
+					}
+				} else {
+					const minX = 0, maxX = document.body.clientWidth;
+					if (rect.x < minX) {
+						offset = minX - rect.x;
+					} else if (rect.x + rect.width > maxX) {
+						offset = maxX - (rect.x + rect.width);
+					}
+					if (offset) {
+						if (this.stylePos === 'left') {
+							tooltip.style.left = `calc(${style} + ${offset}px)`;
+							//arrow.style.left = `calc(50% - .4rem + ${offset}px)`;
+						} else {
+							tooltip.style.right = `calc(${style} - ${offset}px)`;
+						}
+						arrow.style.transform = `translateX(${-offset}px)`;
+					} else {
+						arrow.style.transform = null;
+					}
+				}
+				// right, top
 			},
 			_copyState: function() {
 				return {
@@ -1465,6 +1518,7 @@ const windowIsDefined = (typeof window === "object");
 					formattedTooltipVal = this.options.formatter(this._state.value);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 					this.tooltip.style[this.stylePos] = `${ (positionPercentages[1] + positionPercentages[0])/2 }%`;
+					this._preventOverflow(this.tooltip);
 
 					var innerTooltipMinText = this.options.formatter(this._state.value[0]);
 					this._setText(this.tooltipInner_min, innerTooltipMinText);
@@ -1473,14 +1527,17 @@ const windowIsDefined = (typeof window === "object");
 					this._setText(this.tooltipInner_max, innerTooltipMaxText);
 
 					this.tooltip_min.style[this.stylePos] = `${ positionPercentages[0] }%`;
+					this._preventOverflow(this.tooltip_min);
 
 					this.tooltip_max.style[this.stylePos] = `${ positionPercentages[1] }%`;
+					this._preventOverflow(this.tooltip_max);
 
 				} else {
 					formattedTooltipVal = this.options.formatter(this._state.value[0]);
 					this._setText(this.tooltipInner, formattedTooltipVal);
 
 					this.tooltip.style[this.stylePos] = `${ positionPercentages[0] }%`;
+					this._preventOverflow(this.tooltip);
 				}
 
 				if (this.options.orientation === 'vertical') {
