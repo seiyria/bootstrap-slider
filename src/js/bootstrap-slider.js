@@ -1269,7 +1269,7 @@ const windowIsDefined = (typeof window === "object");
 				const style = tooltip.style[this.stylePos];
 				const arrow = tooltip.querySelector('.arrow');
 				let offset;
-				if(this.options.orientation === 'vertical') {
+				if (this.options.orientation === 'vertical') {
 					const minY = 0, maxY = document.body.clientHeight;
 					if (rect.y < minY) {
 						offset = minY - rect.y;
@@ -1285,10 +1285,12 @@ const windowIsDefined = (typeof window === "object");
 					}
 				} else {
 					const minX = 0, maxX = document.body.clientWidth;
-					if (rect.x < minX) {
-						offset = minX - rect.x;
-					} else if (rect.x + rect.width > maxX) {
-						offset = maxX - (rect.x + rect.width);
+					// Because of .tooltip-inner's left: -50%, the actual rectangle span
+					// is [rect.x - rect.width / 2, rect.x + rect.width + 2]
+					if (rect.x - rect.width / 2 < minX) {
+						offset = minX - (rect.x - rect.width / 2);
+					} else if (rect.x + rect.width / 2 > maxX) {
+						offset = maxX - (rect.x + rect.width / 2);
 					}
 					if (offset) {
 						if (this.stylePos === 'left') {
