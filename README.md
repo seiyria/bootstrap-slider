@@ -201,6 +201,7 @@ Options can be passed either as a data (data-slider-foo) attribute, or as part o
 | tooltip |	string |	'show' |	whether to show the tooltip on drag, hide the tooltip, or always show the tooltip. Accepts: 'show', 'hide', or 'always' |
 | tooltip_split |	bool |	false |	if false show one tootip if true show two tooltips one for each handler |
 | tooltip_position |	string |	null |	Position of tooltip, relative to slider. Accepts 'top'/'bottom' for horizontal sliders and 'left'/'right' for vertically orientated sliders. Default positions are 'top' for horizontal and 'right' for vertical slider. |
+| preventOverflow | bool | false | whether to shift tooltips to keep them within the viewport, similar to Popper.js's [`preventOverflow` modifier](https://popper.js.org/docs/v2/modifiers/prevent-overflow/)
 | handle |	string |	'round' |	handle shape. Accepts: 'round', 'square', 'triangle' or 'custom' |
 | reversed | bool | false | whether or not the slider should be reversed |
 | rtl | string, bool| 'auto' | whether or not the slider should be shown in rtl mode. Accepts true, false, 'auto'. Default 'auto' : use actual direction of HTML (`dir='rtl'`) |
