@@ -325,3 +325,10 @@ Maintainers
 - Rohit Kalkur
 	* Twitter: [@Rovolutionary](https://twitter.com/Rovolutionary)
 	* Github: [rovolution](https://github.com/rovolution)
+
+Looking for a Premium UI Kit?
+============
+
+AdminKit is a developer friendly & highly customizable Bootstrap 5 admin template featuring hundreds of UI components, forms, tables, charts and icons. [Learn more](https://gumroad.com/a/709465203).
+
+[![AdminKit - Premium Bootstrap 5 admin template](https://assets.adminkit.io/banners/partners/adminkit-1200x628.jpg)](https://gumroad.com/a/709465203)
