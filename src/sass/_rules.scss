@@ -124,10 +124,10 @@
   }
   &.slider-disabled {
     .slider-handle {
-      @include slider_background-image($slider-gray-2, $slider-gray-1, mix($slider-gray-2, $slider-gray-1));
+      @include slider_background-image($slider-gray-2, $slider-gray-1, $slider-handle-background-color-disabled);
     }
     .slider-track {
-      @include slider_background-image($slider-gray-3, $slider-gray-4, mix($slider-gray-3, $slider-gray-4));
+      @include slider_background-image($slider-gray-3, $slider-gray-4, $slider-track-background-color-disabled);
       cursor: not-allowed;
     }
   }
@@ -182,7 +182,7 @@
 }
 
 .slider-track {
-  @include slider_background-image($slider-gray-5, $slider-gray-6, mix($slider-gray-5, $slider-gray-6));
+  @include slider_background-image($slider-gray-5, $slider-gray-6, $slider-track-background-color);
   @include slider_box-shadow(inset 0 1px 2px rgba(0,0,0,0.1));
   @include slider_border-radius($slider-border-radius);
 
@@ -191,7 +191,7 @@
 }
 
 .slider-selection {
-  @include slider_background-image($slider-gray-6, $slider-gray-5, mix($slider-gray-6, $slider-gray-5));
+  @include slider_background-image($slider-gray-6, $slider-gray-5, $slider-selection-background-color);
   @include slider_box-shadow(inset 0 -1px 0 rgba(0,0,0,0.15));
   @include slider_box-sizing(border-box);
   @include slider_border-radius($slider-border-radius);
@@ -199,7 +199,7 @@
   position: absolute;
 }
 .slider-selection.tick-slider-selection {
-  @include slider_background-image($slider-secondary-top, $slider-secondary-bottom, mix($slider-secondary-top, $slider-secondary-bottom));
+  @include slider_background-image($slider-secondary-top, $slider-secondary-bottom, $slider-selection-tick-background-color);
 }
 
 .slider-track-low, .slider-track-high {
@@ -211,7 +211,7 @@
 }
 
 .slider-handle {
-  @include slider_background-image($slider-primary-top, $slider-primary-bottom, mix($slider-primary-top, $slider-primary-bottom));
+  @include slider_background-image($slider-primary-top, $slider-primary-bottom, $slider-handle-background-color);
   @include slider_box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05));
 
   position: absolute;
@@ -219,7 +219,7 @@
   width:  $slider-line-height;
   height: $slider-line-height;
   background-color: $slider-primary;
-  border: 0px solid transparent;
+  border: 0 solid transparent;
   &:hover {
     cursor: pointer;
   }
@@ -241,7 +241,7 @@
 }
 
 .slider-tick {
-  @include slider_background-image($slider-gray-5, $slider-gray-6, mix($slider-gray-5, $slider-gray-6));
+  @include slider_background-image($slider-gray-5, $slider-gray-6, $slider-tick-background-color);
   @include slider_box-shadow(inset 0 -1px 0 rgba(0,0,0,0.15));
   @include slider_box-sizing(border-box);
 
@@ -251,7 +251,7 @@
   height: $slider-line-height;
   filter: none;
   opacity: 0.8;
-  border: 0px solid transparent;
+  border: 0 solid transparent;
 
   &.round {
     border-radius: 50%;
@@ -269,7 +269,7 @@
     }
   }
   &.in-selection {
-    @include slider_background-image($slider-secondary-top, $slider-secondary-bottom, mix($slider-secondary-top, $slider-secondary-bottom));
+    @include slider_background-image($slider-secondary-top, $slider-secondary-bottom, $slider-tick-in-selection-background-color);
     opacity: 1;
   }
 }
