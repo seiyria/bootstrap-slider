@@ -1885,27 +1885,36 @@ const windowIsDefined = (typeof window === "object");
 				Source: http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
 			*/
 			_getPercentage: function(ev) {
-				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove' || ev.type === 'touchend')) {
-					ev = ev.changedTouches[0];
+				var me = this,
+				    _state = me._state,
+				    options = me.options,
+				    isVertical = "vertical" === options.orientation,
+				    sliderEl = me.sliderElem;
+
+				if (me.touchCapable && ("touchstart" === ev.type || "touchmove" === ev.type || "touchend" === ev.type)) {
+				    ev = ev.changedTouches[0];
 				}
 
-				var eventPosition = ev[this.mousePos];
-				var sliderOffset = this._state.offset[this.stylePos];
-				var distanceToSlide = eventPosition - sliderOffset;
-				if(this.stylePos==='right') {
+				var eventPosition = ev[me.mousePos],
+				    sliderOffset = _state.offset[me.stylePos],
+				    distanceToSlide = (eventPosition - sliderOffset)
+
+				    // AK 2022-04-16: find out the scale factor between the document and an element... (And fix the scale.)
+					/ (sliderEl.getBoundingClientRect()[isVertical ? "height" : "width"]
+						/ sliderEl["offset" + (isVertical ? "Height" : "Width")]);
+
+				if ("right" === me.stylePos) {
 					distanceToSlide = -distanceToSlide;
 				}
+
 				// Calculate what percent of the length the slider handle has slid
-				var percentage = (distanceToSlide / this._state.size) * 100;
-				percentage = Math.round(percentage / this._state.percentage[2]) * this._state.percentage[2];
-				if (this.options.reversed) {
-					percentage = 100 - percentage;
-				}
+				var percentage = distanceToSlide / _state.size * 100;
+				percentage = Math.round(percentage / _state.percentage[2]) * _state.percentage[2];
 
 				// Make sure the percent is within the bounds of the slider.
 				// 0% corresponds to the 'min' value of the slide
 				// 100% corresponds to the 'max' value of the slide
-				return Math.max(0, Math.min(100, percentage));
+				return Math.max(0, Math.min(100, options.reversed ? 100 - percentage : percentage));
 			},
 			_validateInputValue: function(val) {
 				if (!isNaN(+val)) {
