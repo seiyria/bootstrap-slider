@@ -1868,8 +1868,7 @@ const windowIsDefined = (typeof window === "object");
 				return val;
 			},
 			_applyPrecision: function(val) {
-				var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step);
-				return this._applyToFixedAndParseFloat(val, precision);
+				return this._applyToFixedAndParseFloat(val, this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step));
 			},
 			_getNumDigitsAfterDecimalPlace: function(num) {
 				var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
@@ -1877,8 +1876,7 @@ const windowIsDefined = (typeof window === "object");
 				return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
 			},
 			_applyToFixedAndParseFloat: function(num, toFixedInput) {
-				var truncatedNum = num.toFixed(toFixedInput);
-				return parseFloat(truncatedNum);
+				return parseFloat(num).toFixed(toFixedInput);
 			},
 			/*
 				Credits to Mike Samuel for the following method!
