@@ -1875,8 +1875,10 @@ const windowIsDefined = (typeof window === "object");
 				if (!match) { return 0; }
 				return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
 			},
-			_applyToFixedAndParseFloat: function(num, toFixedInput) {
-				return parseFloat(num).toFixed(toFixedInput);
+			_applyToFixedAndParseFloat: function(num, decimalPlaces) {
+				// Idea of Epsilon Round: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+				var p = Math.pow(10, decimalPlaces);
+				return Math.round((parseFloat(num) * p) * (1 + Number.EPSILON)) / p;
 			},
 			/*
 				Credits to Mike Samuel for the following method!
