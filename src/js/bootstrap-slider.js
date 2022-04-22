@@ -2010,7 +2010,7 @@ const windowIsDefined = (typeof window === "object");
 				var offsetTop = obj.offsetTop;
 				while((obj = obj.offsetParent) && !isNaN(obj.offsetTop)){
 					offsetTop += obj.offsetTop;
-					if( obj.tagName !== 'BODY') {
+					if( obj !== document.body) {
 						offsetTop -= obj.scrollTop;
 					}
 				}
