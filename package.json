@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "babel-preset-es2015": "6.3.13",
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.6.0",
     "grunt": "^0.4.5",
     "grunt-babel": "6.0.0",
     "grunt-bump": "0.0.16",
@@ -69,7 +69,7 @@
     "grunt-template": "0.2.0",
     "jquery": "1.9.1 - 3",
     "node-sass": "^4.9.0",
-    "popper.js": "^1.14.3"
+    "popper.js": "^1.16.1"
   },
   "gruntConfig": {
     "devPort": 9000,
