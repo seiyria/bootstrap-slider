@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-slider",
-  "version": "11.0.2",
+  "version": "11.0.3",
   "description": "Slider view component for Twitter Bootstrap.",
   "main": "dist/bootstrap-slider.js",
   "style": "dist/css/bootstrap-slider.css",
@@ -29,6 +29,11 @@
       "name": "Rohit Kalkur",
       "twitter": "@Rovolutionary",
       "github": "rovolution"
+    },
+    {
+      "name": "Oleksii Kuznietsov",
+      "twitter": "@utilmind",
+      "github": "utilmind"
     }
   ],
   "keywords": [
@@ -41,7 +46,9 @@
   "readmeFilename": "README.md",
   "gitHead": "67eb8fe3c26205efc94ae95b3ef37a469eef0b81",
   "dependencies": {},
-  "engine": {},
+  "engines": {
+    "node": ">=14.17.0"
+  },
   "devDependencies": {
     "babel-preset-es2015": "6.3.13",
     "bootstrap": "^4.1.1",
