@@ -46,7 +46,9 @@
   "readmeFilename": "README.md",
   "gitHead": "67eb8fe3c26205efc94ae95b3ef37a469eef0b81",
   "dependencies": {},
-  "engine": {},
+  "engines": {
+    "node": ">=14.17.0"
+  },
   "devDependencies": {
     "babel-preset-es2015": "6.3.13",
     "bootstrap": "^4.1.1",
