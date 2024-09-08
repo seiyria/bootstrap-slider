@@ -1,9 +1,10 @@
 {
   "name": "seiyria-bootstrap-slider",
-  "version": "11.0.2",
+  "version": "11.0.3",
   "homepage": "https://github.com/seiyria/bootstrap-slider",
   "authors": [
     "Kyle Kemp <kyle@seiyria.com>",
+    "Oleksii Kuznietsov <utilmind@gmail.com>",
     "Rohit Kalkur <rohit.kalkur@gmail.com>"
   ],
   "description": "a slider element for bootstrap 4",

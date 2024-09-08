@@ -5,6 +5,9 @@
  *		Kyle Kemp
  *			- Twitter: @seiyria
  *			- Github:  seiyria
+ *		Oleksii Kuznietsov
+ *			- Twitter: @utilmind
+ *			- Github:  utilmind
  *		Rohit Kalkur
  *			- Twitter: @Rovolutionary
  *			- Github:  rovolution
