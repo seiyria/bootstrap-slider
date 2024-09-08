@@ -1,3 +1,7 @@
+11.0.3 / 2024-08-23
+==================
+* Resolves issue with page scale factor. [Described in issue #625](https://github.com/seiyria/bootstrap-slider/issues/625). Thanks to [utilmind](https://github.com/utilmind)
+
 11.0.2 / 2020-06-03
 ==================
 * Resolves issue with GH Pages not loading sliders properly.
