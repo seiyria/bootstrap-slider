@@ -12,9 +12,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  *		Kyle Kemp
  *			- Twitter: @seiyria
  *			- Github:  seiyria
- *		Oleksii Kuznietsov
- *			- Twitter: @utilmind
- *			- Github:  utilmind
  *		Rohit Kalkur
  *			- Twitter: @Rovolutionary
  *			- Github:  rovolution
