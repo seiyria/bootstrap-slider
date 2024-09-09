@@ -26,3 +26,13 @@ $slider-gray-6: #F9F9F9 !default;
 
 // unicode color for demo page
 $slider-unicode-color: #726204 !default;
+
+// components
+$slider-selection-background-color: mix($slider-gray-6, $slider-gray-5) !default;
+$slider-selection-tick-background-color: mix($slider-secondary-top, $slider-secondary-bottom) !default;
+$slider-tick-background-color: mix($slider-gray-5, $slider-gray-6) !default;
+$slider-tick-in-selection-background-color: mix($slider-secondary-top, $slider-secondary-bottom) !default;
+$slider-handle-background-color: mix($slider-primary-top, $slider-primary-bottom) !default;
+$slider-handle-background-color-disabled: mix($slider-gray-2, $slider-gray-1) !default;
+$slider-track-background-color: mix($slider-gray-5, $slider-gray-6) !default;
+$slider-track-background-color-disabled: mix($slider-gray-3, $slider-gray-4) !default;
