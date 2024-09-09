@@ -1,5 +1,5 @@
 /*! =======================================================
-                      VERSION  11.0.2              
+                      VERSION  11.0.3              
 ========================================================= */
 "use strict";
 
@@ -12,6 +12,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  *		Kyle Kemp
  *			- Twitter: @seiyria
  *			- Github:  seiyria
+ *		Oleksii Kuznietsov
+ *			- Twitter: @utilmind
+ *			- Github:  utilmind
  *		Rohit Kalkur
  *			- Twitter: @Rovolutionary
  *			- Github:  rovolution
@@ -212,8 +215,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 	})($);
 
 	/*************************************************
- 			BOOTSTRAP-SLIDER SOURCE CODE
- 	**************************************************/
+ 
+ 		BOOTSTRAP-SLIDER SOURCE CODE
+ 
+ **************************************************/
 
 	(function ($) {
 		var autoRegisterNamespace = void 0;
@@ -323,8 +328,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		};
 
 		/*************************************************
-  						CONSTRUCTOR
-  	**************************************************/
+  							CONSTRUCTOR
+  		**************************************************/
 		Slider = function Slider(element, options) {
 			createNewSlider.call(this, element, options);
 			return this;
@@ -358,8 +363,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			}
 
 			/*************************************************
-   					Process Options
-   	**************************************************/
+   						Process Options
+   		**************************************************/
 			options = options ? options : {};
 			var optionTypes = Object.keys(this.defaultOptions);
 
@@ -432,8 +437,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			}
 
 			/*************************************************
-   					Create Markup
-   	**************************************************/
+   						Create Markup
+   		**************************************************/
 
 			var origWidth = this.element.style.width;
 			var updateSlider = false;
@@ -604,8 +609,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			}
 
 			/*************************************************
-   						Setup
-   	**************************************************/
+   							Setup
+   		**************************************************/
 			this.eventToCallbackMap = {};
 			this.sliderElem.id = this.options.id;
 
@@ -747,8 +752,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			this.setValue(this._state.value);
 
 			/******************************************
-   				Bind Event Listeners
-   	******************************************/
+   					Bind Event Listeners
+   		******************************************/
 
 			// Bind keyboard handlers
 			this.handle1Keydown = this._keydown.bind(this, 0);
@@ -836,10 +841,10 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		}
 
 		/*************************************************
-  				INSTANCE PROPERTIES/METHODS
-  	- Any methods bound to the prototype are considered
+  					INSTANCE PROPERTIES/METHODS
+  		- Any methods bound to the prototype are considered
   part of the plugin's `public` interface
-  	**************************************************/
+  		**************************************************/
 		Slider.prototype = {
 			_init: function _init() {}, // NOTE: Must exist to support bridget
 
@@ -1074,11 +1079,11 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			},
 
 			/******************************+
-   				HELPERS
-   	- Any method that is not part of the public interface.
+   					HELPERS
+   		- Any method that is not part of the public interface.
    - Place it underneath this comment block and write its signature like so:
-   		_fnName : function() {...}
-   	********************************/
+   			_fnName : function() {...}
+   		********************************/
 			_removeTooltipListener: function _removeTooltipListener(event, handler) {
 				this.handle1.removeEventListener(event, handler, false);
 				this.handle2.removeEventListener(event, handler, false);
@@ -1816,8 +1821,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 			},
 
 			_applyPrecision: function _applyPrecision(val) {
-				var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step);
-				return this._applyToFixedAndParseFloat(val, precision);
+				return this._applyToFixedAndParseFloat(val, this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step));
 			},
 			_getNumDigitsAfterDecimalPlace: function _getNumDigitsAfterDecimalPlace(num) {
 				var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
@@ -1826,36 +1830,45 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				}
 				return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
 			},
-			_applyToFixedAndParseFloat: function _applyToFixedAndParseFloat(num, toFixedInput) {
-				var truncatedNum = num.toFixed(toFixedInput);
-				return parseFloat(truncatedNum);
+			_applyToFixedAndParseFloat: function _applyToFixedAndParseFloat(num, decimalPlaces) {
+				// Idea of Epsilon Round: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+				var p = Math.pow(10, decimalPlaces);
+				return Math.round(parseFloat(num) * p * (1 + Number.EPSILON)) / p;
 			},
 			/*
    	Credits to Mike Samuel for the following method!
    	Source: http://stackoverflow.com/questions/10454518/javascript-how-to-retrieve-the-number-of-decimals-of-a-string-number
    */
 			_getPercentage: function _getPercentage(ev) {
-				if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove' || ev.type === 'touchend')) {
+				var me = this,
+				    _state = me._state,
+				    options = me.options,
+				    isVertical = "vertical" === options.orientation,
+				    sliderEl = me.sliderElem;
+
+				if (me.touchCapable && ("touchstart" === ev.type || "touchmove" === ev.type || "touchend" === ev.type)) {
 					ev = ev.changedTouches[0];
 				}
 
-				var eventPosition = ev[this.mousePos];
-				var sliderOffset = this._state.offset[this.stylePos];
-				var distanceToSlide = eventPosition - sliderOffset;
-				if (this.stylePos === 'right') {
+				var eventPosition = ev[me.mousePos],
+				    sliderOffset = _state.offset[me.stylePos],
+				    distanceToSlide = (eventPosition - sliderOffset) / (
+
+				// AK 2022-04-16: find out the scale factor between the document and an element... (And fix the scale.)
+				sliderEl.getBoundingClientRect()[isVertical ? "height" : "width"] / sliderEl["offset" + (isVertical ? "Height" : "Width")]);
+
+				if ("right" === me.stylePos) {
 					distanceToSlide = -distanceToSlide;
 				}
+
 				// Calculate what percent of the length the slider handle has slid
-				var percentage = distanceToSlide / this._state.size * 100;
-				percentage = Math.round(percentage / this._state.percentage[2]) * this._state.percentage[2];
-				if (this.options.reversed) {
-					percentage = 100 - percentage;
-				}
+				var percentage = distanceToSlide / _state.size * 100;
+				percentage = Math.round(percentage / _state.percentage[2]) * _state.percentage[2];
 
 				// Make sure the percent is within the bounds of the slider.
 				// 0% corresponds to the 'min' value of the slide
 				// 100% corresponds to the 'max' value of the slide
-				return Math.max(0, Math.min(100, percentage));
+				return Math.max(0, Math.min(100, options.reversed ? 100 - percentage : percentage));
 			},
 			_validateInputValue: function _validateInputValue(val) {
 				if (!isNaN(+val)) {
@@ -1953,7 +1966,7 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 				var offsetTop = obj.offsetTop;
 				while ((obj = obj.offsetParent) && !isNaN(obj.offsetTop)) {
 					offsetTop += obj.offsetTop;
-					if (obj.tagName !== 'BODY') {
+					if (obj !== document.body) {
 						offsetTop -= obj.scrollTop;
 					}
 				}
@@ -2036,8 +2049,8 @@ var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(win
 		};
 
 		/*********************************
-  		Attach to global namespace
-  	*********************************/
+  			Attach to global namespace
+  		*********************************/
 		if ($ && $.fn) {
 			if (!$.fn.slider) {
 				$.bridget(NAMESPACE_MAIN, Slider);
