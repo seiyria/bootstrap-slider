@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $slider-line-height: 20px !default;
 $slider-border-radius: 4px !default;
 $slider-horizontal-width: 210px !default;
@@ -12,9 +14,9 @@ $slider-primary: null !default;
 }
 
 $slider-primary-top: $slider-primary !default;
-$slider-primary-bottom: darken($slider-primary, 5%) !default;
-$slider-secondary-top: saturate(lighten($slider-primary, 28%), 20%) !default;
-$slider-secondary-bottom: saturate(lighten($slider-primary, 23%), 2%) !default;
+$slider-primary-bottom: color.scale($slider-primary, $lightness: -5%) !default;
+$slider-secondary-top: saturate(color.scale($slider-primary, $lightness: 28%), 20%) !default;
+$slider-secondary-bottom: saturate(color.scale($slider-primary, $lightness: 23%), 2%) !default;
 
 // grays for slider channel and disabled states
 $slider-gray-1: #BEBEBE !default;
