@@ -6,9 +6,9 @@
     width: $slider-horizontal-width;
     height: $slider-line-height;
     .slider-track {
-      height: $slider-line-height/2;
+      height: calc($slider-line-height/2);
       width: 100%;
-      margin-top: -$slider-line-height/4;
+      margin-top: - calc($slider-line-height/4);
       top:  50%;
       left: 0;
     }
@@ -19,12 +19,12 @@
     }
     .slider-tick,
     .slider-handle {
-      margin-left: -$slider-line-height/2;
+      margin-left: - calc($slider-line-height/2);
       &.triangle {
         position: relative;
         top: 50%;
         transform: translateY(-50%);
-        border-width: 0 $slider-line-height/2 $slider-line-height/2 $slider-line-height/2;
+        border-width: 0 calc($slider-line-height/2) calc($slider-line-height/2) calc($slider-line-height/2);
         width: 0;
         height: 0;
         border-bottom-color: $slider-primary-bottom;
@@ -54,7 +54,7 @@
       .slider-tick,
       .slider-handle {
         margin-left: initial;
-        margin-right: -$slider-line-height/2;
+        margin-right: - calc($slider-line-height/2);
       }
       .slider-tick-container {
         left: initial;
@@ -66,7 +66,7 @@
     height: $slider-vertical-height;
     width: $slider-line-height;
     .slider-track {
-      width: $slider-line-height/2;
+      width: calc($slider-line-height/2);
       height: 100%;
       left: 25%;
       top: 0;
@@ -84,9 +84,9 @@
     }
     .slider-tick,
     .slider-handle {
-      margin-top: -$slider-line-height/2;
+      margin-top: - calc($slider-line-height/2);
       &.triangle {
-        border-width: $slider-line-height/2 0 $slider-line-height/2 $slider-line-height/2;
+        border-width: calc($slider-line-height/2) 0 calc($slider-line-height/2) calc($slider-line-height/2);
         width:  1px;
         height: 1px;
         border-left-color: $slider-primary-bottom;
@@ -111,7 +111,7 @@
       .slider-tick,
       .slider-handle {
         &.triangle {
-          border-width: $slider-line-height/2 $slider-line-height/2 $slider-line-height/2 0;
+          border-width: calc($slider-line-height/2) calc($slider-line-height/2) calc($slider-line-height/2) 0;
         }
       }
       .slider-tick-label-container {
