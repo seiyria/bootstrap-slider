@@ -158,7 +158,7 @@ const windowIsDefined = (typeof window === "object");
 			            "attempted to call '" + options + "'" );
 			          continue;
 			        }
-			        if ( !$.isFunction( instance[options] ) || options.charAt(0) === '_' ) {
+			        if ( !(typeof( instance[options] ) === 'function') || options.charAt(0) === '_' ) {
 			          logError( "no such method '" + options + "' for " + namespace + " instance" );
 			          continue;
 			        }
@@ -1645,10 +1645,10 @@ const windowIsDefined = (typeof window === "object");
 			},
 			_triggerFocusOnHandle: function(handleIdx) {
 				if(handleIdx === 0) {
-					this.handle1.focus();
+					this.handle1.trigger('focus');
 				}
 				if(handleIdx === 1) {
-					this.handle2.focus();
+					this.handle2.trigger('focus');
 				}
 			},
 			_keydown: function(handleIdx, ev) {
