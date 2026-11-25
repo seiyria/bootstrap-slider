@@ -1822,7 +1822,7 @@ const windowIsDefined = (typeof window === "object");
 				var val = this._calculateValue(true);
 
 				this.setValue(val, false, true);
-				this._trigger('slideStop', val);
+				this._trigger('slideStop', this.getValue());
 
 				// No longer need 'dragged' after mouse up
 				this._state.dragged = null;
